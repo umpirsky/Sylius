@@ -16,7 +16,9 @@ framework:
     templating:      { engines: ['twig'] }
     default_locale:  "%sylius.locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        name: PHPSYLIUSID
+        cookie_domain: .%sylius.hypebeast.uri%
 
 twig:
     form:

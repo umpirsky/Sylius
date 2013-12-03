@@ -1,4 +1,6 @@
 parameters:
+    sylius.hypebeast.uri: hypebeast.com
+
     sylius.database.driver:           pdo_mysql
     sylius.database.host:             127.0.0.1
     sylius.database.port:             ~
