@@ -24,11 +24,13 @@ twig:
             - 'SyliusWebBundle::forms.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        global_media_web_base_path: %sylius.media.web_base_path%
 
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle']
+    bundles:        ['SyliusWebBundle', 'HypebeastWebBundle']
     filters:
         cssrewrite: ~
 
@@ -76,6 +78,7 @@ stof_doctrine_extensions:
             timestampable: true
             softdeleteable: true
             loggable: true
+            sortable: true
 
 fos_user:
     db_driver: orm
@@ -95,7 +98,7 @@ hwi_oauth:
     resource_owners:
         amazon:
             type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid% 
+            client_id:     %sylius.oauth.amazon.clientid%
             client_secret: %sylius.oauth.amazon.clientsecret%
         facebook:
             type:          facebook
@@ -123,14 +126,14 @@ knp_gaufrette:
     adapters:
         sylius_image:
             local:
-                directory:  %kernel.root_dir%/../web/media/image
+                directory:  %sylius.media.image_path%
                 create:     true
     filesystems:
         sylius_image:
             adapter: sylius_image
 
 liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image
+    data_root: %sylius.media.image_path%
     filter_sets:
         sylius_16x16:
             filters:

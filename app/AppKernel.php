@@ -48,6 +48,7 @@ class AppKernel extends Kernel
 
             new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
+            new Hypebeast\Bundle\WebBundle\HypebeastWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // CMF bundles.
@@ -82,6 +83,7 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Payum\Bundle\PayumBundle\PayumBundle(),
+            new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
         );
 
         if ('dev' === $this->environment) {

@@ -13,17 +13,10 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 interface VariantImageInterface extends ImageInterface
 {
-    /**
-     * Get variant.
-     *
-     * @return VariantInterface
-     */
     public function getVariant();
-
-    /**
-     * Set the variant.
-     *
-     * @param VariantInterface $variant
-     */
     public function setVariant(VariantInterface $variant = null);
+    public function getPosition();
+    public function setPosition($position);
+    public function isModel();
+    public function setModel($model);
 }

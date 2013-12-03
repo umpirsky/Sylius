@@ -1,0 +1,7 @@
+sylius_backend_product_parent:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product.yml
+
+sylius_backend_product_upload:
+    pattern: /upload/{id}
+    defaults:
+        _controller: sylius.controller.product:uploadAction

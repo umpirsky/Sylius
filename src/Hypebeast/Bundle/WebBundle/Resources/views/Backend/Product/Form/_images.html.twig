@@ -1,0 +1,85 @@
+{% macro imagePrototype() %}
+<div class="sylius-assortment-variant-images-image row" id="sylius_product_masterVariant_images___name__">
+    <div class="col-md-1">
+        <span class="thumbnail"></span>
+    </div>
+    <div class="col-md-4">
+        <span class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+        <input type="file" class="form-control" required="required" name="sylius_product[masterVariant][images][__name__][file]" id="sylius_product_masterVariant_images___name___file">
+    </div>
+    <div class="col-md-5">
+        <input type="hidden" name="sylius_product[masterVariant][images][__name__][position]"/>
+        <div>
+            <input type="radio" id="sylius_product_masterVariant_images___name___model_0" name="sylius_product[masterVariant][images][__name__][model]" required="required" value="0">
+            <label class="control-label col-lg-2 required" for="sylius_product_masterVariant_images___name___model_0">{{ 'sylius.form.image.model.product'|trans }}</label>
+            <input type="radio" id="sylius_product_masterVariant_images___name___model_1" name="sylius_product[masterVariant][images][__name__][model]" required="required" value="1" checked="checked">
+            <label class="control-label col-lg-2 required" for="sylius_product_masterVariant_images___name___model_1">{{ 'sylius.form.image.model.model'|trans }}</label>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+    </div>
+</div>
+{% endmacro %}
+
+<div class="tab-pane" id="images">
+    {{ form_row(form.uploadId) }}
+    <div id="product-multiple-images"></div>
+    <div id="product-images">
+        <div id="sylius-assortment-product-images" data-toggle="modal-gallery" data-target="#modal-gallery" class="collection-container" data-prototype="{{ _self.imagePrototype()|e }}">
+            {% for image in product.images %}
+            <div class="sylius-assortment-variant-images-image row">
+                <div class="col-md-1">
+                    {% if image.path|length > 0 %}
+                    <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery">
+                        <img class="img-rounded" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="" />
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    {{ form_widget(form.masterVariant.images[loop.index0].file) }}
+                </div>
+                <div class="col-md-5">
+                    {{ form_widget(form.masterVariant.images[loop.index0].position) }}
+                    {{ form_widget(form.masterVariant.images[loop.index0].model) }}
+                </div>
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+        <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images">{{ 'sylius.variant.add_image'|trans }}</a>
+    </div>
+</div>
+
+{% spaceless %}
+<script type="text/template" id="file-uploader-template">
+  <div class="uploader" data-dropzone="1" style="margin-top: 10px; margin-bottom: 70px">
+    <div class="controls" style="margin-bottom: 20px;">
+      {# No name attribute please, that would cause it to submit with a regular form #}
+      <a href="#" class="btn btn-primary btn-block" style="position: absolute;">{{ 'sylius.variant.add_images'|trans }}</a>
+      <input id="product-multiple-images-file" style="width: 100%; margin-bottom: 30px;" type="file" data-files="1" multiple />
+      <span class="spinner" data-spinner="1" style="display: none">
+        <img src="{{ asset('bundles/punkavefileuploader/images/spinner.gif') }}" /> Uploading...
+      </span>
+    </div>
+    <div class="collection-container" data-thumbnails="1">
+        {# We populate the list via an API call #}
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="file-uploader-file-template">
+    <div data-name="<%- name %>" class="sylius-assortment-variant-images-image row">
+        <% if ('undefined' != typeof thumbnail_url) { %>
+            <div class="col-md-1"><img src="<%- thumbnail_url %>" class="img-rounded" /></div>
+        <% } %>
+        <div class="col-md-2">
+            <a rel="tooltip" title="Delete" data-action="delete" class="btn btn-danger" href="#delete"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+        </div>
+    </div>
+</script>
+{% endspaceless %}

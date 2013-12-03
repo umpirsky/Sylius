@@ -22,6 +22,96 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ProductController extends ResourceController
 {
+    public function createAction(Request $request)
+    {
+        $config = $this->getConfiguration();
+
+        $resource = $this->createNew();
+        $form = $this->getForm($resource);
+
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $this->get('sylius.file_uploader')->syncFiles(array(
+                'from_folder' => $form->get('uploadId')->getData(),
+                'resource'    => $resource->getMasterVariant(),
+            ));
+
+            $event = $this->create($resource);
+
+            $this->get('sylius.file_uploader_file_manager')->cleanupFiles($form->get('uploadId')->getData());
+
+            if (!$event->isStopped()) {
+                $this->setFlash('success', 'create');
+
+                return $this->redirectTo($resource);
+            }
+
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+        }
+
+        if ($config->isApiRequest()) {
+            return $this->handleView($this->view($form));
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($config->getTemplate('create.html'))
+            ->setData(array(
+                $config->getResourceName() => $resource,
+                'form'                     => $form->createView(),
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    public function updateAction(Request $request)
+    {
+        $config = $this->getConfiguration();
+
+        $resource = $this->findOr404();
+        $form = $this->getForm($resource);
+
+        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
+            $this->get('sylius.file_uploader')->syncFiles(array(
+                'from_folder' => $form->get('uploadId')->getData(),
+                'resource'    => $resource->getMasterVariant(),
+            ));
+
+            $event = $this->update($resource);
+
+            $this->get('sylius.file_uploader_file_manager')->cleanupFiles($form->get('uploadId')->getData());
+
+            if (!$event->isStopped()) {
+                $this->setFlash('success', 'update');
+
+                return $this->redirectTo($resource);
+            }
+
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+        }
+
+        if ($config->isApiRequest()) {
+            return $this->handleView($this->view($form));
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($config->getTemplate('update.html'))
+            ->setData(array(
+                $config->getResourceName() => $resource,
+                'form'                     => $form->createView(),
+                'upload_id'                => $form->get('uploadId')->getData(),
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    public function uploadAction($id)
+    {
+        $this->get('sylius.file_uploader')->handleFileUpload(array('folder' => $id));
+    }
+
     /**
      * List products categorized under given taxon.
      *

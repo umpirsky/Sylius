@@ -70,6 +70,18 @@
         <source>sylius.form.locale.enabled</source>
         <target>Enabled</target>
       </trans-unit>
+      <trans-unit id="79fc91b958c3d643f9f68c6ea9f517cg" resname="sylius.form.image.model">
+        <source>sylius.form.image.model</source>
+        <target>Shot type</target>
+      </trans-unit>
+      <trans-unit id="79fc91b958c3d643f9f68c6ea9f517ch" resname="sylius.form.image.model.product">
+        <source>sylius.form.image.model.product</source>
+        <target>Product shot</target>
+      </trans-unit>
+      <trans-unit id="79fc91b958c3d643f9f68c6ea9f517ci" resname="sylius.form.image.model.model">
+        <source>sylius.form.image.model.model</source>
+        <target>Model shot</target>
+      </trans-unit>
       <trans-unit id="d0a428ce7a524cee57efe279770f7ccf" resname="sylius.form.order_filter.created_at_from">
         <source>sylius.form.order_filter.created_at_from</source>
         <target>From</target>

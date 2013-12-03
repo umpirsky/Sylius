@@ -13,27 +13,41 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 class VariantImage extends Image implements VariantImageInterface
 {
-    /**
-     * The associated variant
-     *
-     * @var VariantInterface
-     */
     protected $variant;
+    protected $position;
+    protected $model = false;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariant()
     {
         return $this->variant;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVariant(VariantInterface $variant = null)
     {
         $this->variant = $variant;
+
+        return $this;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+    public function isModel()
+    {
+        return $this->model;
+    }
+
+    public function setModel($model)
+    {
+        $this->model = $model;
 
         return $this;
     }

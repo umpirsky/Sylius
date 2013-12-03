@@ -12,12 +12,19 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\VariantImage" table="sylius_variant_image">
-        <many-to-one field="variant" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" inversed-by="images"/>
+        <many-to-one field="variant" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" inversed-by="images">
+            <gedmo:sortable-group/>
+        </many-to-one>
+        <field name="position" type="integer">
+            <gedmo:sortable-position/>
+        </field>
+        <field name="model" type="boolean" />
     </mapped-superclass>
 
 </doctrine-mapping>

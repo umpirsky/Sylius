@@ -64,16 +64,20 @@
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
-        
+
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Bundle\CoreBundle\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Bundle\CoreBundle\Promotion\Checker\UserLoyalityRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Bundle\CoreBundle\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Bundle\CoreBundle\Promotion\Checker\TaxonomyRuleChecker</parameter>
+
+        <parameter key="sylius.file_uploader.class">PunkAve\FileUploaderBundle\Services\FileUploader</parameter>
+        <parameter key="sylius.file_uploader_file_manager.class">Sylius\Bundle\CoreBundle\Uploader\FileManager</parameter>
+
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\AddProductAction</parameter>
-        
+
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
@@ -81,6 +85,7 @@
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
 
         <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
+        <parameter key="sylius.twig.file_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusFileExtension</parameter>
     </parameters>
 
     <services>
@@ -309,6 +314,26 @@
             </argument>
         </service>
 
+        <service id="sylius.file_uploader" class="%sylius.file_uploader.class%" scope="request">
+            <argument type="collection">
+                <argument key="file_base_path">%sylius.media.tmp_path%</argument>
+                <argument key="web_base_path">%sylius.media.web_base_path%</argument>
+                <argument key="request" type="service" id="request" />
+                <argument key="file_manager" type="service" id="sylius.file_uploader_file_manager" />
+                <argument key="allowed_extensions">%file_uploader.allowed_extensions%</argument>
+                <argument key="sizes">%file_uploader.sizes%</argument>
+                <argument key="originals">%file_uploader.originals%</argument>
+                <argument key="max_number_of_files">%file_uploader.max_number_of_files%</argument>
+            </argument>
+        </service>
+
+        <service id="sylius.file_uploader_file_manager" class="%sylius.file_uploader_file_manager.class%">
+            <argument type="collection">
+                <argument key="file_base_path">%sylius.media.tmp_path%</argument>
+                <argument key="uploader" type="service" id="sylius.image_uploader"/>
+            </argument>
+        </service>
+
         <service id="sylius.form.type.user_filter" class="%sylius.form.type.user_filter.class%">
             <tag name="form.type" alias="sylius_user_filter" />
         </service>
@@ -374,7 +399,7 @@
             <argument type="service" id="sylius.repository.variant" />
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>
-        
+
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
             <argument type="service" id="sylius.repository.variant" />
@@ -405,6 +430,11 @@
 
         <service id="sylius.twig.restricted_zone_extension" class="%sylius.twig.restricted_zone_extension.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.twig.file_extension" class="%sylius.twig.file_extension.class%">
+            <argument type="service" id="service_container" />
             <tag name="twig.extension" />
         </service>
     </services>

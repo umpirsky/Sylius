@@ -16,7 +16,12 @@ parameters:
 
     sylius.currency:                  EUR
 
-    sylius.cache:             file_system
+    sylius.cache:                     file_system
+
+    sylius.media.root_path:           %kernel.root_dir%/../web/media
+    sylius.media.image_path:          %sylius.media.root_path%/image
+    sylius.media.tmp_path:            %sylius.media.root_path%/tmp
+    sylius.media.web_base_path:       /media/tmp
 
     paypal.express_checkout.username: EDITME
     paypal.express_checkout.password: EDITME

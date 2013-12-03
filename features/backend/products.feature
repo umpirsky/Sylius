@@ -61,12 +61,14 @@ Feature: Products
           And I follow "Create product"
          Then I should be on the product creation page
 
+    @javascript
     Scenario: Submitting form without specifying the name
         Given I am on the product creation page
          When I press "Create"
          Then I should still be on the product creation page
           And I should see "Please enter product name."
 
+    @javascript
     Scenario: Trying to create product without description
         Given I am on the product creation page
          When I fill in "Name" with "Bag"
@@ -74,6 +76,7 @@ Feature: Products
          Then I should still be on the product creation page
           And I should see "Please enter product description."
 
+    @javascript
     Scenario: Trying to create product without the price
         Given I am on the product creation page
          When I fill in "Name" with "Bag"
@@ -81,6 +84,7 @@ Feature: Products
          Then I should still be on the product creation page
           And I should see "Please enter the price."
 
+    @javascript
     Scenario: Trying to create product with invalid price
         Given I am on the product creation page
          When I fill in "Name" with "Bag"
@@ -89,6 +93,7 @@ Feature: Products
          Then I should still be on the product creation page
           And I should see "Price must not be negative."
 
+    @javascript
     Scenario: Creating simple product without any properties and options
         Given I am on the product creation page
          When I fill in the following:
@@ -99,6 +104,7 @@ Feature: Products
          Then I should be on the page of product "Book about Everything"
           And I should see "Product has been successfully created."
 
+    @javascript
     Scenario: Creating product with options
         Given I am on the product creation page
          When I fill in the following:
@@ -187,6 +193,7 @@ Feature: Products
          Then I should be on the page of product "Manchester United tee"
           And I "Product has been successfully created." should appear on the page
 
+    @javascript
     Scenario: Created products appear in the list
         Given I am on the product creation page
          When I fill in the following:
@@ -208,6 +215,7 @@ Feature: Products
          When I click "Edit" near "Mug"
          Then I should be editing product "Mug"
 
+    @javascript
     Scenario: Updating the product name
         Given I am editing product "Sticker"
          When I fill in "Name" with "Big Sticker"
@@ -215,6 +223,7 @@ Feature: Products
          Then I should be on the page of product "Big Sticker"
           And I should see "Product has been successfully updated."
 
+    @javascript
     Scenario: Updating the product description
         Given I am editing product "Sticker"
          When I fill in "Description" with "This sticker is awesome"
@@ -222,6 +231,7 @@ Feature: Products
          Then I should be on the page of product "Sticker"
           And I should see "This sticker is awesome"
 
+    @javascript
     Scenario: Selecting the product tax category
         Given I am editing product "Sticker"
          When I select "Print" from "Tax category"
@@ -230,6 +240,7 @@ Feature: Products
           And I should see "Product has been successfully updated."
           And "Print" should appear on the page
 
+    @javascript
     Scenario: Selecting the categorization taxons
         Given I am editing product "Black T-Shirt"
           And go to "Categorization" tab
@@ -240,6 +251,7 @@ Feature: Products
           And I should see "Product has been successfully updated."
           And "Featured" should appear on the page
 
+    @javascript
     Scenario: Selecting more than one taxon from taxonomy
         Given I am editing product "Black T-Shirt"
           And go to "Categorization" tab
