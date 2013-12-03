@@ -8,16 +8,16 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class HypebeastWebBundle extends Bundle
 {
-    public function getParent()
-    {
-        return 'SyliusWebBundle';
-    }
-
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
 
         $extension = $container->getExtension('security');
         $extension->addSecurityListenerFactory(new HypebeastFactory);
+    }
+
+    public function getParent()
+    {
+        return 'SyliusWebBundle';
     }
 }
