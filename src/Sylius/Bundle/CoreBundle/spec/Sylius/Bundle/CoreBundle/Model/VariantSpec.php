@@ -48,6 +48,11 @@ class VariantSpec extends ObjectBehavior
         $this->setPrice(4.99)->getPrice()->shouldReturn(4.99);
     }
 
+    function its_total_price_should_be_sale_price_if_sale_price_is_set()
+    {
+        $this->setSalePrice(4.99)->getTotalPrice()->shouldReturn(4.99);
+    }
+
     /**
      * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $masterVariant
      */

@@ -6,6 +6,14 @@
         <source>sylius.variant.add_images</source>
         <target>Add images</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473e" resname="sylius.product.wholesale_price">
+        <source>sylius.product.wholesale_price</source>
+        <target>Wholesale price</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473f" resname="sylius.variant.wholesale_price">
+        <source>sylius.variant.wholesale_price</source>
+        <target>Wholesale price</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

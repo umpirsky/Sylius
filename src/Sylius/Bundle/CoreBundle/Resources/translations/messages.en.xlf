@@ -254,6 +254,14 @@
         <source>sylius.form.variant.price</source>
         <target>Price</target>
       </trans-unit>
+      <trans-unit id="4ecf22f299095448d542fcf93b8a6b34" resname="sylius.form.variant.sale_price">
+        <source>sylius.form.variant.sale_price</source>
+        <target>Sale price</target>
+      </trans-unit>
+      <trans-unit id="4ecf22f299095448d542fcf93b8a6b35" resname="sylius.form.variant.wholesale_price">
+        <source>sylius.form.variant.wholesale_price</source>
+        <target>Wholesale price</target>
+      </trans-unit>
       <trans-unit id="6bd77fa4ee5506db723f5e64327f3cb2" resname="sylius.form.variant.sku">
         <source>sylius.form.variant.sku</source>
         <target>SKU</target>

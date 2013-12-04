@@ -37,6 +37,20 @@ class Variant extends BaseVariant implements VariantInterface
     protected $price;
 
     /**
+     * The variant sale price.
+     *
+     * @var integer
+     */
+    protected $salePrice;
+
+    /**
+     * The variant wholesale price.
+     *
+     * @var integer
+     */
+    protected $wholesalePrice;
+
+    /**
      * On hand stock.
      *
      * @var integer
@@ -148,6 +162,54 @@ class Variant extends BaseVariant implements VariantInterface
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSalePrice()
+    {
+        return $this->salePrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSalePrice($salePrice)
+    {
+        $this->salePrice = $salePrice;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWholesalePrice()
+    {
+        return $this->wholesalePrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWholesalePrice($wholesalePrice)
+    {
+        $this->wholesalePrice = $wholesalePrice;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalPrice()
+    {
+        if (null !== $this->getSalePrice()) {
+            return $this->getSalePrice();
+        }
+
+        return $this->getPrice();
     }
 
     /**

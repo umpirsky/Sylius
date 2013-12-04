@@ -36,6 +36,12 @@ interface VariantInterface extends BaseVariantInterface, ShippableInterface, Sto
      */
     public function setPrice($price);
 
+    public function getSalePrice();
+    public function setSalePrice($salePrice);
+    public function getWholesalePrice();
+    public function setWholesalePrice($wholesalePrice);
+    public function getTotalPrice();
+
     /**
      * Get images.
      *

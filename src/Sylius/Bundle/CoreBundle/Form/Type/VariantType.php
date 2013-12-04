@@ -36,6 +36,12 @@ class VariantType extends BaseVariantType
             ->add('price', 'sylius_money', array(
                 'label' => 'sylius.form.variant.price'
             ))
+            ->add('salePrice', 'sylius_money', array(
+                'label' => 'sylius.form.variant.sale_price'
+            ))
+            ->add('wholesalePrice', 'sylius_money', array(
+                'label' => 'sylius.form.variant.wholesale_price'
+            ))
             ->add('availableOnDemand', 'checkbox', array(
                 'label' => 'sylius.form.variant.available_on_demand'
             ))
