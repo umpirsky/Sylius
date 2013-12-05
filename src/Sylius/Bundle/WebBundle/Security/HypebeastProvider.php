@@ -25,10 +25,9 @@ class HypebeastProvider implements AuthenticationProviderInterface
         try {
             $user = $this->userProvider->loadUserByUsername($token->getUsername());
         } catch (UsernameNotFoundException $e) {
-            $user = (new User)
-                ->setEmail($token->getUsername())
-                ->setPlainPassword(md5(uniqid()))
-            ;
+            $user = (new User);
+            $user->setUsername($token->getUsername());
+            $user->setPassword(md5(uniqid()));
         }
 
         return new HypebeastToken($token->getUsername(), $user);
