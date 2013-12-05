@@ -7,7 +7,9 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 class HypebeastToken extends AbstractToken
 {
-    public function __construct($username, User $user)
+    private $username;
+
+    public function __construct($username, User $user = null)
     {
         $this->username = $username;
 
@@ -16,7 +18,14 @@ class HypebeastToken extends AbstractToken
 
             $this->setUser($user);
             $this->setAuthenticated($user);
+        } else {
+            parent::__construct([]);
         }
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
     }
 
     public function getCredentials()

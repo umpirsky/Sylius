@@ -1,0 +1,5 @@
+sylius_frontend_security_authenticate:
+    pattern: /auth/mobile
+    methods: [GET, POST]
+    defaults:
+        _controller: SyliusWebBundle:Frontend/Security:authenticate

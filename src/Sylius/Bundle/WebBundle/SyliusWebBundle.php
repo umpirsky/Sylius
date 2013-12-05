@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\WebBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Bundle\WebBundle\Security\HypebeastFactory;
 
 /**
  * Sylius frontend bundle.
@@ -20,4 +22,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SyliusWebBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $extension = $container->getExtension('security');
+        $extension->addSecurityListenerFactory(new HypebeastFactory);
+    }
 }

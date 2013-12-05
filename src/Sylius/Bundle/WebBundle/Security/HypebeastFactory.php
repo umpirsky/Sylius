@@ -6,17 +6,21 @@ use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityF
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
+use Symfony\Component\DependencyInjection\Reference;
 
 class HypebeastFactory implements SecurityFactoryInterface
 {
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
-        $providerId  = sprintf('security.authentication.provider.hypebeast.%s', $id);
-        $providerDef = new DefinitionDecorator('security.authentication.provider.hypebeast');
-        $container->setDefinition($providerId, $providerDef);
+        $providerId  = sprintf('sylius.hypebeast.security.provider.%s', $id);
+        $providerDef = new DefinitionDecorator('sylius.hypebeast.security.provider');
+        $container
+            ->setDefinition($providerId, $providerDef)
+            ->replaceArgument(0, new Reference($userProvider))
+        ;
 
-        $listenerId  = sprintf('security.authentication.listener.hypebeast.%s', $id);
-        $listenerDef = new DefinitionDecorator('security.authentication.listener.hypebeast');
+        $listenerId  = sprintf('sylius.hypebeast.security.listener.%s', $id);
+        $listenerDef = new DefinitionDecorator('sylius.hypebeast.security.listener');
         $container->setDefinition($listenerId, $listenerDef);
 
         return array($providerId, $listenerId, $defaultEntryPoint);

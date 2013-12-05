@@ -8,6 +8,9 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
     firewalls:
+        hypebeast:
+            pattern:   ^/auth/.*
+            hypebeast: true
         administration:
             switch_user: true
             context:     user
@@ -28,6 +31,7 @@ security:
         main:
             switch_user: { role: ROLE_SYLIUS_ADMIN }
             context:     user
+            hypebeast:   true
             pattern:     /.*
             form_login:
                 provider: fos_userbundle
@@ -66,6 +70,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration/authenticate, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
 
