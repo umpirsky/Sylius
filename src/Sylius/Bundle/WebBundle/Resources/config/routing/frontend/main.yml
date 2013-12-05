@@ -44,3 +44,6 @@ sylius_cart_save:
         _controller: sylius.controller.cart:saveAction
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
+
+sylius_frontend_security:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/security.yml
