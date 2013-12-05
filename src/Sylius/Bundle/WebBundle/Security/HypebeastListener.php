@@ -27,10 +27,10 @@ class HypebeastListener implements ListenerInterface
     {
         $request = $event->getRequest();
 
-        $token = $this->loadTokenFromSession($request->getSession());
+        $token = $this->loadTokenFromRequest($request);
 
         if (null === $token) {
-            $token = $this->loadTokenFromRequest($request);
+            $token = $this->loadTokenFromSession($request->getSession());
         }
 
         if (null === $token) {
@@ -38,21 +38,14 @@ class HypebeastListener implements ListenerInterface
             return;
         }
 
-        if (false === $token->isAuthenticated()) {
-            try {
-                $token = $this->authenticationManager->authenticate($token);
-            } catch (AuthenticationException $e) {
-                $this->securityContext->setToken($token);
-            }
-        }
-
+        $token = $this->authenticationManager->authenticate($token);
         $this->securityContext->setToken($token);
     }
 
     protected function supports(Request $request)
     {
         return $request->query->has('api_key')
-            && $request->request->has('username')
+            && $request->request->has('email')
         ;
     }
 
@@ -60,7 +53,7 @@ class HypebeastListener implements ListenerInterface
     {
         return [
             base64_decode($request->query->get('api_key')),
-            $request->request->get('username'),
+            $request->request->get('email'),
         ];
     }
 
@@ -68,7 +61,12 @@ class HypebeastListener implements ListenerInterface
     {
         if ($session->has('_security_hypebeast')) {
 
-            return unserialize($session->get('_security_hypebeast'));
+            $token = unserialize($session->get('_security_hypebeast'));
+
+            if ($token instanceof HypebeastToken) {
+
+                return new HypebeastToken($token->getUsername(), $token->getUser());
+            }
         }
     }
 

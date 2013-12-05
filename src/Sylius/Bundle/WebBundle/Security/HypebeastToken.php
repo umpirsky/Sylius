@@ -18,6 +18,7 @@ class HypebeastToken extends AbstractToken
 
             $this->setUser($user);
             $this->setAuthenticated($user);
+            $this->username = $user->getUsername();
         } else {
             parent::__construct([]);
         }
