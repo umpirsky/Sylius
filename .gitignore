@@ -22,3 +22,5 @@ bin/phpcrodm
 bin/phpcrodm.php
 bin/jackalope
 vendor/*
+
+.idea
