@@ -413,4 +413,12 @@ class Product extends BaseProduct implements ProductInterface
             self::VARIANT_SELECTION_MATCH  => 'Options matching',
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isNewArrival()
+    {
+        return $this->publishedAt > new \DateTime("-3 days");
+    }
 }

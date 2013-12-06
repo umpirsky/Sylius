@@ -1,0 +1,64 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    {# Twitter Bootstrap uses the CSS class "active" to indicate current item. #}
+    {% set options = options|merge({'currentClass': 'active'}) %}
+
+    {% set listAttributes = item.childrenAttributes %}
+    {{ block('list') -}}
+{% endblock %}
+
+{% block list %}
+    {% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+        {% if item.level == 0 %}
+            {% set listClass = '' %}
+
+            {% if options.style is defined and options.style == 'tabs' %}
+                {% set listClass = 'nav nav-tabs' %}
+            {% elseif options.style is defined and options.style == 'justified-tabs' %}
+                {% set listClass = 'nav nav-tabs nav-justified' %}
+            {% elseif options.style is defined and options.style == 'pills' %}
+                {% set listClass = 'nav nav-pills' %}
+            {% elseif options.style is defined and options.style == 'justified-pills' %}
+                {% set listClass = 'nav nav-pills nav-justified' %}
+            {% elseif options.style is defined and options.style == 'stacked-pills' %}
+                {% set listClass = 'nav nav-pills nav-stacked' %}
+            {% elseif options.style is defined and options.style == 'list' %}
+                {% set listClass = 'nav nav-list' %}
+            {% elseif options.style is defined and options.style == 'navbar' %}
+                {% set listClass = 'nav navbar-nav' %}
+            {% elseif options.style is defined and options.style == 'navbar-right' %}
+                {% set listClass = 'nav navbar-nav navbar-right' %}
+            {% endif %}
+
+            {% if options.pull is defined and options.pull == 'right' %}
+                {% set listClass = (listClass|default('') ~ ' pull-right')|trim %}
+            {% elseif options.pull is defined and options.pull == 'left' %}
+                {% set listClass = (listClass|default('') ~ 'pull-left')|trim %}
+            {% endif %}
+
+            {% set listAttributes = listAttributes|merge({'class': (listAttributes.class|default('') ~ ' ' ~ listClass)|trim}) %}
+        {% endif %}
+
+        {% spaceless %}
+            {% import 'knp_menu.html.twig' as knp_menu %}
+            <ul{{ knp_menu.attributes(listAttributes) }}>
+                {{ block('children') }}
+            </ul>
+        {% endspaceless %}
+    {% endif %}
+{% endblock %}
+
+{% block label %}
+    {% if item.labelAttribute('icon') %}
+        <span class="{{ item.labelAttribute('icon') }}"></span>
+    {% endif %}
+
+    {% if not item.labelAttribute('iconOnly') %}
+        {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}
+            {{ item.label|raw }}
+        {% else %}
+            {{ item.label }}
+        {% endif %}
+    {% endif %}
+{% endblock %}

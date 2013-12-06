@@ -1,16 +1,27 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import list %}
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import grid %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets output='styles/index.css' '@HypebeastWebBundle/Resources/assets/less/index.less' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
 
 {% block content %}
-<div class="page-header">
-    <h1>{% block h1 %}{{ 'sylius.product.index_header'|trans()|raw }}{% endblock %}</h1>
-</div>
+    <div class="toolbar row">
+        <div class="col-sm-6 sort-by">
+            Sort by Price: <a href="#">High</a> / <a href="#">Low</a>
+        </div>
+        <div class="col-sm-6 items-per-page text-right">
+            Show <a href="#">30</a> / <a href="#">60</a> / <a href="#">90</a> Items Per Page
+        </div>
+    </div>
 
-{{ pagination(products) }}
-{{ list(products) }}
-{{ pagination(products) }}
+    <hr/>
 
+    {{ grid(products) }}
+    {{ pagination(products) }}
 {% endblock %}

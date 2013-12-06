@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+{% set settings = sylius_settings_all('general') %}
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title settings.title|default('sylius.meta.frontend_title'|trans) %}</title>
+    <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
+    <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
+
+    {% block stylesheets %}
+        {% stylesheets output='styles/core.css'
+            '@HypebeastWebBundle/Resources/assets/less/layout.less' %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+    {% endblock stylesheets %}
+
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/hypebeastweb/bower_components/html5shiv/dist/html5shiv.js') }}"></script>
+    <script src="{{ asset('bundles/hypebeastweb/bower_components/respond/respond.min.js') }}"></script>
+    <![endif]-->
+</head>
+<body id="page-container">
+    <nav class="navbar navbar-inverse" role="navigation" id="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('sylius_homepage') }}">
+                    <img src="{{ asset('bundles/hypebeastweb/images/nav-logo.png') }}" />
+                </a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-left hidden-xs">
+                <li><a href="http://hypebeast.com/news">News</a></li>
+                <li class="active"><a href="{{ path('sylius_homepage') }}">Store</a></li>
+                <li><a href="http://hypebeast.com/forums">Forums</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-left hidden-sm hidden-xs" role="search" action="/">
+                <input type="text" class="form-control" placeholder="Search Store" name="s" value="">
+                <span class="glyphicon glyphicon-search"></span>
+            </form>
+
+            {{ knp_menu_render('store.user', {
+                'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',
+                'style': 'navbar-right'
+            }) }}
+        </div>
+    </nav>
+
+    <div id="site-subnavbar">
+        <div class="container">
+            {{ knp_menu_render('store.sub_navbar', {
+                'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',
+                'depth': 1,
+                'style': 'pills'
+            }) }}
+        </div>
+    </div>
+
+    <div id="site-subnavbar-dropdown">
+        <div id="site-subnavbar-dropdown-brands" class="container">
+            {{ knp_menu_render('store.brands', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig'}) }}
+        </div>
+        <div id="site-subnavbar-dropdown-clothing" class="container">
+            {{ knp_menu_render('store.clothing', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',}) }}
+        </div>
+        <div id="site-subnavbar-dropdown-accessories" class="container">
+            {{ knp_menu_render('store.accessories', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',}) }}
+        </div>
+        <div id="site-subnavbar-dropdown-sale" class="container">
+            {{ knp_menu_render('store.sale', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',}) }}
+        </div>
+    </div>
+
+    <div id="container" class="container">
+        {% block flashes %}
+            {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'fos_user_success'] %}
+                {% for flash in flashes %}
+                    <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name }}">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        {{ flash|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+
+        {% block main %}
+            <div class="row">
+                <div class="col-sm-9 col-sm-push-3">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+                    {% block sidebar %}
+                        <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
+                        {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block footer %}
+            <footer id="site-footer">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pull-left footer-links">
+                            <a href="#" id="contact-us">Contact Us</a> |
+                            <a href="http://hypebeast.com/about">About Us</a> |
+                            <a href="http://hypebeast.com/faq">FAQS</a> |
+                            <a href="http://hypebeast.com/delivery">Delivery &amp; Shipping</a> |
+                            <a href="http://hypebeast.com/returns">Returns Policy</a> |
+                            <a href="http://hypebeast.com/affiliates">Affiliates</a> |
+                            <a href="http://hypebeast.com/vip">VIP</a>
+                        </div>
+                        <div class="pull-right footer-links">
+                            <a href="http://hypebeast.com/jobs">Jobs</a> |
+                            <a href="http://hypebeast.com/advertise">Advertising</a> |
+                            <a href="http://hbnetwork.co" target="_blank">HB Network</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <span class="copyright"><?=date('Y');?> 101 MEDIA LAB LIMITED. ALL RIGHTS RESERVED.</span> |
+                        <a href="http://hypebeast.com/terms">Terms &amp; Conditions</a> |
+                        <a href="http://hypebeast.com/privacy">Privacy Policy</a>
+                    </div>
+                    <div class="col-xs-2 newsletter-span">
+                        <form id="footer-newsletter-form" class="newsletter-signup-form" action="http://hb.com/Hypebeast-Mobile/web/app_dev.php/signup_newsletter" method="POST">
+                            <input class="form-control newsletter-email" name="email" size="16" type="email"
+                                   placeholder="Sign Up For Our Newsletter"
+                                   required="required">
+                        </form>
+                    </div>
+                    <div class="follow-us-footer col-xs-2">
+                        <a class="facebook" href="http://facebook.com/hypebeast" rel="nofollow" target="_blank">
+                            <i class="fontello-facebook"></i>
+                        </a>
+                        <a class="twitter" href="https://twitter.com/hypebeast" rel="nofollow" target="_blank">
+                            <i class="fontello-twitter"></i>
+                        </a>
+                        <a class="youtube" href="http://www.youtube.com/subscription_center?add_user=hypebeasttv" rel="nofollow" target="_blank">
+                            <i class="fontello-youtube"></i>
+                        </a>
+                        <a class="google" href="https://plus.google.com/+HYPEBEAST" rel="nofollow" target="_blank">
+                            <i class="fontello-gplus"></i>
+                        </a>
+                        <a class="instagram" href="http://instagram.com/hypebeast" rel="nofollow" target="_blank">
+                            <i class="fontello-instagrem"></i>
+                        </a>
+                        <a class="tumblr" href="http://hypebeast.tumblr.com/" rel="nofollow" target="_blank">
+                            <i class="fontello-tumblr"></i>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        {% endblock %}
+    </div>
+    {# div#container #}
+
+    {% block javascripts %}
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+        {% javascripts output='assets/compiled/frontend.js' '@HypebeastWebBundle/Resources/assets/js/base.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</body>
+</html>

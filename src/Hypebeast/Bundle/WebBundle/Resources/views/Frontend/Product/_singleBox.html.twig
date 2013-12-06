@@ -1,8 +1,19 @@
-<div class="product-box">
-    <a href="{{ path('sylius_product_show', {'slug': product.slug, 'brand': sylius_product_taxons(product, 'Brand')[0].permalink}) }}"><h4>{{ product.name|truncate(18) }}</h4></a>
-    <a href="{{ path('sylius_product_show', {'slug': product.slug, 'brand': sylius_product_taxons(product, 'Brand')[0].permalink}) }}">
-        <img class="img-rounded img-responsive" src="{{ product.image ? product.image.path|imagine_filter('sylius_262x255') : 'http://placehold.it/262x255' }}" alt="{{ product.name }}" />
-        <span class="label label-primary">{{ product.price|sylius_price }}</span>
-        <button class="btn btn-success btn-xs pull-right"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+<div class="product">
+    <a href="{{ path('sylius_product_show', {'slug': product.slug, 'brand': sylius_product_taxons(product, 'Brand')[0].permalink}) }}"
+        class="picture">
+        <img class="img-responsive" src="{{ product.image ? product.image.path|imagine_filter('store_thumbnail') : 'http://placehold.it/250x275' }}" alt="{{ product.name }} picture." />
+        <img class="img-responsive model-shot" src="http://placehold.it/250x275" alt="{{ product.name }} picture." />
     </a>
+    <a href="{{ path('sylius_product_index_by_brand', {'permalink': sylius_product_taxons(product, 'Brand')[0].permalink}) }}">
+        <h4 class="brand">{{ sylius_product_taxons(product, 'Brand')[0].name }}</h4>
+    </a>
+    <a href="{{ path('sylius_product_show', {'slug': product.slug, 'brand': sylius_product_taxons(product, 'Brand')[0].permalink}) }}">
+        <h3 class="name">{{ product.name }}</h3>
+    </a>
+    <div class="info">
+        <span class="price">{{ product.masterVariant.price|sylius_price }}</span>
+        {% if product.newArrival %}
+            <span class="new">New</span>
+        {% endif %}
+    </div>
 </div>

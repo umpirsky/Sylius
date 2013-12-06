@@ -170,4 +170,5 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
 
     public function getPublishedAt();
     public function setPublishedAt(DateTime $publishedAt);
+    public function isNewArrival();
 }

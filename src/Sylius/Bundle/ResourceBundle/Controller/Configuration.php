@@ -162,7 +162,7 @@ class Configuration
 
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->get('paginate', 10);
+        return (int) $this->get('paginate', 12);
     }
 
     public function isFilterable()

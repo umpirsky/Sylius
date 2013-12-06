@@ -1,0 +1,148 @@
+// Core variables and mixins
+@import "../../public/bower_components/bootstrap/less/variables.less";
+@import "variables.less";
+@import "../../public/bower_components/bootstrap/less/mixins.less";
+
+.toolbar {
+    margin-bottom: -10px;
+    line-height: 1em;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    color: #808080;
+    text-transform: uppercase;
+
+    a {
+        color: #808080;
+
+        &:hover {
+            color: #000;
+        }
+
+        &.active {
+            color: #000;
+            font-weight: bold;
+        }
+    }
+}
+
+.product {
+    height: 335px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    color: @gray;
+
+    @media (max-width: 320px) {
+        height: 252px;
+    }
+
+    @media (min-width: 321px) and (max-width: 400px) {
+        height: 285px;
+    }
+
+    @media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+        height: 280px;
+    }
+
+    .picture {
+        margin-bottom: 5px;
+        line-height: 0;
+        display: block;
+        position: relative;
+        text-align: center;
+
+        img {
+            width: 220px;
+            height: 242px;
+
+            @media (max-width: @screen-sm-max) {
+                width: 100%;
+                height: auto;
+                max-width: 220px;
+            }
+        }
+
+        .model-shot {
+            .opacity(0);
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: block;
+            z-index: 2;
+            .transition(~"all linear .05s");
+        }
+
+        &:hover .model-shot {
+            .opacity(100);
+        }
+    }
+
+    .brand {
+        margin: 0 0 3px 0;
+        font-family: "Georgia",Times New Roman,Times,serif;
+        font-size: 11px;
+        font-weight: normal;
+        line-height: 1.2em;
+        color: #404040;
+        text-transform: uppercase;
+    }
+
+    .name {
+        margin: 0 0 3px 0;
+        font-size: 12px;
+        font-weight: bold;
+        color: #404040;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        line-height: 13px;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        font-size: 11px;
+        font-weight: bold;
+        width: 100%;
+        border-bottom: solid 1px #e5e5e5;
+
+        .from {
+            display: none;
+        }
+
+        del {
+            font-weight: normal;
+            color: @gray-light;
+        }
+
+        ins {
+            text-decoration: none;
+            color: @red;
+        }
+
+        .out-of-stock {
+            color: @red;
+        }
+
+        .new, .back-in-stock {
+            color: lighten(@gray, 17%);
+        }
+    }
+
+    .add-to-cart {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 11px;
+        font-weight: bold;
+        background: #FFF;
+
+        .btn {
+            margin-bottom: 3px;
+        }
+
+        .btn.added {
+            display: none;
+        }
+    }
+}

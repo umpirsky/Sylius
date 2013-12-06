@@ -35,6 +35,10 @@ assetic:
     bundles:        ['SyliusWebBundle', 'HypebeastWebBundle']
     filters:
         cssrewrite: ~
+        less:
+            node: /usr/bin/node
+            node_paths: [/usr/lib/node_modules]
+            apply_to: "\.less$"
 
 doctrine:
     dbal:
@@ -162,6 +166,16 @@ liip_imagine:
         sylius_gallery:
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
+
+        store_thumbnail:
+            filters:
+                thumbnail: { size: [250, 275], mode: outbound}
+        store_gallery:
+            filters:
+                thumbnail: { size: [500, 550], mode: outbound}
+        store_large:
+            filters:
+                thumbnail: { size: [1000, 1100], mode: inset}
 
 knp_snappy:
     pdf:

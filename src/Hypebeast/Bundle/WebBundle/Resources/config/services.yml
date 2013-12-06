@@ -13,3 +13,55 @@ services:
             - @security.context
             - @security.authentication.manager
             - %sylius.hypebeast.key%
+
+    store.menu_builder:
+        class: Hypebeast\Bundle\WebBundle\Menu\StoreMenuBuilder
+        arguments:
+            - @knp_menu.factory
+            - @security.context
+            - @translator
+
+    store.menu.user:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createUserMenu
+        arguments:
+            - @sylius.cart_provider
+            - @sylius.twig.money
+        tags:
+            - { name: knp_menu.menu, alias: store.user }
+
+    store.menu.sub_navbar:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createSubNavbarMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.sub_navbar }
+
+    store.menu.brands:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createBrandsMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.brands }
+
+    store.menu.clothing:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createClothingMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.clothing }
+
+    store.menu.accessories:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createAccessoriesMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.accessories }
+
+    store.menu.sale:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createSaleMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.sale }
