@@ -54,6 +54,43 @@ You can run Behat using the following command.
 $ bin/behat
 ```
 
+Sylius Authentication
+---------------------
+
+Add Guzzle package : 
+
+```bash
+composer.phar require guzzle/guzzle *
+```
+
+When you press the "store" link on Hypebeast, just axecute an action like that :
+
+```php
+$url  = "http://store.hypebeast.dev/app_dev.php/";
+$auth = $url . "auth/mobile";
+$key  = "YouHaveToChangeThisKey";
+
+$browser = new \Guzzle\Http\Client($auth);
+
+$request = $browser->post(
+        sprintf('?api_key=%s', base64_encode($key)),
+        null,
+        [
+        'username'  => 'TheUsername',
+        'email'     => 'your@address.email',
+        'firstname' => 'John',
+        'lastname'  => 'DOE',
+        ]
+        );
+
+$response = $request->send();
+
+return new RedirectResponse($url, 302, [ 'Set-Cookie' => $response->getSetCookie() ]);
+```
+
+An authenticated token is created for the given user and the user is created/updated on Sylius.
+Then, you are redirected on Sylius and you are authenticated
+
 Troubleshooting
 ---------------
 
