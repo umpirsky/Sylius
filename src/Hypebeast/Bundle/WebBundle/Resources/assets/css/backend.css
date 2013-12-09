@@ -340,6 +340,11 @@ input[type="radio"] {
     float: left;
 }
 
+label.checkbox {
+    float: right;
+    margin: 0px 15px 0px -25px;
+}
+
 .form-control {
     border-radius: 3px;
     -webkit-box-shadow: none;

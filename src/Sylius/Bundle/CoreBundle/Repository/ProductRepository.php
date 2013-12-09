@@ -55,6 +55,8 @@ class ProductRepository extends VariableProductRepository
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->select('product, variant')
             ->leftJoin('product.variants', 'variant')
+            ->leftJoin('product.taxons', 'taxon')
+            ->leftJoin('taxon.taxonomy', 'taxonomy')
         ;
 
         if (!empty($criteria['name'])) {
@@ -67,6 +69,38 @@ class ProductRepository extends VariableProductRepository
             $queryBuilder
                 ->andWhere('variant.sku = :sku')
                 ->setParameter('sku', $criteria['sku'])
+            ;
+        }
+        if (!empty($criteria['taxons']) && is_array($criteria['taxons'])) {
+            $expressions = array();
+            foreach ($criteria['taxons'] as $taxonomyId => $taxonIds) {
+                $taxonomy = $this
+                    ->getEntityManager()
+                    ->getRepository('Sylius\Bundle\CoreBundle\Model\Taxonomy')
+                    ->find($taxonomyId)
+                ;
+                foreach ($taxonIds as $taxonId) {
+                    $uid = uniqid();
+                    $expressions[] = $queryBuilder->expr()->andX(
+                        $queryBuilder->expr()->eq('taxonomy', ':taxonomy'.$uid),
+                        $queryBuilder->expr()->eq('taxon', ':taxon'.$uid)
+                    );
+
+                    $queryBuilder
+                        ->setParameter('taxonomy'.$uid, $taxonomy)
+                        ->setParameter('taxon'.$uid, $taxonomy->getTaxons()[$taxonId])
+                    ;
+                }
+            }
+            if ($expressions) {
+                $queryBuilder->andWhere(
+                    call_user_func_array(array($queryBuilder->expr(), 'orX'), $expressions)
+                );
+            }
+        }
+        if (!empty($criteria['sale'])) {
+            $queryBuilder
+                ->andWhere('variant.salePrice > 0')
             ;
         }
 

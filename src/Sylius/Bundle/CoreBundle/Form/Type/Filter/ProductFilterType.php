@@ -42,6 +42,11 @@ class ProductFilterType extends AbstractType
                     'placeholder' => 'sylius.form.product_filter.sku'
                 )
             ))
+            ->add('taxons', 'sylius_taxon_filter_selection')
+            ->add('sale', 'checkbox', array(
+                'required' => false,
+                'label'    => 'sylius.form.product_filter.sale'
+            ))
         ;
     }
 
