@@ -1,0 +1,12 @@
+services:
+    sylius.hypebeast.security.provider:
+        class: Hypebeast\Bundle\WebBundle\Security\HypebeastProvider
+        arguments:
+            - @fos_user.user_provider.username
+
+    sylius.hypebeast.security.listener:
+        class: Hypebeast\Bundle\WebBundle\Security\HypebeastListener
+        arguments:
+            - @security.context
+            - @security.authentication.manager
+            - %sylius.hypebeast.key%

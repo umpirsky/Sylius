@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\WebBundle\Security;
+namespace Hypebeast\Bundle\WebBundle\Security;
 
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;

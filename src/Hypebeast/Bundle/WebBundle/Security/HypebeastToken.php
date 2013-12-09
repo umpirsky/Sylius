@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\WebBundle\Security;
+namespace Hypebeast\Bundle\WebBundle\Security;
 
 use Sylius\Bundle\CoreBundle\Model\User;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;

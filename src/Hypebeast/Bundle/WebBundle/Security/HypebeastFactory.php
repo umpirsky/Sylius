@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\WebBundle\Security;
+namespace Hypebeast\Bundle\WebBundle\Security;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;

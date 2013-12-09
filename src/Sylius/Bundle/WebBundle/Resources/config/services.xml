@@ -114,16 +114,6 @@
             <tag name="kernel.event_listener" event="sylius.address.pre_delete" method="onAddressPreDelete" />
             <argument type="service" id="security.context" />
         </service>
-
-        <service id="sylius.hypebeast.security.provider" class="Sylius\Bundle\WebBundle\Security\HypebeastProvider">
-            <argument type="service" id="fos_user.user_provider.username" />
-        </service>
-
-        <service id="sylius.hypebeast.security.listener" class="Sylius\Bundle\WebBundle\Security\HypebeastListener">
-            <argument type="service" id="security.context" />
-            <argument type="service" id="security.authentication.manager" />
-            <argument type="string">%sylius.hypebeast.key%</argument>
-        </service>
     </services>
 
 </container>
