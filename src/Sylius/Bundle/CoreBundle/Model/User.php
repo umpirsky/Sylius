@@ -45,6 +45,13 @@ class User extends BaseUser implements UserInterface
         parent::__construct();
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getCurrency()
     {
         return $this->currency;

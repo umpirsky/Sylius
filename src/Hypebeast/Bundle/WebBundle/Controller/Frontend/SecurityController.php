@@ -13,10 +13,6 @@ class SecurityController extends Controller
     {
         if (null !== $user = $this->getUser()) {
 
-            if (null !== $user->getId()) {
-                $user = $this->get('sylius.repository.user')->find($user->getId());
-            }
-
             foreach ($request->request as $field => $value) {
                 $method = sprintf('set%s', ucfirst($field));
 

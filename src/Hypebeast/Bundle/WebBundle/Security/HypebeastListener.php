@@ -45,6 +45,7 @@ class HypebeastListener implements ListenerInterface
     protected function supports(Request $request)
     {
         return $request->query->has('api_key')
+            && $request->request->has('id')
             && $request->request->has('username')
             && $request->request->has('email')
         ;
@@ -54,6 +55,7 @@ class HypebeastListener implements ListenerInterface
     {
         return [
             base64_decode($request->query->get('api_key')),
+            $request->request->get('id'),
             $request->request->get('username'),
             $request->request->get('email'),
         ];
@@ -67,7 +69,7 @@ class HypebeastListener implements ListenerInterface
 
             if ($token instanceof HypebeastToken) {
 
-                return new HypebeastToken($token->getUsername(), $token->getUser());
+                return new HypebeastToken($token->getId(), $token->getUsername(), $token->getUser());
             }
         }
     }
@@ -79,13 +81,13 @@ class HypebeastListener implements ListenerInterface
             return;
         }
 
-        list($api_key, $username, $email) = $this->getCredentials($request);
+        list($api_key, $id, $username, $email) = $this->getCredentials($request);
 
-        if ($api_key !== $this->apiKey) {
+        if ($api_key != $this->apiKey) {
 
             return;
         }
 
-        return new HypebeastToken($username);
+        return new HypebeastToken($id, $username);
     }
 }
