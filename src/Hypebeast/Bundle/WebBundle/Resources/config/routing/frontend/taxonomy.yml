@@ -1,0 +1,8 @@
+sylius_taxonomy_brand_show:
+    pattern: /brands
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Taxonomy:show.html.twig
+            criteria: {name: 'Brand'}

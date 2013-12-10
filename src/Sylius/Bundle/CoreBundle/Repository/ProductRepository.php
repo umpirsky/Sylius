@@ -136,6 +136,17 @@ class ProductRepository extends VariableProductRepository
         );
     }
 
+    public function createSalePaginator()
+    {
+        return $this->getPaginator(
+            $this
+                ->getCollectionQueryBuilder()
+                ->leftJoin('product.variants', 'variant')
+                ->where('variant.master = true')
+                ->andWhere('variant.salePrice > 0')
+        );
+    }
+
     /**
      * Get the product data for the details page.
      *

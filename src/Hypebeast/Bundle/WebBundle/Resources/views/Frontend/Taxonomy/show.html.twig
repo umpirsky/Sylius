@@ -1,0 +1,28 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+<table class="table">
+    <tbody>
+        {{ _self.tree(taxonomy, taxonomy.taxons) }}
+    </tbody>
+</table>
+{% endblock %}
+
+{% macro tree(taxonomy, taxons) %}
+
+{% for taxon in taxons %}
+<tr id="{{ taxon.id }}">
+    <td>
+        <a href="{{ path('sylius_product_index_by_brand', {'permalink': taxon.permalink}) }}" style="border-left: {{ (taxon.level - 1) * 20}}px solid #f1f1f1; padding-left: 10px;">
+            {% if taxon.path|length > 0 %}
+                <img src="{{ taxon.path|imagine_filter('sylius_50x40') }}" alt="" class="img-rounded" />
+            {% endif %}
+            {{ taxon.name }}
+        </a>
+    </td>
+</tr>
+{% if taxon.children|length > 0 %}
+    {{ _self.tree(taxonomy, taxon.children) }}
+{% endif %}
+{% endfor %}
+{% endmacro %}

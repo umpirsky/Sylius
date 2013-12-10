@@ -22,6 +22,10 @@
         <source>sylius.product.status</source>
         <target>Status</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473h" resname="sylius.product.sale">
+        <source>sylius.product.sale</source>
+        <target>Sale</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

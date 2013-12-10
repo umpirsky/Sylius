@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.product.new_arrivals'|trans() }}</h1>
+    <h1>{% block h1 %}{{ 'sylius.product.index_header'|trans()|raw }}{% endblock %}</h1>
 </div>
 
 {{ pagination(products) }}
