@@ -1,6 +1,20 @@
 sylius_backend_product_parent:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product.yml
 
+sylius_backend_product_price:
+    pattern: /{id}/price
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:price.html.twig
+
+sylius_backend_product_update_price:
+    pattern: /{id}/edit-price
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product:updatePriceAction
+
 sylius_backend_product_upload:
     pattern: /upload/{id}
     defaults:

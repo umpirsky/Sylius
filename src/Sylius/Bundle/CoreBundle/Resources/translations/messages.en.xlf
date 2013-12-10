@@ -278,6 +278,10 @@
         <source>sylius.form.variant.width</source>
         <target>Width</target>
       </trans-unit>
+      <trans-unit id="6bd77fa4ee5506db723f5e64327f3cb3" resname="sylius.form.product_price.invalid">
+        <source>sylius.form.product_price.invalid</source>
+        <target>One or more of the given values is invalid.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

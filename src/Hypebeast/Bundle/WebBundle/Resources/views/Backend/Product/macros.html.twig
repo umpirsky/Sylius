@@ -41,7 +41,15 @@
                 </a>
             </td>
             <td>
-                <td>{% if product.masterVariant.salePrice %}<del>{{ product.masterVariant.price|sylius_price }}</del> {% endif %}{{ product.masterVariant.totalPrice|sylius_price }}</td>
+                <a
+                    href="#"
+                    data-type="price"
+                    data-url="{{ path('sylius_backend_product_update_price', {'id': product.id}) }}"
+                    data-price-url="{{ path('sylius_backend_product_price', {'id': product.id}) }}"
+                    data-value="{{ {'masterVariant': {'price': product.price/100, 'salePrice': product.salePrice/100, 'wholesalePrice': product.wholesalePrice/100}}|json_encode }}"
+                    data-pk="{{ product.id }}"
+                    class="editable editable-click"
+                >{% include 'SyliusWebBundle:Backend/Product:price.html.twig' %}</a>
             </td>
             <td>
                 <div class="pull-right">

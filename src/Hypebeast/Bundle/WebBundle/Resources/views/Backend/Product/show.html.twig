@@ -126,7 +126,7 @@
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
-                    <td>{% if product.masterVariant.salePrice %}<del>{{ product.masterVariant.price|sylius_price }}</del> {% endif %}{{ product.masterVariant.totalPrice|sylius_price }}</td>
+                    <td>{% include 'SyliusWebBundle:Backend/Product:price.html.twig' %}</td>
                 </tr>
                 {% if product.masterVariant.wholesalePrice %}
                     <tr>

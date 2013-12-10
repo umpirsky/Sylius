@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -22,6 +23,45 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ProductController extends ResourceController
 {
+    public function indexAction(Request $request)
+    {
+        $config = $this->getConfiguration();
+
+        $criteria = $config->getCriteria();
+        $sorting = $config->getSorting();
+
+        $pluralName = $config->getPluralResourceName();
+        $repository = $this->getRepository();
+
+        if ($config->isPaginated()) {
+            $resources = $this
+                ->getResourceResolver()
+                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting))
+            ;
+
+            $resources
+                ->setCurrentPage($request->get('page', 1), true, true)
+                ->setMaxPerPage($config->getPaginationMaxPerPage())
+            ;
+        } else {
+            $resources = $this
+                ->getResourceResolver()
+                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()))
+            ;
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($config->getTemplate('index.html'))
+            ->setData(array(
+                $pluralName => $resources,
+                'form'      => $this->get('form.factory')->create('sylius_product_price'),
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
     public function createAction(Request $request)
     {
         $config = $this->getConfiguration();
@@ -105,6 +145,27 @@ class ProductController extends ResourceController
         ;
 
         return $this->handleView($view);
+    }
+
+    public function updatePriceAction(Request $request)
+    {
+        $config = $this->getConfiguration();
+
+        $resource = $this->findOr404();
+        $form = $this->get('form.factory')->create('sylius_product_price', $resource);
+
+        if ($request->isMethod('POST') && $form->bind($request->request->get('value'))->isValid()) {
+            $event = $this->update($resource);
+
+            if (!$event->isStopped()) {
+                return new Response();
+            }
+        }
+
+        return new Response(
+            $this->get('translator')->trans('sylius.form.product_price.invalid'),
+            400
+        );
     }
 
     public function uploadAction($id)
