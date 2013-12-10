@@ -1,0 +1,5 @@
+hypebeast_frontend_security_authenticate:
+    pattern: /auth/mobile
+    methods: [POST]
+    defaults:
+        _controller: HypebeastWebBundle:Frontend/Security:authenticate

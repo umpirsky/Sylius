@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\WebBundle\Controller\Frontend;
+namespace Hypebeast\Bundle\WebBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
