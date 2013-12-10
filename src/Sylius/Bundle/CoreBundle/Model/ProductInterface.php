@@ -97,7 +97,7 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
     public function setSalePrice($salePrice);
     public function getWholesalePrice();
     public function setWholesalePrice($wholesalePrice);
-    public function getTotalPrice();
+    public function getCurrentPrice();
 
     /**
      * Get product short description.

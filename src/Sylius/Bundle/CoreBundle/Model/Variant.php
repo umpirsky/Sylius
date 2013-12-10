@@ -203,9 +203,9 @@ class Variant extends BaseVariant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalPrice()
+    public function getCurrentPrice()
     {
-        if (null !== $this->getSalePrice()) {
+        if (null !== $this->getSalePrice() && 0 !== $this->getSalePrice()) {
             return $this->getSalePrice();
         }
 

@@ -1,1 +1,1 @@
-{% if product.salePrice %}<del>{{ product.price|sylius_price }}</del> {% endif %}{{ product.totalPrice|sylius_price }}
+{% if product.salePrice %}<del>{{ product.price|sylius_price }}</del> {% endif %}{{ product.currentPrice|sylius_price }}

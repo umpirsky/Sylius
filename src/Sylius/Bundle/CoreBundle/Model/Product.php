@@ -215,9 +215,9 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalPrice()
+    public function getCurrentPrice()
     {
-        return $this->getMasterVariant()->getTotalPrice();
+        return $this->getMasterVariant()->getCurrentPrice();
     }
 
     /**

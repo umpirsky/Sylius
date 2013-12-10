@@ -19,13 +19,16 @@ class VariantPriceType extends AbstractType
     {
         $builder
             ->add('price', 'sylius_money', array(
-                'label' => 'sylius.form.variant.price'
+                'required' => false,
+                'label'    => 'sylius.form.variant.price'
             ))
             ->add('salePrice', 'sylius_money', array(
-                'label' => 'sylius.form.variant.sale_price'
+                'required' => false,
+                'label'    => 'sylius.form.variant.sale_price'
             ))
             ->add('wholesalePrice', 'sylius_money', array(
-                'label' => 'sylius.form.variant.wholesale_price'
+                'required' => false,
+                'label'    => 'sylius.form.variant.wholesale_price'
             ))
         ;
     }

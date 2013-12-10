@@ -131,7 +131,7 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Selected item is not available in your country.');
         }
 
-        $item->setUnitPrice($variant->getTotalPrice());
+        $item->setUnitPrice($variant->getCurrentPrice());
 
         return $item;
     }

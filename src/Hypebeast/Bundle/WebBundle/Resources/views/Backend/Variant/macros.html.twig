@@ -44,7 +44,7 @@
             </td>
             <td><span class="badge badge-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
             <td>{% if variant.wholesalePrice %}{{ variant.wholesalePrice|sylius_price }}{% endif %}</td>
-            <td>{% if variant.salePrice %}<del>{{ variant.price|sylius_price }}</del> {% endif %}{{ variant.totalPrice|sylius_price }}</td>
+            <td>{% if variant.salePrice %}<del>{{ variant.price|sylius_price }}</del> {% endif %}{{ variant.currentPrice|sylius_price }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.edit(path('sylius_backend_variant_update', {'productId': product.id, 'id': variant.id})) }}

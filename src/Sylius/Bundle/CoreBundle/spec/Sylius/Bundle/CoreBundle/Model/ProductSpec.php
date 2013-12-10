@@ -67,7 +67,7 @@ class ProductSpec extends ObjectBehavior
 
     function its_total_price_should_be_sale_price_if_sale_price_is_set()
     {
-        $this->setSalePrice(4.99)->getTotalPrice()->shouldReturn(4.99);
+        $this->setSalePrice(4.99)->getCurrentPrice()->shouldReturn(4.99);
     }
 
     function its_variant_selection_method_is_choice_by_default()

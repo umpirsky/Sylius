@@ -281,7 +281,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             /* @var $item OrderItem */
             $item = $orderItemRepository->createNew();
             $item->setVariant($product->getMasterVariant());
-            $item->setUnitPrice($product->getMasterVariant()->getTotalPrice());
+            $item->setUnitPrice($product->getMasterVariant()->getCurrentPrice());
             $item->setQuantity($data['quantity']);
 
             $order->addItem($item);
@@ -495,7 +495,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $this->getService('sylius.generator.variant')->generate($product);
 
         foreach ($product->getVariants() as $variant) {
-            $variant->setPrice($product->getMasterVariant()->getTotalPrice());
+            $variant->setPrice($product->getMasterVariant()->getCurrentPrice());
         }
 
         $manager = $this->getEntityManager();

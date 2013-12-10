@@ -37,7 +37,7 @@ class LoadOrdersData extends DataFixture
                 /* @var $item OrderItemInterface */
                 $item = $orderItemRepository->createNew();
                 $item->setVariant($variant);
-                $item->setUnitPrice($variant->getTotalPrice());
+                $item->setUnitPrice($variant->getCurrentPrice());
                 $item->setQuantity(rand(1, 5));
 
                 $order->addItem($item);
