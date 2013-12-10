@@ -1,3 +1,6 @@
+parameters:
+    sylius.cart_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastCartExtension
+
 services:
     sylius.hypebeast.security.provider:
         class: Hypebeast\Bundle\WebBundle\Security\HypebeastProvider
