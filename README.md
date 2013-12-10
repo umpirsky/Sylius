@@ -76,10 +76,11 @@ $request = $browser->post(
         sprintf('?api_key=%s', base64_encode($key)),
         null,
         [
-        'username'  => 'TheUsername',
-        'email'     => 'your@address.email',
-        'firstname' => 'John',
-        'lastname'  => 'DOE',
+            'id'        => 100,
+            'username'  => 'TheUsername',
+            'email'     => 'your@address.email',
+            'firstname' => 'John',
+            'lastname'  => 'DOE',
         ]
         );
 
