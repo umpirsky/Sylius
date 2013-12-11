@@ -105,6 +105,15 @@ class UserRepository extends EntityRepository
         ;
     }
 
+    public function getMaxId()
+    {
+        return parent::getCollectionQueryBuilder()
+            ->select('MAX(o.id) AS id')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
