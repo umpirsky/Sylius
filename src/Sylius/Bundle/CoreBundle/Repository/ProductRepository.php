@@ -188,4 +188,13 @@ class ProductRepository extends VariableProductRepository
             $limit
         );
     }
+
+    public function findLastUpdated($limit = 10)
+    {
+        return $this->findBy(
+            array('status' => Product::STATUS_PUBLISHED),
+            array('publishedAt' => 'desc'),
+            $limit
+        );
+    }
 }

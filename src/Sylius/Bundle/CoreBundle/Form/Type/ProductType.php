@@ -14,6 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType as BaseProductType;
 use Sylius\Bundle\CoreBundle\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 /**
  * Product form type.
@@ -62,5 +64,21 @@ class ProductType extends BaseProductType
                 'mapped'  => false,
             ))
         ;
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function(FormEvent $event) {
+                $data = $event->getData();
+                $form = $event->getForm();
+
+                if (null !== $data->getPublishedAt()) {
+                    $form->add('publishedAt', 'datetime', [
+                        'date_format' => 'y-M-d',
+                        'date_widget' => 'choice',
+                        'time_widget' => 'text',
+                    ]);
+                }
+            }
+        );
     }
 }

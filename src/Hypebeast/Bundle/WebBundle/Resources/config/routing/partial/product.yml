@@ -1,0 +1,19 @@
+sylius_partial_product_latest:
+    pattern: /latest
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: false
+            method: findLatest
+            arguments: [$limit]
+            template: $template
+
+sylius_partial_product_last_updated:
+    pattern: /last/updated
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: false
+            method: findLastUpdated
+            arguments: [$limit]
+            template: $template
