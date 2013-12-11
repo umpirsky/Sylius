@@ -3,7 +3,7 @@
 
 default:
     context:
-        class: Sylius\Bundle\WebBundle\Behat\FeatureContext
+        class: Hypebeast\Bundle\WebBundle\Behat\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
             default_session: symfony2
