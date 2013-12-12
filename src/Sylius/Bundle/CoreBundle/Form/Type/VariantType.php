@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\VariableProductBundle\Form\Type\VariantType as BaseVariantType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 /**
  * Product variant type.
@@ -72,5 +74,17 @@ class VariantType extends BaseVariantType
                 'label'    => 'sylius.form.variant.weight'
             ))
         ;
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function(FormEvent $event) {
+                $variant = $event->getData();
+                $product = $variant->getProduct();
+
+                if (null !== $master = $product->getMasterVariant()) {
+                    $variant->setPrice($master->getPrice());
+                }
+            }
+        );
     }
 }
