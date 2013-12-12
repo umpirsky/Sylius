@@ -79,6 +79,11 @@ class VariantType extends BaseVariantType
             FormEvents::PRE_SET_DATA,
             function(FormEvent $event) {
                 $variant = $event->getData();
+
+                if (null !== $variant->getPrice()) {
+                    return;
+                }
+
                 $product = $variant->getProduct();
 
                 if (null !== $master = $product->getMasterVariant()) {
