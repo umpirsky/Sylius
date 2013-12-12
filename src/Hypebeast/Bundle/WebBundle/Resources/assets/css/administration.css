@@ -1,0 +1,45 @@
+.product.index .sylius-products-table td {
+    vertical-align: middle;
+}
+.product.index .sylius-products-table td.retail-price .editable-click {
+    border-bottom: none;
+}
+.product.index .sylius-products-table td.retail-price del {
+    color: #999;
+    font-size: 12px;
+    display: block;
+    font-style: italic;
+}
+.product.index .editableform input[type="text"] {
+    width: 100px;
+}
+
+.product.index .editableform .editable-input,
+.product.index .editableform .editable-buttons {
+    display: block;
+    margin: 0;
+}
+
+.product.index .editableform .editable-buttons {
+    margin-left: 130px;
+}
+
+.product.index .editableform .form-group {
+    display: block;
+    overflow: hidden;
+}
+.product.index .editableform .form-group > .control-label {
+    padding: 6px 0 0 0;
+    width: 130px;
+}
+
+.product.index .editableform .form-group > .col-lg-10 {
+    width: 140px;
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+
+label.checkbox {
+    float: right;
+    margin: 0 15px 0 -25px;
+}

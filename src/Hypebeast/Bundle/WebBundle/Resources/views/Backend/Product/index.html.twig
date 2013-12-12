@@ -7,28 +7,28 @@
 {% block stylesheets %}
 {{ parent() }}
 {% stylesheets
-    '@SyliusWebBundle/Resources/assets/css/bootstrap-editable.css'
+    '@HypebeastWebBundle/Resources/assets/css/bootstrap-editable.css'
 %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript">
-    var sylius_xeditable_price_tpl = '{{ form_widget(form.masterVariant) }}';
-</script>
-{{ parent() }}
-{% javascripts
-    '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js'
-    '@SyliusWebBundle/Resources/assets/js/price.js'
-%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-<script type="text/javascript">
-    (function ($) {
-        $('a.editable').editable();
-    }(window.jQuery));
-</script>
+    <script type="text/javascript">
+        var sylius_xeditable_price_tpl = '{{ form_widget(form.masterVariant) }}';
+    </script>
+    {{ parent() }}
+    {% javascripts
+        '@HypebeastWebBundle/Resources/assets/js/bootstrap-editable.js'
+        '@SyliusWebBundle/Resources/assets/js/price.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        (function ($) {
+            $('a.editable').editable();
+        }(window.jQuery));
+    </script>
 {% endblock %}
 
 {% block topbar %}
