@@ -6,7 +6,7 @@ body {
 
 /* Links. */
 a {
-    color: #1ABB9C;
+    color: #10AC8E;
 }
 a:hover {
     color: #017E5D;
@@ -46,18 +46,20 @@ form.form-signin .form-control:focus {
 .btn {
     text-transform: uppercase;
     border-radius: 3px;
-    font-size: 13px;
+}
+.btn:not(.btn-lg):not(.btn-sm):not(.btn-xs) {
     line-height: 20px;
+    font-size: 13px;
 }
 .btn > i {
     margin-right: 5px;
 }
 .btn.btn-default {
-    border-color: #ECECEC;
+    border-color: #DDD;
     background: #F5F5F5;
 }
 .btn.btn-default:hover {
-    border-color: #E5E5E5;
+    border-color: #CCC;
     background: #EEE;
 }
 
@@ -123,16 +125,6 @@ form.form-signin .form-control:focus {
 }
 
 /* Grid and tables. */
-th {
-    background-color: #f1f1f1;
-    text-transform: uppercase;
-}
-th a:link {
-    color: #5a5a5a;
-}
-th a:visited {
-    color: #5a5a5a;
-}
 .table tbody > tr.sub-table > td {
     padding-top: 0;
     border-top: 0;
@@ -156,19 +148,32 @@ th a:visited {
 }
 
 /* Table. */
-.main-container .table {
+.table {
     background: #FAFAFA;
 }
-.main-container .table.table-bordered {
+.table.table-bordered {
     border-color: #EAEAEA;
 }
-.main-container .table th {
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-color: #EEE;
+}
+.table > thead > tr > th {
     vertical-align: middle;
     border-bottom-width: 1px;
     border-color: #EAEAEA;
+    background-color: #f1f1f1;
+    text-transform: uppercase;
 }
-.main-container .table td {
-    border-color: #EEE;
+.table > thead > tr > th a:link {
+    color: #5a5a5a;
+}
+.table > thead > tr > th a:visited {
+    color: #5a5a5a;
 }
 
 /* Pagination. */
@@ -336,15 +341,6 @@ input[type="file"] {
     z-index: 100;
 }
 
-input[type="radio"] {
-    float: left;
-}
-
-label.checkbox {
-    float: right;
-    margin: 0px 15px 0px -25px;
-}
-
 .form-control {
     border-radius: 3px;
     -webkit-box-shadow: none;
@@ -445,4 +441,82 @@ label.checkbox {
 /** Dashboard */
 .col-md-6 #users .btn span {
     display: none;
+}
+
+/** Products. **/
+.sylius-products-table td {
+    vertical-align: middle;
+}
+.sylius-products-table .name {
+    font-size: 16px;
+    text-decoration: none;
+}
+.sylius-products-table .sku {
+    background: #FCFCFC;
+    color: #666;
+}
+.sylius-products-table .id,
+.sylius-products-table .stock,
+.sylius-products-table .retail-price,
+.sylius-products-table .updated-at {
+    text-align: center;
+}
+.sylius-products-table .stock,
+.sylius-products-table .retail-price,
+.sylius-products-table .updated-at {
+    width: 150px;
+}
+.sylius-products-table .actions {
+    width: 170px;
+    text-align: center;
+}
+
+/** Order. **/
+.sylius-order-content-table .picture,
+.sylius-order-content-table .quantity,
+.sylius-order-content-table .unit-price,
+.sylius-order-content-table .total {
+    width: 110px;
+    vertical-align: middle;
+}
+.sylius-order-content-table .info .name {
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0 0 5px 0;
+}
+.sylius-order-content-table .info ul {
+    margin-bottom: 0;
+}
+.sylius-order-content-table .info .sku code {
+    background: #FCFCFC;
+    color: #666;
+}
+.sylius-order-content-table tr.taxes td,
+.sylius-order-content-table tr.shipping-charges td,
+.sylius-order-content-table tr.promotion-discount td {
+    vertical-align: middle;
+}
+.sylius-order-content-table tr.taxes td h5,
+.sylius-order-content-table tr.shipping-charges td h5,
+.sylius-order-content-table tr.promotion-discount td h5 {
+    margin-top: 0;
+}
+.sylius-order-content-table tr.taxes td p,
+.sylius-order-content-table tr.taxes td ul,
+.sylius-order-content-table tr.shipping-charges td p,
+.sylius-order-content-table tr.shipping-charges td ul,
+.sylius-order-content-table tr.promotion-discount td p,
+.sylius-order-content-table tr.promotion-discount td ul {
+    margin-bottom: 0;
+}
+.sylius-order-content-table span.amount {
+    min-width: 65px;
+    display: inline-block;
+}
+
+
+/** Hypebeast Store customization */
+label.checkbox {
+    float: right;
+    margin: 0px 15px 0px -25px;
 }
