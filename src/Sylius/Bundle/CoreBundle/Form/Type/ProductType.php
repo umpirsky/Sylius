@@ -53,6 +53,10 @@ class ProductType extends BaseProductType
                 'empty_value' => '---',
                 'label'       => 'sylius.form.product.restricted_zone',
             ))
+            ->add('status', 'choice', array(
+                'label'   => 'sylius.form.product.status',
+                'choices' => Product::getStatusLabels()
+            ))
             ->add('uploadId', 'hidden', array(
                 'data'    => uniqid(),
                 'mapped'  => false,

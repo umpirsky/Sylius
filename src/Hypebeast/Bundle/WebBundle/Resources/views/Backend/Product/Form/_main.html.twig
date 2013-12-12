@@ -4,6 +4,7 @@
     {{ form_row(form.shortDescription, {'attr': {'class': 'input-lg', 'rows': 3}}) }}
     {{ form_row(form.masterVariant.sku) }}
     <hr />
+    {{ form_row(form.status) }}
     {{ form_label(form.masterVariant.availableOn) }}
     {{ form_widget(form.masterVariant.availableOn, {'label': false}) }}
     {{ form_row(form.masterVariant.availableOnDemand) }}

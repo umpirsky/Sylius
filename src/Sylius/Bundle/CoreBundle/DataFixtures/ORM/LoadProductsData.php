@@ -106,6 +106,7 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+        $product->setStatus(Product::STATUS_PUBLISHED);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
@@ -147,6 +148,7 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Sticker "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+        $product->setStatus(Product::STATUS_PUBLISHED);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
@@ -183,6 +185,7 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Mug "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+        $product->setStatus(Product::STATUS_PUBLISHED);
 
         $this->addMasterVariant($product);
 
@@ -216,6 +219,7 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+        $product->setStatus(Product::STATUS_PUBLISHED);
 
         $this->addMasterVariant($product, $isbn);
 

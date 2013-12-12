@@ -21,6 +21,7 @@
         <field name="shortDescription" column="short_description" type="string" nullable="true">
             <gedmo:versioned />
         </field>
+        <field name="status" column="status" type="integer" />
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
         <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
@@ -45,6 +46,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+        <field name="publishedAt" column="published_at" type="datetime" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

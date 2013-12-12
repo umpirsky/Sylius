@@ -17,6 +17,7 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
+use DateTime;
 
 /**
  * Sylius core product entity.
@@ -36,6 +37,10 @@ class Product extends BaseProduct implements ProductInterface
     const VARIANT_SELECTION_CHOICE = 'choice';
     const VARIANT_SELECTION_MATCH  = 'match';
 
+    const STATUS_DRAFT = 0;
+    const STATUS_UNPUBLISHED = 1;
+    const STATUS_PUBLISHED = 2;
+
     /**
      * Short product description.
      * For lists displaying.
@@ -43,6 +48,13 @@ class Product extends BaseProduct implements ProductInterface
      * @var string
      */
     protected $shortDescription;
+
+    /**
+     * self::STATUS_*
+     *
+     * @var int
+     */
+    protected $status;
 
     /**
      * Variant selection method.
@@ -80,12 +92,20 @@ class Product extends BaseProduct implements ProductInterface
     protected $restrictedZone;
 
     /**
+     * Publish time.
+     *
+     * @var \DateTime
+     */
+    protected $publishedAt;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
+        $this->setStatus(self::STATUS_DRAFT);
         $this->setMasterVariant(new Variant());
         $this->taxons = new ArrayCollection();
 
@@ -251,6 +271,44 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        if (self::STATUS_PUBLISHED == $status && self::STATUS_PUBLISHED != $this->status) {
+            $this->setPublishedAt(new DateTime);
+        }
+
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPublished()
+    {
+        return self::STATUS_PUBLISHED == $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatusLabel()
+    {
+        return $this->getStatusLabels()[$this->getStatus()];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTaxCategory()
     {
         return $this->taxCategory;
@@ -316,6 +374,33 @@ class Product extends BaseProduct implements ProductInterface
     public function getImage()
     {
         return $this->getMasterVariant()->getImages()->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPublishedAt(DateTime $publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public static function getStatusLabels()
+    {
+        return array(
+            self::STATUS_DRAFT       => 'Draft',
+            self::STATUS_UNPUBLISHED => 'Unpublished',
+            self::STATUS_PUBLISHED   => 'Published',
+        );
     }
 
     /**

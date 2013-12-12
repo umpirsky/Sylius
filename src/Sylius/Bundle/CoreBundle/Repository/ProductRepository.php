@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Repository;
 
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Sylius\Bundle\VariableProductBundle\Doctrine\ORM\VariableProductRepository;
+use Sylius\Bundle\CoreBundle\Model\Product;
+use DateTime;
 
 /**
  * Product repository.
@@ -36,7 +38,9 @@ class ProductRepository extends VariableProductRepository
         $queryBuilder
             ->innerJoin('product.taxons', 'taxon')
             ->andWhere('taxon = :taxon')
+            ->andWhere('product.status = :status')
             ->setParameter('taxon', $taxon)
+            ->setParameter('status', Product::STATUS_PUBLISHED)
         ;
 
         return $this->getPaginator($queryBuilder);
@@ -120,6 +124,18 @@ class ProductRepository extends VariableProductRepository
         return $this->getPaginator($queryBuilder);
     }
 
+    public function createNewArrivalsPaginator()
+    {
+        return $this->getPaginator(
+            $this
+                ->getCollectionQueryBuilder()
+                ->where('product.publishedAt > :date')
+                ->andWhere('product.status = :status')
+                ->setParameter('date', new DateTime('-3 days'))
+                ->setParameter('status', Product::STATUS_PUBLISHED)
+        );
+    }
+
     /**
      * Get the product data for the details page.
      *
@@ -155,6 +171,10 @@ class ProductRepository extends VariableProductRepository
      */
     public function findLatest($limit = 10)
     {
-        return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
+        return $this->findBy(
+            array('status' => Product::STATUS_PUBLISHED),
+            array('createdAt' => 'desc'),
+            $limit
+        );
     }
 }

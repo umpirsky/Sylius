@@ -37,6 +37,7 @@
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
+        <parameter key="sylius.listener.order_product_status.class">Sylius\Bundle\CoreBundle\EventListener\OrderProductStatusListener</parameter>
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
         <parameter key="sylius.listener.coupon_usage.class">Sylius\Bundle\CoreBundle\EventListener\CouponUsageListener</parameter>
@@ -89,6 +90,8 @@
 
         <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
         <parameter key="sylius.twig.file_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusFileExtension</parameter>
+
+        <parameter key="sylius.constant.product_status_published" type="constant">Sylius\Bundle\CoreBundle\Model\Product::STATUS_PUBLISHED</parameter>
     </parameters>
 
     <services>
@@ -246,6 +249,9 @@
             <argument type="service" id="sylius.order_processing.taxation_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
+        </service>
+        <service id="sylius.listener.order_product_status" class="%sylius.listener.order_product_status.class%">
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_factory" />

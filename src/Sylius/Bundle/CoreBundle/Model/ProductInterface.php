@@ -17,6 +17,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use DateTime;
 
 /**
  * Product interface.
@@ -113,6 +114,11 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      */
     public function setShortDescription($shortDescription);
 
+    public function getStatus();
+    public function setStatus($status);
+    public function isPublished();
+    public function getStatusLabel();
+
     /**
      * Set taxation category.
      *
@@ -161,4 +167,7 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      * @return ImageInterface
      */
     public function getImage();
+
+    public function getPublishedAt();
+    public function setPublishedAt(DateTime $publishedAt);
 }
