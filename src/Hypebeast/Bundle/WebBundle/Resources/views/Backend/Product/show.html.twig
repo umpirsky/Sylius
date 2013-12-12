@@ -76,6 +76,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>{{ 'sylius.product.status'|trans }}</td>
+                    <td>
+                        <span class="label label-{% if product.published %}success{% elseif product.status == constant('Sylius\\Bundle\\CoreBundle\\Model\\Product::STATUS_UNPUBLISHED') %}warning{% else %}default{% endif %}">{{ product.statusLabel }}</span>
+                        {% if product.published %}<span class="label label-success">{{ product.publishedAt|date }}</span>{% endif %}
+                    </td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.available_on'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
                 </tr>

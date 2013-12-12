@@ -90,6 +90,7 @@
 
         <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
         <parameter key="sylius.twig.file_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusFileExtension</parameter>
+
         <parameter key="sylius.twig.product_taxons_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusProductTaxonsExtension</parameter>
 
         <parameter key="sylius.constant.product_status_published" type="constant">Sylius\Bundle\CoreBundle\Model\Product::STATUS_PUBLISHED</parameter>
@@ -254,6 +255,9 @@
             <argument type="service" id="sylius.order_processing.taxation_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
+        </service>
+        <service id="sylius.listener.order_product_status" class="%sylius.listener.order_product_status.class%">
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
         </service>
         <service id="sylius.listener.order_product_status" class="%sylius.listener.order_product_status.class%">
             <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />

@@ -78,6 +78,10 @@ class ProductType extends BaseProductType
                 'time_widget' => 'text',
                 'required'    => false,
             ])
+            ->add('status', 'choice', array(
+                'label'   => 'sylius.form.product.status',
+                'choices' => Product::getStatusLabels()
+            ))
             ->add('uploadId', 'hidden', array(
                 'data'    => uniqid(),
                 'mapped'  => false,
