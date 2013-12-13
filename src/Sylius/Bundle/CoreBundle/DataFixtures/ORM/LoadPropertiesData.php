@@ -52,6 +52,12 @@ class LoadPropertiesData extends DataFixture
         $property = $this->createProperty('Book pages', 'Number of pages');
         $manager->persist($property);
 
+        $property = $this->createProperty('Clothing Size and Fit', 'Size and Fit');
+        $manager->persist($property);
+
+        $property = $this->createProperty('Clothing Care', 'Care');
+        $manager->persist($property);
+
         $manager->flush();
     }
 

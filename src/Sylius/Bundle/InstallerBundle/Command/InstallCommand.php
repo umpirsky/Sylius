@@ -90,9 +90,9 @@ class InstallCommand extends ContainerAwareCommand
         $count = count($this->getContainer()->get('sylius.repository.user')->findAll());
 
         $user->setId($count+1);
-        $user->setUsername($dialog->ask($output, '<question>Username:</question>'));
-        $user->setPlainPassword($dialog->ask($output, '<question>Password:</question>'));
-        $user->setEmail($dialog->ask($output, '<question>Email:</question>'));
+        $user->setUsername($dialog->ask($output, '<question>Username:</question>', 'admin'));
+        $user->setPlainPassword($dialog->ask($output, '<question>Password:</question>', 'admin'));
+        $user->setEmail($dialog->ask($output, '<question>Email:</question>', 'admin@example.com'));
         $user->setEnabled(true);
         $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
 

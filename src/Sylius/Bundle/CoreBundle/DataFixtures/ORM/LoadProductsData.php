@@ -55,23 +55,11 @@ class LoadProductsData extends DataFixture
         $this->productPropertyClass = $this->container->getParameter('sylius.model.product_property.class');
 
         // T-Shirts...
-        for ($i = 1; $i <= 120; $i++) {
-            switch (rand(0, 3)) {
+        for ($i = 1; $i <= 80; $i++) {
+            switch (rand(0, 0)) {
                 case 0:
-                    $manager->persist($this->createTShirt($i));
-                break;
-
-                case 1:
-                    $manager->persist($this->createSticker($i));
-                break;
-
-                case 2:
-                    $manager->persist($this->createMug($i));
-                break;
-
-                case 3:
-                    $manager->persist($this->createBook($i));
-                break;
+                    $manager->persist($this->createHypebeastProduct($i));
+                    break;
             }
 
             if (0 === $i % 20) {
@@ -91,6 +79,60 @@ class LoadProductsData extends DataFixture
     public function getOrder()
     {
         return 6;
+    }
+
+    /**
+     * Creates Hypebeast t-shirt product.
+     *
+     * @param integer $i
+     */
+    private function createHypebeastProduct($i)
+    {
+        $product = $this->createProduct();
+
+        $brand    = $this->faker->randomElement(['A.P.C.', 'AMBUSH®', 'BWGH', 'CASH CA', 'Stussy', 'HUF', 'Mister']);
+        $color    = $this->faker->randomElement(['Black', 'White', 'Red']);
+        $pattern  = $this->faker->randomElement(['Dotted', 'Stripe', 'Camo', 'Letter']);
+        $category = $this->faker->randomElement(['T-Shirts', 'Bags', 'Hats', 'Jeans']);
+
+        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
+        $product->setName("$color ".ucfirst($this->faker->word)." $pattern $category");
+        $product->setDescription($this->faker->paragraph);
+        $product->setShortDescription($this->faker->sentence);
+        $product->setStatus(Product::STATUS_PUBLISHED);
+        $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+
+        $this->addMasterVariant($product);
+
+        // Taxomies
+        $this->setTaxons($product, array(
+            $brand,
+            $category,
+        ));
+
+        if($category !== 'Hats') {
+            $this->addProperty($product, 'Clothing Size and Fit', $this->faker->paragraph);
+        }
+
+        if($category !== 'Bag') {
+            $this->addProperty($product, 'Clothing Care', $this->faker->paragraph);
+        }
+
+        // T-Shirt collection.
+        $randomCollection = sprintf('Symfony2 %s %s', $this->faker->randomElement(array('Summer', 'Winter', 'Spring', 'Autumn')), rand(1995, 2012));
+        $this->addProperty($product, 'T-Shirt collection', $randomCollection);
+
+        // T-Shirt material.
+        $randomMaterial = $this->faker->randomElement(array('Polyester', 'Wool', 'Polyester 10% / Wool 90%', 'Potato 100%'));
+        $this->addProperty($product, 'T-Shirt material', $randomMaterial);
+
+        $product->addOption($this->getReference('Sylius.Option.T-Shirt size'));
+
+        $this->generateVariants($product);
+
+        $this->setReference('Sylius.Product-'.$i, $product);
+
+        return $product;
     }
 
     /**
@@ -278,7 +320,7 @@ class LoadProductsData extends DataFixture
 
         $productName = explode(' ', $product->getName());
         $image = clone $this->getReference(
-            'Sylius.Image.'.strtolower($productName[0])
+            'Sylius.Image.'.strtolower($productName[0]).'-'.strtolower($productName[3])
         );
         $variant->addImage($image);
 
