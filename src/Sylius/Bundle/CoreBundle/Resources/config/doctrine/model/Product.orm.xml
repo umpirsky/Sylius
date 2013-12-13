@@ -22,6 +22,7 @@
             <gedmo:versioned />
         </field>
         <field name="status" column="status" type="integer" />
+        <field name="supplierCode" column="supplier_code" type="string" nullable="true" />
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
         <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">

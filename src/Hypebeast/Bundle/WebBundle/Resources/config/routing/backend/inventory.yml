@@ -1,0 +1,17 @@
+sylius_backend_inventory_parent:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/inventory.yml
+
+sylius_backend_inventory_update:
+    pattern: /edit
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.inventory:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Inventory:update.html.twig
+
+sylius_backend_inventory_variants:
+    pattern: /variants
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.inventory:variantsAction
+        _format: json

@@ -97,6 +97,7 @@ class LoadProductsData extends DataFixture
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName("$color ".ucfirst($this->faker->word)." $pattern $category");
+        $product->setSupplierCode($this->getUniqueSku());
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setStatus(Product::STATUS_PUBLISHED);

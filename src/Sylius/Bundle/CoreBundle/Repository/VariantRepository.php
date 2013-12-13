@@ -24,4 +24,14 @@ class VariantRepository extends BaseVariantRepository
     {
         return $this->getCollectionQueryBuilder();
     }
+
+    public function findAllForTypehead()
+    {
+        return $this->getCollectionQueryBuilder()
+            ->select("o.id, o.sku, product.supplierCode, o.onHand, product.name, CONCAT(o.sku, ' - ', product.name, ' (', COALESCE(product.supplierCode, ''), ')') AS value")
+            ->innerJoin('o.product', 'product')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

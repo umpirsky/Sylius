@@ -38,6 +38,9 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      */
     public function setSku($sku);
 
+    public function getSupplierCode();
+    public function setSupplierCode($supplierCode);
+
     /**
      * Get the variant selection method.
      *

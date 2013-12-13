@@ -1,0 +1,41 @@
+parameters:
+    sylius.controller.inventory.class: Hypebeast\Bundle\InventoryBundle\Controller\InventoryController
+    sylius.form.type.sylius_variant_to_identifier_hidden.class: Hypebeast\Bundle\InventoryBundle\Form\Type\VariantToIdentifierType
+    sylius.form.type.inventory_adjustment.class: Hypebeast\Bundle\InventoryBundle\Form\Type\AdjustmentType
+    sylius.form.type.inventory_adjustment_adjustment_change.class: Hypebeast\Bundle\InventoryBundle\Form\Type\AdjustmentChangeType
+    sylius.form.handler.inventory.class: Hypebeast\Bundle\InventoryBundle\Form\Handler\Inventory
+
+
+services:
+    sylius.controller.inventory:
+        class: %sylius.controller.inventory.class%
+        arguments:
+            - sylius
+            - inventory_unit
+            - HypebeastInventoryBundle:Inventory
+        calls:
+            - [setContainer, ['@service_container']]
+
+    sylius.form.type.sylius_variant_to_identifier_hidden:
+        class: %sylius.form.type.sylius_variant_to_identifier_hidden.class%
+        arguments:
+            - @sylius.repository.variant
+        tags:
+            - { name: form.type, alias: sylius_variant_to_identifier_hidden }
+
+    sylius.form.type.inventory_adjustment:
+        class: %sylius.form.type.inventory_adjustment.class%
+        tags:
+            - { name: form.type, alias: sylius_inventory_adjustment }
+
+    sylius.form.type.inventory_adjustment_adjustment_change:
+        class: %sylius.form.type.inventory_adjustment_adjustment_change.class%
+        tags:
+            - { name: form.type, alias: sylius_inventory_adjustment_change }
+
+    sylius.form.handler.inventory:
+        class: %sylius.form.handler.inventory.class%
+        arguments:
+            - @sylius.inventory_operator
+            - @sylius.inventory_unit_factory
+            - @doctrine.orm.entity_manager

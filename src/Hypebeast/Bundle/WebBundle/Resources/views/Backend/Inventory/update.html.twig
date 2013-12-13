@@ -1,0 +1,77 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% stylesheets
+    '@HypebeastWebBundle/Resources/assets/css/typeahead.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts output='assets/compiled/backend_inventory_update.js'
+    '//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js'
+    '//cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan.min.js'
+    '@SyliusWebBundle/Resources/assets/js/inventory-update.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script type="text/javascript">
+    var inventory_update_variants_path = '{{ path('sylius_backend_inventory_variants') }}';
+</script>
+{% endblock %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.inventory.update'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.adjustment_change.update_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_inventory_update') }}" method="post" class="form-horizontal">
+    {{ form_errors(form) }}
+    {{ form_row(form.reason) }}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>{{ 'sylius.inventory.item_name'|trans }}</th>
+                <th>{{ 'sylius.inventory.supplier_code'|trans }}</th>
+                <th>{{ 'sylius.inventory.quantity'|trans }}</th>
+                <th>{{ 'sylius.inventory.available'|trans }}</th>
+                <th>{{ 'sylius.inventory.after'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="sylius-inventory-adjustment-changes" class="collection-container" data-prototype="{{ ('<tr class="sylius-assortment-variant-images-image"><td>' ~ form_widget(form.adjustmentChanges.vars.prototype.typehead) ~ form_widget(form.adjustmentChanges.vars.prototype.variant) ~ '</td><td></td><td>' ~ form_widget(form.adjustmentChanges.vars.prototype.quantity) ~ '</td><td></td><td></td><td><a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-inventory-adjustment-changes" data-collection="sylius-inventory-adjustment-changes"><i class="glyphicon glyphicon-trash"></i></a></td></tr>')|e }}">
+            {% for adjustmentChange in form.adjustmentChanges %}
+                <tr class="sylius-assortment-variant-images-image">
+                    <td>{{ form_widget(adjustmentChange.typehead) }}{{ form_widget(adjustmentChange.variant) }}</td>
+                    <td>{% if adjustmentChange.vars.data.variant %}{{ adjustmentChange.vars.data.variant.product.supplierCode }}{% endif %}</td>
+                    <td>{{ form_widget(adjustmentChange.quantity) }}</td>
+                    <td>{% if adjustmentChange.vars.data.variant %}{{ adjustmentChange.vars.data.variant.onHand }}{% endif %}</td>
+                    <td>{% if adjustmentChange.vars.data.variant %}{{ adjustmentChange.vars.data.variant.onHand + adjustmentChange.vars.data.quantity }}{% endif %}</td>
+                    <td><a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-inventory-adjustment-changes" data-collection="sylius-inventory-adjustment-changes"><i class="glyphicon glyphicon-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius-inventory-adjustment-changes" data-collection="sylius-inventory-adjustment-changes">
+        {{ 'sylius.inventory.add_adjustment_change'|trans }}
+    </a>
+    <br>
+    {{ form_row(form.note) }}
+    {{ form_widget(form._token) }}
+
+    {{ update() }}
+</form>
+{% endblock %}

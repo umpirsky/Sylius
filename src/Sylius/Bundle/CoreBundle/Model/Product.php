@@ -50,6 +50,11 @@ class Product extends BaseProduct implements ProductInterface
     protected $shortDescription;
 
     /**
+     * @var string
+     */
+    protected $supplierCode;
+
+    /**
      * self::STATUS_*
      *
      * @var int
@@ -311,6 +316,24 @@ class Product extends BaseProduct implements ProductInterface
     public function getStatusLabel()
     {
         return $this->getStatusLabels()[$this->getStatus()];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupplierCode()
+    {
+        return $this->supplierCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSupplierCode($supplierCode)
+    {
+        $this->supplierCode = $supplierCode;
+
+        return $this;
     }
 
     /**

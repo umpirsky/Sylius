@@ -3,6 +3,7 @@
     {{ form_row(form.description, {'attr': {'class': 'input-lg', 'rows': 10}}) }}
     {{ form_row(form.shortDescription, {'attr': {'class': 'input-lg', 'rows': 3}}) }}
     {{ form_row(form.masterVariant.sku) }}
+    {{ form_row(form.supplierCode) }}
     <hr />
     {{ form_row(form.status) }}
     {% if form.publishedAt is defined %}

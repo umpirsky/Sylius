@@ -36,6 +36,10 @@ class ProductType extends BaseProductType
                 'required' => false,
                 'label'    => 'sylius.form.product.short_description'
             ))
+            ->add('supplierCode', 'text', array(
+                'required' => false,
+                'label'    => 'sylius.form.product.supplier_code'
+            ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(
                 'required'    => false,
                 'empty_value' => '---',

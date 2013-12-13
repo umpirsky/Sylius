@@ -30,10 +30,6 @@
         <source>sylius.product.sale</source>
         <target>Sale</target>
       </trans-unit>
-      <trans-unit id="c2928b60e4bb3e0a42ed78727273473i" resname="sylius.product.new">
-        <source>sylius.product.new</source>
-        <target>New</target>
-      </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.product.picture.alt">
         <source>sylius.product.picture.alt</source>
         <target>%brand% %name% Picutre</target>
@@ -41,6 +37,42 @@
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.product.picture.model.alt">
         <source>sylius.product.picture.model.alt</source>
         <target>%brand% %name% Model Picutre</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473h" resname="sylius.inventory.manage">
+        <source>sylius.inventory.manage</source>
+        <target>Manage inventory levels</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473i" resname="sylius.breadcrumb.inventory.update">
+        <source>sylius.breadcrumb.inventory.update</source>
+        <target>Inventory update</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.adjustment_change.update_header">
+        <source>sylius.adjustment_change.update_header</source>
+        <target>Stock adjustment</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473k" resname="sylius.inventory.item_name">
+        <source>sylius.inventory.item_name</source>
+        <target>Item name</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273474l" resname="sylius.inventory.supplier_code">
+        <source>sylius.inventory.supplier_code</source>
+        <target>Supplier code</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473l" resname="sylius.inventory.quantity">
+        <source>sylius.inventory.quantity</source>
+        <target>Quantity change</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473m" resname="sylius.inventory.available">
+        <source>sylius.inventory.available</source>
+        <target>Available</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473n" resname="sylius.inventory.after">
+        <source>sylius.inventory.after</source>
+        <target>After</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473o" resname="sylius.inventory.add_adjustment_change">
+        <source>sylius.inventory.add_adjustment_change</source>
+        <target>Add item</target>
       </trans-unit>
     </body>
   </file>

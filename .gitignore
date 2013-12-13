@@ -10,6 +10,7 @@ behat.yml
 
 web/bundles/*
 web/css/*
+web/styles/*
 web/js/*
 web/assets/compiled/*
 web/media/*

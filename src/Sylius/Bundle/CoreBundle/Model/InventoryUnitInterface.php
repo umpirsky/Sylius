@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface as BaseInventoryUnitInterface;
+use Hypebeast\Bundle\InventoryBundle\Entity\InventoryUnitInterface as BaseInventoryUnitInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 
 /**
