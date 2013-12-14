@@ -93,6 +93,10 @@
         <parameter key="sylius.twig.product_taxons_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusProductTaxonsExtension</parameter>
 
         <parameter key="sylius.constant.product_status_published" type="constant">Sylius\Bundle\CoreBundle\Model\Product::STATUS_PUBLISHED</parameter>
+
+        <!-- VariantImage repository -->
+        <parameter key="sylius.repository.variant_image.class">Sylius\Bundle\CoreBundle\Repository\VariantImageRepository</parameter>
+        <parameter key="sylius.model.variant_image.class">Sylius\Bundle\CoreBundle\Model\VariantImage</parameter>
     </parameters>
 
     <services>
@@ -463,6 +467,24 @@
         <service id="sylius.twig.product_taxons_extension" class="%sylius.twig.product_taxons_extension.class%">
             <tag name="twig.extension" />
         </service>
+
+        <service id="sylius.twig.product_variant_image" class="Sylius\Bundle\CoreBundle\Twig\SyliusProductVariantImageExtension">
+            <argument type="service" id="sylius.repository.variant_image" />
+            <tag name="twig.extension" />
+        </service>
+
+        <!-- VariantImage repository -->
+        <service id="sylius.manager.variant_image" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.variant_image" class="%sylius.repository.variant_image.class%">
+            <argument type="service" id="sylius.manager.variant_image" />
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata" factory-service="doctrine.orm.default_entity_manager"
+                         factory-method="getClassMetadata">
+                    <argument>%sylius.model.variant_image.class%</argument>
+                </service>
+            </argument>
+        </service>
+
     </services>
 
 </container>
