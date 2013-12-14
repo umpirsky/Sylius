@@ -5,6 +5,9 @@ hypebeast.initSubNavbarDropdown = function($) {
     var $dropdown = $('#site-subnavbar-dropdown');
     var timer = null;
 
+    /**
+     * Group menu item into columns
+     */
     $dropdown.find('ul').each(function() {
         var $lis = $(this).find('> li');
 
@@ -18,12 +21,17 @@ hypebeast.initSubNavbarDropdown = function($) {
         }
     });
 
+    /**
+     * Dropdown function
+     */
     $subnav.find('> div > ul > li').bind({
         'mouseenter':function() {
             var $this = $(this);
-            var href = $this.find('> a').attr('href');
+            var target = $this.find('> a').data('target');
 
-            if(!href || href.length <= 1 || href.substr(0, 1) !== '#') {
+            clearTimeout(timer);
+
+            if(!target) {
                 timer = setTimeout(hideDropdown(), 200);
                 return;
             }
@@ -31,8 +39,7 @@ hypebeast.initSubNavbarDropdown = function($) {
             $dropdown.find('.container').hide();
             $dropdown.show();
 
-            $dropdown.find('#'+href.substr(1)).show();
-            clearTimeout(timer);
+            $dropdown.find(target).show();
         },
         'mouseleave': function() {
             timer = setTimeout(hideDropdown, 200);

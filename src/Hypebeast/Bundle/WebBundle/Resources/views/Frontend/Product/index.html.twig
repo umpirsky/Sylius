@@ -2,6 +2,7 @@
 
 {% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import grid %}
+{% import _self as index %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -13,10 +14,14 @@
 {% block content %}
     <div class="toolbar row">
         <div class="col-sm-6 sort-by">
-            Sort by Price: <a href="#">High</a> / <a href="#">Low</a>
+            Sort by Price:
+            <a href="{{ index.path_with_params({'sort': 'desc'}) }}">High</a> /
+            <a href="{{ index.path_with_params({'sort': 'asc'}) }}">Low</a>
         </div>
         <div class="col-sm-6 items-per-page text-right">
-            Show <a href="#">30</a> / <a href="#">60</a> / <a href="#">90</a> Items Per Page
+            Show <a href="{{ index.path_with_params({'limit': 30}) }}">30</a> /
+            <a href="{{ index.path_with_params({'limit': 60}) }}">60</a> /
+            <a href="{{ index.path_with_params({'limit': 90}) }}">90</a> Items Per Page
         </div>
     </div>
 
@@ -25,3 +30,7 @@
     {{ grid(products) }}
     {{ pagination(products) }}
 {% endblock %}
+
+{% macro path_with_params(params) %}
+    {{ path(app.request.get('_route'), app.request.get('_route_params')|merge(app.request.query.all|merge(params))) }}
+{% endmacro %}

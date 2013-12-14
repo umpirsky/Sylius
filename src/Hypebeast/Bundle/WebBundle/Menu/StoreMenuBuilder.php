@@ -89,7 +89,7 @@ class StoreMenuBuilder extends MenuBuilder
             'route' => 'sylius_homepage'
         ])->setLabel('Home');
         $menu->addChild('new_arrivals', [
-            'uri' => '#'
+            'route' => 'sylius_product_index_by_new_arrivals'
         ])->setLabel('New Arrivals');
         $menu->addChild('back', [
             'uri' => '#'
@@ -114,7 +114,10 @@ class StoreMenuBuilder extends MenuBuilder
     public function createBrandsMenu()
     {
         $menu = $this->factory->createItem('brand', [
-            'uri' => '#site-subnavbar-dropdown-brands'
+            'uri' => '#',
+            'linkAttributes' => [
+                'data-target' => '#site-subnavbar-dropdown-brands'
+            ]
         ]);
 
         $menu->addChild('all', [
@@ -143,7 +146,7 @@ class StoreMenuBuilder extends MenuBuilder
             'undefeated' => 'Undefeated',
         ];
 
-        foreach($brands as $slug => $brand) {
+        foreach ($brands as $slug => $brand) {
             $menu->addChild($slug, [
                 'uri' => "#$slug"
             ])->setLabel($brand);
@@ -155,7 +158,10 @@ class StoreMenuBuilder extends MenuBuilder
     public function createClothingMenu()
     {
         $menu = $this->factory->createItem('clothing', [
-            'uri' => '#site-subnavbar-dropdown-clothing'
+            'uri' => '#',
+            'linkAttributes' => [
+                'data-target' => '#site-subnavbar-dropdown-clothing'
+            ]
         ]);
 
         $menu->addChild('all', [
@@ -179,7 +185,7 @@ class StoreMenuBuilder extends MenuBuilder
             'vests' => 'Vests',
         ];
 
-        foreach($brands as $slug => $brand) {
+        foreach ($brands as $slug => $brand) {
             $menu->addChild($slug, [
                 'uri' => "#$slug"
             ])->setLabel($brand);
@@ -191,7 +197,10 @@ class StoreMenuBuilder extends MenuBuilder
     public function createAccessoriesMenu()
     {
         $menu = $this->factory->createItem('accessories', [
-            'uri' => '#site-subnavbar-dropdown-accessories'
+            'uri' => '#',
+            'linkAttributes' => [
+                'data-target' => '#site-subnavbar-dropdown-accessories'
+            ]
         ]);
 
         $menu->addChild('all', [
@@ -220,7 +229,7 @@ class StoreMenuBuilder extends MenuBuilder
             'watches' => 'Watches',
         ];
 
-        foreach($brands as $slug => $brand) {
+        foreach ($brands as $slug => $brand) {
             $menu->addChild($slug, [
                 'uri' => "#$slug"
             ])->setLabel($brand);
@@ -232,7 +241,10 @@ class StoreMenuBuilder extends MenuBuilder
     public function createSaleMenu()
     {
         $menu = $this->factory->createItem('sale', [
-            'uri' => '#site-subnavbar-dropdown-sale'
+            'route' => 'sylius_product_index_by_sale',
+            'linkAttributes' => [
+                'data-target' => '#site-subnavbar-dropdown-sale'
+            ]
         ]);
 
         $brands = [
@@ -243,7 +255,7 @@ class StoreMenuBuilder extends MenuBuilder
             '70-sale' => '70% off',
         ];
 
-        foreach($brands as $slug => $brand) {
+        foreach ($brands as $slug => $brand) {
             $menu->addChild($slug, [
                 'uri' => "#$slug"
             ])->setLabel($brand);

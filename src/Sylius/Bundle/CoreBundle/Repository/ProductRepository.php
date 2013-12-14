@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Sylius\Bundle\VariableProductBundle\Doctrine\ORM\VariableProductRepository;
 use Sylius\Bundle\CoreBundle\Model\Product;
@@ -31,17 +32,19 @@ class ProductRepository extends VariableProductRepository
      *
      * @return PagerfantaInterface
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon)
+    public function createByTaxonPaginator(TaxonInterface $taxon, $criteria = [], $sorting = [])
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-
-        $queryBuilder
+        $queryBuilder = $this->getCollectionQueryBuilder()
             ->innerJoin('product.taxons', 'taxon')
             ->andWhere('taxon = :taxon')
+            ->leftJoin('product.variants', 'variant')
+            ->andWhere('variant.master = true')
             ->andWhere('product.status = :status')
             ->setParameter('taxon', $taxon)
             ->setParameter('status', Product::STATUS_PUBLISHED)
         ;
+
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -124,27 +127,49 @@ class ProductRepository extends VariableProductRepository
         return $this->getPaginator($queryBuilder);
     }
 
-    public function createNewArrivalsPaginator()
+    public function createHomepagePaginator($criteria = [], $sorting = [])
     {
-        return $this->getPaginator(
-            $this
-                ->getCollectionQueryBuilder()
-                ->where('product.publishedAt > :date')
-                ->andWhere('product.status = :status')
-                ->setParameter('date', new DateTime('-3 days'))
-                ->setParameter('status', Product::STATUS_PUBLISHED)
-        );
+        $queryBuilder = $this->getCollectionQueryBuilder()
+            ->leftJoin('product.variants', 'variant')
+            ->andWhere('variant.master = true')
+            ->andWhere('product.status = :status')
+            ->setParameter('status', Product::STATUS_PUBLISHED)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
     }
 
-    public function createSalePaginator()
+    public function createNewArrivalsPaginator($criteria = [], $sorting = [])
     {
-        return $this->getPaginator(
-            $this
-                ->getCollectionQueryBuilder()
-                ->leftJoin('product.variants', 'variant')
-                ->where('variant.master = true')
-                ->andWhere('variant.salePrice > 0')
-        );
+        $queryBuilder = $this->getCollectionQueryBuilder()
+            ->leftJoin('product.variants', 'variant')
+            ->where('product.publishedAt > :date')
+            ->andWhere('product.status = :status')
+            ->andWhere('variant.master = true')
+            ->setParameter('date', new DateTime('-3 days'))
+            ->setParameter('status', Product::STATUS_PUBLISHED)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function createSalePaginator($criteria = [], $sorting = [])
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder()
+            ->leftJoin('product.variants', 'variant')
+            ->andWhere('variant.master = true')
+            ->andWhere('variant.salePrice > 0')
+            ->andWhere('product.status = :status')
+            ->setParameter('status', Product::STATUS_PUBLISHED)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
     }
 
     /**
@@ -196,5 +221,18 @@ class ProductRepository extends VariableProductRepository
             array('publishedAt' => 'desc'),
             $limit
         );
+    }
+
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    {
+        if (empty($sorting)) {
+            if (!is_array($sorting)) {
+                $sorting = [];
+            }
+
+            $sorting['publishedAt'] = 'desc';
+        }
+
+        parent::applySorting($queryBuilder, $sorting);
     }
 }

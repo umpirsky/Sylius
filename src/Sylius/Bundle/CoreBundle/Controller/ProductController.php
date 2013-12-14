@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +29,7 @@ class ProductController extends ResourceController
         $config = $this->getConfiguration();
 
         $criteria = $config->getCriteria();
-        $sorting = $config->getSorting();
+        $sorting = $this->getSortBy($request);
 
         $pluralName = $config->getPluralResourceName();
         $repository = $this->getRepository();
@@ -40,8 +41,8 @@ class ProductController extends ResourceController
             ;
 
             $resources
+                ->setMaxPerPage($this->getMaxPerPage($request))
                 ->setCurrentPage($request->get('page', 1), true, true)
-                ->setMaxPerPage($config->getPaginationMaxPerPage())
             ;
         } else {
             $resources = $this
@@ -192,12 +193,13 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
+        /** @var $paginator Pagerfanta */
         $paginator = $this
             ->getRepository()
-            ->createByTaxonPaginator($taxon)
+            ->createByTaxonPaginator($taxon, null, $this->getSortBy($request));
         ;
 
-        $paginator->setMaxPerPage($this->getConfiguration()->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($this->getMaxPerPage($request));
         $paginator->setCurrentPage($request->query->get('page', 1));
 
         return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
@@ -228,6 +230,28 @@ class ProductController extends ResourceController
             'taxon'    => $taxon,
             'products' => $paginator,
         ));
+    }
+
+    private function getSortBy(Request $request)
+    {
+        $sort = strtolower($request->query->get('sort'));
+
+        if ($sort && in_array($sort, ['desc', 'asc'])) {
+            return ['variant.price' => $sort];
+        }
+
+        return null;
+    }
+
+    private function getMaxPerPage(Request $request)
+    {
+        $limit = $request->query->get('limit');
+
+        if ($limit && in_array($limit, [30,60,90])) {
+            return (int) $limit;
+        }
+
+        return 12;
     }
 
     /**
