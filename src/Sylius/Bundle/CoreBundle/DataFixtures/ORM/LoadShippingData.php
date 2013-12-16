@@ -35,7 +35,7 @@ class LoadShippingData extends DataFixture
         $manager->persist($heavy);
 
         $config = array('first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0);
-        $manager->persist($this->createShippingMethod('FedEx', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod('FedEx', 'US', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $config = array('amount' => 2500);
         $manager->persist($this->createShippingMethod('UPS Ground', 'EU', DefaultCalculators::FLAT_RATE, $config));

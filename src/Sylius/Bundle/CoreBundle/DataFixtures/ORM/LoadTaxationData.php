@@ -37,7 +37,7 @@ class LoadTaxationData extends DataFixture
         $manager->persist($taxRate);
         $manager->flush();
 
-        $taxableGoods->addRate($this->createTaxRate('US Sales Tax', 'USA', 0.08));
+        $taxableGoods->addRate($this->createTaxRate('US Sales Tax', 'US', 0.08));
         $taxRate->setCategory($taxableGoods);
 
         $manager->persist($taxRate);

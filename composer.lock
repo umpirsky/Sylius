@@ -2513,6 +2513,57 @@
             "time": "2013-10-10 11:11:36"
         },
         {
+            "name": "maxmind/geoip",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IDCI-Consulting/Maxmind-GeoIp.git",
+                "reference": "876901852135369b8b728dfe4efa7c665e34d8bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/IDCI-Consulting/Maxmind-GeoIp/zipball/876901852135369b8b728dfe4efa7c665e34d8bf",
+                "reference": "876901852135369b8b728dfe4efa7c665e34d8bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel BONDAZ",
+                    "email": "gabriel.bondaz@idci-consulting.fr",
+                    "homepage": "http://www.idci-consulting.fr",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ariel Ferrandini",
+                    "email": "arielferrandini@gmail.com",
+                    "homepage": "http://ferrandini.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sébastien Roch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "MaxMind GeoIP Symfony2 Bundle",
+            "keywords": [
+                "maxmind geoip"
+            ],
+            "time": "2013-12-10 10:02:39"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.6.0",
             "source": {
@@ -5455,6 +5506,7 @@
         "white-october/pagerfanta-bundle": 20,
         "pagerfanta/pagerfanta": 20,
         "punkave/symfony2-file-uploader-bundle": 20,
+        "maxmind/geoip": 20,
         "behat/behat": 0,
         "phpspec/phpspec": 20
     },

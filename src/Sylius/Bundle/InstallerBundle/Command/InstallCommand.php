@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use RuntimeException;
+use Symfony\Component\Console\Input\ArrayInput;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -75,6 +76,17 @@ class InstallCommand extends ContainerAwareCommand
             ->runCommand('doctrine:phpcr:repository:init', $input, $output)
             ->runCommand('store:bower:install', $input, $output)
             ->runCommand('assetic:dump', $input, $output)
+        ;
+
+        $output->writeln('');
+        $output->writeln('<info>Update geoIP data.</info>');
+        $this
+            ->runCommand(
+                'maxmind:geoip:update-data',
+                new ArrayInput([
+                    'command' => 'maxmind:geoip:update-data',
+                    'source'  => 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz'
+                ]), $output)
         ;
 
         if ($dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {

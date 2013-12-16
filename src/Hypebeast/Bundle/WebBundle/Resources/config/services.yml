@@ -15,6 +15,28 @@ services:
             - @security.authentication.manager
             - %sylius.hypebeast.key%
 
+    sylius.hypebeast.default.country.listener:
+        class: Hypebeast\Bundle\WebBundle\EventListener\DefaultCountryListener
+        arguments:
+            - @sylius.repository.zone
+            - @sylius.repository.zone_member_country
+            - @sylius.repository.country
+            - @maxmind.geoip
+            - %sylius.hypebeast.default.country%
+            - %sylius.hypebeast.fake.ip%
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    sylius.form.type.address:
+        class: Hypebeast\Bundle\WebBundle\Form\Type\AddressType
+        arguments:
+            - @service_container
+            - %sylius.model.address.class%
+            - %sylius.validation_group.address%
+            - @sylius.form.listener.address
+        tags:
+        - { name: form.type, alias:sylius_address }
+
     store.menu_builder:
         class: Hypebeast\Bundle\WebBundle\Menu\StoreMenuBuilder
         arguments:

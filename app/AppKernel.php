@@ -84,6 +84,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Payum\Bundle\PayumBundle\PayumBundle(),
             new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
+            new Maxmind\Bundle\GeoipBundle\MaxmindGeoipBundle(),
         );
 
         if ('dev' === $this->environment) {

@@ -24,6 +24,9 @@ class SecurityController extends Controller
             $this->get('fos_user.user_manager')->updateUser($user);
         }
 
+        $request->getSession()->remove('_hypebeast_default_country');
+        $request->getSession()->remove('_hypebeast_default_zone');
+
         return new Response(
             null,
             null === $user ? 404 : 200

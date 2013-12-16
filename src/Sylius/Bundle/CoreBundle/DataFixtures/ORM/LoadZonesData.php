@@ -37,8 +37,8 @@ class LoadZonesData extends DataFixture
         $restOfWorldCountries = array_diff(array_keys(Intl::getRegionBundle()->getCountryNames()), $euCountries + array('US'));
 
         $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $euCountries));
-        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
-        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $manager->persist($this->createZone('US', ZoneInterface::TYPE_COUNTRY, array('US')));
+        $manager->persist($this->createZone('EU + US', ZoneInterface::TYPE_ZONE, array('EU', 'US')));
         $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();

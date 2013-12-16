@@ -92,6 +92,20 @@ return new RedirectResponse($url, 302, [ 'Set-Cookie' => $response->getSetCookie
 An authenticated token is created for the given user and the user is created/updated on Sylius.
 Then, you are redirected on Sylius and you are authenticated
 
+Update user default country
+---------------------------
+
+Just post a form to any URL with a field named **"\_hypebeast\_default\_country"** containing the ID of the new country.
+```html
+<form action="." method="POST">
+        <select name="_hypebeast_default_country">
+        	<option value="1">Afghanistan</option>
+        	<option value="2">Afrique du Sud</option>
+        	<option value="3">Albanie</option>
+        </select>
+</form>
+```
+
 Troubleshooting
 ---------------
 
