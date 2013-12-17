@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Hypebeast\Bundle\WebBundle\Model\PropertyTypes;
 
 /**
  * Default assortment product properties to play with Sylius sandbox.
@@ -34,7 +35,10 @@ class LoadPropertiesData extends DataFixture
         $property = $this->createProperty('T-Shirt material', 'Made of');
         $manager->persist($property);
 
-        $property = $this->createProperty('Sticker resolution', 'Print resolution');
+        $property = $this->createProperty('Manufacturer comment', 'What about this product', PropertyTypes::TEXTAREA);
+        $manager->persist($property);
+
+        $property = $this->createProperty('Sticker resolution', 'Print resolution', PropertyTypes::NUMBER);
         $manager->persist($property);
 
         $property = $this->createProperty('Sticker paper', 'Paper');
@@ -49,7 +53,10 @@ class LoadPropertiesData extends DataFixture
         $property = $this->createProperty('Book ISBN', 'ISBN');
         $manager->persist($property);
 
-        $property = $this->createProperty('Book pages', 'Number of pages');
+        $property = $this->createProperty('Synopsis', 'Synopsis', PropertyTypes::TEXTAREA);
+        $manager->persist($property);
+
+        $property = $this->createProperty('Book pages', 'Number of pages', PropertyTypes::NUMBER);
         $manager->persist($property);
 
         $property = $this->createProperty('Clothing Size and Fit', 'Size and Fit');
@@ -75,13 +82,14 @@ class LoadPropertiesData extends DataFixture
      * @param string $name
      * @param string $presentation
      */
-    private function createProperty($name, $presentation)
+    private function createProperty($name, $presentation, $type = PropertyTypes::TEXT)
     {
         $repository = $this->getPropertyRepository();
 
         $property = $repository->createNew();
         $property->setName($name);
         $property->setPresentation($presentation);
+        $property->setType($type);
 
         $this->setReference('Sylius.Property.'.$name, $property);
 

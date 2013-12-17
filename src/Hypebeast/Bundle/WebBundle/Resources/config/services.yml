@@ -1,5 +1,6 @@
 parameters:
     sylius.cart_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastCartExtension
+    sylius.form.type.property.class: Hypebeast\Bundle\WebBundle\Form\Type\PropertyType
 
 services:
     sylius.hypebeast.security.provider:
