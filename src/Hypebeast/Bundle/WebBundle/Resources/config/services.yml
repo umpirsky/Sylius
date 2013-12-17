@@ -5,6 +5,7 @@ parameters:
     sylius.checkout_step.shipping.class: Hypebeast\Bundle\WebBundle\Checkout\Step\ShippingStep
     sylius.form.type.order_filter.class: Hypebeast\Bundle\WebBundle\Form\Type\Filter\OrderFilterType
     sylius.form.type.shipment.class: Hypebeast\Bundle\CoreBundle\Form\Type\ShipmentType
+    sylius.form.type.product_property.class: Hypebeast\Bundle\WebBundle\Form\Type\ProductPropertyType
 
 services:
     sylius.form.type.shipment:
