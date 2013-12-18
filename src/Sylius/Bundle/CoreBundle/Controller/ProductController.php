@@ -246,12 +246,13 @@ class ProductController extends ResourceController
     private function getMaxPerPage(Request $request)
     {
         $limit = $request->query->get('limit');
+        $session = $request->getSession();
 
         if ($limit && in_array($limit, [30,60,90])) {
-            return (int) $limit;
+            $session->set('_hypebeast_product_per_page', $limit);
         }
 
-        return 12;
+        return (int) $session->get('_hypebeast_product_per_page', 12);
     }
 
     /**
