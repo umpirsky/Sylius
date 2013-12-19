@@ -47,9 +47,6 @@ class VariantType extends BaseVariantType
             ->add('availableOnDemand', 'checkbox', array(
                 'label' => 'sylius.form.variant.available_on_demand'
             ))
-            ->add('onHand', 'integer', array(
-                'label' => 'sylius.form.variant.on_hand'
-            ))
             ->add('images', 'collection', array(
                 'type'         => 'sylius_image',
                 'allow_add'    => true,
