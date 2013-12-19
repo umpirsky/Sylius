@@ -35,9 +35,9 @@ sylius_product:
     classes:
         product:
             model: Sylius\Bundle\CoreBundle\Model\Product
-            controller: Sylius\Bundle\CoreBundle\Controller\ProductController
-            repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+            controller: Hypebeast\Bundle\WebBundle\Controller\Partial\ProductController
+            repository: Hypebeast\Bundle\WebBundle\Repository\ProductRepository
+            form: Hypebeast\Bundle\WebBundle\Form\Type\ProductType
 
 sylius_variable_product:
     classes:

@@ -1,0 +1,8 @@
+{% form_theme form 'HypebeastWebBundle:Backend/Product/Form:_theme.html.twig' %}
+
+<div class="tab-pane" id="related-up">
+    {{ form_row(form.upSells, {'attr': {'class': 'input-lg'}}) }}
+</div>
+<div class="tab-pane" id="related-cross">
+    {{ form_row(form.crossSells, {'attr': {'class': 'input-lg'}}) }}
+</div>

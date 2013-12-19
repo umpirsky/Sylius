@@ -1,0 +1,27 @@
+{% if product is defined %}
+    <div class="col-md-4" style="margin-top: 15px;" data-autocomplete-item="{{ product.id }}">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
+            </a>
+            <input type="hidden" value='{{ product.id }}' name="{{ form.vars.full_name }}[]" />
+            <div class="media-body">
+                <h4 class="media-heading">{{ product.name }}</h4>
+                <button class="btn btn-xs btn-danger" data-autocomplete-delete>Delete</button>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="col-md-4" style="margin-top: 15px;" data-autocomplete-item="%value%">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src%hash%="%picture%" alt="%label%" />
+            </a>
+            <input%hash% type="hidden" value='%value%' name="{{ form.vars.full_name }}[]" />
+            <div class="media-body">
+                <h4 class="media-heading">%label%</h4>
+                <button class="btn btn-xs btn-danger" data-autocomplete-delete>Delete</button>
+            </div>
+        </div>
+    </div>
+{% endif %}

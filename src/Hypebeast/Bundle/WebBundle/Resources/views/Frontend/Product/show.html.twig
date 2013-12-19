@@ -1,5 +1,7 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import grid %}
+
 {% set form = sylius_cart_form({'product': product}) %}
 
 {% block stylesheets %}
@@ -76,6 +78,10 @@
                 <p>{{ product.getPropertyByName('Clothing Size and Fit').value }}</p>
             </div>
             {% endif %}
+        </div>
+        <div class="col-md-12">
+            <h4>Related products</h4>
+            {{ grid(0 < product.upSells.count ? product.upSells : product.defaultUpSells) }}
         </div>
     </div>
 {% endblock %}

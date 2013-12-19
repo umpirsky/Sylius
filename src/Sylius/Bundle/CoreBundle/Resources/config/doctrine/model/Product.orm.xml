@@ -49,6 +49,27 @@
         </many-to-many>
         <field name="backInStockAt" column="back_in_stock_at" type="datetime" nullable="true" />
         <field name="publishedAt" column="published_at" type="datetime" nullable="true" />
+        <many-to-many field="upSells" target-entity="Sylius\Bundle\CoreBundle\Model\Product">
+            <join-table name="sylius_product_up_sells">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="up_sell_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-many field="crossSells" target-entity="Sylius\Bundle\CoreBundle\Model\Product" inversed-by="crossSellOf">
+            <join-table name="sylius_product_cross_sells">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="cross_sell_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-many field="crossSellOf" target-entity="Sylius\Bundle\CoreBundle\Model\Product" mapped-by="crossSells" />
     </mapped-superclass>
 
 </doctrine-mapping>

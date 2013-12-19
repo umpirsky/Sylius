@@ -110,6 +110,14 @@ class Product extends BaseProduct implements ProductInterface
      */
     protected $publishedAt;
 
+    protected $upSells;
+
+    protected $crossSells;
+
+    protected $crossSellOf;
+
+    protected $defaultUpSells;
+
     /**
      * Constructor.
      */
@@ -119,7 +127,8 @@ class Product extends BaseProduct implements ProductInterface
 
         $this->setStatus(self::STATUS_DRAFT);
         $this->setMasterVariant(new Variant());
-        $this->taxons = new ArrayCollection();
+        $this->taxons  = new ArrayCollection();
+        $this->upSells = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
     }
@@ -438,6 +447,130 @@ class Product extends BaseProduct implements ProductInterface
     public function setPublishedAt(DateTime $publishedAt)
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getUpSells()
+    {
+        return $this->upSells;
+    }
+
+    public function setUpSells(ArrayCollection $upSells)
+    {
+        $this->upSells = $upSells;
+
+        return $this;
+    }
+
+    public function addUpSell($upSell)
+    {
+        $this->upSells->add($upSell);
+
+        return $this;
+    }
+
+    public function hasUpSell($upSell)
+    {
+        return $this->upSells->contains($upSell);
+    }
+
+    public function removeUpSell($upSell)
+    {
+        $this->upSells->remove($upSell);
+
+        return $this;
+    }
+
+    public function getDefaultUpSells()
+    {
+        return $this->defaultUpSells;
+    }
+
+    public function setDefaultUpSells($defaultUpSells)
+    {
+        $this->defaultUpSells = $defaultUpSells;
+
+        return $this;
+    }
+
+    public function addDefaultUpSell($defaultUpSell)
+    {
+        $this->defaultUpSells->add($defaultUpSell);
+
+        return $this;
+    }
+
+    public function hasDefaultUpSell($defaultUpSell)
+    {
+        return $this->defaultUpSells->contains($defaultUpSell);
+    }
+
+    public function removeDefaultUpSell($defaultUpSell)
+    {
+        $this->defaultUpSells->remove($defaultUpSell);
+
+        return $this;
+    }
+
+    public function getCrossSells()
+    {
+        return $this->crossSells;
+    }
+
+    public function setCrossSells($crossSells)
+    {
+        $this->crossSells = $crossSells;
+
+        return $this;
+    }
+
+    public function addCrossSell($crossSell)
+    {
+        $this->crossSells->add($crossSell);
+
+        return $this;
+    }
+
+    public function hasCrossSell($crossSell)
+    {
+        return $this->crossSells->contains($crossSell);
+    }
+
+    public function removeCrossSell($crossSell)
+    {
+        $this->crossSells->remove($crossSell);
+
+        return $this;
+    }
+
+    public function getCrossSellOf()
+    {
+        return $this->crossSellOf;
+    }
+
+    public function setCrossSellOf($crossSellOf)
+    {
+        $this->crossSellOf = $crossSellOf;
+
+        return $this;
+    }
+
+    public function addCrossSellOf($crossSellOf)
+    {
+        $this->crossSellOf->add($crossSellOf);
+
+        return $this;
+    }
+
+    public function hasCrossSellOf($crossSellOf)
+    {
+        return $this->crossSellOf->contains($crossSellOf);
+    }
+
+    public function removeCrossSellOf($crossSellOf)
+    {
+        $this->crossSellOf->remove($crossSellOf);
 
         return $this;
     }

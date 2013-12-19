@@ -1,0 +1,19 @@
+{% block _sylius_product_upSells_row %}
+    <input class="form-control" type="text" placeholder="Enter a product name" data-autocomplete-source="{{ url('sylius_backend_product_autocomplete') }}" />
+    <div data-prototype style="display:none">
+        {% include 'HypebeastWebBundle:Backend/Product/Form:_entry.html.twig' %}
+    </div>
+    <hr />
+    <div class="row" data-autocomplete-target>
+    {% for choice in form.vars.choices %}
+        {% set product = choice.data %}
+        {% for child in form if child.vars.value == product.id and true == child.vars.data %} 
+            {% include 'HypebeastWebBundle:Backend/Product/Form:_entry.html.twig' %}
+        {% endfor %}
+    {% endfor %}
+    </div>
+{% endblock %}
+
+{% block _sylius_product_crossSells_row %}
+    {{ block('_sylius_product_upSells_row') }}
+{% endblock %}

@@ -37,7 +37,6 @@ class ProductRepository extends VariableProductRepository
         $queryBuilder = $this->getCollectionQueryBuilder()
             ->innerJoin('product.taxons', 'taxon')
             ->andWhere('taxon = :taxon')
-            ->leftJoin('product.variants', 'variant')
             ->andWhere('variant.master = true')
             ->andWhere('product.status = :status')
             ->setParameter('taxon', $taxon)
@@ -60,8 +59,6 @@ class ProductRepository extends VariableProductRepository
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
-            ->select('product, variant')
-            ->leftJoin('product.variants', 'variant')
             ->leftJoin('product.taxons', 'taxon')
             ->leftJoin('taxon.taxonomy', 'taxonomy')
         ;
@@ -130,7 +127,6 @@ class ProductRepository extends VariableProductRepository
     public function createHomepagePaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder()
-            ->leftJoin('product.variants', 'variant')
             ->andWhere('variant.master = true')
             ->andWhere('product.status = :status')
             ->setParameter('status', Product::STATUS_PUBLISHED)
@@ -144,7 +140,6 @@ class ProductRepository extends VariableProductRepository
     public function createNewArrivalsPaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder()
-            ->leftJoin('product.variants', 'variant')
             ->where('product.publishedAt > :date')
             ->andWhere('product.status = :status')
             ->andWhere('variant.master = true')
@@ -176,7 +171,6 @@ class ProductRepository extends VariableProductRepository
     public function createSalePaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder()
-            ->leftJoin('product.variants', 'variant')
             ->andWhere('variant.master = true')
             ->andWhere('variant.salePrice > 0')
             ->andWhere('product.status = :status')

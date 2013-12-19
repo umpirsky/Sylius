@@ -20,7 +20,7 @@
 
 <form action="{{ path('sylius_backend_product_update', {'id': product.id}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
+    {% include 'HypebeastWebBundle:Backend/Product:_form.html.twig' %}
     {{ update() }}
 </form>
 {% endblock %}

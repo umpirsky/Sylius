@@ -152,5 +152,26 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     public function setProducts($products)
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function addProduct($product)
+    {
+        $this->products->add($product);
+
+        return $this;
+    }
+
+    public function hasProduct($product)
+    {
+        return $this->products->contains($product);
+    }
+
+    public function removeProduct($product)
+    {
+        $this->products->remove($product);
+
+        return $this;
     }
 }

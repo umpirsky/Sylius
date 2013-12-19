@@ -30,6 +30,10 @@
         <source>sylius.product.sale</source>
         <target>Sale</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473i" resname="sylius.product.new">
+        <source>sylius.product.new</source>
+        <target>New</target>
+      </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.product.picture.alt">
         <source>sylius.product.picture.alt</source>
         <target>%brand% %name% Picutre</target>
@@ -37,6 +41,14 @@
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.product.picture.model.alt">
         <source>sylius.product.picture.model.alt</source>
         <target>%brand% %name% Model Picutre</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473k" resname="sylius.product.tabs.related.up">
+        <source>sylius.product.tabs.related.cross</source>
+        <target>Up sells</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473l" resname="sylius.product.tabs.related.cross">
+        <source>sylius.product.tabs.related.up</source>
+        <target>Cross sells</target>
       </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473h" resname="sylius.inventory.manage">
         <source>sylius.inventory.manage</source>

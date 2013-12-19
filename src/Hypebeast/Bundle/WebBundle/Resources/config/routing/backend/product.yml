@@ -19,3 +19,10 @@ sylius_backend_product_upload:
     pattern: /upload/{id}
     defaults:
         _controller: sylius.controller.product:uploadAction
+
+sylius_backend_product_autocomplete:
+    pattern: /product/autocomplete
+    defaults:
+        _controller: sylius.controller.product:termAction
+        _format: json
+

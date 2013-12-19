@@ -99,6 +99,8 @@ class Variant extends BaseVariant implements VariantInterface
      */
     protected $depth;
 
+    protected $orderItems;
+
     /**
      * Override constructor to set on hand stock.
      */
@@ -430,5 +432,36 @@ class Variant extends BaseVariant implements VariantInterface
     public function getShippingDepth()
     {
         return $this->getDepth();
+    }
+
+    public function getOrderItems()
+    {
+        return $this->orderItems;
+    }
+
+    public function setOrderItems($orderItems)
+    {
+        $this->orderItems = $orderItems;
+
+        return $this;
+    }
+
+    public function addOrderItem($orderItem)
+    {
+        $this->orderItems->add($orderItem);
+
+        return $this;
+    }
+
+    public function hasOrderItem($orderItem)
+    {
+        return $this->orderItems->contains($orderItem);
+    }
+
+    public function removeOrderItem($orderItem)
+    {
+        $this->orderItems->remove($orderItem);
+
+        return $this;
     }
 }
