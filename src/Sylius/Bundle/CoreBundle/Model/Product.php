@@ -92,6 +92,13 @@ class Product extends BaseProduct implements ProductInterface
     protected $restrictedZone;
 
     /**
+     * Back in stock time.
+     *
+     * @var \DateTime
+     */
+    protected $backInStockAt;
+
+    /**
      * Publish time.
      *
      * @var \DateTime
@@ -374,6 +381,24 @@ class Product extends BaseProduct implements ProductInterface
     public function getImage()
     {
         return $this->getMasterVariant()->getImages()->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBackInStockAt()
+    {
+        return $this->backInStockAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBackInStockAt(DateTime $backInStockAt)
+    {
+        $this->backInStockAt = $backInStockAt;
+
+        return $this;
     }
 
     /**

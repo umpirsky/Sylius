@@ -168,6 +168,8 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      */
     public function getImage();
 
+    public function getBackInStockAt();
+    public function setBackInStockAt(DateTime $backInStockAt);
     public function getPublishedAt();
     public function setPublishedAt(DateTime $publishedAt);
     public function isNewArrival();

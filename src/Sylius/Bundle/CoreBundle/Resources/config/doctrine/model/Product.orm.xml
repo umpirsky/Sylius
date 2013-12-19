@@ -46,6 +46,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+        <field name="backInStockAt" column="back_in_stock_at" type="datetime" nullable="true" />
         <field name="publishedAt" column="published_at" type="datetime" nullable="true" />
     </mapped-superclass>
 

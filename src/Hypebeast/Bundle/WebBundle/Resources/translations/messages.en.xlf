@@ -18,6 +18,10 @@
         <source>sylius.product.new_arrivals</source>
         <target>New arrivals</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475f" resname="sylius.product.back_in_stock">
+        <source>sylius.product.back_in_stock</source>
+        <target>Back in stock</target>
+      </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473g" resname="sylius.product.status">
         <source>sylius.product.status</source>
         <target>Status</target>

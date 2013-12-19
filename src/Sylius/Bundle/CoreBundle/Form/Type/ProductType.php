@@ -59,6 +59,12 @@ class ProductType extends BaseProductType
                 'label'   => 'sylius.form.product.status',
                 'choices' => Product::getStatusLabels()
             ))
+            ->add('backInStockAt', 'datetime', [
+                'label'       => 'sylius.form.product.back_in_stock_at',
+                'date_format' => 'y-M-d',
+                'date_widget' => 'choice',
+                'time_widget' => 'text',
+            ])
             ->add('uploadId', 'hidden', array(
                 'data'    => uniqid(),
                 'mapped'  => false,
@@ -73,6 +79,7 @@ class ProductType extends BaseProductType
 
                 if (null !== $data->getPublishedAt()) {
                     $form->add('publishedAt', 'datetime', [
+                        'label'       => 'sylius.form.product.published_at',
                         'date_format' => 'y-M-d',
                         'date_widget' => 'choice',
                         'time_widget' => 'text',

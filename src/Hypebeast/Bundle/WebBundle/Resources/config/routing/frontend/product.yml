@@ -20,6 +20,14 @@ sylius_product_index_by_new_arrivals:
             template: SyliusWebBundle:Frontend/Product:newArrivals.html.twig
             method: createNewArrivalsPaginator
 
+sylius_product_index_by_back_in_stock:
+    pattern: /back-in-stock
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Product:backInStock.html.twig
+            method: createBackInStockPaginator
+
 sylius_product_index_by_sale:
     pattern: /sale
     defaults:

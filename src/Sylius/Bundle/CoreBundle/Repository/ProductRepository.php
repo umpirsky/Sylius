@@ -157,6 +157,22 @@ class ProductRepository extends VariableProductRepository
         return $this->getPaginator($queryBuilder);
     }
 
+    public function createBackInStockPaginator($criteria = [], $sorting = [])
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder()
+            ->leftJoin('product.variants', 'variant')
+            ->where('product.backInStockAt > :date')
+            ->andWhere('product.status = :status')
+            ->andWhere('variant.master = true')
+            ->setParameter('date', new DateTime('-3 days'))
+            ->setParameter('status', Product::STATUS_PUBLISHED)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
     public function createSalePaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder()

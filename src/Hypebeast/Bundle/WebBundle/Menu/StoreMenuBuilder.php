@@ -92,7 +92,7 @@ class StoreMenuBuilder extends MenuBuilder
             'route' => 'sylius_product_index_by_new_arrivals'
         ])->setLabel('New Arrivals');
         $menu->addChild('back', [
-            'uri' => '#'
+            'route' => 'sylius_product_index_by_back_in_stock'
         ])->setLabel('Back In Stock');
         $menu->addChild($this->createBrandsMenu())->setLabel('Brands');
         $menu->addChild($this->createClothingMenu())->setLabel('Clothing');

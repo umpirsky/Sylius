@@ -9,6 +9,7 @@
         {{ form_label(form.publishedAt) }}
         {{ form_widget(form.publishedAt, {'label': false}) }}
     {% endif %}
+    {{ form_row(form.backInStockAt) }}
     {{ form_label(form.masterVariant.availableOn) }}
     {{ form_widget(form.masterVariant.availableOn, {'label': false}) }}
     {{ form_row(form.masterVariant.availableOnDemand) }}

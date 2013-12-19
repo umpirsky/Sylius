@@ -138,6 +138,14 @@
         <source>sylius.form.product.restricted_zone</source>
         <target>Restricted zone</target>
       </trans-unit>
+      <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4dd" resname="sylius.form.product.back_in_stock_at">
+        <source>sylius.form.product.back_in_stock_at</source>
+        <target>Back in stock at</target>
+      </trans-unit>
+      <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4ed" resname="sylius.form.product.published_at">
+        <source>sylius.form.product.published_at</source>
+        <target>Published at</target>
+      </trans-unit>
       <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4ce" resname="sylius.form.product.status">
         <source>sylius.form.product.status</source>
         <target>Status</target>
