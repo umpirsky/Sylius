@@ -40,7 +40,8 @@ class DefaultCountryListener
         }
 
         if (false === $session->has($this->parameterName . 'country')) {
-            $country = $this->findCountry($this->buildLocator($request));
+            $locator = $this->buildLocator($request);
+            $country = $this->findCountry(false === $locator ? null : $locator);
 
             $session->set($this->parameterName . 'country', $country);
         } else {
@@ -77,9 +78,9 @@ class DefaultCountryListener
         );
     }
 
-    protected function findCountry(GeoipManager $locator)
+    protected function findCountry(GeoipManager $locator = null)
     {
-        if (false === $locator) {
+        if (null === $locator) {
 
             return $this->getDefaultCountry();
         }
