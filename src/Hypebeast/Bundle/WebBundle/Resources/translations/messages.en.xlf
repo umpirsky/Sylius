@@ -74,6 +74,78 @@
         <source>sylius.inventory.add_adjustment_change</source>
         <target>Add item</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473p" resname="sylius.movement_history.adjustment.message">
+        <source>sylius.movement_history.adjustment.message</source>
+        <target><![CDATA[Adjustment <a href="%s">#%s</a> by <a href="%s">%s</a>]]></target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473r" resname="sylius.movement_history.order.message">
+        <source>sylius.movement_history.order.message</source>
+        <target><![CDATA[Order <a href="%s">#%s</a> by <a href="%s">%s</a>]]></target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473s" resname="sylius.movement_hisory.index_header">
+        <source>sylius.movement_hisory.index_header</source>
+        <target>Stock movement history</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273474s" resname="sylius.movement_hisory.index">
+        <source>sylius.movement_hisory.index</source>
+        <target>Stock movement history</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475s" resname="sylius.inventory.show">
+        <source>sylius.inventory.show</source>
+        <target>Inventory levels</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473t" resname="sylius.movement_history.created_at">
+        <source>sylius.movement_history.created_at</source>
+        <target>Created at</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473u" resname="sylius.movement_history.message">
+        <source>sylius.movement_history.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473v" resname="sylius.adjustment.show_header">
+        <source>sylius.adjustment.show_header</source>
+        <target>Stock adjustment</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473x" resname="sylius.adjustment.status">
+        <source>sylius.adjustment.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473w" resname="sylius.adjustment.reason">
+        <source>sylius.adjustment.reason</source>
+        <target>Reason</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473z" resname="sylius.adjustment.note">
+        <source>sylius.adjustment.note</source>
+        <target>Note</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475a" resname="sylius.adjustment.changes">
+        <source>sylius.adjustment.changes</source>
+        <target>Changes</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475b" resname="sylius.adjustment.sku">
+        <source>sylius.adjustment.sku</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475c" resname="sylius.adjustment.name">
+        <source>sylius.adjustment.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475d" resname="sylius.adjustment.quantity">
+        <source>sylius.adjustment.quantity</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475e" resname="sylius.adjustment.on_hand">
+        <source>sylius.adjustment.on_hand</source>
+        <target>On hand</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475f" resname="sylius.variant.movement_history">
+        <source>sylius.variant.movement_history</source>
+        <target>Stock movement history</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475g" resname="sylius.inventory.back_to_product">
+        <source>sylius.inventory.back_to_product</source>
+        <target>Back to product</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

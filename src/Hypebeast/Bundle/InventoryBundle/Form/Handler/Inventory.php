@@ -4,6 +4,7 @@ namespace Hypebeast\Bundle\InventoryBundle\Form\Handler;
 
 use Hypebeast\Bundle\InventoryBundle\Entity\Adjustment;
 use Hypebeast\Bundle\InventoryBundle\Entity\InventoryUnitInterface;
+use Hypebeast\Bundle\InventoryBundle\Logger\InventoryLogger;
 use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
 use Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,12 +13,18 @@ class Inventory
 {
     private $inventoryOperator;
     private $inventoryUnitFactory;
+    private $logger;
     private $objectManager;
 
-    public function __construct(InventoryOperatorInterface $inventoryOperator, InventoryUnitFactoryInterface $inventoryUnitFactory, ObjectManager $objectManager)
-    {
+    public function __construct(
+        InventoryOperatorInterface $inventoryOperator,
+        InventoryUnitFactoryInterface $inventoryUnitFactory,
+        InventoryLogger $logger,
+        ObjectManager $objectManager
+    ) {
         $this->inventoryOperator = $inventoryOperator;
         $this->inventoryUnitFactory = $inventoryUnitFactory;
+        $this->logger = $logger;
         $this->objectManager = $objectManager;
     }
 
@@ -41,5 +48,7 @@ class Inventory
 
         $this->objectManager->persist($adjustment);
         $this->objectManager->flush();
+
+        $this->logger->log($adjustment);
     }
 }

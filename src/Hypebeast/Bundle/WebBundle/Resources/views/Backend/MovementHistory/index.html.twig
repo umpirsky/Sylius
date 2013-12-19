@@ -1,0 +1,66 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.inventory.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {% if app.request.get('id') %}
+            <a href="{{ app.request.server.get('HTTP_REFERER') }}" class="btn btn-default">
+               <i class="glyphicon glyphicon-arrow-left"></i><span>{{ 'sylius.inventory.back_to_product'|trans }}</span>
+            </a>
+        {% endif %}
+        {{ buttons.show(path('sylius_backend_inventory_index'), 'sylius.inventory.show'|trans) }}
+        {{ buttons.manage(path('sylius_backend_inventory_update'), 'sylius.inventory.manage'|trans) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-stats"></i> {{ 'sylius.movement_hisory.index_header'|trans|raw }}</h1>
+</div>
+
+ {% render(url('sylius_backend_inventory_movement_history_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+
+{{ pagination(inventoryMovementHistories) }}
+{% if inventoryMovementHistories|length > 0 %}
+<table class="table" id="stockables">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('createdAt', 'sylius.movement_history.created_at'|trans) }}</th>
+            <th>{{ 'sylius.movement_history.message'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movementHistory in inventoryMovementHistories %}
+            <tr>
+                <td>
+                    {{ movementHistory.id }}
+                </td>
+                <td>
+                    {{ movementHistory.createdAt|date }}
+                </td>
+                <td>
+                    {{ sylius_movement_history_render(movementHistory) }}
+                </td>
+                <td>
+                    {{ buttons.show(sylius_movement_history_show_url(movementHistory)) }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.movement_history.no_results'|trans) }}
+{% endif %}
+{{ pagination(inventoryMovementHistories) }}
+
+
+{% endblock %}

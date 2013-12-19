@@ -15,3 +15,39 @@ sylius_backend_inventory_variants:
     defaults:
         _controller: sylius.controller.inventory:variantsAction
         _format: json
+
+sylius_backend_inventory_movement_history_index:
+    pattern: /history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.inventory_movement_history:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/MovementHistory:index.html.twig
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
+
+sylius_backend_inventory_movement_history_filter_form:
+    pattern: /filter-form
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.inventory_movement_history:filterFormAction
+        _sylius:
+            template: SyliusWebBundle:Backend/MovementHistory:filterForm.html.twig
+
+sylius_backend_inventory_movement_history_index_by_variant:
+    pattern: /history/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.inventory_movement_history:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/MovementHistory:index.html.twig
+            method: createPaginatorByVariant
+            arguments: [$id]
+
+sylius_backend_inventory_adjustment_show:
+    pattern: /show/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.inventory_adjustment:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Adjustment:show.html.twig

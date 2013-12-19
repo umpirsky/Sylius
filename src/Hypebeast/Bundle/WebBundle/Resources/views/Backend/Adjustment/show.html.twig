@@ -1,0 +1,86 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.inventory.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.show(path('sylius_backend_inventory_index'), 'sylius.inventory.show'|trans) }}
+        {{ buttons.manage(path('sylius_backend_inventory_update'), 'sylius.inventory.manage'|trans) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-stats"></i> {{ 'sylius.adjustment.show_header'|trans|raw }}</h1>
+</div>
+
+<table class="table" id="stockables">
+    <thead>
+        <tr>
+            <th>#id</th>
+            <th>{{ 'sylius.adjustment.status'|trans }}</th>
+            <th>{{ 'sylius.adjustment.reason'|trans }}</th>
+            <th>{{ 'sylius.adjustment.note'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                {{ inventoryAdjustment.id }}
+            </td>
+            <td>
+                {{ inventoryAdjustment.status }}
+            </td>
+            <td>
+                {{ inventoryAdjustment.reason }}
+            </td>
+            <td>
+                {{ inventoryAdjustment.note }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th colspan="7">{{ 'sylius.adjustment.changes'|trans }}</th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th>{{ 'sylius.adjustment.sku'|trans }}</th>
+            <th>{{ 'sylius.adjustment.name'|trans }}</th>
+            <th>{{ 'sylius.adjustment.quantity'|trans }}</th>
+            <th>{{ 'sylius.adjustment.on_hand'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for change in inventoryAdjustment.adjustmentChanges %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ change.variant.sku }}</td>
+            <td>{{ change.variant.product.name }}</td>
+            <td>{{ change.quantity }}</td>
+            {% if change.variant.onHand > 0 and change.variant.isAvailable %}
+                <td class="stock in-stock">
+                    {{ change.variant.onHand }}
+                </td>
+            {% else %}
+                <td class="stock out-of-stock text-muted">
+                    <em>{{ 'sylius.out_of_stock'|trans }}</em>
+                </td>
+            {% endif %}
+            <td>{{ buttons.show(path('sylius_backend_product_show', {'id': change.variant.product.id}), 'sylius.product.show'|trans) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

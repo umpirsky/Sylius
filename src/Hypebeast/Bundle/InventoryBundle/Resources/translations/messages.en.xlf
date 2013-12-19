@@ -10,6 +10,26 @@
         <source>sylius.label.adjustment.note</source>
         <target>Note</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473f" resname="sylius.form.inventory_movement_history_filter.sku">
+        <source>sylius.form.inventory_movement_history_filter.sku</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473g" resname="sylius.form.inventory_movement_history_filter.adjustment">
+        <source>sylius.form.inventory_movement_history_filter.adjustment</source>
+        <target>Adjustment</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473h" resname="sylius.form.inventory_movement_history_filter.number">
+        <source>sylius.form.inventory_movement_history_filter.number</source>
+        <target>Order number</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473i" resname="sylius.form.inventory_movement_history_filter.created_at_from">
+        <source>sylius.form.inventory_movement_history_filter.created_at_from</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.form.inventory_movement_history_filter.created_at_to">
+        <source>sylius.form.inventory_movement_history_filter.created_at_from</source>
+        <target>To</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

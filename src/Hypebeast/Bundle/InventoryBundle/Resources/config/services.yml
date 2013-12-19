@@ -1,20 +1,70 @@
 parameters:
     sylius.controller.inventory.class: Hypebeast\Bundle\InventoryBundle\Controller\InventoryController
+    sylius.controller.inventory_adjustment.class: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+    sylius.controller.inventory_movement_history.class: Hypebeast\Bundle\InventoryBundle\Controller\MovementHistoryController
+    sylius.repository.inventory_adjustment.class: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+    sylius.repository.inventory_movement_history.class: Hypebeast\Bundle\InventoryBundle\Repository\MovementHistoryRepository
     sylius.form.type.sylius_variant_to_identifier_hidden.class: Hypebeast\Bundle\InventoryBundle\Form\Type\VariantToIdentifierType
     sylius.form.type.inventory_adjustment.class: Hypebeast\Bundle\InventoryBundle\Form\Type\AdjustmentType
     sylius.form.type.inventory_adjustment_adjustment_change.class: Hypebeast\Bundle\InventoryBundle\Form\Type\AdjustmentChangeType
+    sylius.form.type.inventory_movement_history_filter.class: Hypebeast\Bundle\InventoryBundle\Form\Type\MovementHistoryFilterType
     sylius.form.handler.inventory.class: Hypebeast\Bundle\InventoryBundle\Form\Handler\Inventory
-
+    sylius.form.logger.inventory_logger.class: Hypebeast\Bundle\InventoryBundle\Logger\InventoryLogger
+    sylius.listener.inventory_logger.class: Hypebeast\Bundle\InventoryBundle\EventListener\InventoryLoggerListener
 
 services:
     sylius.controller.inventory:
         class: %sylius.controller.inventory.class%
         arguments:
             - sylius
-            - inventory_unit
+            - inventoryUnit
             - HypebeastInventoryBundle:Inventory
         calls:
             - [setContainer, ['@service_container']]
+
+    sylius.controller.inventory_adjustment:
+        class: %sylius.controller.inventory_adjustment.class%
+        arguments:
+            - sylius
+            - inventoryAdjustment
+            - HypebeastInventoryBundle:InventoryAdjustment
+        calls:
+            - [setContainer, ['@service_container']]
+
+    sylius.repository.inventory_adjustment:
+        class: %sylius.repository.inventory_adjustment.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @sylius.class_metadata.inventory_adjustment
+
+    sylius.class_metadata.inventory_adjustment:
+                class: Doctrine\ORM\Mapping\ClassMetadata
+                factory_service: doctrine.orm.entity_manager
+                factory_method: getClassMetadata
+                arguments:
+                    - Hypebeast\Bundle\InventoryBundle\Entity\Adjustment
+
+    sylius.controller.inventory_movement_history:
+        class: %sylius.controller.inventory_movement_history.class%
+        arguments:
+            - sylius
+            - inventoryMovementHistory
+            - HypebeastInventoryBundle:MovementHistory
+        calls:
+            - [setContainer, ['@service_container']]
+
+    sylius.repository.inventory_movement_history:
+        class: %sylius.repository.inventory_movement_history.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @sylius.class_metadata.inventory_movement_history
+
+    sylius.class_metadata.inventory_movement_history:
+                class: Doctrine\ORM\Mapping\ClassMetadata
+                factory_service: doctrine.orm.entity_manager
+                factory_method: getClassMetadata
+                arguments:
+                    - Hypebeast\Bundle\InventoryBundle\Entity\MovementHistory
 
     sylius.form.type.sylius_variant_to_identifier_hidden:
         class: %sylius.form.type.sylius_variant_to_identifier_hidden.class%
@@ -33,9 +83,28 @@ services:
         tags:
             - { name: form.type, alias: sylius_inventory_adjustment_change }
 
+    sylius.form.type.inventory_movement_history_filter:
+        class: %sylius.form.type.inventory_movement_history_filter.class%
+        tags:
+            - { name: form.type, alias: sylius_inventory_movement_history_filter }
+
     sylius.form.handler.inventory:
         class: %sylius.form.handler.inventory.class%
         arguments:
             - @sylius.inventory_operator
             - @sylius.inventory_unit_factory
+            - @sylius.form.logger.inventory_logger
             - @doctrine.orm.entity_manager
+
+    sylius.form.logger.inventory_logger:
+        class: %sylius.form.logger.inventory_logger.class%
+        arguments:
+            - @security.context
+            - @doctrine.orm.entity_manager
+
+    sylius.listener.inventory_logger:
+        class: %sylius.listener.inventory_logger.class%
+        arguments:
+            - @sylius.form.logger.inventory_logger
+        tags:
+            - { name: kernel.event_listener, event: sylius.checkout.finalize.pre_complete, method: onCheckoutFinalizePreComplete }

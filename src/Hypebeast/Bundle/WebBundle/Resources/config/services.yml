@@ -1,8 +1,17 @@
 parameters:
     sylius.cart_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastCartExtension
+    sylius.movement_history_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastMovementHistoryExtension
     sylius.form.type.property.class: Hypebeast\Bundle\WebBundle\Form\Type\PropertyType
 
 services:
+    sylius.movement_history_twig:
+        class: %sylius.movement_history_twig.class%
+        arguments:
+            - @router
+            - @translator
+        tags:
+            - { name: twig.extension }
+
     sylius.hypebeast.security.provider:
         class: Hypebeast\Bundle\WebBundle\Security\HypebeastProvider
         arguments:
