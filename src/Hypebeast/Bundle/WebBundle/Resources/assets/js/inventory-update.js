@@ -5,7 +5,10 @@ $(document).ready(function() {
     var createTypehead = function(element) {
         element.typeahead({
             name: 'variants',
-            prefetch: inventory_update_variants_path,
+            prefetch: {
+                url: inventory_update_variants_path,
+                ttl: 30000
+            },
             template: '<span>{{sku}} - {{name}}</span> <span class="label label-success">{{onHand}}</span>',
             engine: Hogan,
             limit: 5
