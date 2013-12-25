@@ -5,9 +5,9 @@ $(document).ready(function() {
     var createTypehead = function(element) {
         element.typeahead({
             name: 'variants',
-            prefetch: {
-                url: inventory_update_variants_path,
-                ttl: 30000
+            remote: {
+                url: inventory_update_variants_path+'?q=%QUERY',
+                cache: false
             },
             template: '<span>{{sku}} - {{name}}</span> <span class="label label-success">{{onHand}}</span>',
             engine: Hogan,

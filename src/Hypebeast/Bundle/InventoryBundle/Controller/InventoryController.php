@@ -39,7 +39,7 @@ class InventoryController extends ResourceController
     {
         $view = $this
             ->view()
-            ->setData($this->get('sylius.repository.variant')->findAllForTypehead())
+            ->setData($this->get('sylius.repository.variant')->findByKeywordForTypeahead($request->get('q')))
         ;
 
         return $this->handleView($view);

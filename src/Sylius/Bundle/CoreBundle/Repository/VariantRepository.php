@@ -25,11 +25,20 @@ class VariantRepository extends BaseVariantRepository
         return $this->getCollectionQueryBuilder();
     }
 
-    public function findAllForTypehead()
+    public function findByKeywordForTypeahead($keyword = '', $maxResults = 10)
     {
-        $qb = $this->getCollectionQueryBuilder()
-            ->select("o.id, o.sku, p.supplierCode, o.onHand, p.name, CONCAT(o.sku, ' - ', p.name, ' (', COALESCE(p.supplierCode, ''), ')') AS value")
+        $qb = $this->getCollectionQueryBuilder();
+
+        $qb->select("o.id, o.sku, p.supplierCode, o.onHand, p.name, CONCAT(o.sku, ' - ', p.name, ' (', COALESCE(p.supplierCode, ''), ')') AS value")
             ->innerJoin('o.product', 'p')
+            ->setMaxResults($maxResults)
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->like('o.sku', ":keyword"),
+                    $qb->expr()->like('p.name', ":keyword")
+                )
+            )
+            ->setParameter('keyword', "%$keyword%")
         ;
 
         // Exclude configurable product's master variant
