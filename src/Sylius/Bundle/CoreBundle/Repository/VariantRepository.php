@@ -29,8 +29,17 @@ class VariantRepository extends BaseVariantRepository
     {
         $qb = $this->getCollectionQueryBuilder();
 
-        $qb->select("o.id, o.sku, p.supplierCode, o.onHand, p.name, CONCAT(o.sku, ' - ', p.name, ' (', COALESCE(p.supplierCode, ''), ')') AS value")
+        $qb->select([
+                'o.id',
+                'o.sku',
+                'p.supplierCode',
+                'o.onHand',
+                'p.name',
+                'opt.value AS option',
+                "CONCAT(o.sku, ' - ', p.name, ' - ', opt.value) AS value"
+            ])
             ->innerJoin('o.product', 'p')
+            ->leftJoin('o.options', 'opt')
             ->setMaxResults($maxResults)
             ->where(
                 $qb->expr()->orX(
