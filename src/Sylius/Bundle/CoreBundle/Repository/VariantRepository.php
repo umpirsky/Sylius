@@ -35,17 +35,17 @@ class VariantRepository extends BaseVariantRepository
                 'p.supplierCode',
                 'o.onHand',
                 'p.name',
+                'taxons.name AS brand',
                 'opt.value AS option',
-                "CONCAT(o.sku, ' - ', p.name, ' - ', opt.value) AS value"
+                "CONCAT(o.sku, ' - ', taxons.name, ' ', p.name) AS value"
             ])
             ->innerJoin('o.product', 'p')
             ->leftJoin('o.options', 'opt')
+            ->leftJoin('p.taxons', 'taxons')
+            ->leftJoin('taxons.taxonomy', 'tax', \Doctrine\ORM\Query\Expr\Join::WITH, "tax.name = 'Brand'")
             ->setMaxResults($maxResults)
             ->where(
-                $qb->expr()->orX(
-                    $qb->expr()->like('o.sku', ":keyword"),
-                    $qb->expr()->like('p.name', ":keyword")
-                )
+                $qb->expr()->like("CONCAT(o.sku, ' - ', taxons.name, ' ', p.name)", ":keyword")
             )
             ->setParameter('keyword', "%$keyword%")
         ;

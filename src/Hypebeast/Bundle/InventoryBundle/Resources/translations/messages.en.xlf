@@ -30,6 +30,34 @@
         <source>sylius.form.inventory_movement_history_filter.created_at_from</source>
         <target>To</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473k" resname="sylius.choice.adjustment.reason.new_product">
+        <source>sylius.choice.adjustment.reason.new_product</source>
+        <target>New Product</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473m" resname="sylius.choice.adjustment.reason.restocked">
+        <source>sylius.choice.adjustment.reason.restocked</source>
+        <target>Restocked</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473n" resname="sylius.choice.adjustment.reason.returned">
+        <source>sylius.choice.adjustment.reason.returned</source>
+        <target>Returned</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473o" resname="sylius.choice.adjustment.reason.damaged">
+        <source>sylius.choice.adjustment.reason.damaged</source>
+        <target>Damaged</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473p" resname="sylius.choice.adjustment.reason.borrowed_from_shooting">
+        <source>sylius.choice.adjustment.reason.</source>
+        <target>Borrowed for Shooting</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473q" resname="sylius.choice.adjustment.reason.returned_from_shooting">
+        <source>sylius.choice.adjustment.reason.</source>
+        <target>Returned from Shooting</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273473r" resname="sylius.choice.adjustment.reason.other">
+        <source>sylius.choice.adjustment.reason.other</source>
+        <target>Other</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

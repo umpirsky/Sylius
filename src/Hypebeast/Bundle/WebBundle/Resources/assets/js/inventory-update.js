@@ -1,34 +1,85 @@
-$(document).ready(function() {
-    'use strict';
+var app = angular.module('hypebeast',[]);
 
-    var typeheadSelector = 'input[name^="sylius_inventory_adjustment[adjustmentChanges]"][name$="[typehead]"]';
-    var createTypehead = function(element) {
-        element.typeahead({
+app.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol('#{').endSymbol('}');
+});
+
+app.controller('StockAdjustment', ['$scope', function(scope) {
+    scope.items = window.formData || [];
+
+    scope.addItem = function(variant) {
+        // Check for duplication
+        for(var i in scope.items) {
+            if (scope.items[i]['id'] == variant.id) {
+                alert('Item already added.');
+                return;
+            }
+        }
+
+        variant.quantity = 1;
+        scope.items.push(variant);
+    };
+
+    scope.removeItem = function(index) {
+        scope.items.splice(index, 1);
+    };
+}]);
+
+/**
+ * Set quantity min and max according to adjustment reason
+ */
+app.directive('stockAdjustmentQuantity', function() {
+    return function(scope, $el) {
+        scope.$watch('reason', function(value) {
+            switch (value) {
+                case 'Other':
+                    $el.removeAttr('min').removeAttr('max');
+                    break;
+                case 'Damaged':
+                case 'Borrowed for Shooting':
+                    $el.removeAttr('min').attr('max', -1);
+                    break;
+                default:
+                    $el.removeAttr('max').attr('min', 1);
+                    break;
+            }
+        })
+    };
+});
+
+/**
+ * Variant autocomplete
+ */
+app.directive('variantTypeahead', function() {
+    return function(scope, $el) {
+        $el.typeahead({
             name: 'variants',
             remote: {
-                url: inventory_update_variants_path+'?q=%QUERY',
+                url: inventory_update_variants_path,
                 cache: false
             },
-            template: '<span>{{sku}} - {{name}}</span> <span class="label label-success">{{onHand}}</span>',
-            engine: Hogan,
-            limit: 5
-        }).bind('typeahead:selected', function(event, variant) {
-            var container = element.closest('td');
-            container.find('input[type="hidden"]').val(variant.id);
-            container.next().html(variant.supplierCode);
-            container.nextAll().eq(2).html(variant.onHand);
-            container.nextAll().eq(1).find('input').trigger('change');
+            template: function(datum) {
+                return '<span><code>'+datum.sku+'</code> '+datum.brand+' '+datum.name+'</span> ('+datum.option+')';
+            },
+            limit: 10
+        });
+
+        $el.bind('typeahead:selected typeahead:autocompleted', function(event, datum) {
+            scope.$apply(function() {
+                scope.addItem(datum);
+            });
+
+            // Empty the †ext field
+            $el.typeahead('setQuery', '');
         });
     };
-    createTypehead($(typeheadSelector));
+});
 
-    $(document).on('click', 'a[data-collection-button="add"]', function(e) {
-        createTypehead($(typeheadSelector + ':last'));
-    });
-
-    $(document).on('change', 'input[name^="sylius_inventory_adjustment[adjustmentChanges]"][name$="[quantity]"]', function (e) {
-        var available = $(this).parent().next();
-        var after = available.next();
-        after.html(parseInt($(this).val()) + parseInt(available.html()));
+$(function() {
+    /**
+     * Disable mousewheel on input box.
+     */
+    $('body').on('mousewheel', 'input', function(event){
+        event.preventDefault();
     });
 });

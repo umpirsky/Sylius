@@ -60,7 +60,7 @@
       </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473l" resname="sylius.inventory.quantity">
         <source>sylius.inventory.quantity</source>
-        <target>Quantity change</target>
+        <target>Quantity</target>
       </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473m" resname="sylius.inventory.available">
         <source>sylius.inventory.available</source>

@@ -11,8 +11,19 @@ class AdjustmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reason', 'text', array(
-                'label' => 'sylius.label.adjustment.reason'
+            ->add('reason', 'choice', array(
+                'label' => 'sylius.label.adjustment.reason',
+                'choices' => [
+                    'New Products' => 'sylius.choice.adjustment.reason.new_product',
+                    'Restocked' => 'sylius.choice.adjustment.reason.restocked',
+                    'Returned' => 'sylius.choice.adjustment.reason.returned',
+                    'Damaged' => 'sylius.choice.adjustment.reason.damaged',
+                    'Borrowed for Shooting' => 'sylius.choice.adjustment.reason.borrowed_from_shooting',
+                    'Returned from Shooting' => 'sylius.choice.adjustment.reason.returned_from_shooting',
+                    'Other' => 'sylius.choice.adjustment.reason.other',
+                ],
+                'empty_value' => 'Choose a Reason',
+                'required' => true
             ))
             ->add('note', 'textarea', array(
                 'required' => false,

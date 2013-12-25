@@ -1,77 +1,91 @@
-{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+{% extends 'HypebeastWebBundle:Backend:layout.html.twig' %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
 
-{% block stylesheets %}
-{{ parent() }}
-{% stylesheets
-    '@HypebeastWebBundle/Resources/assets/css/typeahead.css'
-%}
-<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-{% endstylesheets %}
-{% endblock %}
-
 {% block javascripts %}
-{{ parent() }}
-{% javascripts output='assets/compiled/backend_inventory_update.js'
-    '//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js'
-    '//cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan.min.js'
-    '@SyliusWebBundle/Resources/assets/js/inventory-update.js'
-%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/hypebeastweb/bower_components/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('bundles/hypebeastweb/bower_components/typeahead.js/dist/typeahead.min.js') }}"></script>
+
+    {% javascripts output='assets/compiled/backend_inventory_update.js'
+        '@SyliusWebBundle/Resources/assets/js/inventory-update.js'
+    %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-<script type="text/javascript">
-    var inventory_update_variants_path = '{{ path('sylius_backend_inventory_variants') }}';
-</script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        var inventory_update_variants_path = '{{ path('sylius_backend_inventory_variants') }}?q=%QUERY';
+        var formData = [];
+        {% if form.vars.data and form.vars.data.adjustmentChanges %}
+            {% for adjustmentChange in form.vars.data.adjustmentChanges %}
+            formData.push({
+                'id': {{ adjustmentChange.variant.id }},
+                'name': "{{ adjustmentChange.variant.product.name }}",
+                'sku': {{ adjustmentChange.variant.sku }},
+                'onHand': {{ adjustmentChange.variant.onHand }},
+                'brand': "{{ sylius_product_brand(adjustmentChange.variant.product).name }}",
+                'quantity': {{ adjustmentChange.quantity }},
+                {% if adjustmentChange.variant.options %}
+                'option': "{{ adjustmentChange.variant.options ? adjustmentChange.variant.options.0.value }}"
+                {% endif %}
+            });
+            {% endfor %}
+        {% endif %}
+    </script>
 {% endblock %}
 
 {% block topbar %}
-<ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.inventory.update'|trans }}</li>
-</ol>
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+        <li>{{ 'sylius.breadcrumb.inventory.update'|trans }}</li>
+    </ol>
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.adjustment_change.update_header'|trans|raw }}</h1>
-</div>
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.adjustment_change.update_header'|trans|raw }}</h1>
+    </div>
 
-<form action="{{ path('sylius_backend_inventory_update') }}" method="post" class="form-horizontal">
-    {{ form_errors(form) }}
-    {{ form_row(form.reason) }}
-    <table class="table table-bordered">
-        <thead>
+    <form id="stock-adjustment-form" ng-controller="StockAdjustment" action="{{ path('sylius_backend_inventory_update') }}" method="post" class="form-horizontal">
+        {{ form_errors(form) }}
+
+        <table class="table table-bordered">
+            <thead>
             <tr>
                 <th>{{ 'sylius.inventory.item_name'|trans }}</th>
-                <th>{{ 'sylius.inventory.supplier_code'|trans }}</th>
-                <th>{{ 'sylius.inventory.quantity'|trans }}</th>
-                <th>{{ 'sylius.inventory.available'|trans }}</th>
-                <th>{{ 'sylius.inventory.after'|trans }}</th>
-                <th></th>
+                <th class="col-xs-2">{{ 'sylius.product.sku'|trans }}</th>
+                <th class="col-xs-1">{{ 'sylius.inventory.quantity'|trans }}</th>
+                <th class="col-xs-1">{{ 'sylius.inventory.available'|trans }}</th>
+                <th class="col-xs-1">{{ 'sylius.inventory.after'|trans }}</th>
+                <th class="col-xs-1"></th>
             </tr>
-        </thead>
-        <tbody id="sylius-inventory-adjustment-changes" class="collection-container" data-prototype="{{ ('<tr class="sylius-assortment-variant-images-image"><td>' ~ form_widget(form.adjustmentChanges.vars.prototype.typehead) ~ form_widget(form.adjustmentChanges.vars.prototype.variant) ~ '</td><td></td><td>' ~ form_widget(form.adjustmentChanges.vars.prototype.quantity) ~ '</td><td></td><td></td><td><a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-inventory-adjustment-changes" data-collection="sylius-inventory-adjustment-changes"><i class="glyphicon glyphicon-trash"></i></a></td></tr>')|e }}">
-            {% for adjustmentChange in form.adjustmentChanges %}
-                <tr class="sylius-assortment-variant-images-image">
-                    <td>{{ form_widget(adjustmentChange.typehead) }}{{ form_widget(adjustmentChange.variant) }}</td>
-                    <td>{% if adjustmentChange.vars.data.variant %}{{ adjustmentChange.vars.data.variant.product.supplierCode }}{% endif %}</td>
-                    <td>{{ form_widget(adjustmentChange.quantity) }}</td>
-                    <td>{% if adjustmentChange.vars.data.variant %}{{ adjustmentChange.vars.data.variant.onHand }}{% endif %}</td>
-                    <td>{% if adjustmentChange.vars.data.variant %}{{ adjustmentChange.vars.data.variant.onHand + adjustmentChange.vars.data.quantity }}{% endif %}</td>
-                    <td><a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-inventory-adjustment-changes" data-collection="sylius-inventory-adjustment-changes"><i class="glyphicon glyphicon-trash"></i></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius-inventory-adjustment-changes" data-collection="sylius-inventory-adjustment-changes">
-        {{ 'sylius.inventory.add_adjustment_change'|trans }}
-    </a>
-    <br>
-    {{ form_row(form.note) }}
-    {{ form_widget(form._token) }}
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items" line-item>
+                <td>#{item.brand} #{item.name} <span ng-if="item.option" class="label label-info">#{item.option}</span></td>
+                <td class="col-xs-2"><code>#{item.sku}</code></td>
+                <td class="col-xs-1"><input type="number" ng-model="item.quantity" class="form-control" name="{{ form.adjustmentChanges.vars.full_name }}[#{$index}][quantity]" stock-adjustment-quantity></td>
+                <td class="col-xs-1">#{item.onHand}</td>
+                <td class="col-xs-1">#{item.onHand + item.quantity}</td>
+                <td class="col-xs-1">
+                    <button ng-click="removeItem($index)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Del</button>
+                    <input type="hidden" name="{{ form.adjustmentChanges.vars.full_name }}[#{$index}][variant]" value="#{item.id}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="item-to-be-added" class="form-control" placeholder="Search by SKU" variant-typeahead>
+                </td>
+                <td colspan="6"></td>
+            </tr>
+            </tbody>
+        </table>
 
-    {{ update() }}
-</form>
+        {{ form_row(form.reason, {'attr': {'ng-model': 'reason'}}) }}
+        {{ form_row(form.note) }}
+        {{ form_widget(form._token) }}
+
+        {{ update() }}
+    </form>
 {% endblock %}
