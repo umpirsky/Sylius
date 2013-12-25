@@ -27,28 +27,25 @@ class VariantRepository extends BaseVariantRepository
 
     public function findAllForTypehead()
     {
-        $noV = $this->getCollectionQueryBuilder()
-            ->select("p.id, SUM(o.master) cpt")
-            ->innerJoin('o.product', 'p')
-            ->groupBy("p.id")
-            ->having("cpt = 0")
-            ->getQuery()
-            ->getResult()
-        ;
-
-        $ids = array_map(function($e){ return $e['id']; }, $noV);
-
         $qb = $this->getCollectionQueryBuilder()
             ->select("o.id, o.sku, p.supplierCode, o.onHand, p.name, CONCAT(o.sku, ' - ', p.name, ' (', COALESCE(p.supplierCode, ''), ')') AS value")
             ->innerJoin('o.product', 'p')
         ;
 
-        return $qb->andWhere(
-                $qb->expr()->orX(
-                    $qb->expr()->eq('o.master', true),
-                    $qb->expr()->in('p.id', $ids)
-                )
-            )
+        // Exclude configurable product's master variant
+        $qb->andWhere(
+            $qb->expr()->not($qb->expr()->exists( // NOT EXISTS
+                $this->createQueryBuilder('v')
+                     ->select('v.id')
+                     ->groupBy('v.product')
+                     ->andHaving('COUNT(v.product) > 1')
+                     // Doctrine does not allow selecting multiple column in Exists
+                     // ->andHaving('v.master = true')
+                     ->andHaving('v.id = o.id')
+            ))
+        );
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;
