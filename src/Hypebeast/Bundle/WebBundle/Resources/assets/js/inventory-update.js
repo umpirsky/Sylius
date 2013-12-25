@@ -12,7 +12,7 @@ $(document).ready(function() {
             template: '<span>{{sku}} - {{name}}</span> <span class="label label-success">{{onHand}}</span>',
             engine: Hogan,
             limit: 5
-        }).bind('typeahead:selected', function(e, variant) {
+        }).bind('typeahead:selected', function(event, variant) {
             var container = element.closest('td');
             container.find('input[type="hidden"]').val(variant.id);
             container.next().html(variant.supplierCode);
