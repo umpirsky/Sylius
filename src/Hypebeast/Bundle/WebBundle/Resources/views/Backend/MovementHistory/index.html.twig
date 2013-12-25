@@ -32,26 +32,31 @@
 <table class="table" id="stockables">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('createdAt', 'sylius.movement_history.created_at'|trans) }}</th>
+            {% if app.request.get('id') %}
+            <th class="col-xs-1 text-center">+/-</th>
+            {% endif %}
             <th>{{ 'sylius.movement_history.message'|trans }}</th>
-            <th></th>
+            <th class="col-xs-3">{{ 'sylius.adjustment.reason'|trans }}</th>
+            <th class="col-xs-4">{{ sylius_resource_sort('createdAt', 'sylius.movement_history.created_at'|trans) }}</th>
         </tr>
     </thead>
     <tbody>
         {% for movementHistory in inventoryMovementHistories %}
             <tr>
-                <td>
-                    {{ movementHistory.id }}
+                {% if app.request.get('id') %}
+                <td class="col-xs-1 text-center">
+                    <strong>{{ sylius_movement_history_variant_change(movementHistory, app.request.get('id')) }}</strong>
                 </td>
-                <td>
-                    {{ movementHistory.createdAt|date }}
-                </td>
+                {% endif %}
                 <td>
                     {{ sylius_movement_history_render(movementHistory) }}
                 </td>
-                <td>
-                    {{ buttons.show(sylius_movement_history_show_url(movementHistory)) }}
+                <td class="col-xs-3">
+                    {% set reason = sylius_movement_history_adjustment_reason(movementHistory) %}
+                    {{ reason ? reason : 'N/A' }}
+                </td>
+                <td class="col-xs-4">
+                    {{ movementHistory.createdAt|date }}
                 </td>
             </tr>
         {% endfor %}

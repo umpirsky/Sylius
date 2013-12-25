@@ -2,6 +2,8 @@
 
 namespace Hypebeast\Bundle\WebBundle\Twig;
 
+use Hypebeast\Bundle\InventoryBundle\Entity\AdjustmentChange;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Twig_Extension;
 use Twig_Function_Method;
 use Hypebeast\Bundle\InventoryBundle\Entity\MovementHistory;
@@ -24,6 +26,8 @@ class HypebeastMovementHistoryExtension extends Twig_Extension
     {
         return array(
             'sylius_movement_history_render'   => new Twig_Function_Method($this, 'getMarkup', array('is_safe' => array('html'))),
+            'sylius_movement_history_adjustment_reason'   => new Twig_Function_Method($this, 'getAdjustmentReason'),
+            'sylius_movement_history_variant_change'   => new Twig_Function_Method($this, 'getVariantChange'),
             'sylius_movement_history_show_url' => new Twig_Function_Method($this, 'getUrl'),
         );
     }
@@ -37,6 +41,40 @@ class HypebeastMovementHistoryExtension extends Twig_Extension
             $this->urlGenerator->generate('sylius_backend_user_show', array('id' => $movementHistory->getUser()->getId())),
             $movementHistory->getUser()->getFirstName()
         );
+    }
+
+    public function getAdjustmentReason(MovementHistory $movementHistory)
+    {
+        if($this->getType($movementHistory) === 'adjustment') {
+            return $movementHistory->getAdjustment()->getReason();
+        }
+    }
+
+    public function getVariantChange(MovementHistory $movementHistory, $variantId)
+    {
+        $change = '';
+
+        switch ($this->getType($movementHistory)):
+            case 'adjustment':
+                $change = $movementHistory->getAdjustment()->getAdjustmentChanges()->filter(
+                    function(AdjustmentChange $adjustmentChange) use ($variantId) {
+                        return $adjustmentChange->getVariant()->getId() == $variantId;
+                    }
+                )->first()->getQuantity();
+                break;
+            case 'order':
+                $change = $movementHistory->getOrder()->getItems()->filter(
+                    function(OrderItemInterface $orderItem) use ($variantId) {
+                        return $orderItem->getVariant()->getId() == $variantId;
+                    }
+                )->first()->getQuantity();
+        endswitch;
+
+        if($change > 0) {
+            return '+ ' . $change;
+        } else {
+            return '- ' . $change;
+        }
     }
 
     public function getUrl(MovementHistory $movementHistory)

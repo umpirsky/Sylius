@@ -117,7 +117,7 @@ class BackendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.products', $section)));
 
         $child->addChild('inventory', array(
-            'route' => 'sylius_backend_inventory_index',
+            'route' => 'sylius_backend_inventory_movement_history_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-tasks'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stockables', $section)));
 

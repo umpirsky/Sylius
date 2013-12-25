@@ -53,6 +53,9 @@ class MovementHistory
         return null !== $this->adjustment;
     }
 
+    /**
+     * @return Adjustment
+     */
     public function getAdjustment()
     {
         return $this->adjustment;
@@ -70,6 +73,9 @@ class MovementHistory
         return null !== $this->order;
     }
 
+    /**
+     * @return \Sylius\Bundle\OrderBundle\Model\OrderInterface
+     */
     public function getOrder()
     {
         return $this->order;

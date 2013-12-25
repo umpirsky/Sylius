@@ -42,6 +42,9 @@ class AdjustmentChange
         return $this->id;
     }
 
+    /**
+     * @return Variant
+     */
     public function getVariant()
     {
         return $this->variant;
