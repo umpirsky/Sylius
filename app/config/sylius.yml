@@ -61,7 +61,7 @@ sylius_shipping:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
         shipping_method:
             model: Sylius\Bundle\CoreBundle\Model\ShippingMethod
-            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+            form: Hypebeast\Bundle\WebBundle\Form\Type\ShippingMethodType
 
 sylius_promotions:
     classes:

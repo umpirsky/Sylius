@@ -17,6 +17,9 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\ShippingMethod" table="sylius_shipping_method">
+        <field name="estimationDaysFrom" column="estimation_days_from" type="integer" nullable="false" />
+        <field name="estimationDaysTo" column="estimation_days_to" type="integer" nullable="false" />
+
         <many-to-one field="zone" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneInterface">
             <join-column name="zone_id" referenced-column-name="id" nullable="false" />
         </many-to-one>

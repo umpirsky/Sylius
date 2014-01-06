@@ -146,6 +146,14 @@
         <source>sylius.inventory.back_to_product</source>
         <target>Back to product</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475h" resname="sylius.form.shipping_method.estimation_from">
+        <source>sylius.form.shipping_method.estimation_from</source>
+        <target>Delivery estimation</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475i" resname="sylius.form.shipping_method.estimation_to">
+        <source>sylius.form.shipping_method.estimation_to</source>
+        <target>to</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

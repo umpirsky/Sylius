@@ -96,6 +96,12 @@ class LoadShippingData extends DataFixture
         $method->setConfiguration($configuration);
         $method->setCategory($category);
 
+        $form = rand(1, 10);
+        $to = $form + rand(0, 10);
+
+        $method->setEstimationDaysFrom($form);
+        $method->setEstimationDaysTo($to);
+
         $this->setReference('Sylius.ShippingMethod.'.$name, $method);
 
         return $method;

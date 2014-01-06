@@ -2,6 +2,7 @@ parameters:
     sylius.cart_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastCartExtension
     sylius.movement_history_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastMovementHistoryExtension
     sylius.form.type.property.class: Hypebeast\Bundle\WebBundle\Form\Type\PropertyType
+    sylius.checkout_step.shipping.class: Hypebeast\Bundle\WebBundle\Checkout\Step\ShippingStep
 
 services:
     sylius.movement_history_twig:

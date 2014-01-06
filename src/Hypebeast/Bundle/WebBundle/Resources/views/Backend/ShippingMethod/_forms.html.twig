@@ -1,0 +1,45 @@
+{% extends 'SyliusWebBundle::forms.html.twig' %}
+
+{% block _sylius_shipping_method_categoryRequirement_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block _sylius_shipping_method_categoryRequirement_widget %}
+    <div class="col-lg-10">
+        {% for child in form %}
+            <div class="radio">
+                <label>
+                    {{ child.vars.label }}
+                    {{ form_widget(child) }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block _sylius_shipping_method_estimationDaysFrom_widget %}
+    <div class="input-group col-lg-10">
+        {{ form_widget(form, { attr: { class: 'form-control' }}) }}
+        <span class="input-group-addon">days</span>
+    </div>
+{% endblock %}
+
+{% block _sylius_shipping_method_estimationDaysFrom_row %}
+    <div class="col-lg-6">
+        <div class="form-group">
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _sylius_shipping_method_estimationDaysTo_widget %}
+    {{ block('_sylius_shipping_method_estimationDaysFrom_widget') }}
+{% endblock %}
+
+{% block _sylius_shipping_method_estimationDaysTo_row %}
+    {{ block('_sylius_shipping_method_estimationDaysFrom_row') }}
+{% endblock %}

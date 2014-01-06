@@ -1,0 +1,22 @@
+{% extends 'SyliusWebBundle::forms.html.twig' %}
+
+{% block sylius_shipping_method_choice_widget %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                {% set method = form.vars.choices[child.vars.value].data %}
+                <div>
+                    {% if shipping_costs[child.vars.value] is defined %}
+                        <span class="pull-right text-muted">{{ shipping_costs[child.vars.value]|sylius_price }}</span>
+                    {% endif %}
+                    <label{% for attrname, attrvalue in child.vars.label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                        {{ form_widget(child) }}
+                        {{ child.vars.label|trans({}, translation_domain) }}
+                    </label>
+                    &nbsp;
+                    <span class="label label-info">From {{ method.estimationDaysFrom }} to {{ method.estimationDaysTo }} business days.</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock %}

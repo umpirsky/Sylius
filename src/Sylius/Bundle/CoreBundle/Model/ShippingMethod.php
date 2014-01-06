@@ -28,6 +28,10 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
      */
     protected $zone;
 
+    protected $estimationDaysFrom = 0;
+
+    protected $estimationDaysTo = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -42,6 +46,30 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public function setZone(ZoneInterface $zone)
     {
         $this->zone = $zone;
+
+        return $this;
+    }
+
+    public function getEstimationDaysFrom()
+    {
+        return $this->estimationDaysFrom;
+    }
+
+    public function setEstimationDaysFrom($estimationDaysFrom)
+    {
+        $this->estimationDaysFrom = $estimationDaysFrom;
+
+        return $this;
+    }
+
+    public function getEstimationDaysTo()
+    {
+        return $this->estimationDaysTo;
+    }
+
+    public function setEstimationDaysTo($estimationDaysTo)
+    {
+        $this->estimationDaysTo = $estimationDaysTo;
 
         return $this;
     }
