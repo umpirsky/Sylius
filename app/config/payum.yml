@@ -6,6 +6,111 @@ payum:
                     driver: orm
 
     contexts:
+        paydollar_visa:
+            paydollar_direct_client_side:
+                options:
+                    merchant_id: %paydollar.merchant_id%
+                    payment_method: VISA
+                    sandbox: %paydollar.sandbox%
+                actions:
+                    - sylius.payum.action.order_status
+                    - sylius.payum.action.obtain_credit_card
+                    - hypebeast.paydollar.action.payment_details_status
+                    - hypebeast.paydollar.action.capture_order_using_credit_card
+                    - hypebeast.paydollar.action.capture_onsite
+                    - hypebeast.paydollar.action.notify_order
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        paydollar_master:
+            paydollar_direct_client_side:
+                options:
+                    merchant_id: %paydollar.merchant_id%
+                    payment_method: Master
+                    sandbox: %paydollar.sandbox%
+                actions:
+                    - sylius.payum.action.order_status
+                    - sylius.payum.action.obtain_credit_card
+                    - hypebeast.paydollar.action.payment_details_status
+                    - hypebeast.paydollar.action.capture_order_using_credit_card
+                    - hypebeast.paydollar.action.capture_onsite
+                    - hypebeast.paydollar.action.notify_order
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        paydollar_amex:
+            paydollar_direct_client_side:
+                options:
+                    merchant_id: %paydollar.merchant_id%
+                    payment_method: AMEX
+                    sandbox: %paydollar.sandbox%
+                actions:
+                    - sylius.payum.action.order_status
+                    - sylius.payum.action.obtain_credit_card
+                    - hypebeast.paydollar.action.payment_details_status
+                    - hypebeast.paydollar.action.capture_order_using_credit_card
+                    - hypebeast.paydollar.action.capture_onsite
+                    - hypebeast.paydollar.action.notify_order
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        paydollar_alipay:
+            paydollar_direct_client_side:
+                options:
+                    merchant_id: %paydollar.merchant_id%
+                    payment_method: ALIPAY
+                    sandbox: %paydollar.sandbox%
+                actions:
+                    - sylius.payum.action.order_status
+                    - sylius.payum.action.obtain_credit_card
+                    - hypebeast.paydollar.action.payment_details_status
+                    - hypebeast.paydollar.action.capture_order
+                    - hypebeast.paydollar.action.capture_onsite
+                    - hypebeast.paydollar.action.notify_order
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        paydollar_unionpay:
+            paydollar_direct_client_side:
+                options:
+                    merchant_id: %paydollar.merchant_id%
+                    payment_method: UPOP
+                    sandbox: %paydollar.sandbox%
+                actions:
+                    - sylius.payum.action.order_status
+                    - sylius.payum.action.obtain_credit_card
+                    - hypebeast.paydollar.action.payment_details_status
+                    - hypebeast.paydollar.action.capture_order
+                    - hypebeast.paydollar.action.capture_onsite
+                    - hypebeast.paydollar.action.notify_order
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
         paypal_express_checkout:
             paypal_express_checkout_nvp:
                 api:

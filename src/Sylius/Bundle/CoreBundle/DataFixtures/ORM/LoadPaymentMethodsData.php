@@ -30,6 +30,10 @@ class LoadPaymentMethodsData extends DataFixture
         $manager->persist($this->createPaymentMethod('Stripe', 'stripe'));
         $manager->persist($this->createPaymentMethod('Be2bill', 'be2bill'));
 
+        $manager->persist($this->createPaymentMethod('VISA', 'paydollar_visa'));
+        $manager->persist($this->createPaymentMethod('MasterCard', 'paydollar_master'));
+        $manager->persist($this->createPaymentMethod('American Express', 'paydollar_amex'));
+
         $manager->flush();
     }
 

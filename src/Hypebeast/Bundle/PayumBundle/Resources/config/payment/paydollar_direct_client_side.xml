@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="hypebeast.paydollar.direct_client_side.api.class">Hypebeast\Paydollar\DirectClientSideConnection\Api</parameter>
+        <parameter key="hypebeast.paydollar.direct_client_side.action.capture_order.class">Hypebeast\Bundle\PayumBundle\Payum\Paydollar\Action\CaptureOrderAction</parameter>
+        <parameter key="hypebeast.paydollar.direct_client_side.action.capture_order_using_credit_card.class">Hypebeast\Bundle\PayumBundle\Payum\Paydollar\Action\CaptureOrderUsingCreditCardAction</parameter>
+        <parameter key="hypebeast.paydollar.direct_client_side.action.capture_onsite">Hypebeast\Bundle\PayumBundle\Payum\Paydollar\Action\CaptureOnsiteAction</parameter>
+        <parameter key="hypebeast.paydollar.action.payment_details_status">Hypebeast\Bundle\PayumBundle\Payum\Paydollar\Action\StatusAction</parameter>
+        <parameter key="hypebeast.paydollar.action.notify_order">Hypebeast\Bundle\PayumBundle\Payum\Paydollar\Action\NotifyOrderAction</parameter>
+        <parameter key="hypebeast.security.paydollar.http_request_verifier.class">Hypebeast\Bundle\PayumBundle\Security\Paydollar\HttpRequestVerifier</parameter>
+    </parameters>
+
+    <services>
+        <service id="hypebeast.paydollar.direct_client_side.api"
+                 class="%hypebeast.paydollar.direct_client_side.api.class%"
+                 abstract="true"
+                 public="false"
+                >
+            <argument type="collection">
+                <!-- It is template service. The real service will be created by PaydollarDirectClientSidePaymentFactory -->
+            </argument>
+        </service>
+
+        <service id="hypebeast.paydollar.action.capture_order"
+                 class="%hypebeast.paydollar.direct_client_side.action.capture_order.class%">
+            <argument type="service" id="payum.security.token_factory" />
+        </service>
+
+        <service id="hypebeast.paydollar.action.capture_order_using_credit_card"
+                 class="%hypebeast.paydollar.direct_client_side.action.capture_order_using_credit_card.class%">
+            <argument type="service" id="payum.security.token_factory" />
+        </service>
+
+        <service id="hypebeast.paydollar.action.capture_onsite"
+                 class="%hypebeast.paydollar.direct_client_side.action.capture_onsite%"
+                 public="false"
+                >
+        </service>
+
+        <service id="hypebeast.paydollar.action.payment_details_status"
+                 class="%hypebeast.paydollar.action.payment_details_status%"
+                 public="false"
+                >
+        </service>
+
+        <service id="hypebeast.paydollar.action.notify_order"
+                 class="%hypebeast.paydollar.action.notify_order%"
+                 public="false"
+                >
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="hypebeast.security.paydollar.http_request_verifier"
+                 class="%hypebeast.security.paydollar.http_request_verifier.class%"
+                >
+            <argument type="service" id="payum.security.token_storage"/>
+        </service>
+    </services>
+</container>

@@ -52,6 +52,7 @@ class AppKernel extends Kernel
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Hypebeast\Bundle\WebBundle\HypebeastWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Hypebeast\Bundle\PayumBundle\HypebeastPayumBundle(),
 
             // CMF bundles.
             new Sonata\BlockBundle\SonataBlockBundle(),

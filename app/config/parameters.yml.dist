@@ -40,6 +40,9 @@ parameters:
     be2bill.password: EDITME
     be2bill.sandbox: true
 
+    paydollar.sandbox:     true
+    paydollar.merchant_id: 88111000
+
     sylius.oauth.amazon.clientid:       <amazon_client_id>
     sylius.oauth.amazon.clientsecret:   <amazon_client_secret>
     sylius.oauth.facebook.clientid:     <facebook_client_id>
