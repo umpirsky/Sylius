@@ -11,6 +11,7 @@ parameters:
     sylius.form.handler.inventory.class: Hypebeast\Bundle\InventoryBundle\Form\Handler\Inventory
     sylius.form.logger.inventory_logger.class: Hypebeast\Bundle\InventoryBundle\Logger\InventoryLogger
     sylius.listener.inventory_logger.class: Hypebeast\Bundle\InventoryBundle\EventListener\InventoryLoggerListener
+    sylius.availability_checker.default.class: Hypebeast\Bundle\InventoryBundle\Checker\AvailabilityChecker
 
 services:
     sylius.controller.inventory:
@@ -108,3 +109,10 @@ services:
             - @sylius.form.logger.inventory_logger
         tags:
             - { name: kernel.event_listener, event: sylius.checkout.finalize.pre_complete, method: onCheckoutFinalizePreComplete }
+
+    sylius.availability_checker.default:
+        class: %sylius.availability_checker.default.class%
+        arguments:
+            - %sylius.backorders%
+            - @sylius.repository.inventory_unit
+            - %sylius.inventory.holding.duration%

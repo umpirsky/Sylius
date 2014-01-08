@@ -1,0 +1,13 @@
+{% extends 'HypebeastWebBundle:Backend/Order:index.html.twig' %}
+
+{% import 'HypebeastWebBundle:Macros:buttons.html.twig' as buttons %}
+
+{% block toolbar %}
+    <div class="pull-left">
+        <a class="print-packing-slips btn btn-primary" href="{{ url("sylius_backend_order_print_packing_slips") }}" target="_blank">
+            <span class="glyphicon glyphicon-print"></span>
+            Print Packing Slips
+        </a>
+    </div>
+    {{ parent() }}
+{% endblock %}

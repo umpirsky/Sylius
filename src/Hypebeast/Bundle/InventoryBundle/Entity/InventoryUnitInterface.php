@@ -6,5 +6,9 @@ use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface as BaseInventoryU
 
 interface InventoryUnitInterface extends BaseInventoryUnitInterface
 {
-    const STATE_ON_HOLD = 'on_hold';
+    const STATE_ON_HOLD    = 'on hold';
+    const STATE_PROCESSING = 'processing';
+    const STATE_PACKING    = 'packing';
+    const STATE_PACKED     = 'packed';
+    const STATE_CANCELLED  = 'cancelled';
 }

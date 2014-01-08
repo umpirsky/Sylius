@@ -1,0 +1,69 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'HypebeastWebBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'HypebeastWebBundle:Backend/Order/Macros:list.html.twig' import list %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/backend-autocomplete.js'
+        '@HypebeastWebBundle/Resources/public/js/field-manipulation.js'
+        '@HypebeastWebBundle/Resources/public/js/modal.js'
+        '@HypebeastWebBundle/Resources/public/js/popover.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.order.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.order.index_header'|trans|raw }}{% if state is not null %} ({{ state|title }}){% endif %}</h1>
+</div>
+
+{% render(url('sylius_backend_order_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+
+{% render(controller('sylius.controller.order:tabsAction', { request: app.request })) %}
+<div style=" padding: 10px 10px 10px 10px; background-color: #f1f1f1; ">
+    <div class="btn-toolbar" role="toolbar">
+    {% block toolbar %}
+        <div class="pull-right">
+            {{ buttons.create(path('sylius_backend_order_create'), 'sylius.order.create'|trans) }}
+        </div>
+    {% endblock %}
+    </div>
+</div>
+
+{{ block('table') }}
+
+{{ block('modal') }}
+
+{% endblock %}
+
+{% block modal %}
+<div class="modal fade" id="modal" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block table %}
+{{ list(orders, { 
+    check: '',
+    orderState: 'Order Status',
+    number: 'Order ID',
+    createdAt: 'Date',
+    shippingAddress: 'Address',
+    payment: 'Payment',
+    shippingState: 'Shipping',
+    itemsTotal: 'Total',
+    actions: ''
+}) }}
+{% endblock %}

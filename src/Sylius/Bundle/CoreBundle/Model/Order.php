@@ -106,6 +106,8 @@ class Order extends Cart implements OrderInterface
      */
     protected $promotions;
 
+    protected $orderState;
+
     /**
      * Gift cards.
      *
@@ -416,6 +418,25 @@ class Order extends Cart implements OrderInterface
         return $this->shipments->contains($shipment);
     }
 
+    public function getShipment()
+    {
+        if (0 === $this->shipments->count()) {
+
+            return;
+        }
+
+        return $this->shipments->first();
+    }
+
+    public function setShipment($shipment)
+    {
+        if (!$this->hasShipment($shipment)) {
+
+            $this->addShipment($shipment);
+        }
+        return $this;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -620,5 +641,17 @@ class Order extends Cart implements OrderInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    public function getOrderState()
+    {
+        return $this->orderState;
+    }
+
+    public function setOrderState($orderState)
+    {
+        $this->orderState = $orderState;
+
+        return $this;
     }
 }

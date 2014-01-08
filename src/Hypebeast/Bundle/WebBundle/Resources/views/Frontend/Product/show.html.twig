@@ -53,7 +53,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
+                        {% if not product.hasVariants or not sylius_inventory_is_available(product.masterVariant) %}
                             <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
                         {% else %}
                             {{ form_widget(form._token) }}

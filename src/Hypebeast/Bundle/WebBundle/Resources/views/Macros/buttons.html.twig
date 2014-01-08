@@ -1,0 +1,85 @@
+{% macro show(url, message) %}
+{% import _self as buttons %}
+{{ buttons.button({ type: 'default', icon: 'book', message: message is empty ? 'sylius.show'|trans : message, url: url }) }}
+{% endmacro %}
+
+{% macro create(url, message) %}
+{% import _self as buttons %}
+{{ buttons.button({ type: 'primary', icon: 'plus-sign', message: message is empty ? 'sylius.create'|trans : message, url: url }) }}
+{% endmacro %}
+
+{% macro edit(url, message) %}
+{% import _self as buttons %}
+{{ buttons.button({ type: 'primary', icon: 'pencil', message: message is empty ? 'sylius.edit'|trans : message, url: url }) }}
+{% endmacro %}
+
+{% macro print(url, message) %}
+{% import _self as buttons %}
+{{ buttons.button({ type: 'warning', icon: 'print', message: message is empty ? 'sylius.print'|trans : message, url: url }) }}
+{% endmacro %}
+
+{% macro cancel(url, message) %}
+{% import _self as buttons %}
+{{ buttons.button({ type: 'danger', icon: 'remove', message: message is empty ? 'sylius.cancel'|trans : message, url: url }) }}
+{% endmacro %}
+
+{% macro delete(url, message, disabled=false, modal=true) %}
+{% import _self as buttons %}
+{% if disabled %}
+{{ buttons.button({ type: 'danger', icon: 'trash', message: message is empty ? 'sylius.delete'|trans : message, class: 'disabled', tag: 'span' }) }}
+{% else %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="DELETE">
+    {{ buttons.button({ type: 'danger', icon: 'trash', message: message is empty ? 'sylius.delete'|trans : message, tag: 'button', class: (modal ? 'btn-confirm' : '') }) }}
+</form>
+{% endif %}
+{% endmacro %}
+
+{% macro manage(url, message) %}
+<a href="{{ url }}" class="btn btn-success">
+    <i class="glyphicon glyphicon-folder-open"></i><span>{{ message is empty ? 'sylius.manage'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro button(params) %}
+    {% set data = { tag: 'a', class: ['btn'] } %}
+    {% set attr = {} %}
+    {% for key in params|keys %}
+        {% if key == 'url' %}
+            {% set attr = attr|push('href', params.url) %}
+        {% elseif key == 'type' %}
+            {% set class = data.class|push('btn-' ~ params.type) %}
+            {% set data = data| merge({ 'class': class }) %}
+        {% elseif key == 'icon' %}
+            {% set data = data|push('icon', ['glyphicon', 'glyphicon-' ~ params.icon]) %}
+        {% elseif key == 'class' %}
+            {% set class = data.class %}
+            {% set class = class|merge(params.class|split(' ')) %}
+            {% set data = data| merge({ 'class': class }) %}
+        {% else %}
+            {% set data = data| merge({ (key): params[key] }) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if data.tag == 'a' and attr.href is not defined %}
+        {% set attr = attr|push('href', '#') %}
+    {% endif %}
+
+    {% set attr = attr|push('class', data.class|join(' ')) %}
+
+    {% if params.attr is defined %}
+        {% set attr = attr|merge(params.attr) %}
+    {% endif %}
+
+    <{{ data.tag }}
+        {% for key in attr|keys %}
+        {{ key }}="{{ attr[key] }}"
+        {% endfor %}
+    >
+        {% if data.icon is defined %}
+        {% if data.message is not defined %}<span>{% endif %}
+            <i class=" {{ data.icon|join(' ') }}"></i>{% endif %}
+            {% if data.message is not defined %}</span>{% endif %}
+        {% if data.message is defined %}<span>{{ data.message }}</span>{% endif %}
+    </{{ data.tag }}>
+{% endmacro %}

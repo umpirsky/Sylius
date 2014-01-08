@@ -19,6 +19,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Hypebeast\Bundle\OrderBundle\Status\States\OrderState;
 
 class LoadOrdersData extends DataFixture
 {
@@ -62,6 +63,13 @@ class LoadOrdersData extends DataFixture
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
 
             $this->dispatchEvents($order);
+
+            $states = OrderState::getStates();
+            $order->setOrderState($states[array_rand($states)]);
+
+            if ($order->getOrderState() === OrderState::STATE_SHIPPED) {
+                $shipment->setTracking($this->faker->uuid);
+            }
 
             $order->calculateTotal();
             $order->complete();

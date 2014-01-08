@@ -57,6 +57,7 @@ sylius_shipping:
         shipment:
             model: Sylius\Bundle\CoreBundle\Model\Shipment
             repository: Sylius\Bundle\CoreBundle\Repository\ShipmentRepository
+            form: Hypebeast\Bundle\CoreBundle\Form\Type\ShipmentType
         shipment_item:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
         shipping_method:
@@ -73,6 +74,7 @@ sylius_inventory:
     classes:
         unit:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
+            repository: Hypebeast\Bundle\InventoryBundle\Repository\InventoryUnitRepository
         stockable:
             model: %sylius.model.variant.class%
 
@@ -93,8 +95,8 @@ sylius_order:
     classes:
         order:
             model: Sylius\Bundle\CoreBundle\Model\Order
-            controller: Sylius\Bundle\CoreBundle\Controller\OrderController
-            repository: Sylius\Bundle\CoreBundle\Repository\OrderRepository
+            controller: Hypebeast\Bundle\OrderBundle\Controller\OrderController
+            repository: Hypebeast\Bundle\CoreBundle\Repository\OrderRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
             model: Sylius\Bundle\CoreBundle\Model\OrderItem

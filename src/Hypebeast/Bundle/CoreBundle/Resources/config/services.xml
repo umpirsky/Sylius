@@ -78,6 +78,13 @@
         <service id="sylius.form.type.promotion_action.gift_card_discount_configuration" class="Hypebeast\Bundle\CoreBundle\Form\Type\Promotion\Action\GiftCardDiscountConfigurationType">
             <tag name="form.type" alias="sylius_promotion_action_gift_card_discount_configuration" />
         </service>
+        <service id="hypebeast.checkout.listener" class="Hypebeast\Bundle\CoreBundle\EventListener\CheckoutListener">
+            <argument type="service" id="sylius.hypebeast.order.state.processor" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.initialize" method="onCheckoutAddressingInitialize" />
+            <tag name="kernel.event_listener" event="sylius.payment.post_state_change" method="onPaymentPostStateChange" />
+        </service>
 
     </services>
 

@@ -1,0 +1,109 @@
+services:
+    sylius.hypebeast.order.state.processor:
+        class: Hypebeast\Bundle\OrderBundle\Status\Processor
+
+    sylius.hypebeast.order.state.order.pending:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\OrderPending
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.order.in_process:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\OrderInProcess
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.order.shipped:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\OrderShipped
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.order.cancelled:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\OrderCancelled
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.order.new:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\OrderNew
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.order.on_hold:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_ON_HOLD'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.checkout:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_CHECKOUT'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.processing:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_PROCESSING'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.packing:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_PACKING'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.packed:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_PACKED'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.sold:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_SOLD'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.on_hold:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_ON_HOLD'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.cancelled:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_CANCELLED'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }
+
+    sylius.hypebeast.order.state.stock.backordered:
+        class: Hypebeast\Bundle\OrderBundle\Status\States\StockState
+        arguments:
+            - @sylius.repository.inventory_unit
+        calls:
+            - [ setState, ['STATE_BACKORDERED'] ]
+        tags:
+            - { name: 'sylius.hypebeast.order.state' }

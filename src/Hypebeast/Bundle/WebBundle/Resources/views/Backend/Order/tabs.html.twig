@@ -1,0 +1,28 @@
+{% import _self as elems %}
+
+<ul class="nav nav-tabs">
+    {% set nbr = 0 %}
+    {% for s in states %}
+        {% set setted = false %}
+        {% for tab in tabs if tab.orderState == s%}
+            {% set setted = true %}
+            {% set nbr = nbr + tab.nbr %}
+            {{ elems.tab(tab.orderState, tab.orderState, tab.nbr, state == tab.orderState, false) }}
+        {% endfor %}
+        {% if setted == false %}
+            {{ elems.tab(s, s, 0, state == s, true) }}
+        {% endif %}
+    {% endfor %}
+    {{ elems.tab('All', '', null, state == null, false) }}
+</ul>
+
+{% macro tab(name, value, nbr, active, disabled) %}
+<li class="{{ active ? ' active' : '' }}{{ disabled ? ' disabled' : '' }}">
+    <a href="#" data-transform-target="#criteria_orderState" data-transform-attr="value={{ value }}" data-transform-submit>
+        {{ name|title }}
+        {% if nbr is not null %}
+            <span class="badge">{{ nbr }}</span>
+        {% endif %}
+    </a>
+</li>
+{% endmacro %}

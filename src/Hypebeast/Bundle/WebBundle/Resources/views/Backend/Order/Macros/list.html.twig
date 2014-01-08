@@ -1,0 +1,134 @@
+{% macro list(elems, fields, shipmentForms) %}
+<table class="table">
+    <thead>
+        {% for header in fields %}
+        <th>
+            {% spaceless %}
+                {% set _block = block('table_' ~ fields|keys[loop.index0] ~ '_header') %}
+                {% if _block is not empty %}
+                    {{ _block|raw }}
+                {% else %}
+                    {{ header }}
+                {% endif %}
+            {% endspaceless %}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for elem in elems %}
+        <tr>
+            {% for field in fields|keys %}
+            <td>
+                {% spaceless %}
+                    {% set _block = block('table_' ~ field ~ '_cell') %}
+                    {% if _block is not empty %}
+                        {{ _block|raw }}
+                    {% else %}
+                    {{ attribute(elem, field) }}
+                    {% endif %}
+                {% endspaceless %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro %}
+
+{% block table_orderState_cell %}
+<span class="label label-primary">{{ elem.orderState|title }}</span>
+{% endblock %}
+
+{% block table_createdAt_cell %}
+{{ elem.createdAt|date }}
+{% endblock %}
+
+{% block table_shippingAddress_cell %}
+{{ elem.shippingAddress.country }}
+{% endblock %}
+
+{% block table_payment_cell %}
+<span class="label label-primary">{{ elem.payment.state|title }}</span>
+{% endblock %}
+
+{% block table_shippingState_cell %}
+<span class="label label-primary">{{ elem.shippingState|title }}</span>
+{% endblock %}
+
+{% block table_itemsTotal_cell %}
+{{ elem.itemsTotal|number_format(2, '.', ',') }} <span class="label label-success">{{ elem.currency }}</span>
+{% endblock %}
+
+{% block table_tracking_cell %}
+{% import 'HypebeastWebBundle:Macros:buttons.html.twig' as buttons %}
+{% if elem.shipment is null %}
+    No shipment found
+{% elseif elem.shipment.tracking is null or elem.shipment.tracking is empty %}
+    {% set form = shipmentForms[elem.id] %}
+    {{ buttons.button({ 
+        tag: 'button', 
+        type: 'warning', 
+        icon: 'plane', 
+        message: 'Enter Tracking Code', 
+        class: 'btn-xs',
+        attr: {
+            'data-popover': true,
+            'data-html': '',
+            'data-container': 'body',
+            'data-toggle': 'popover',
+            'data-placement': 'top',
+            'data-html': true,
+            'data-content': block('table_tracking_cell_popover')
+        }
+    }) }}
+{% else %}
+    {% set form = shipmentForms[elem.id] %}
+    {{ buttons.button({ 
+        tag: 'button', 
+        type: 'primary', 
+        icon: 'plane', 
+        message: elem.shipment.tracking,
+        class: 'btn-xs',
+        attr: {
+            'data-popover': true,
+            'data-html': '',
+            'data-container': 'body',
+            'data-toggle': 'popover',
+            'data-placement': 'top',
+            'data-html': true,
+            'data-content': block('table_tracking_cell_popover')
+        }
+    }) }}
+{% endif %}
+{% endblock %}
+
+{% block table_tracking_cell_popover %}
+<form method="post" action="{{ path('sylius_backend_order_shipment_update', app.request.query.all|merge({ id: elem.id })) }}">
+    {{ form_widget(form._token) }}
+    <div class="input-group">
+        {{ form_widget(form.tracking) }}
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span></button>
+        </span>
+    </div>
+</form>
+{% endblock %}
+
+{% block table_actions_cell %}
+    {% import 'HypebeastWebBundle:Macros:buttons.html.twig' as buttons %}
+    <div style="text-align:right">
+        {{ buttons.show(path('sylius_backend_order_show', {'id': elem.id})) }}
+        &nbsp;
+        {{ buttons.edit(path('sylius_backend_order_update', {'id': elem.id})) }}
+        &nbsp;
+        {{ buttons.delete(path('sylius_backend_order_delete', {'id': elem.id})) }}
+    </div>
+{% endblock %}
+
+{% block table_check_header %}
+    <input type="checkbox" data-transform-target=".line-identifier" />
+{% endblock %}
+
+{% block table_check_cell %}
+    <input type="checkbox" class="line-identifier" data-form="order" data-name="orders[]" data-value="{{ elem.id }}" />
+{% endblock %}

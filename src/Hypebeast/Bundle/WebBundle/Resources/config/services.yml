@@ -3,8 +3,23 @@ parameters:
     sylius.movement_history_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastMovementHistoryExtension
     sylius.form.type.property.class: Hypebeast\Bundle\WebBundle\Form\Type\PropertyType
     sylius.checkout_step.shipping.class: Hypebeast\Bundle\WebBundle\Checkout\Step\ShippingStep
+    sylius.form.type.order_filter.class: Hypebeast\Bundle\WebBundle\Form\Type\Filter\OrderFilterType
+    sylius.form.type.shipment.class: Hypebeast\Bundle\CoreBundle\Form\Type\ShipmentType
 
 services:
+    sylius.form.type.shipment:
+        class: %sylius.form.type.shipment.class%
+        arguments:
+            - %sylius.model.shipment.class%
+            - []
+        tags:
+            - { name: form.type, alias: sylius_shipment }
+
+    sylius.hypebeast_twig:
+        class: Hypebeast\Bundle\WebBundle\Twig\HypebeastExtension
+        tags:
+            - { name: twig.extension }
+
     sylius.movement_history_twig:
         class: %sylius.movement_history_twig.class%
         arguments:

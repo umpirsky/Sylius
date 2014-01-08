@@ -1,0 +1,32 @@
+{% import 'HypebeastWebBundle:Macros:buttons.html.twig' as buttons %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Print Packing Slips</title>
+    {% block stylesheets %}
+        {% stylesheets output='styles/core.css'
+        '@HypebeastWebBundle/Resources/assets/less/layout.less' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+    {% endblock stylesheets %}
+
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body onload="window.print()">
+
+<div class="orders">
+    {% for order in orders %}
+        <div class="order" style="Page-Break-After:Always">
+            {% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

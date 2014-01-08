@@ -3,6 +3,7 @@ parameters:
     sylius.hypebeast.key:             YouHaveToChangeThisKey
     sylius.hypebeast.fake.ip:         ~
     sylius.hypebeast.default.country: US
+    sylius.inventory.holding.duration: 15 min
 
     sylius.database.driver:           pdo_mysql
     sylius.database.host:             127.0.0.1

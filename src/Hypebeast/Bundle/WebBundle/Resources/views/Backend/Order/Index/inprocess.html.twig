@@ -1,0 +1,27 @@
+{% extends 'HypebeastWebBundle:Backend/Order:index.html.twig' %}
+
+{% import 'HypebeastWebBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'HypebeastWebBundle:Backend/Order/Macros:list.html.twig' import list %}
+
+{% block toolbar %}
+    <div class="pull-left">
+        {{ buttons.print('#', 'Print Shipping Labels') }}
+        {{ buttons.button({ type: 'primary', icon: 'export', message: 'EXPORT FEDEX FILE' }) }}
+    </div>
+    {{ parent() }}
+{% endblock %}
+
+{% block table %}
+{{ list(orders, { 
+    check: '',
+    orderState: 'Order Status',
+    number: 'Order ID',
+    createdAt: 'Date',
+    shippingAddress: 'Address',
+    payment: 'Payment',
+    shippingState: 'Shipping',
+    itemsTotal: 'Total',
+    tracking: 'Tracking Code',
+    actions: ''
+}, shipmentForms) }}
+{% endblock %}
