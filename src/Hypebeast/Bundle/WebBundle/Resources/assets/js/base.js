@@ -58,7 +58,50 @@ hypebeast.initSubNavbarDropdown = function($) {
     function hideDropdown() {
         $dropdown.find('.container').hide();
     }
-}
+};
+
+hypebeast.initSidebarFilter = function($) {
+    var $filter = $('#sidebar-filter');
+    var uri = new Uri(document.location);
+    var params = {};
+
+    try {
+        params = $.parseJSON(decodeURIComponent(uri.getQueryParamValue('filter')));
+    } catch (e) {
+
+    }
+
+    $filter.find('li').each(function() {
+        var $li = $(this);
+        var field = $li.closest('.section').data('field');
+        var query = $li.data('query') || $li.text();
+        var stringifiedQuery = JSON.stringify(query);
+
+        // check selected item
+        if(params[field]) {
+            for(var i in params[field]) {
+                if(stringifiedQuery === JSON.stringify(params[field][i])) {
+                    $li.addClass('selected');
+                }
+            }
+        }
+
+        $li.click(function() {
+            params[field] = params[field] ? $.grep(params[field], function(value) {
+                return JSON.stringify(value) !== stringifiedQuery;
+            }) : [];
+
+            if($li.hasClass('selected') === false) {
+                params[field].push($li.data('query')||$li.text());
+            }
+
+            $li.toggleClass('selected');
+
+            $('#container').fadeTo(null,.5);
+            document.location = uri.replaceQueryParam('filter', JSON.stringify(params)).toString();
+        })
+    });
+};
 
 $(function() {
     hypebeast.body = $("body");

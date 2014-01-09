@@ -1,40 +1,32 @@
 sylius_product_index_by_taxon:
     pattern: /categories/{permalink}
     defaults:
-        _controller: sylius.controller.product:indexByTaxonAction
-        _sylius:
-            template: HypebeastWebBundle:Frontend/Product:index.html.twig
+        _controller: HypebeastCoreBundle:Catalog:taxon
+
+sylius_product_search:
+    pattern: /search
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:search
 
 sylius_product_index_by_brand:
     pattern: /brands/{permalink}
     defaults:
-        _controller: sylius.controller.product:indexByTaxonAction
-        _sylius:
-            template: HypebeastWebBundle:Frontend/Product:index.html.twig
+        _controller: HypebeastCoreBundle:Catalog:taxon
 
 sylius_product_index_by_new_arrivals:
     pattern: /new-arrivals
     defaults:
-        _controller: sylius.controller.product:indexAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Product:newArrivals.html.twig
-            method: createNewArrivalsPaginator
+        _controller: HypebeastCoreBundle:Catalog:newArrival
 
 sylius_product_index_by_back_in_stock:
     pattern: /back-in-stock
     defaults:
-        _controller: sylius.controller.product:indexAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Product:backInStock.html.twig
-            method: createBackInStockPaginator
+        _controller: HypebeastCoreBundle:Catalog:backInStock
 
 sylius_product_index_by_sale:
     pattern: /sale
     defaults:
-        _controller: sylius.controller.product:indexAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Product:sale.html.twig
-            method: createSalePaginator
+        _controller: HypebeastCoreBundle:Catalog:onSale
 
 sylius_product_show:
     pattern: /brands/{brand}/{slug}

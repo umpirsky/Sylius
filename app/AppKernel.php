@@ -48,6 +48,7 @@ class AppKernel extends Kernel
             new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
 
             new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
+            new Hypebeast\Bundle\CoreBundle\HypebeastCoreBundle(),
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Hypebeast\Bundle\WebBundle\HypebeastWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
@@ -86,6 +87,7 @@ class AppKernel extends Kernel
             new Payum\Bundle\PayumBundle\PayumBundle(),
             new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
             new Maxmind\Bundle\GeoipBundle\MaxmindGeoipBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
         );
 
         if ('dev' === $this->environment) {

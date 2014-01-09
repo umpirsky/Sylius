@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sylius.elasticsearch.provider.product" class="Hypebeast\Bundle\CoreBundle\Elasticsearch\Provider\ProductProvider">
+            <argument type="service" id="fos_elastica.index.store.product" />
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="fos_elastica.provider" index="store" type="product" />
+        </service>
+        <service id="sylius.listener.elasticsearch" class="Hypebeast\Bundle\CoreBundle\EventListener\ElasticsearchListener">
+            <argument type="service" id="fos_elastica.index.store.product" />
+            <tag name="kernel.event_listener" event="sylius.product.post_create" method="onProductUpdate" />
+            <tag name="kernel.event_listener" event="sylius.product.post_update" method="onProductUpdate" />
+            <tag name="kernel.event_listener" event="sylius.product.post_delete" method="onProductDelete" />
+        </service>
+
+    </services>
+
+</container>

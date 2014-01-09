@@ -1,5 +1,5 @@
 {% set brands = sylius_product_taxons(product, 'Brand') %}
-{% set brand = brands ? brands[0] : {'permalink': '', 'name': ''} %}
+{% set brand = brands ? brands[0] : {'permalink': 'na', 'name': ''} %}
 
 <div class="product">
     {% spaceless %}

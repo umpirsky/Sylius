@@ -7,10 +7,7 @@ sylius_taxonomy:
 sylius_homepage:
     pattern: /
     defaults:
-        _controller: sylius.controller.product:indexAction
-        _sylius:
-            template: HypebeastWebBundle:Frontend/Homepage:main.html.twig
-            method: createHomepagePaginator
+        _controller: HypebeastCoreBundle:Catalog:homepage
 
 hypebeast_frontend_security:
     resource: @HypebeastWebBundle/Resources/config/routing/frontend/security.yml

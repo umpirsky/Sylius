@@ -40,8 +40,8 @@
                 <li><a href="http://hypebeast.com/forums">Forums</a></li>
             </ul>
 
-            <form class="navbar-form navbar-left hidden-sm hidden-xs" role="search" action="/">
-                <input type="text" class="form-control" placeholder="Search Store" name="s" value="">
+            <form class="navbar-form navbar-left hidden-sm hidden-xs" role="search" action="{{ url('sylius_product_search') }}">
+                <input type="text" class="form-control" placeholder="Search Store" name="q" value="{{ app.request.query.get('q') }}">
                 <span class="glyphicon glyphicon-search"></span>
             </form>
 
@@ -95,7 +95,7 @@
                     {% block content %}
                     {% endblock %}
                 </div>
-                <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+                <div class="col-sm-3 col-sm-pull-9">
                     {% block sidebar %}
                         <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
                         {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
@@ -166,7 +166,7 @@
     {% block javascripts %}
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-        {% javascripts output='assets/compiled/frontend.js' '@HypebeastWebBundle/Resources/assets/js/base.js' %}
+        {% javascripts output='assets/compiled/frontend.js' '@HypebeastWebBundle/Resources/public/bower_components/jsUri/Uri.js' '@HypebeastWebBundle/Resources/assets/js/base.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}

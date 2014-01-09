@@ -1,0 +1,67 @@
+{% extends 'SyliusWebBundle:Frontend:Product/index.html.twig' %}
+
+{% block sidebar %}
+    <div id="sidebar-filter">
+        {% set facets = products.adapter.facets %}
+
+        <div class="section">
+            <a href="{{ url('sylius_product_index_by_new_arrivals') }}"><h5>New Arrivals</h5></a>
+        </div>
+
+        <div class="section">
+            <a href="{{ url('sylius_product_index_by_back_in_stock') }}"><h5>Back In Stock</h5></a>
+        </div>
+
+        <div class="section">
+            <a href="{{ url('sylius_product_index_by_sale') }}"><h5>Sale</h5></a>
+        </div>
+        
+        <div class="section collapsable" data-field="category">
+            <h5>Categories</h5>
+            <ul>
+                {% for term in facets.category.terms %}
+                    <li>{{ term.term }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section collapsable" data-field="brand">
+            <h5>Brands</h5>
+            <ul>
+                {% for term in facets.brand.terms %}
+                    <li>{{ term.term }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section collapsable" data-field="size">
+            <h5>Size</h5>
+            <ul>
+                {% for term in facets.size.terms %}
+                    <li>{{ term.term }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section collapsable" data-field="price">
+            <h5>Price</h5>
+            <ul>
+                {% for range in facets.price.ranges if range.count > 0 %}
+                    {% if range.from is not defined %}
+                        <li data-query='{"from": null, "to": {{ range.to }}}'>
+                            {{ range.to|sylius_price }} and under
+                        </li>
+                    {% elseif range.to is not defined %}
+                        <li data-query='{"from": {{ range.from }}, "to": null}'>
+                            {{ range.from|sylius_price }} or above
+                        </li>
+                    {% else %}
+                        <li data-query='{"from": {{ range.from }}, "to": {{ range.to }}}'>
+                            {{ range.from|sylius_price }} - {{ range.to|sylius_price }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
