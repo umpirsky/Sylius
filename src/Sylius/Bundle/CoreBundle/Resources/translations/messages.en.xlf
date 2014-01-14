@@ -130,6 +130,10 @@
         <source>sylius.form.product.supplier_code</source>
         <target>Supplier code</target>
       </trans-unit>
+      <trans-unit id="02a8b57fa162c999afe9cce1745529cf" resname="sylius.form.product.gift_card">
+        <source>sylius.form.product.gift_card</source>
+        <target>Gift card</target>
+      </trans-unit>
       <trans-unit id="313e975acffd448d8e4c6fe1e1f20e29" resname="sylius.form.product.tax_category">
         <source>sylius.form.product.tax_category</source>
         <target>Tax category</target>

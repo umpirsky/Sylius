@@ -157,6 +157,9 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      */
     public function setRestrictedZone(ZoneInterface $zone = null);
 
+    public function isGiftCard();
+    public function setGiftCard($giftCard);
+
     /**
      * Get all product images.
      *

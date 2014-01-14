@@ -37,6 +37,12 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many field="giftCards" target-entity="Hypebeast\Bundle\CoreBundle\Entity\GiftCard" mapped-by="order" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <one-to-many field="shipments" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>

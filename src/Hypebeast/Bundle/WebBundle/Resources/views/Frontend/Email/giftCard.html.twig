@@ -1,0 +1,11 @@
+{% block subject %}
+    {{ 'email.gift_card.subject'|trans }}
+{% endblock %}
+
+{% block body_text %}
+    {{ 'email.gift_card.body_text'|trans({'%message%': giftCard.message, '%code%': giftCard.promotion.coupons[0].code}) }}
+{% endblock %}
+
+{% block body_html %}
+    {{ 'email.gift_card.body_html'|trans({'%message%': giftCard.message, '%code%': giftCard.promotion.coupons[0].code}) }}
+{% endblock %}

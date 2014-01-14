@@ -19,6 +19,7 @@ use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Hypebeast\Bundle\CoreBundle\Entity\GiftCard;
 
 /**
  * Order entity.
@@ -106,6 +107,13 @@ class Order extends Cart implements OrderInterface
     protected $promotions;
 
     /**
+     * Gift cards.
+     *
+     * @var Collection
+     */
+    protected $giftCards;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -115,6 +123,10 @@ class Order extends Cart implements OrderInterface
         $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
         $this->promotions = new ArrayCollection();
+        $this->giftCards = new ArrayCollection();
+        $this->currency = 'EUR'; // @todo: Temporary
+
+        $this->shippingState = OrderShippingStates::READY;
     }
 
     /**
@@ -472,6 +484,50 @@ class Order extends Cart implements OrderInterface
         $this->shippingState = $state;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGiftCards()
+    {
+        return $this->giftCards;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasGiftCards()
+    {
+        return !$this->giftCards->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addGiftCard(GiftCard $giftCard)
+    {
+        $giftCard->setOrder($this);
+        $this->giftCards->add($giftCard);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeGiftCard(GiftCard $giftCard)
+    {
+        $giftCard->setOrder(null);
+        $this->giftCards->removeElement($giftCard);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeGiftCards()
+    {
+        foreach ($this->getGiftCards() as $giftCard) {
+            $this->removeGiftCard($giftCard);
+        }
     }
 
     /**

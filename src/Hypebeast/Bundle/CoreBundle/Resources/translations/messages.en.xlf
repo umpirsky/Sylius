@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="9efc314b65237d5d646e1b817372afc7" resname="sylius.form.gift_card.name">
+        <source>sylius.form.gift_card.name</source>
+        <target>Recipient's name</target>
+      </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372afc8" resname="sylius.form.gift_card.email">
+        <source>sylius.form.gift_card.email</source>
+        <target>Recipient's email</target>
+      </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372afc9" resname="sylius.form.gift_card.message">
+        <source>sylius.form.gift_card.message</source>
+        <target>Message (optional)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

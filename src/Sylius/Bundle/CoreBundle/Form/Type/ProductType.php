@@ -40,6 +40,10 @@ class ProductType extends BaseProductType
                 'required' => false,
                 'label'    => 'sylius.form.product.supplier_code'
             ))
+            ->add('giftCard', 'checkbox', array(
+                'required' => false,
+                'label'    => 'sylius.form.product.gift_card'
+            ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(
                 'required'    => false,
                 'empty_value' => '---',

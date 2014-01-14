@@ -39,7 +39,7 @@
                 </span>
             </div>
 
-            <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
+            <form action="{{ path('sylius_product_show', {'slug': product.slug, 'brand': sylius_product_taxons(product, 'Brand')[0].permalink}) }}" method="post" class="clearfix">
                 <div class="row">
                     {% if product.hasVariants %}
                         <div class="col-md-6">
@@ -65,19 +65,59 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div class="description">
+                    <h4>Description</h4>
+                    <p>{{ product.description|default('sylius.product.no_description')|trans }}</p>
+                </div>
+
+                {% if product.hasPropertyByName('Clothing Size and Fit') %}
+                <div class="size-and-fit">
+                    <h4>Size and Fit</h4>
+                    <p>{{ product.getPropertyByName('Clothing Size and Fit').value }}</p>
+                </div>
+                {% endif %}
+
+                {% if product.giftCard %}
+                    {{ form_errors(giftCardForm) }}
+                    <div class="gift-card-form">
+                        <div class="control-group">
+                            <div class="form-group">
+                                {{ form_errors(giftCardForm.name) }}
+                                <div class="row">
+                                    {{ form_label(giftCardForm.name) }}
+                                    <div class="col-xs-8">
+                                        {{ form_widget(giftCardForm.name) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group">
+                                {{ form_errors(giftCardForm.email) }}
+                                <div class="row">
+                                    {{ form_label(giftCardForm.email) }}
+                                    <div class="col-xs-8">
+                                        {{ form_widget(giftCardForm.email) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group">
+                                {{ form_errors(giftCardForm.message) }}
+                                <div class="row">
+                                    {{ form_label(giftCardForm.message) }}
+                                    <div class="col-xs-12">
+                                        {{ form_widget(giftCardForm.message, {'attr': {'rows': 8}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_rest(giftCardForm) }}
+                {% endif %}
             </form>
-
-            <div class="description">
-                <h4>Description</h4>
-                <p>{{ product.description|default('sylius.product.no_description')|trans }}</p>
-            </div>
-
-            {% if product.hasPropertyByName('Clothing Size and Fit') %}
-            <div class="size-and-fit">
-                <h4>Size and Fit</h4>
-                <p>{{ product.getPropertyByName('Clothing Size and Fit').value }}</p>
-            </div>
-            {% endif %}
         </div>
         <div class="col-md-12">
             <h4>Related products</h4>

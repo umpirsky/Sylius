@@ -97,6 +97,13 @@ class Product extends BaseProduct implements ProductInterface
     protected $restrictedZone;
 
     /**
+     * Is it gift card.
+     *
+     * @var Boolean
+     */
+    protected $giftCard;
+
+    /**
      * Back in stock time.
      *
      * @var \DateTime
@@ -127,10 +134,10 @@ class Product extends BaseProduct implements ProductInterface
 
         $this->setStatus(self::STATUS_DRAFT);
         $this->setMasterVariant(new Variant());
-        $this->taxons  = new ArrayCollection();
+        $this->taxons = new ArrayCollection();
         $this->upSells = new ArrayCollection();
-
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
+        $this->giftCard = false;
     }
 
     /**
@@ -395,6 +402,24 @@ class Product extends BaseProduct implements ProductInterface
     public function setRestrictedZone(ZoneInterface $zone = null)
     {
         $this->restrictedZone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isGiftCard()
+    {
+        return $this->giftCard;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGiftCard($giftCard)
+    {
+        $this->giftCard = $giftCard;
 
         return $this;
     }

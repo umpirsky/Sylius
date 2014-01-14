@@ -166,6 +166,18 @@
         <source>sylius.form.shipping_method.estimation_to</source>
         <target>to</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475j" resname="email.gift_card.subject">
+        <source>email.gift_card.subject</source>
+        <target>Gift card</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475k" resname="email.gift_card.body_text">
+        <source>email.gift_card.body_text</source>
+        <target>%message% Your coupon code is %code%.</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475k" resname="email.gift_card.body_html">
+        <source>email.gift_card.body_html</source>
+        <target>%message% Your coupon code is %code%.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

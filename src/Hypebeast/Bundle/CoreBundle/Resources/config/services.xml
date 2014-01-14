@@ -18,6 +18,38 @@
             <tag name="kernel.event_listener" event="sylius.product.post_update" method="onProductUpdate" />
             <tag name="kernel.event_listener" event="sylius.product.post_delete" method="onProductDelete" />
         </service>
+        <service id="sylius.form.type.gift_card" class="Hypebeast\Bundle\CoreBundle\Form\Type\GiftCardType">
+            <tag name="form.type" alias="sylius_gift_card" />
+        </service>
+        <service id="sylius.listener.order_gift_card" class="Hypebeast\Bundle\CoreBundle\EventListener\OrderGiftCardListener">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_listener" event="sylius.cart_item.add.initialize" method="onCartItemAddInitialize" />
+            <tag name="kernel.event_listener" event="sylius.cart_item.remove.initialize" method="onCartItemRemoveInitialize" />
+            <tag name="kernel.event_listener" event="sylius.cart_clear.initialize" method="onCartClearInitialize" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
+            <tag name="kernel.event_listener" event="sylius.payment.post_state_change" method="onPaymentPostStateChange" />
+        </service>
+        <service id="sylius.processor.gift_card" class="Hypebeast\Bundle\CoreBundle\Processor\GiftCardProcessor">
+            <argument type="service" id="sylius.mailer.gift_card" />
+            <argument type="service" id="sylius.builder.gift_card_promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="sylius.mailer.gift_card" class="Hypebeast\Bundle\CoreBundle\Mailer\GiftCardMailer">
+            <argument type="service" id="sylius.mailer" />
+            <argument type="collection">
+                <argument key="template">SyliusWebBundle:Frontend/Email:giftCard.html.twig</argument>
+                <argument key="from_email">%sylius.mailer.gift_card.email.from_email%</argument>
+            </argument>
+        </service>
+        <service id="sylius.builder.promotion" class="Hypebeast\Bundle\CoreBundle\Builder\PromotionBuilder">
+            <argument type="service" id="sylius.manager.promotion" />
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.repository.promotion_action" />
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+        </service>
+        <service id="sylius.builder.gift_card_promotion" class="Hypebeast\Bundle\CoreBundle\Builder\GiftCardPromotionBuilder">
+            <argument type="service" id="sylius.builder.promotion" />
+        </service>
 
     </services>
 

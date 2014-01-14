@@ -4,10 +4,9 @@ namespace Hypebeast\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 
-class HypebeastCoreExtension extends Extension
+class HypebeastCoreExtension extends SyliusResourceExtension
 {
     /**
      * Loads a specific configuration.
@@ -21,7 +20,13 @@ class HypebeastCoreExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        $this->configDir = __DIR__.'/../Resources/config';
+
+        list($config, $loader) = $this->configure($config, new Configuration(), $container);
+
+        $container->setParameter(
+            'sylius.mailer.gift_card.email.from_email',
+            array($config['from_email']['address'] => $config['from_email']['sender_name'])
+        );
     }
 }

@@ -17,6 +17,7 @@ use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Hypebeast\Bundle\CoreBundle\Entity\GiftCard;
 
 /**
  * Sylius core Order model.
@@ -262,6 +263,12 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @param string $state
      */
     public function setShippingState($state);
+
+    public function getGiftCards();
+    public function hasGiftCards();
+    public function addGiftCard(GiftCard $giftCard);
+    public function removeGiftCard(GiftCard $giftCard);
+    public function removeGiftCards();
 
     /**
      * Has any pending inventory?
