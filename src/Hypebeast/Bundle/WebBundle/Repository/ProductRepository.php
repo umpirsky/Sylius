@@ -6,7 +6,7 @@ use Sylius\Bundle\CoreBundle\Repository\ProductRepository as BaseRepository;
 
 class ProductRepository extends BaseRepository
 {
-    public function findAllRelatedToOrder($order, $limit = 10)
+    public function findAllRelatedToOrder($order, $limit = 3)
     {
         $queryBuilder = $this->getCollectionQueryBuilder()
             ->select('product, COUNT(taxon) counter')
@@ -32,7 +32,7 @@ class ProductRepository extends BaseRepository
         );
     }
 
-    public function findAllRelatedToOrderProducts($order, $limit = 10)
+    public function findAllRelatedToOrderProducts($order, $limit = 3)
     {
         $queryBuilder = $this->getCollectionQueryBuilder()
             ->select('product')
@@ -50,7 +50,7 @@ class ProductRepository extends BaseRepository
         ;
     }
 
-    public function findAllDefaultRelatedProduct($product, $limit = 10)
+    public function findAllDefaultRelatedProduct($product, $limit = 3)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->select('product, COUNT(taxon) counter')
