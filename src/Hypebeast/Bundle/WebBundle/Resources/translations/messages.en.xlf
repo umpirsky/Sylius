@@ -178,6 +178,78 @@
         <source>email.gift_card.body_html</source>
         <target>%message% Your coupon code is %code%.</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734601" resname="sylius.gift_card.id">
+        <source>sylius.gift_card.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734701" resname="sylius.gift_card.index_header">
+        <source>sylius.gift_card.index_header</source>
+        <target>Gift cards</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734702" resname="sylius.gift_card.name">
+        <source>sylius.gift_card.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734703" resname="sylius.gift_card.email">
+        <source>sylius.gift_card.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734704" resname="sylius.gift_card.value">
+        <source>sylius.gift_card.value</source>
+        <target>Value</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734705" resname="sylius.gift_card.status">
+        <source>sylius.gift_card.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734805" resname="sylius.gift_card.message">
+        <source>sylius.gift_card.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734905" resname="sylius.gift_card.updated_at">
+        <source>sylius.gift_card.updated_at</source>
+        <target>Updated at</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272735005" resname="sylius.gift_card.created_at">
+        <source>sylius.gift_card.created_at</source>
+        <target>Created at</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734706" resname="sylius.gift_card.no_results">
+        <source>sylius.gift_card.no_results</source>
+        <target>There are no gift cards.</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734707" resname="sylius.gift_card.status.added">
+        <source>sylius.gift_card.status.added</source>
+        <target>Added</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734708" resname="sylius.gift_card.status.ordered">
+        <source>sylius.gift_card.status.ordered</source>
+        <target>Ordered</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734709" resname="sylius.gift_card.status.sent">
+        <source>sylius.gift_card.status.sent</source>
+        <target>Sent</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734710" resname="sylius.gift_card.show_header">
+        <source>sylius.gift_card.show_header</source>
+        <target>Gift card details</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734711" resname="sylius.gift_card.manage">
+        <source>sylius.gift_card.manage</source>
+        <target>Manage gift cards</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734712" resname="sylius.gift_card.show_product">
+        <source>sylius.gift_card.show_product</source>
+        <target>Show product</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734713" resname="sylius.gift_card.show_order">
+        <source>sylius.gift_card.show_order</source>
+        <target>Show order</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734714" resname="sylius.gift_card.show_promotion">
+        <source>sylius.gift_card.show_promotion</source>
+        <target>Show promotion</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

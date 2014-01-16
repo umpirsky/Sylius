@@ -7,6 +7,26 @@
 
     <services>
 
+        <service id="sylius.controller.gift_card" class="Sylius\Bundle\ResourceBundle\Controller\ResourceController">
+            <argument>sylius</argument>
+            <argument>giftCard</argument>
+            <argument>SyliusWebBundle:GiftCard</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.repository.gift_card" class="Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service">
+                <service
+                    factory-service="doctrine.orm.entity_manager"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>Hypebeast\Bundle\CoreBundle\Entity\GiftCard</argument>
+                </service>
+            </argument>
+        </service>
         <service id="sylius.elasticsearch.provider.product" class="Hypebeast\Bundle\CoreBundle\Elasticsearch\Provider\ProductProvider">
             <argument type="service" id="fos_elastica.index.store.product" />
             <argument type="service" id="sylius.repository.product" />

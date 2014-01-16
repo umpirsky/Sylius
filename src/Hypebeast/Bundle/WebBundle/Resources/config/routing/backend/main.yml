@@ -1,0 +1,6 @@
+sylius_backend_main:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/main.yml
+
+sylius_backend_gift_card:
+    prefix: /gift-cards
+    resource: @HypebeastWebBundle/Resources/config/routing/backend/gift_card.yml

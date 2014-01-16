@@ -46,6 +46,10 @@
         <source>sylius.backend.menu.main.new_promotion</source>
         <target>Add new promotion</target>
       </trans-unit>
+      <trans-unit id="2afcc81479a864da0961f38b00126ac0" resname="sylius.backend.menu.main.gift_cards">
+        <source>sylius.backend.menu.main.gift_cards</source>
+        <target>Gift cards</target>
+      </trans-unit>
       <trans-unit id="b36a72c48b853b6998f5a53c49b7e882" resname="sylius.backend.menu.main.options">
         <source>sylius.backend.menu.main.options</source>
         <target>Manage product options</target>
@@ -177,6 +181,10 @@
       <trans-unit id="e926bf719883393cf94f09aeb2f742d9" resname="sylius.backend.menu.sidebar.new_promotion">
         <source>sylius.backend.menu.sidebar.new_promotion</source>
         <target>Add new promotion</target>
+      </trans-unit>
+      <trans-unit id="e926bf719883393cf94f09aeb2f742d0" resname="sylius.backend.menu.sidebar.gift_cards">
+        <source>sylius.backend.menu.sidebar.gift_cards</source>
+        <target>Gift cards</target>
       </trans-unit>
       <trans-unit id="44d59833dd3689d7605ddc74731242c1" resname="sylius.backend.menu.sidebar.options">
         <source>sylius.backend.menu.sidebar.options</source>

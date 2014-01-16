@@ -5,6 +5,7 @@ namespace Hypebeast\Bundle\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
@@ -69,6 +70,18 @@ class GiftCard
      */
     private $promotion;
 
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function __construct()
     {
         $this->status = self::STATUS_ADDED;
@@ -132,6 +145,17 @@ class GiftCard
         return $this->status;
     }
 
+    public function getStatusLabel()
+    {
+        $statuses = [
+            self::STATUS_ADDED   => 'sylius.gift_card.status.added',
+            self::STATUS_ORDERED => 'sylius.gift_card.status.ordered',
+            self::STATUS_SENT    => 'sylius.gift_card.status.sent',
+        ];
+
+        return $statuses[$this->getStatus()];
+    }
+
     public function setStatus($status)
     {
         $this->status = $status;
@@ -171,6 +195,30 @@ class GiftCard
     public function setPromotion(PromotionInterface $promotion)
     {
         $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
