@@ -21,11 +21,24 @@ class OrderGiftCardListener
     public function onCartItemAddInitialize(CartItemEvent $event)
     {
         $request = $this->container->get('request');
-        $variant = $event->getItem()->getVariant();
+        $promotionBuilder = $this->container->get('sylius.builder.promotion');
         $form = $this->container->get('form.factory')->create('sylius_gift_card');
 
-        if ($variant->getProduct()->isGiftCard() && $request->isMethod('POST') && $form->bind($request)->isValid()) {
+        $variant = $event->getItem()->getVariant();
+        $product = $variant->getProduct();
+
+        if ($product->isGiftCard() && $request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $coupon = $promotionBuilder
+                ->setPromotion($product->getPromotion())
+                ->createCoupon(uniqid())
+            ;
+            $promotionBuilder
+                ->addCoupon($coupon)
+                ->save()
+            ;
+
             $giftCard = $form->getData();
+            $giftCard->setCoupon($coupon);
             $giftCard->setVariant($variant);
             $giftCard->setValue($variant->getPrice());
 

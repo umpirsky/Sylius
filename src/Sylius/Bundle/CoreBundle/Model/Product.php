@@ -17,6 +17,7 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use DateTime;
 
 /**
@@ -97,11 +98,11 @@ class Product extends BaseProduct implements ProductInterface
     protected $restrictedZone;
 
     /**
-     * Is it gift card.
+     * Gift card products have promotion defined.
      *
-     * @var Boolean
+     * @var PromotionInterface
      */
-    protected $giftCard;
+    private $promotion;
 
     /**
      * Back in stock time.
@@ -406,22 +407,24 @@ class Product extends BaseProduct implements ProductInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isGiftCard()
+    public function getPromotion()
     {
-        return $this->giftCard;
+        return $this->promotion;
+    }
+
+    public function setPromotion(PromotionInterface $promotion)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setGiftCard($giftCard)
+    public function isGiftCard()
     {
-        $this->giftCard = $giftCard;
-
-        return $this;
+        return null !== $this->getPromotion();
     }
 
     /**

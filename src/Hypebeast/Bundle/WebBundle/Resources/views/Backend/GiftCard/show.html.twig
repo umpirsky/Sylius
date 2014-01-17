@@ -9,8 +9,8 @@
         {{ buttons.manage(path('sylius_backend_gift_card_index'), 'sylius.gift_card.manage'|trans) }}
         {{ buttons.show(path('sylius_backend_product_show', {'id': giftCard.variant.product.id}), 'sylius.gift_card.show_product'|trans) }}
         {{ buttons.show(path('sylius_backend_order_show', {'id': giftCard.order.id}), 'sylius.gift_card.show_order'|trans) }}
-        {% if giftCard.promotion %}
-        {{ buttons.show(path('sylius_backend_promotion_show', {'id': giftCard.promotion.id}), 'sylius.gift_card.show_promotion'|trans) }}
+        {% if giftCard.coupon %}
+        {{ buttons.show(path('sylius_backend_promotion_show', {'id': giftCard.coupon.promotion.id}), 'sylius.gift_card.show_promotion'|trans) }}
         {% endif %}
     </div>
     <h1><i class="glyphicon glyphicon-gift"></i> {{ 'sylius.gift_card.show_header'|trans|raw }}</h1>
@@ -22,6 +22,12 @@
             <td>{{ 'sylius.gift_card.id'|trans }}</td>
             <td>{{ giftCard.id }}</td>
         </tr>
+        {% if giftCard.coupon %}
+        <tr>
+            <td>{{ 'sylius.gift_card.code'|trans }}</td>
+            <td>{{ giftCard.coupon.code }}</td>
+        </tr>
+        {% endif %}
         <tr>
             <td>{{ 'sylius.gift_card.name'|trans }}</td>
             <td>{{ giftCard.name }}</td>
@@ -38,7 +44,7 @@
         {% endif %}
         <tr>
             <td>{{ 'sylius.gift_card.value'|trans }}</td>
-            <td>{{ giftCard.value }}</td>
+            <td>{{ giftCard.value|sylius_price }}</td>
         </tr>
         <tr>
             <td>{{ 'sylius.gift_card.status'|trans }}</td>

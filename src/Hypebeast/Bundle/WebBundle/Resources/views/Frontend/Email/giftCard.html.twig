@@ -3,9 +3,9 @@
 {% endblock %}
 
 {% block body_text %}
-    {{ 'email.gift_card.body_text'|trans({'%message%': giftCard.message, '%code%': giftCard.promotion.coupons[0].code}) }}
+    {{ 'email.gift_card.body_text'|trans({'%message%': giftCard.message, '%code%': giftCard.coupon.code}) }}
 {% endblock %}
 
 {% block body_html %}
-    {{ 'email.gift_card.body_html'|trans({'%message%': giftCard.message, '%code%': giftCard.promotion.coupons[0].code}) }}
+    {{ 'email.gift_card.body_html'|trans({'%message%': giftCard.message, '%code%': giftCard.coupon.code}) }}
 {% endblock %}

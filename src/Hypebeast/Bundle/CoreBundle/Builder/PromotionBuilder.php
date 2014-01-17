@@ -4,6 +4,7 @@ namespace Hypebeast\Bundle\CoreBundle\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 
 class PromotionBuilder
 {
@@ -45,6 +46,13 @@ class PromotionBuilder
         return $this;
     }
 
+    public function setPromotion(PromotionInterface $promotion)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
     public function addAction($type, array $configuration)
     {
         $action = $this->actionRepository->createNew();
@@ -57,16 +65,14 @@ class PromotionBuilder
         return $this;
     }
 
-    public function addCoupon($code, $usageLimit)
+    public function createCoupon($code, $usageLimit = null)
     {
         $coupon = $this->couponRepository->createNew();
 
         $coupon->setCode($code);
         $coupon->setUsageLimit($usageLimit);
 
-        $this->promotion->addCoupon($coupon);
-
-        return $this;
+        return $coupon;
     }
 
     public function save($flush = true)

@@ -182,6 +182,10 @@
         <source>sylius.gift_card.id</source>
         <target>ID</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272834601" resname="sylius.gift_card.code">
+        <source>sylius.gift_card.code</source>
+        <target>Coupon code</target>
+      </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed787272734701" resname="sylius.gift_card.index_header">
         <source>sylius.gift_card.index_header</source>
         <target>Gift cards</target>
@@ -249,6 +253,10 @@
       <trans-unit id="c2928b60e4bb3e0a42ed787272734714" resname="sylius.gift_card.show_promotion">
         <source>sylius.gift_card.show_promotion</source>
         <target>Show promotion</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734715" resname="sylius.product.gift_card">
+        <source>sylius.product.gift_card</source>
+        <target>Gift card promotion</target>
       </trans-unit>
     </body>
   </file>

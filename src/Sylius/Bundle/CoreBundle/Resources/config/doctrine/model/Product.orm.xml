@@ -37,7 +37,9 @@
             <join-column name="restricted_zone" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <field name="giftCard" column="gift_card" type="boolean" />
+        <many-to-one field="promotion" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface">
+            <join-column name="promotion" referenced-column-name="id" nullable="true" />
+        </many-to-one>
 
         <many-to-many field="taxons" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface" inversed-by="products">
             <join-table name="sylius_product_taxon">

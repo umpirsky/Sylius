@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 
 /**
  * @ORM\Entity
@@ -66,9 +66,9 @@ class GiftCard
     private $order;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Bundle\PromotionsBundle\Model\CouponInterface")
      */
-    private $promotion;
+    private $coupon;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -187,14 +187,14 @@ class GiftCard
         return $this;
     }
 
-    public function getPromotion()
+    public function getCoupon()
     {
-        return $this->promotion;
+        return $this->coupon;
     }
 
-    public function setPromotion(PromotionInterface $promotion)
+    public function setCoupon(CouponInterface $coupon)
     {
-        $this->promotion = $promotion;
+        $this->coupon = $coupon;
 
         return $this;
     }

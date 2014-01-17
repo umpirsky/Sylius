@@ -17,6 +17,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use DateTime;
 
 /**
@@ -157,8 +158,9 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      */
     public function setRestrictedZone(ZoneInterface $zone = null);
 
+    public function getPromotion();
+    public function setPromotion(PromotionInterface $promotion);
     public function isGiftCard();
-    public function setGiftCard($giftCard);
 
     /**
      * Get all product images.
