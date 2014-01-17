@@ -66,6 +66,14 @@
             <argument type="service" id="sylius.repository.promotion_action" />
             <argument type="service" id="sylius.repository.promotion_coupon" />
         </service>
+        <service id="sylius.promotion_action.gift_card_discount" class="Hypebeast\Bundle\CoreBundle\Promotion\Action\GiftCardDiscountAction">
+            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.repository.gift_card" />
+            <tag name="sylius.promotion_action" type="gift_card_discount" label="Gift card discount" />
+        </service>
+        <service id="sylius.form.type.promotion_action.gift_card_discount_configuration" class="Hypebeast\Bundle\CoreBundle\Form\Type\Promotion\Action\GiftCardDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_gift_card_discount_configuration" />
+        </service>
 
     </services>
 
