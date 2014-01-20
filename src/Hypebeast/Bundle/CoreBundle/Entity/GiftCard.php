@@ -28,8 +28,7 @@ class GiftCard
     private $id;
 
     /**
-     * @ORM\Column
-     * @Assert\NotBlank
+     * @ORM\Column(nullable=true)
      */
     private $name;
 

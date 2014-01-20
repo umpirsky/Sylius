@@ -7,8 +7,12 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_gift_card_index'), 'sylius.gift_card.manage'|trans) }}
+        {% if giftCard.variant %}
         {{ buttons.show(path('sylius_backend_product_show', {'id': giftCard.variant.product.id}), 'sylius.gift_card.show_product'|trans) }}
+        {% endif %}
+        {% if giftCard.order %}
         {{ buttons.show(path('sylius_backend_order_show', {'id': giftCard.order.id}), 'sylius.gift_card.show_order'|trans) }}
+        {% endif %}
         {% if giftCard.coupon %}
         {{ buttons.show(path('sylius_backend_promotion_show', {'id': giftCard.coupon.promotion.id}), 'sylius.gift_card.show_promotion'|trans) }}
         {% endif %}

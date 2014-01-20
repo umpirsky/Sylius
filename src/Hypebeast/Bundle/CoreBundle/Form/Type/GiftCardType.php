@@ -12,7 +12,8 @@ class GiftCardType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.gift_card.name'
+                'label'    => 'sylius.form.gift_card.name',
+                'required' => false
             ))
             ->add('email', 'email', array(
                 'label' => 'sylius.form.gift_card.email'
