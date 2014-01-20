@@ -10,7 +10,17 @@ class ProductController extends BaseController
 {
     public function showAction()
     {
+        $request = $this->getRequest();
+        $config = $this->getConfiguration();
+        $form = $this->createForm('sylius_gift_card_front');
         $product = $this->findOr404();
+
+        if (
+            (!$product->isGiftCard() && $request->isMethod('POST')) ||
+            ($product->isGiftCard() && $request->isMethod('POST') && $form->bind($request)->isValid())
+        ) {
+            return $this->forward('sylius.controller.cart_item:addAction', array('id' => $product->getId()));
+        }
 
         if (0 === $product->getUpSells()->count()) {
             $product->setDefaultUpSells(
@@ -18,13 +28,14 @@ class ProductController extends BaseController
             );
         }
 
-        $config = $this->getConfiguration();
-
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('show.html'))
             ->setTemplateVar($config->getResourceName())
-            ->setData($product)
+            ->setData([
+                'product'      => $product,
+                'giftCardForm' => $form->createView(),
+            ])
         ;
 
         return $this->handleView($view);

@@ -24,33 +24,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ProductController extends ResourceController
 {
-    public function showAction()
-    {
-        $request = $this->getRequest();
-        $config = $this->getConfiguration();
-        $form = $this->createForm('sylius_gift_card_front');
-        $product = $this->findOr404();
-
-        if (
-            (!$product->isGiftCard() && $request->isMethod('POST')) ||
-            ($product->isGiftCard() && $request->isMethod('POST') && $form->bind($request)->isValid())
-        ) {
-            return $this->forward('sylius.controller.cart_item:addAction', array('id' => $product->getId()));
-        }
-
-        $view = $this
-            ->view()
-            ->setTemplate($config->getTemplate('show.html'))
-            ->setTemplateVar($config->getResourceName())
-            ->setData([
-                'product'      => $product,
-                'giftCardForm' => $form->createView(),
-            ])
-        ;
-
-        return $this->handleView($view);
-    }
-
     public function indexAction(Request $request)
     {
         $config = $this->getConfiguration();
