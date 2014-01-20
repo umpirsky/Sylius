@@ -7,10 +7,36 @@ sylius_backend_gift_card_index:
             template: SyliusWebBundle:Backend/GiftCard:index.html.twig
             sortable: true
 
+sylius_backend_gift_card_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.gift_card:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/GiftCard:create.html.twig
+            redirect: sylius_backend_gift_card_show
+
 sylius_backend_gift_card_show:
-    pattern: /show/{id}
+    pattern: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.gift_card:showAction
         _sylius:
             template: SyliusWebBundle:Backend/GiftCard:show.html.twig
+
+sylius_backend_gift_card_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.gift_card:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/GiftCard:update.html.twig
+            redirect: sylius_backend_gift_card_show
+
+sylius_backend_gift_card_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.gift_card:deleteAction
+        _sylius:
+            redirect: sylius_backend_gift_card_index

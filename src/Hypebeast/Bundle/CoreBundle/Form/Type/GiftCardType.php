@@ -2,36 +2,24 @@
 
 namespace Hypebeast\Bundle\CoreBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class GiftCardType extends AbstractType
+class GiftCardType extends GiftCardFrontType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder
-            ->add('name', 'text', array(
-                'label'    => 'sylius.form.gift_card.name',
-                'required' => false
+            ->add('value', 'sylius_money', array(
+                'label' => 'sylius.form.gift_card.value',
             ))
-            ->add('email', 'email', array(
-                'label' => 'sylius.form.gift_card.email'
-            ))
-            ->add('message', 'textarea', array(
-                'label'    => 'sylius.form.gift_card.message',
-                'required' => false
+            ->add('coupon', 'entity', array(
+                'class'    => 'Sylius\Bundle\PromotionsBundle\Model\Coupon',
+                'property' => 'code',
+                'label'    => 'sylius.form.gift_card.coupon',
             ))
         ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class' => 'Hypebeast\Bundle\CoreBundle\Entity\GiftCard',
-            )
-        );
     }
 
     public function getName()

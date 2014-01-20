@@ -6,12 +6,15 @@
 
 {% block content %}
 <div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_gift_card_create'), 'sylius.gift_card.create'|trans) }}
+    </div>
     <h1><i class="glyphicon glyphicon-gift"></i> {{ 'sylius.gift_card.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(giftCards) }}
+{{ pagination(gift_cards) }}
 
-{% if giftCards|length > 0 %}
+{% if gift_cards|length > 0 %}
     <table class="table">
         <thead>
             <tr>
@@ -25,21 +28,23 @@
             </tr>
         </thead>
         <tbody>
-        {% for giftCard in giftCards %}
+        {% for gift_card in gift_cards %}
             <tr>
-                <td>{{ giftCard.id }}</td>
-                <td>{{ giftCard.name }}</td>
-                <td><a href="mailto:{{ giftCard.email }}">{{ giftCard.email }}</a></td>
-                <td>{{ giftCard.value|sylius_price }}</td>
+                <td>{{ gift_card.id }}</td>
+                <td>{{ gift_card.name }}</td>
+                <td><a href="mailto:{{ gift_card.email }}">{{ gift_card.email }}</a></td>
+                <td>{{ gift_card.value|sylius_price }}</td>
                 <td>
-                    <span class="label label-{{ constant('Hypebeast\\Bundle\\CoreBundle\\Entity\\GiftCard::STATUS_SENT') == giftCard.status ? 'success' : 'default'}}">
-                        {{ giftCard.statusLabel|trans }}
+                    <span class="label label-{{ constant('Hypebeast\\Bundle\\CoreBundle\\Entity\\GiftCard::STATUS_SENT') == gift_card.status ? 'success' : 'default'}}">
+                        {{ gift_card.statusLabel|trans }}
                     </span>
                 </td>
-                <td>{{ giftCard.createdAt|date }}</td>
-                <td>
-                    <div class="pull-right">
-                        {{ buttons.show(path('sylius_backend_gift_card_show', {'id': giftCard.id})) }}
+                <td>{{ gift_card.createdAt|date }}</td>
+                <td class="actions text-right">
+                    <div class="btn-group">
+                        {{ buttons.show(path('sylius_backend_gift_card_show', {'id': gift_card.id})) }}
+                        {{ buttons.edit(path('sylius_backend_gift_card_update', {'id': gift_card.id})) }}
+                        {{ buttons.delete(path('sylius_backend_gift_card_delete', {'id': gift_card.id})) }}
                     </div>
                 </td>
             </tr>
@@ -50,6 +55,6 @@
     {{ alerts.info('sylius.gift_card.no_results'|trans) }}
 {% endif %}
 
-{{ pagination(giftCards) }}
+{{ pagination(gift_cards) }}
 
 {% endblock %}

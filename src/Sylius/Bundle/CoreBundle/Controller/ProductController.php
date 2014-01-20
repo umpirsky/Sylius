@@ -28,7 +28,7 @@ class ProductController extends ResourceController
     {
         $request = $this->getRequest();
         $config = $this->getConfiguration();
-        $form = $this->createForm('sylius_gift_card');
+        $form = $this->createForm('sylius_gift_card_front');
         $product = $this->findOr404();
 
         if (

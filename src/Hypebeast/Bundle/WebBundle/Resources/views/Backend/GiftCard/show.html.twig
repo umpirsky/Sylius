@@ -7,15 +7,17 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_gift_card_index'), 'sylius.gift_card.manage'|trans) }}
-        {% if giftCard.variant %}
-        {{ buttons.show(path('sylius_backend_product_show', {'id': giftCard.variant.product.id}), 'sylius.gift_card.show_product'|trans) }}
+        {% if gift_card.variant %}
+        {{ buttons.show(path('sylius_backend_product_show', {'id': gift_card.variant.product.id}), 'sylius.gift_card.show_product'|trans) }}
         {% endif %}
-        {% if giftCard.order %}
-        {{ buttons.show(path('sylius_backend_order_show', {'id': giftCard.order.id}), 'sylius.gift_card.show_order'|trans) }}
+        {% if gift_card.order %}
+        {{ buttons.show(path('sylius_backend_order_show', {'id': gift_card.order.id}), 'sylius.gift_card.show_order'|trans) }}
         {% endif %}
-        {% if giftCard.coupon %}
-        {{ buttons.show(path('sylius_backend_promotion_show', {'id': giftCard.coupon.promotion.id}), 'sylius.gift_card.show_promotion'|trans) }}
+        {% if gift_card.coupon %}
+        {{ buttons.show(path('sylius_backend_promotion_show', {'id': gift_card.coupon.promotion.id}), 'sylius.gift_card.show_promotion'|trans) }}
         {% endif %}
+        {{ buttons.edit(path('sylius_backend_gift_card_update', {'id': gift_card.id})) }}
+        {{ buttons.delete(path('sylius_backend_gift_card_delete', {'id': gift_card.id})) }}
     </div>
     <h1><i class="glyphicon glyphicon-gift"></i> {{ 'sylius.gift_card.show_header'|trans|raw }}</h1>
 </div>
@@ -24,47 +26,47 @@
     <tbody>
         <tr>
             <td>{{ 'sylius.gift_card.id'|trans }}</td>
-            <td>{{ giftCard.id }}</td>
+            <td>{{ gift_card.id }}</td>
         </tr>
-        {% if giftCard.coupon %}
+        {% if gift_card.coupon %}
         <tr>
             <td>{{ 'sylius.gift_card.code'|trans }}</td>
-            <td>{{ giftCard.coupon.code }}</td>
+            <td>{{ gift_card.coupon.code }}</td>
         </tr>
         {% endif %}
         <tr>
             <td>{{ 'sylius.gift_card.name'|trans }}</td>
-            <td>{{ giftCard.name }}</td>
+            <td>{{ gift_card.name }}</td>
         </tr>
         <tr>
             <td>{{ 'sylius.gift_card.email'|trans }}</td>
-            <td><a href="mailto:{{ giftCard.email }}">{{ giftCard.email }}</a></td>
+            <td><a href="mailto:{{ gift_card.email }}">{{ gift_card.email }}</a></td>
         </tr>
-        {% if giftCard.message %}
+        {% if gift_card.message %}
         <tr>
             <td>{{ 'sylius.gift_card.message'|trans }}</td>
-            <td>{{ giftCard.message }}</td>
+            <td>{{ gift_card.message }}</td>
         </tr>
         {% endif %}
         <tr>
             <td>{{ 'sylius.gift_card.value'|trans }}</td>
-            <td>{{ giftCard.value|sylius_price }}</td>
+            <td>{{ gift_card.value|sylius_price }}</td>
         </tr>
         <tr>
             <td>{{ 'sylius.gift_card.status'|trans }}</td>
             <td>
-                <span class="label label-{{ constant('Hypebeast\\Bundle\\CoreBundle\\Entity\\GiftCard::STATUS_SENT') == giftCard.status ? 'success' : 'default'}}">
-                    {{ giftCard.statusLabel|trans }}
+                <span class="label label-{{ constant('Hypebeast\\Bundle\\CoreBundle\\Entity\\GiftCard::STATUS_SENT') == gift_card.status ? 'success' : 'default'}}">
+                    {{ gift_card.statusLabel|trans }}
                 </span>
             </td>
         </tr>
         <tr>
             <td>{{ 'sylius.gift_card.created_at'|trans }}</td>
-            <td>{{ giftCard.createdAt|date }}</td>
+            <td>{{ gift_card.createdAt|date }}</td>
         </tr>
         <tr>
             <td>{{ 'sylius.gift_card.updated_at'|trans }}</td>
-            <td>{{ giftCard.updatedAt|date }}</td>
+            <td>{{ gift_card.updatedAt|date }}</td>
         </tr>
     </tbody>
 </table>

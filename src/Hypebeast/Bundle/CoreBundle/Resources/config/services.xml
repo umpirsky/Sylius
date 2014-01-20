@@ -7,19 +7,20 @@
 
     <services>
 
+        <service id="sylius.manager.gift_card" alias="doctrine.orm.entity_manager" />
         <service id="sylius.controller.gift_card" class="Sylius\Bundle\ResourceBundle\Controller\ResourceController">
             <argument>sylius</argument>
-            <argument>giftCard</argument>
+            <argument>gift_card</argument>
             <argument>SyliusWebBundle:GiftCard</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
         <service id="sylius.repository.gift_card" class="Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository">
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.manager.gift_card" />
             <argument type="service">
                 <service
-                    factory-service="doctrine.orm.entity_manager"
+                    factory-service="sylius.manager.gift_card"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
@@ -40,6 +41,9 @@
         </service>
         <service id="sylius.form.type.gift_card" class="Hypebeast\Bundle\CoreBundle\Form\Type\GiftCardType">
             <tag name="form.type" alias="sylius_gift_card" />
+        </service>
+        <service id="sylius.form.type.gift_card_front" class="Hypebeast\Bundle\CoreBundle\Form\Type\GiftCardFrontType">
+            <tag name="form.type" alias="sylius_gift_card_front" />
         </service>
         <service id="sylius.listener.order_gift_card" class="Hypebeast\Bundle\CoreBundle\EventListener\OrderGiftCardListener">
             <argument type="service" id="service_container"/>

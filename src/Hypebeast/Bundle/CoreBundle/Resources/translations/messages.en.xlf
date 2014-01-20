@@ -12,7 +12,15 @@
       </trans-unit>
       <trans-unit id="9efc314b65237d5d646e1b817372afc9" resname="sylius.form.gift_card.message">
         <source>sylius.form.gift_card.message</source>
-        <target>Message (optional)</target>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372af10" resname="sylius.form.gift_card.value">
+        <source>sylius.form.gift_card.value</source>
+        <target>Value</target>
+      </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372af11" resname="sylius.form.gift_card.coupon">
+        <source>sylius.form.gift_card.coupon</source>
+        <target>Coupon</target>
       </trans-unit>
     </body>
   </file>

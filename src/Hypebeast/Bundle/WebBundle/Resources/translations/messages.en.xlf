@@ -258,6 +258,18 @@
         <source>sylius.product.gift_card</source>
         <target>Gift card promotion</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734716" resname="sylius.gift_card.update_header">
+        <source>sylius.gift_card.update_header</source>
+        <target>Editing gift card</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734717" resname="sylius.gift_card.create">
+        <source>sylius.gift_card.create</source>
+        <target>Create gift card</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734718" resname="sylius.gift_card.create_header">
+        <source>sylius.gift_card.create_header</source>
+        <target>Creating gift card</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

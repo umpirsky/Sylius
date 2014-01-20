@@ -22,7 +22,7 @@ class OrderGiftCardListener
     {
         $request = $this->container->get('request');
         $promotionBuilder = $this->container->get('sylius.builder.promotion');
-        $form = $this->container->get('form.factory')->create('sylius_gift_card');
+        $form = $this->container->get('form.factory')->create('sylius_gift_card_front');
 
         $variant = $event->getItem()->getVariant();
         $product = $variant->getProduct();
