@@ -85,6 +85,14 @@
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.initialize" method="onCheckoutAddressingInitialize" />
             <tag name="kernel.event_listener" event="sylius.payment.post_state_change" method="onPaymentPostStateChange" />
         </service>
+        <service id="sylius.promotion_action.percentage_discount_ignore_on_sale" class="Hypebeast\Bundle\CoreBundle\Promotion\Action\PercentageDiscountIgnoreOnSaleAction">
+            <argument type="service" id="sylius.repository.adjustment" />
+            <tag name="sylius.promotion_action" type="percentage_discount_ignore_on_sale" label="Percentage discount ignore on sale" />
+        </service>
+        <service id="sylius.form.type.promotion_action.percentage_discount_ignore_on_sale_configuration" class="Hypebeast\Bundle\CoreBundle\Form\Type\Promotion\Action\PercentageDiscountIgnoreOnSaleConfigurationType">
+            <argument>%sylius.validation_group.promotion_action_percentage_discount_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_percentage_discount_ignore_on_sale_configuration" />
+        </service>
 
     </services>
 
