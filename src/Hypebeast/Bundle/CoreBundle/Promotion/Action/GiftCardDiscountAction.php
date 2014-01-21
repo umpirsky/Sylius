@@ -35,6 +35,11 @@ class GiftCardDiscountAction implements PromotionActionInterface
         $subject->addAdjustment($adjustment);
     }
 
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    {
+        $subject->removePromotionAdjustments();
+    }
+
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_gift_card_discount_configuration';

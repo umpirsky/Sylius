@@ -28,7 +28,7 @@ class MovementHistory
     private $adjustment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Bundle\OrderBundle\Model\OrderInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Bundle\OrderBundle\Model\OrderInterface", cascade={"all"})
      */
     private $order;
 
