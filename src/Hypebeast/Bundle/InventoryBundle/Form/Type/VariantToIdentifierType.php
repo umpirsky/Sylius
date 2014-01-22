@@ -2,10 +2,10 @@
 
 namespace Hypebeast\Bundle\InventoryBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\EntityToIdentifierType;
+use Hypebeast\Bundle\CoreBundle\Form\Type\IdentifierToEntityType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class VariantToIdentifierType extends EntityToIdentifierType
+class VariantToIdentifierType extends IdentifierToEntityType
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
