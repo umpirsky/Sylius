@@ -7,6 +7,7 @@ use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 
 class GiftCardDiscountAction implements PromotionActionInterface
 {
@@ -21,14 +22,19 @@ class GiftCardDiscountAction implements PromotionActionInterface
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, 'Sylius\Bundle\CoreBundle\Model\OrderInterface');
+        }
+
         $giftCard = $this->giftCardRepository->findOneBy(['coupon' => $subject->getPromotionCoupon()]);
         if (null === $giftCard) {
             return;
         }
 
+        $subject->calculateTotal();
         $adjustment = $this->adjustmentRepository->createNew();
 
-        $adjustment->setAmount(-$giftCard->getValue());
+        $adjustment->setAmount($subject->getTotal() >= $giftCard->getValue() ? -$giftCard->getValue() : -$subject->getTotal());
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 

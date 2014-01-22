@@ -412,7 +412,7 @@ class Product extends BaseProduct implements ProductInterface
         return $this->promotion;
     }
 
-    public function setPromotion(PromotionInterface $promotion)
+    public function setPromotion(PromotionInterface $promotion = null)
     {
         $this->promotion = $promotion;
 

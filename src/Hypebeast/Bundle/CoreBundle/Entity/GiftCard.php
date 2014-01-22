@@ -139,6 +139,13 @@ class GiftCard
         return $this;
     }
 
+    public function deductValue($value)
+    {
+        $this->setValue(max(0, $this->getValue() - $value));
+
+        return $this;
+    }
+
     public function getStatus()
     {
         return $this->status;

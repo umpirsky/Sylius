@@ -98,8 +98,10 @@ class OrderGiftCardListener
 
         if ($payment::STATE_COMPLETED === $payment->getState()) {
             foreach ($order->getGiftCards() as $giftCard) {
-                $this->container->get('sylius.processor.gift_card')->send($giftCard);
+                $this->container->get('sylius.processor.gift_card')->sendGiftCard($giftCard);
             }
+
+            $this->container->get('sylius.processor.gift_card')->useGiftCard($order);
         }
     }
 }

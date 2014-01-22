@@ -56,6 +56,7 @@
         <service id="sylius.processor.gift_card" class="Hypebeast\Bundle\CoreBundle\Processor\GiftCardProcessor">
             <argument type="service" id="sylius.mailer.gift_card" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.repository.gift_card" />
         </service>
         <service id="sylius.mailer.gift_card" class="Hypebeast\Bundle\CoreBundle\Mailer\GiftCardMailer">
             <argument type="service" id="sylius.mailer" />
