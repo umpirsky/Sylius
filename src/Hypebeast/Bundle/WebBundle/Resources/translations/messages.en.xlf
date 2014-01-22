@@ -349,6 +349,26 @@
         <source>sylius.form.product.restricted_zone.not_restricted</source>
         <target>Not Restricted</target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734719" resname="sylius.user.points">
+        <source>sylius.user.points</source>
+        <target>Points</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734720" resname="sylius.reward.id">
+        <source>sylius.reward.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734721" resname="sylius.reward.points">
+        <source>sylius.reward.points</source>
+        <target>Points</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734722" resname="sylius.reward.subject">
+        <source>sylius.reward.subject</source>
+        <target>Subject</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed787272734723" resname="sylius.reward.created_at">
+        <source>sylius.reward.created_at</source>
+        <target>Earned at</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

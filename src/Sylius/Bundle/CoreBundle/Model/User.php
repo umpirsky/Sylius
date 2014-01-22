@@ -35,12 +35,14 @@ class User extends BaseUser implements UserInterface
     protected $billingAddress;
     protected $shippingAddress;
     protected $addresses;
+    protected $rewards;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->orders    = new ArrayCollection();
         $this->addresses = new ArrayCollection();
+        $this->rewards = new ArrayCollection();
 
         parent::__construct();
     }
@@ -246,6 +248,29 @@ class User extends BaseUser implements UserInterface
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    public function getRewards()
+    {
+        return $this->rewards;
+    }
+
+    public function setRewards(ArrayCollection $rewards)
+    {
+        $this->rewards = $rewards;
+
+        return $this;
+    }
+
+    public function getPoints()
+    {
+        $points = 0;
+
+        foreach ($this->getRewards() as $reward) {
+            $points += $reward->getPoints();
+        }
+
+        return $points;
     }
 
     public function getFullName()

@@ -78,6 +78,12 @@
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
+        <one-to-many field="rewards" target-entity="Hypebeast\Bundle\CoreBundle\Entity\Reward" mapped-by="user" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>
 

@@ -131,6 +131,8 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      */
     public function removeShippingAdjustments();
 
+    public function getOnSaleTotal();
+
     /**
      * Get the payment associated with the order.
      *

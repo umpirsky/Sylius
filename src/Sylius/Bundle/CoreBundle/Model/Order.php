@@ -310,6 +310,22 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getOnSaleTotal()
+    {
+        $onSaleTotal = 0;
+
+        foreach ($this->getItems() as $item) {
+            if (null !== $item->getVariant()->getSalePrice()) {
+                $onSaleTotal += $item->getVariant()->getSalePrice();
+            }
+        }
+
+        return $onSaleTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPayment()
     {
         return $this->payment;

@@ -89,6 +89,10 @@ class OrderGiftCardListener
             );
         }
 
+        if ($payment::STATE_COMPLETED !== $payment->getState()) {
+            return;
+        }
+
         $order = $this->container->get('sylius.repository.order')->findOneBy(['payment' => $payment]);
         if (null === $order) {
             throw new \InvalidArgumentException(
@@ -96,12 +100,8 @@ class OrderGiftCardListener
             );
         }
 
-        if ($payment::STATE_COMPLETED === $payment->getState()) {
-            foreach ($order->getGiftCards() as $giftCard) {
-                $this->container->get('sylius.processor.gift_card')->sendGiftCard($giftCard);
-            }
-
-            $this->container->get('sylius.processor.gift_card')->useGiftCard($order);
+        foreach ($order->getGiftCards() as $giftCard) {
+            $this->container->get('sylius.processor.gift_card')->send($giftCard);
         }
     }
 }

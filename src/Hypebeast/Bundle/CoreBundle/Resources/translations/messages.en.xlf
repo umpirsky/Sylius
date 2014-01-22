@@ -22,6 +22,18 @@
         <source>sylius.form.gift_card.coupon</source>
         <target>Coupon</target>
       </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372af12" resname="sylius.reward.type.sign_up">
+        <source>sylius.reward.type.sign_up</source>
+        <target>Sign up</target>
+      </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372af13" resname="sylius.reward.type.order">
+        <source>sylius.reward.type.order</source>
+        <target>Order</target>
+      </trans-unit>
+      <trans-unit id="9efc314b65237d5d646e1b817372af14" resname="sylius.reward.type.invite">
+        <source>sylius.reward.type.invite</source>
+        <target>Invite</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

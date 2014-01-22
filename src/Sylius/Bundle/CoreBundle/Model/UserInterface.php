@@ -125,4 +125,8 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
      * @return Boolean
      */
     public function hasAddress(AddressInterface $address);
+
+    public function getRewards();
+    public function setRewards(ArrayCollection $rewards);
+    public function getPoints();
 }
