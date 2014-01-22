@@ -94,6 +94,14 @@
         <source>sylius.movement_history.order.message</source>
         <target><![CDATA[<a href="%s">Order #%s</a> by <a href="%s">%s</a>]]></target>
       </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273483p" resname="sylius.movement_history.adjustment.message_no_user">
+        <source>sylius.movement_history.adjustment.message</source>
+        <target><![CDATA[<a href="%s">Adjustment #%s</a>]]></target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273493r" resname="sylius.movement_history.order.message_no_user">
+        <source>sylius.movement_history.order.message</source>
+        <target><![CDATA[<a href="%s">Order #%s</a>]]></target>
+      </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473s" resname="sylius.movement_hisory.index_header">
         <source>sylius.movement_hisory.index_header</source>
         <target>Stock movement history</target>

@@ -16,8 +16,7 @@ class AdjustmentChangeType extends AbstractType
                 'label'    => 'sylius.label.adjustment_change.typehead'
             ))
             ->add('variant', 'sylius_variant_to_identifier_hidden', array(
-                'label'      => 'sylius.label.adjustment_change.variant',
-                'identifier' => 'id'
+                'label' => 'sylius.label.adjustment_change.variant'
             ))
             ->add('quantity', 'integer', array(
                 'label' => 'sylius.label.adjustment_change.quantity'

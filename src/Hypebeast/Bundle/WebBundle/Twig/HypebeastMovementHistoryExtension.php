@@ -34,6 +34,14 @@ class HypebeastMovementHistoryExtension extends Twig_Extension
 
     public function getMarkup(MovementHistory $movementHistory)
     {
+        if (null === $movementHistory->getUser()) {
+            return sprintf(
+                $this->translator->trans(sprintf('sylius.movement_history.%s.message_no_user', $this->getType($movementHistory))),
+                $this->getUrl($movementHistory),
+                $movementHistory->getId()
+            );
+        }
+
         return sprintf(
             $this->translator->trans(sprintf('sylius.movement_history.%s.message', $this->getType($movementHistory))),
             $this->getUrl($movementHistory),

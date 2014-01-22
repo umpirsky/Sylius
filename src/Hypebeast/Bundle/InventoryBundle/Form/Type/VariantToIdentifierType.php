@@ -2,10 +2,25 @@
 
 namespace Hypebeast\Bundle\InventoryBundle\Form\Type;
 
-use Sylius\Bundle\VariableProductBundle\Form\Type\VariantToIdentifierType as BaseVariantToIdentifierType;
+use Sylius\Bundle\ResourceBundle\Form\Type\EntityToIdentifierType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class VariantToIdentifierType extends BaseVariantToIdentifierType
+class VariantToIdentifierType extends EntityToIdentifierType
 {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'identifier' => 'id',
+                'class'      => 'Sylius\Bundle\CoreBundle\Model\Variant',
+            ))
+            ->setAllowedTypes(array(
+                'identifier' => array('string'),
+                'class'      => array('string'),
+            ))
+        ;
+    }
+
     public function getParent()
     {
         return 'hidden';

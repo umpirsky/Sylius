@@ -70,7 +70,7 @@ services:
     sylius.form.type.sylius_variant_to_identifier_hidden:
         class: %sylius.form.type.sylius_variant_to_identifier_hidden.class%
         arguments:
-            - @sylius.repository.variant
+            - @doctrine.orm.entity_manager
         tags:
             - { name: form.type, alias: sylius_variant_to_identifier_hidden }
 
