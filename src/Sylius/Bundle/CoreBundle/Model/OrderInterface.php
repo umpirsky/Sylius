@@ -98,6 +98,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return float
      */
     public function getPromotionTotal();
+    public function getItemsPromotionTotal();
 
     /**
      * Get all promotion adjustments.

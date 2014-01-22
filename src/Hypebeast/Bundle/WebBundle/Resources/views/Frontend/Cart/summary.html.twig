@@ -30,10 +30,10 @@
         {% endfor %}
     </tbody>
     <tfoot>
-        {% if cart.promotionTotal %}
+        {% if cart.promotionTotal or cart.itemsPromotionTotal %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
+                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ (cart.promotionTotal + cart.itemsPromotionTotal)|sylius_price }}
             </td>
         </tr>
         {% endif %}

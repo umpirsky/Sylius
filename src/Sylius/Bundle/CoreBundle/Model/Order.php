@@ -238,6 +238,20 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getItemsPromotionTotal()
+    {
+        $promotionTotal = 0;
+
+        foreach ($this->getItems() as $item) {
+            $promotionTotal += $item->getAdjustmentsTotal();
+        }
+
+        return $promotionTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPromotionAdjustments()
     {
         return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
