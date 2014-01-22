@@ -59,7 +59,9 @@ app.directive('variantTypeahead', function() {
                 cache: false
             },
             template: function(datum) {
-                return '<span><code>'+datum.sku+'</code> '+datum.brand+' '+datum.name+'</span> ('+datum.option+')';
+                return '<span><code>'+datum.sku+'</code> '+datum.brand+' '+datum.name+'</span>' +
+                    (datum.option?'('+datum.option+')':'')
+                    ;
             },
             limit: 10
         });

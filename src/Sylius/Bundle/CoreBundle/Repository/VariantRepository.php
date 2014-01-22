@@ -30,22 +30,20 @@ class VariantRepository extends BaseVariantRepository
         $qb = $this->getCollectionQueryBuilder();
 
         $qb->select([
-                'o.id',
-                'o.sku',
+                'v.id',
+                'v.sku',
                 'p.supplierCode',
-                'o.onHand',
+                'v.onHand',
                 'p.name',
                 'taxons.name AS brand',
-                'opt.value AS option',
-                "CONCAT(o.sku, ' - ', taxons.name, ' ', p.name) AS value"
+                'o.value AS option',
+                "CONCAT(v.sku, ' - ', taxons.name, ' ', p.name) AS value"
             ])
-            ->innerJoin('o.product', 'p')
-            ->leftJoin('o.options', 'opt')
             ->leftJoin('p.taxons', 'taxons')
-            ->leftJoin('taxons.taxonomy', 'tax', \Doctrine\ORM\Query\Expr\Join::WITH, "tax.name = 'Brand'")
+            ->innerJoin('taxons.taxonomy', 'tax', \Doctrine\ORM\Query\Expr\Join::WITH, "tax.name = 'Brand'")
             ->setMaxResults($maxResults)
             ->where(
-                $qb->expr()->like("CONCAT(o.sku, ' - ', taxons.name, ' ', p.name)", ":keyword")
+                $qb->expr()->like("CONCAT(v.sku, ' - ', taxons.name, ' ', p.name)", ":keyword")
             )
             ->setParameter('keyword', "%$keyword%")
         ;
@@ -53,13 +51,12 @@ class VariantRepository extends BaseVariantRepository
         // Exclude configurable product's master variant
         $qb->andWhere(
             $qb->expr()->not($qb->expr()->exists( // NOT EXISTS
-                $this->createQueryBuilder('v')
-                     ->select('v.id')
-                     ->groupBy('v.product')
-                     ->andHaving('COUNT(v.product) > 1')
-                     // Doctrine does not allow selecting multiple column in Exists
-                     // ->andHaving('v.master = true')
-                     ->andHaving('v.id = o.id')
+                $this->createQueryBuilder('vv')
+                     ->select('vv.id')
+                     ->andWhere('vv.id = v.id')
+                     ->andWhere('vv.master = true')
+                     ->groupBy('vv.product')
+                     ->andHaving('COUNT(vv.product) > 1')
             ))
         );
 
