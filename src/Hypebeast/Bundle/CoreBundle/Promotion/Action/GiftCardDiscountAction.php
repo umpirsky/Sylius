@@ -34,7 +34,7 @@ class GiftCardDiscountAction implements PromotionActionInterface
         $subject->calculateTotal();
         $adjustment = $this->adjustmentRepository->createNew();
 
-        $adjustment->setAmount($subject->getTotal() >= $giftCard->getValue() ? -$giftCard->getValue() : -$subject->getTotal());
+        $adjustment->setAmount($subject->getItemsTotal() >= $giftCard->getValue() ? -$giftCard->getValue() : -$subject->getItemsTotal());
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 
