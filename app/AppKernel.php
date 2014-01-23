@@ -28,6 +28,8 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            new Hypebeast\Bundle\CoreBundle\HypebeastCoreBundle(),
+
             // Sylius bundles.
             new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
@@ -49,7 +51,6 @@ class AppKernel extends Kernel
             new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
 
             new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
-            new Hypebeast\Bundle\CoreBundle\HypebeastCoreBundle(),
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Hypebeast\Bundle\WebBundle\HypebeastWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
