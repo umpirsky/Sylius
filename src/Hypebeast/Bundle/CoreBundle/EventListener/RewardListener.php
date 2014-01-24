@@ -11,7 +11,7 @@ use Hypebeast\Bundle\CoreBundle\Entity\Reward;
 
 class RewardListener
 {
-    protected $securityContext;
+    private $securityContext;
     private $rewardBuilder;
     private $orderRepository;
 

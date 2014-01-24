@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Hypebeast\Bundle\CoreBundle\Repository\RewardRepository")
  * @ORM\Table(name="sylius_reward")
  */
 class Reward

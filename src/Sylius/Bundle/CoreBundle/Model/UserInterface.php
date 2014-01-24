@@ -128,5 +128,8 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
 
     public function getRewards();
     public function setRewards(ArrayCollection $rewards);
+    public function getVipDate();
+    public function setVipDate(\DateTime $vipDate);
+    public function isVip();
     public function getPoints();
 }

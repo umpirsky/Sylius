@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sylius\Bundle\WebBundle\Security\HypebeastFactory;
+use Hypebeast\Bundle\WebBundle\Security\HypebeastFactory;
 
 /**
  * Sylius frontend bundle.

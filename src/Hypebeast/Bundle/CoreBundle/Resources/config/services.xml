@@ -45,7 +45,7 @@
             </argument>
         </service>
         <service id="sylius.manager.reward" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.reward" class="Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository">
+        <service id="sylius.repository.reward" class="Hypebeast\Bundle\CoreBundle\Repository\RewardRepository">
             <argument type="service" id="sylius.manager.reward" />
             <argument type="service">
                 <service
@@ -73,6 +73,10 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.repository.gift_card" />
         </service>
+        <service id="sylius.processor.vip" class="Hypebeast\Bundle\CoreBundle\Processor\VipProcessor">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="sylius.repository.reward" />
+        </service>
         <service id="sylius.mailer.gift_card" class="Hypebeast\Bundle\CoreBundle\Mailer\GiftCardMailer">
             <argument type="service" id="sylius.mailer" />
             <argument type="collection">
@@ -96,8 +100,8 @@
             <argument type="service" id="sylius.repository.gift_card" />
             <tag name="sylius.promotion_action" type="gift_card_discount" label="Gift card discount" />
         </service>
-        <service id="sylius.form.type.promotion_action.gift_card_discount_configuration" class="Hypebeast\Bundle\CoreBundle\Form\Type\Promotion\Action\GiftCardDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_gift_card_discount_configuration" />
+        <service id="sylius.form.type.promotion_action.no_configuration" class="Hypebeast\Bundle\CoreBundle\Form\Type\Promotion\Action\NoConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_no_configuration" />
         </service>
         <service id="sylius.listener.elasticsearch" class="Hypebeast\Bundle\CoreBundle\EventListener\ElasticsearchListener">
             <argument type="service" id="fos_elastica.index.store.product" />
@@ -119,6 +123,19 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.initialize" method="onCheckoutAddressingInitialize" />
             <tag name="kernel.event_listener" event="sylius.payment.post_state_change" method="onPaymentPostStateChange" />
+        </service>
+        <service id="hypebeast.listener.reward" class="Hypebeast\Bundle\CoreBundle\EventListener\RewardListener">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="sylius.builder.reward" />
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="kernel.event_listener" event="sylius.payment.post_state_change" method="onPaymentPostStateChange" />
+        </service>
+        <service id="hypebeast.listener.vip" class="Hypebeast\Bundle\CoreBundle\EventListener\VipListener">
+            <argument type="service" id="sylius.processor.vip" />
+            <tag name="kernel.event_listener" event="sylius.payment.post_state_change" method="onPaymentPostStateChange" />
+        </service>
+        <service id="sylius.checker.vip" class="Hypebeast\Bundle\CoreBundle\Promotion\Checker\VipRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="vip" label="VIP user" />
         </service>
         <service id="sylius.promotion_action.percentage_discount_ignore_on_sale" class="Hypebeast\Bundle\CoreBundle\Promotion\Action\PercentageDiscountIgnoreOnSaleAction">
             <argument type="service" id="sylius.repository.adjustment" />

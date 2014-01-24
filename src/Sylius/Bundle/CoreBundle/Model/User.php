@@ -36,6 +36,7 @@ class User extends BaseUser implements UserInterface
     protected $shippingAddress;
     protected $addresses;
     protected $rewards;
+    protected $vipDate;
 
     public function __construct()
     {
@@ -260,6 +261,23 @@ class User extends BaseUser implements UserInterface
         $this->rewards = $rewards;
 
         return $this;
+    }
+
+    public function getVipDate()
+    {
+        return $this->vipDate;
+    }
+
+    public function setVipDate(\DateTime $vipDate)
+    {
+        $this->vipDate = $vipDate;
+
+        return $this;
+    }
+
+    public function isVip()
+    {
+        return $this->getVipDate() > (new \DateTime('-1 year'));
     }
 
     public function getPoints()

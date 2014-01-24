@@ -48,6 +48,6 @@ class GiftCardDiscountAction implements PromotionActionInterface
 
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_gift_card_discount_configuration';
+        return 'sylius_promotion_action_no_configuration';
     }
 }
