@@ -1,0 +1,40 @@
+{% extends 'HypebeastWebBundle:Frontend:Checkout/layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/frontend_province.js'
+    '@SyliusWebBundle/Resources/assets/js/province-choices.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ 'sylius.checkout.addressing.header'|trans|title }}</h1>
+    </div>
+
+    {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
+
+    <form method="post"
+          action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}"
+          novalidate>
+        {{ bootstrap_set_style('') }}
+        {{ form_errors(form) }}
+
+        <div>
+            <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans|title }}</h4>
+            {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
+            {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
+        </div>
+
+        <div id="sylius-billing-address-container">
+            <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans|title }}</h4>
+            {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
+        </div>
+
+        {{ form_widget(form._token) }}
+
+        <button type="submit" class="btn btn-primary">{{ 'sylius.checkout.forward'|trans }}</button>
+    </form>
+{% endblock %}

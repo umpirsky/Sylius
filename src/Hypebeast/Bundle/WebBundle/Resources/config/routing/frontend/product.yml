@@ -3,31 +3,6 @@ sylius_product_index_by_taxon:
     defaults:
         _controller: HypebeastCoreBundle:Catalog:taxon
 
-sylius_product_search:
-    pattern: /search
-    defaults:
-        _controller: HypebeastCoreBundle:Catalog:search
-
-sylius_product_index_by_brand:
-    pattern: /brands/{permalink}
-    defaults:
-        _controller: HypebeastCoreBundle:Catalog:taxon
-
-sylius_product_index_by_new_arrivals:
-    pattern: /new-arrivals
-    defaults:
-        _controller: HypebeastCoreBundle:Catalog:newArrival
-
-sylius_product_index_by_back_in_stock:
-    pattern: /back-in-stock
-    defaults:
-        _controller: HypebeastCoreBundle:Catalog:backInStock
-
-sylius_product_index_by_sale:
-    pattern: /sale
-    defaults:
-        _controller: HypebeastCoreBundle:Catalog:onSale
-
 sylius_product_show:
     pattern: /brands/{brand}/{slug}
     defaults:
@@ -35,3 +10,51 @@ sylius_product_show:
         _sylius:
             template: HypebeastWebBundle:Frontend/Product:show.html.twig
             criteria: {slug: $slug, status: %sylius.constant.product_status_published%}
+
+store_back_in_stock:
+    pattern: /back-in-stock
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:backInStock
+
+store_new_arrivals:
+    pattern: /new-arrivals
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:newArrival
+
+store_sale:
+    pattern: /sale
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:sale
+
+store_sale_n_percent_off:
+    pattern: /sale/{percentage}-percent-off
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:saleNPercentOff
+
+store_search:
+    pattern: /search
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:search
+
+store_brands:
+    pattern: /brands
+    defaults:
+        _controller: sylius.controller.taxonomy:showAction
+        _sylius:
+            template: HypebeastWebBundle:Frontend/Product:brands.html.twig
+            criteria: {name: 'Brand'}
+
+store_brand:
+    pattern: /brands/{permalink}
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:taxon
+
+store_category:
+    pattern: /categories/{permalink}
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:taxon
+
+store_subcategory:
+    pattern: /categories/{parent}/{permalink}
+    defaults:
+        _controller: HypebeastCoreBundle:Catalog:taxon

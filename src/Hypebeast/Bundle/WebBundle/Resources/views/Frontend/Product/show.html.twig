@@ -1,59 +1,96 @@
-{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+{% extends 'HypebeastWebBundle:Frontend:layout.html.twig' %}
+{% set form = sylius_cart_form({'product': product, 'quantityless': true}) %}
 
-{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import grid %}
-
-{% set form = sylius_cart_form({'product': product}) %}
+{% block title sylius_product_brand(product).name ~ " " ~ product.name|title %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    {% stylesheets output='styles/product.css' '@HypebeastWebBundle/Resources/assets/less/product.less' %}
+    {% stylesheets output='styles/product.css'
+    '@HypebeastWebBundle/Resources/assets/less/product.less'
+    '@HypebeastWebBundle/Resources/assets/css/venobox.css'%}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/product.js' '@HypebeastWebBundle/Resources/assets/js/venobox.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block main %}
     <div class="row">
-        <div class="col-md-6">
-            <img class="img-responsive" src="{{ product.image ? product.image.path|imagine_filter('store_gallery') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
+        <div id="gallery" class="col-sm-6">
+            <div class="holder">
+                <img class="img-responsive"
+                     src="{{ product.image ? product.image.path|imagine_filter('store_gallery') : 'http://placehold.it/200x200' }}"
+                     alt="{{ product.name }}"
+                     data-index="0" />
+            </div>
 
+            {% spaceless %}
             {% if product.images|length > 0 %}
-                <div id="gallery">
+                <div class="carousel">
                     {% for image in product.images %}
-                        <a href="{{ image.path|imagine_filter('store_thumbnail') }}" title="{{ product.name }}">
-                            <img class="img-rounded" src="{{ image.path|imagine_filter('store_thumbnail') }}" alt="{{ product.name }}" />
+                        <a href="{{ image.path|imagine_filter('store_gallery') }}"
+                           title="{{ product.name }}"
+                           data-gall="gallery">
+                            <img src="{{ image.path|imagine_filter('store_thumbnail') }}" alt="{{ product.name }}" />
                         </a>
                     {% endfor %}
                 </div>
             {% endif %}
+            {% endspaceless %}
         </div>
-        <div id="product-summary" class="col-md-6">
-            <a href="{{ url('sylius_product_index_by_brand', {permalink: sylius_product_taxons(product, 'Brand')[0].permalink}) }}"
-               title="{{ sylius_product_taxons(product, 'Brand')[0].name }}">
-                <h3 class="brand">{{ sylius_product_taxons(product, 'Brand')[0].name }}</h3>
+        <div id="product-summary" class="col-sm-6">
+            <a href="{{ url('store_brand', {permalink: sylius_product_brand(product).permalink}) }}"
+               title="{{ sylius_product_brand(product).name }}">
+                <h3 class="brand">{{ sylius_product_brand(product).name }}</h3>
             </a>
             <h1 class="name">{{ product.name }}</h1>
             <div class="info">
-                <span class="price">
-                    {{ product.masterVariant.price|sylius_price }}
+                <span class="price {{ product.onSale ? 'on-sale' }}">
+                    {% if not product.onSale %}
+                        <span class="regular-price">{{ product.masterVariant.price|sylius_price }}</span>
+                    {% else %}
+                        <span class="regular-price">{{ product.masterVariant.price|sylius_price }}</span>
+                        <span class="sale-price">{{ product.masterVariant.salePrice|sylius_price }}</span>
+                    {% endif %}
                 </span>
             </div>
 
-            <form action="{{ path('sylius_product_show', {'slug': product.slug, 'brand': sylius_product_taxons(product, 'Brand')[0].permalink}) }}" method="post" class="clearfix">
+            <form action="{{ path('sylius_cart_item_add', {
+                'id': product.id,
+                '_redirect_to': url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))
+            }) }}" method="post" class="clearfix">
                 <div class="row">
-                    {% if product.hasVariants %}
+                    {% set productGroup = sylius_product_taxons(product, 'Product Group') %}
+                    {% if productGroup is not empty %}
                         <div class="col-md-6">
-                            {{ form_widget(form.variant) }}
+                            <div class="form-group">
+                                <label class="control-label">{{ 'sylius.product.color'|trans }}</label>
+                                <div>
+                                    <select class="form-control" onchange="javascript:window.location.href=this.value;">
+                                        {% for productInGroup in productGroup[0].products %}
+                                            <option value="{{ path('sylius_product_show', {'slug': productInGroup.slug, 'brand': sylius_product_brand(productInGroup).permalink}) }}"
+                                                    {% if productInGroup.slug == product.slug %}selected{% endif %}>{{ productInGroup.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     {% endif %}
-
-                    <div class="col-md-6">
-                        {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
-                    </div>
+                    {% if product.hasVariants %}
+                        <div class="col-md-6">
+                            {{ form_row(form.variant) }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {% if not product.hasVariants or not sylius_inventory_is_available(product.masterVariant) %}
+                        {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
                             <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
                         {% else %}
                             {{ form_widget(form._token) }}
@@ -66,17 +103,20 @@
                     </div>
                 </div>
 
-                <div class="description">
-                    <h4>Description</h4>
-                    <p>{{ product.description|default('sylius.product.no_description')|trans }}</p>
-                </div>
+                {{ form_rest(form) }}
+            </form>
 
-                {% if product.hasPropertyByName('Clothing Size and Fit') %}
-                <div class="size-and-fit">
-                    <h4>Size and Fit</h4>
-                    <p>{{ product.getPropertyByName('Clothing Size and Fit').value }}</p>
-                </div>
-                {% endif %}
+            <div class="description">
+                <h4>Description</h4>
+                <p>{{ product.description|default('sylius.product.no_description')|trans }}</p>
+            </div>
+
+            {% if product.hasPropertyByName('Clothing Size and Fit') %}
+            <div class="size-and-fit">
+                <h4>Size and Fit</h4>
+                <p>{{ product.getPropertyByName('Clothing Size and Fit').value }}</p>
+            </div>
+            {% endif %}
 
                 {% if product.giftCard %}
                     {{ form_errors(giftCardForm) }}
@@ -117,11 +157,19 @@
                     </div>
                     {{ form_rest(giftCardForm) }}
                 {% endif %}
-            </form>
+
         </div>
-        <div class="col-md-12">
-            <h4>Related products</h4>
-            {{ grid(0 < product.upSells.count ? product.upSells : product.defaultUpSells) }}
+    </div>
+    <div class="row">
+        <div id="related-products" class="col-md-12">
+            <h2><span>Related Products</span></h2>
+            <div class="row">
+                {% for product in product.relatedProducts %}
+                    <div class="col-xs-4">
+                        {% include 'SyliusWebBundle:Frontend/Product:_singleBox.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import update %}
+
+<div class="page-header">
+    <h1>{{ 'sylius.form.frontend.profile.title'|trans|title }}</h1>
+</div>
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }}
+      method="POST"
+      class="form-horizontal">
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+    {{ update() }}
+</form>

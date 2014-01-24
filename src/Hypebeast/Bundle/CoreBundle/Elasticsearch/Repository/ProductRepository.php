@@ -52,11 +52,18 @@ class ProductRepository extends Repository
         return $query;
     }
 
-    public function getOnSaleQuery($filter = [], $sorting = [])
+    public function getSaleQuery($percentOff, $filter = [], $sorting = [])
     {
-        $query = new Query\ConstantScore(
-            new Exists('sale_price')
-        );
+        if ($percentOff) {
+            $query = new Query\Range('discount', [
+                'from' => $percentOff/100,
+                'to' => ($percentOff/100)+0.099
+            ]);
+        } else {
+            $query = new Query\ConstantScore(
+                new Exists('sale_price')
+            );
+        }
 
         return $this->getQuery($query, $filter, $sorting);
     }
@@ -151,6 +158,8 @@ class ProductRepository extends Repository
         foreach (['size', 'brand', 'category'] as $field) {
             $facet = new Facet\Terms($field);
             $facet->setField($field);
+            $facet->setSize(60);
+            $facet->setOrder('count');
             $query->addFacet($facet);
         }
 

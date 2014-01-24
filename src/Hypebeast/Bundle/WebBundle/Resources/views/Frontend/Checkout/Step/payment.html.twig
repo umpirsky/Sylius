@@ -1,0 +1,23 @@
+{% extends 'HypebeastWebBundle:Frontend:Checkout/layout.html.twig' %}
+
+{% block title 'sylius.checkout.payment.header'|trans|title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ 'sylius.checkout.payment.header'|trans|title }}</h1>
+    </div>
+
+    {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
+
+    <form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
+        {{ form_errors(form) }}
+
+        {% for paymentMethodForm in form.paymentMethod %}
+            {{ form_row(paymentMethodForm) }}
+        {% endfor %}
+
+        {{ form_widget(form._token) }}
+
+        <button type="submit" class="btn btn-primary">{{ 'sylius.checkout.forward'|trans }}</button>
+    </form>
+{% endblock %}

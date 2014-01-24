@@ -3,14 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title settings.title|default('sylius.meta.frontend_title'|trans) %}</title>
+    <title>{% block title 'sylius.meta.frontend_title.front_page'|trans|title %} | {{ 'sylius.meta.frontend_title'|trans|title }}</title>
+
     <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
     <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
 
+    <script type="text/javascript" src="{{ asset('bundles/hypebeastweb/bower_components/jquery/jquery.min.js') }}"></script>
+
     {% block stylesheets %}
         {% stylesheets output='styles/core.css'
-            '@HypebeastWebBundle/Resources/assets/less/layout.less' %}
-            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        '@HypebeastWebBundle/Resources/assets/less/layout.less' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
     {% endblock stylesheets %}
 
@@ -19,7 +22,8 @@
     <script src="{{ asset('bundles/hypebeastweb/bower_components/respond/respond.min.js') }}"></script>
     <![endif]-->
 </head>
-<body id="page-container">
+<body class="{{ app.request.get('_route') }}">
+<div id="mmenu-container">
     <nav class="navbar navbar-inverse" role="navigation" id="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -40,24 +44,26 @@
                 <li><a href="http://hypebeast.com/forums">Forums</a></li>
             </ul>
 
-            <form class="navbar-form navbar-left hidden-sm hidden-xs" role="search" action="{{ url('sylius_product_search') }}">
+            <form class="navbar-form navbar-left hidden-sm hidden-xs" role="search" action="{{ url('store_search') }}">
                 <input type="text" class="form-control" placeholder="Search Store" name="q" value="{{ app.request.query.get('q') }}">
                 <span class="glyphicon glyphicon-search"></span>
             </form>
 
             {{ knp_menu_render('store.user', {
-                'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',
-                'style': 'navbar-right'
+            'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',
+            'style': 'navbar-right',
+            'class': 'hidden-xs',
+            'allow_safe_labels': true
             }) }}
         </div>
     </nav>
 
-    <div id="site-subnavbar">
+    <div id="site-subnavbar" class="hidden-xs">
         <div class="container">
-            {{ knp_menu_render('store.sub_navbar', {
-                'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',
-                'depth': 1,
-                'style': 'pills'
+            {{ knp_menu_render('store.menu', {
+            'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',
+            'depth': 1,
+            'style': 'pills'
             }) }}
         </div>
     </div>
@@ -67,19 +73,19 @@
             {{ knp_menu_render('store.brands', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig'}) }}
         </div>
         <div id="site-subnavbar-dropdown-clothing" class="container">
-            {{ knp_menu_render('store.clothing', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',}) }}
+            {{ knp_menu_render('store.clothing', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig'}) }}
         </div>
         <div id="site-subnavbar-dropdown-accessories" class="container">
-            {{ knp_menu_render('store.accessories', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',}) }}
+            {{ knp_menu_render('store.accessories', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig'}) }}
         </div>
         <div id="site-subnavbar-dropdown-sale" class="container">
-            {{ knp_menu_render('store.sale', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig',}) }}
+            {{ knp_menu_render('store.sale', {'template': 'HypebeastWebBundle:Bootstrap:menu.html.twig'}) }}
         </div>
     </div>
 
     <div id="container" class="container">
         {% block flashes %}
-            {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'notice', 'fos_user_success'] %}
+            {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'fos_user_success'] %}
                 {% for flash in flashes %}
                     <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name }}">
                         <a class="close" data-dismiss="alert" href="#">×</a>
@@ -163,12 +169,22 @@
     </div>
     {# div#container #}
 
-    {% block javascripts %}
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-        {% javascripts output='assets/compiled/frontend.js' '@HypebeastWebBundle/Resources/public/bower_components/jsUri/Uri.js' '@HypebeastWebBundle/Resources/assets/js/base.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
+    <nav id="mmenu" style="display: none">
+        {{ knp_menu_render('store.mobile', {'allow_safe_labels': true}) }}
+    </nav>
+</div>
+{# div#mmenu-container #}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/hypebeastweb/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    {% javascripts output='assets/compiled/frontend.js'
+    '@HypebeastWebBundle/Resources/public/bower_components/jsUri/Uri.js'
+    '@HypebeastWebBundle/Resources/assets/js/base.js'
+    '@HypebeastWebBundle/Resources/assets/js/jquery.mmenu.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 </body>
 </html>

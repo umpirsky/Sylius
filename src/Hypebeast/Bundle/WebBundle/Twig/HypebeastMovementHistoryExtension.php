@@ -69,6 +69,7 @@ class HypebeastMovementHistoryExtension extends Twig_Extension
                         return $adjustmentChange->getVariant()->getId() == $variantId;
                     }
                 )->first()->getQuantity();
+
                 break;
             case 'order':
                 $change = $movementHistory->getOrder()->getItems()->filter(
@@ -76,12 +77,16 @@ class HypebeastMovementHistoryExtension extends Twig_Extension
                         return $orderItem->getVariant()->getId() == $variantId;
                     }
                 )->first()->getQuantity();
+
+                $change = $change * -1;
+
+                break;
         endswitch;
 
         if($change > 0) {
-            return '+ ' . $change;
+            return '+' . $change;
         } else {
-            return '- ' . $change;
+            return '-' . abs($change);
         }
     }
 

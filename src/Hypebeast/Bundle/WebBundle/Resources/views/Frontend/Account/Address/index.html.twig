@@ -1,0 +1,78 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block title 'sylius.account.address.list'|trans|title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ 'sylius.account.address.list'|trans|title }}</h1>
+    </div>
+
+    <p>
+        The following addresses are currently associated with your account.<br/>
+        Click the Edit button for any address that you'd like to adjust, or <a href="{{ path('sylius_account_address_create') }}">Click here to add a new address.</a><br/>
+    </p>
+
+    {% if addresses is not empty %}
+        <table id="addresses" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Address</th>
+                    <th class="text-center col-xs-3">Default Billing Addr.</th>
+                    <th class="text-center col-xs-3">Default Shipping Addr.</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr id="{{ address.id }}">
+                    <td class="text-center">
+                        {{ loop.index }}
+                    </td>
+                    <td>
+                        <address>
+                            {{ include('SyliusWebBundle:Frontend/Account/Address:_address.html.twig') }}
+                        </address>
+                        <div>
+                            <a class="btn btn-sm btn-default"
+                               href="{{ path('sylius_account_address_update', {'id': address.id}) }}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                {{ 'sylius.account.address.action.edit'|trans }}
+                            </a>
+                            <a class="btn btn-sm btn-default"
+                               href="{{ path('sylius_account_address_delete', {'id': address.id}) }}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                {{ 'sylius.account.address.action.delete'|trans }}
+                            </a>
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-3">
+                        {% if address == app.user.billingAddress %}
+                            <input name="default-billing" type="radio" checked/>
+                        {% else %}
+                            <input name="default-billing" type="radio"
+                                   data-href="{{ path('sylius_account_address_set_default_billing', {'id': address.id}) }}" />
+                        {% endif %}
+                    </td>
+                    <td class="text-center col-xs-3">
+                        {% if address == app.user.shippingAddress %}
+                            <input name="default-shipping" type="radio" checked/>
+                        {% else %}
+                            <input name="default-shipping" type="radio"
+                                   data-href="{{ path('sylius_account_address_set_default_shipping', {'id': address.id}) }}"/>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ 'sylius.account.address.empty'|trans }}</p>
+    {% endif %}
+
+    <p>
+        <a class="btn btn-primary" href="{{ path('sylius_account_address_create') }}">{{ 'sylius.account.address.action.create'|trans }}</a>
+    </p>
+
+    <p class="text-muted">Note: Pending orders will not be affected by any changes.</p>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block title 'sylius.meta.front_end_title.checkout'|trans|title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets output='styles/cart.css' '@HypebeastWebBundle/Resources/assets/less/checkout.less' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {% block content "" %}
+        </div>
+    </div>
+{% endblock %}

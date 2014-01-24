@@ -39,7 +39,7 @@ class DefaultCountryListener
             $session->remove($this->parameterName . 'zone');
         }
 
-        if (false === $session->has($this->parameterName . 'country')) {
+        if (false === $session->has($this->parameterName . 'country') || !$session->get($this->parameterName . 'country') ) {
             $locator = $this->buildLocator($request);
             $country = $this->findCountry(false === $locator ? null : $locator);
 

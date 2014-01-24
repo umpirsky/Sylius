@@ -2,39 +2,105 @@
 
 namespace Hypebeast\Bundle\WebBundle\Menu;
 
+use Knp\Menu\FactoryInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
+use Sylius\Bundle\CoreBundle\Model\OrderItem;
+use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\CoreBundle\Model\Taxon;
 use Sylius\Bundle\WebBundle\Menu\MenuBuilder;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class StoreMenuBuilder extends MenuBuilder
 {
-    public function createUserMenu(CartProviderInterface $cartProvider, SyliusMoneyExtension $moneyExtension)
+    protected $request;
+
+    public function __construct(FactoryInterface $factory, SecurityContextInterface $securityContext, TranslatorInterface $translator, Request $request)
+    {
+        parent::__construct($factory, $securityContext, $translator);
+
+        $this->request = $request;
+    }
+
+    public function createCartMenu(CartProviderInterface $cartProvider)
+    {
+        $cart = $cartProvider->getCart();
+        $menu = $this->factory->createItem('root', [
+            'route' => 'sylius_cart_summary',
+            'attributes' => [
+                'class' => 'dropdown'
+            ],
+            'linkAttributes' => [
+                'class' => 'dropdown-toggle'
+            ],
+            'childrenAttributes' => [
+                'class' => 'cart dropdown-menu pull-right'
+            ]
+        ]);
+
+        /** @var $item OrderItem */
+        foreach ($cart->getItems() as $item) {
+            /** @var $product Product */
+            $product = $item->getProduct();
+            /** @var $brand Taxon */
+            $brand = new Taxon();
+            $brand->setName('N/A');
+            $brand->setPermalink('na');
+
+            if(count($brands = $product->getTaxons()->filter(function($taxon) { return 'Brand' === $taxon->getTaxonomy()->getName(); })) > 0) {
+                $brand = $brands->first();
+            }
+
+            $menu->addChild($product->getSlug(),
+                [
+                    'route' => 'sylius_product_show',
+                    'routeParameters' => ['slug' => $product->getSlug(), 'brand' => $brand->getPermalink()],
+                    'labelAttributes' => [
+                        'media_object' => true,
+                    ],
+                    'extras' => [
+                        'safe_label' => true,
+                        'media_object' => $product->getImage() ? $product->getImage()->getPath() : 'NA',
+                        'media_heading' => $brand->getName(),
+                        'media_body' => $product->getName(),
+                        'pull' => 'pull-right'
+                    ]
+                ]
+            );
+        }
+
+        if ($cart->countItems() > 0) {
+            $menu->addChild('checkout', [
+                'route' => 'sylius_cart_summary',
+                'linkAttributes' => [
+                    'class' => 'checkout-now'
+                ]
+            ])->setLabel($this->translate('Check Out Now'));
+        }
+
+        return $menu;
+    }
+
+    public function createUserMenu(CartProviderInterface $cartProvider)
     {
         $menu = $this->factory->createItem('user', [
             'childrenAttributes' => [
-                'id' => 'site-account-menu'
+                'id' => 'site-account-menu',
             ],
         ]);
-        $cart = $cartProvider->getCart();
 
         $menu->addChild('location', [
             'uri' => '#',
             'labelAttributes' => [
                 'icon' => 'glyphicon glyphicon-globe'
             ],
-        ])->setLabel('HK');
+        ])->setLabel($this->request->getSession()->get('_hypebeast_default_country')->getIsoName());
 
-        $menu->addChild('cart', array(
-            'route' => 'sylius_cart_summary',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
-                    '%items%' => $cart->getTotalItems(),
-                    '%total%' => $moneyExtension->formatPrice($cart->getTotal())
-                ))),
-            'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
-        ))->setLabel($this->translate('%items% Items', array(
-            '%items%' => $cart->getTotalItems(),
-            '%total%' => $moneyExtension->formatPrice($cart->getTotal())
-        )));
+        $menu->addChild($this->createCartMenu($cartProvider))
+            ->setLabel($this->translate('%items% Items',
+                ['%items%' => $cartProvider->getCart()->getTotalItems()]
+            ));
 
         if ($this->securityContext->isGranted('ROLE_USER')) {
             $account = $this->factory->createItem('account', [
@@ -81,18 +147,20 @@ class StoreMenuBuilder extends MenuBuilder
         return $menu;
     }
 
-    public function createSubNavbarMenu()
+    public function createStoreMenu()
     {
-        $menu = $this->factory->createItem('root');
+        $menu = $this->factory->createItem('store', [
+            'route' => 'sylius_homepage'
+        ]);
 
         $menu->addChild('home', [
             'route' => 'sylius_homepage'
         ])->setLabel('Home');
         $menu->addChild('new_arrivals', [
-            'route' => 'sylius_product_index_by_new_arrivals'
+            'route' => 'store_new_arrivals'
         ])->setLabel('New Arrivals');
         $menu->addChild('back', [
-            'route' => 'sylius_product_index_by_back_in_stock'
+            'route' => 'store_back_in_stock'
         ])->setLabel('Back In Stock');
         $menu->addChild($this->createBrandsMenu())->setLabel('Brands');
         $menu->addChild($this->createClothingMenu())->setLabel('Clothing');
@@ -107,6 +175,51 @@ class StoreMenuBuilder extends MenuBuilder
             'uri' => '#'
         ])->setLabel('Gift Cards');
         $menu->addChild($this->createSaleMenu())->setLabel('Sale');
+
+        return $menu;
+    }
+
+    public function createMobileMenu(CartProviderInterface $cartProvider)
+    {
+        $menu = $this->factory->createItem('root');
+
+        $cart = $cartProvider->getCart();
+
+        $menu->addChild('
+            <form class="search-form" role="search" action="http://store.hypebeast.com">
+                <input type="text" class="form-control" placeholder="Search Store" name="s" value="">
+                <span class="glyphicon glyphicon-search"></span>
+            </form>
+        ',
+            ['extras' => ['safe_label' => true]]
+        );
+
+        $menu->addChild('cart', array(
+            'route' => 'sylius_cart_summary',
+            'attributes' => [
+                'class' => 'cart'
+            ],
+        ))->setLabel($this->translate('View Shipping Cart (%items% Items)', array(
+            '%items%' => $cart->getTotalItems(),
+        )));
+
+        $menu->addChild(
+            $this->factory->createItem('news', ['uri' => '#'])
+                ->addChild('style', ['uri' => '#'])->setLabel('Style')->getParent()
+                ->addChild('style', ['uri' => '#'])->setLabel('Arts')->getParent()
+                ->addChild('design', ['uri' => '#'])->setLabel('Design')->getParent()
+                ->addChild('music', ['uri' => '#'])->setLabel('Music')->getParent()
+                ->addChild('entertainment', ['uri' => '#'])->setLabel('Entertainment')->getParent()
+                ->addChild('lifestyle', ['uri' => '#'])->setLabel('Lifestyle')->getParent()
+                ->addChild('tech', ['uri' => '#'])->setLabel('Tech')->getParent()
+                ->addChild('editorial', ['uri' => '#'])->setLabel('Editorial')->getParent()
+        )->setLabel('News');
+
+        $menu->addChild(
+            $this->createStoreMenu()->removeChild('home')
+        )->setLabel('Store');
+
+        $menu->addChild('forum', ['uri' => '#'])->setLabel('Forum');
 
         return $menu;
     }
@@ -148,7 +261,10 @@ class StoreMenuBuilder extends MenuBuilder
 
         foreach ($brands as $slug => $brand) {
             $menu->addChild($slug, [
-                'uri' => "#$slug"
+                'route' => 'store_brand',
+                'routeParameters' => [
+                    'permalink' => $slug,
+                ]
             ])->setLabel($brand);
         }
 
@@ -185,10 +301,14 @@ class StoreMenuBuilder extends MenuBuilder
             'vests' => 'Vests',
         ];
 
-        foreach ($brands as $slug => $brand) {
+        foreach ($brands as $slug => $label) {
             $menu->addChild($slug, [
-                'uri' => "#$slug"
-            ])->setLabel($brand);
+                'route' => 'store_subcategory',
+                'routeParameters' => [
+                    'parent' => 'clothing',
+                    'permalink' => $slug,
+                ]
+            ])->setLabel($label);
         }
 
         return $menu;
@@ -229,10 +349,14 @@ class StoreMenuBuilder extends MenuBuilder
             'watches' => 'Watches',
         ];
 
-        foreach ($brands as $slug => $brand) {
+        foreach ($brands as $slug => $label) {
             $menu->addChild($slug, [
-                'uri' => "#$slug"
-            ])->setLabel($brand);
+                'route' => 'store_subcategory',
+                'routeParameters' => [
+                    'parent' => 'accessories',
+                    'permalink' => $slug,
+                ]
+            ])->setLabel($label);
         }
 
         return $menu;
@@ -241,24 +365,27 @@ class StoreMenuBuilder extends MenuBuilder
     public function createSaleMenu()
     {
         $menu = $this->factory->createItem('sale', [
-            'route' => 'sylius_product_index_by_sale',
+            'route' => 'store_sale',
             'linkAttributes' => [
                 'data-target' => '#site-subnavbar-dropdown-sale'
             ]
         ]);
 
         $brands = [
-            '30-percent' => '30% off',
-            '40-percent' => '40% off',
-            '50-percent' => '50% off',
-            '60-percent' => '60% off',
-            '70-sale' => '70% off',
+            '30' => '30% off',
+            '40' => '40% off',
+            '50' => '50% off',
+            '60' => '60% off',
+            '70' => '70% off',
         ];
 
-        foreach ($brands as $slug => $brand) {
-            $menu->addChild($slug, [
-                'uri' => "#$slug"
-            ])->setLabel($brand);
+        foreach ($brands as $percentage => $label) {
+            $menu->addChild($percentage, [
+                'route' => 'store_sale_n_percent_off',
+                'routeParameters' => [
+                    'percentage' => $percentage
+                ]
+            ])->setLabel($label);
         }
 
         return $menu;

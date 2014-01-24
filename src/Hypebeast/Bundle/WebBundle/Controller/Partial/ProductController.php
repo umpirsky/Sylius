@@ -3,8 +3,8 @@
 namespace Hypebeast\Bundle\WebBundle\Controller\Partial;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductController as BaseController;
+use Sylius\Bundle\CoreBundle\Model\Product;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class ProductController extends BaseController
 {
@@ -22,8 +22,9 @@ class ProductController extends BaseController
             return $this->forward('sylius.controller.cart_item:addAction', array('id' => $product->getId()));
         }
 
-        if (0 === $product->getUpSells()->count()) {
-            $product->setDefaultUpSells(
+        // Guess some related product if we don't have enough.
+        if ($product->getPickedRelatedProducts()->count() < 3) {
+            $product->setGuessedRelatedProducts(
                 $this->get('sylius.repository.product')->findAllDefaultRelatedProduct($product, 3)
             );
         }

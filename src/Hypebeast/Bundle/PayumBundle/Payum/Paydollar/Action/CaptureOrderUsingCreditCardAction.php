@@ -62,7 +62,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $details->setEpYear($obtainCreditCardRequest->getCreditCard()->getExpiryYear());
             $details->setCardNo($obtainCreditCardRequest->getCreditCard()->getNumber());
             $details->setSecurityCode($obtainCreditCardRequest->getCreditCard()->getSecurityCode());
-            $details->setCardHolder($order->getUser()->getFirstName() . ' ' . $order->getUser()->getLastName());
+            $details->setCardHolder($order->getBillingAddress()->getFirstName() . ' ' . $order->getBillingAddress()->getLastName());
             $details->setSuccessUrl($request->getToken()->getTargetUrl().'?paydollar=pass');
             $details->setFailUrl($request->getToken()->getTargetUrl().'?paydollar=failed');
             $details->setErrorUrl($request->getToken()->getTargetUrl().'?paydollar=error');

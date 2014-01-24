@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="90796488b6ffb32a05a503ce70f14001" resname="sylius.account.title">
+        <source>sylius.account.title</source>
+        <target>Account Settings</target>
+      </trans-unit>
+      <trans-unit id="90796488b6ffb32a05a503ce70f14002" resname="sylius.frontend.menu.account.profile">
+        <source>sylius.frontend.menu.account.profile</source>
+        <target>Profile</target>
+      </trans-unit>
+      <trans-unit id="90796488b6ffb32a05a503ce70f14003" resname="sylius.frontend.menu.account.orders">
+        <source>sylius.frontend.menu.account.orders</source>
+        <target>Orders</target>
+      </trans-unit>
+      <trans-unit id="90796488b6ffb32a05a503ce70f14004" resname="sylius.frontend.menu.account.addresses">
+        <source>sylius.frontend.menu.account.addresses</source>
+        <target>Address Book</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,5 +1,19 @@
 var hypebeast = hypebeast ? hypebeast : {};
 
+hypebeast.initMobileMenu = function($) {
+    var $mmenu = $('#mmenu');
+
+    $mmenu.find('form').unwrap();
+
+    $mmenu.show().mmenu({
+        position: 'right'
+    });
+
+    $('nav .navbar-toggle').click(function() {
+        $mmenu.trigger('open')
+    })
+};
+
 hypebeast.initSubNavbarDropdown = function($) {
     var $subnav = $('#site-subnavbar');
     var $dropdown = $('#site-subnavbar-dropdown');
@@ -60,8 +74,47 @@ hypebeast.initSubNavbarDropdown = function($) {
     }
 };
 
+hypebeast.initProductPage = function($) {
+    if(hypebeast.body.hasClass('sylius_product_show') === false) {
+        return;
+    }
+
+    var $gallery = $('#gallery');
+    var $holder = $('.holder', $gallery);
+    var $carousel = $('.carousel', $gallery);
+
+    $('> a', $carousel).click(function(event) {
+        var $this = $(this);
+        $holder
+            .find('img')
+            .attr('src', $this.attr('href'))
+            .data('index', $this.index())
+        ;
+        event.preventDefault();
+    }).venobox({
+        'border': '10px',
+        'eventType': 'openLightbox'
+    });
+
+    $holder.on('click', 'img', function() {
+        $carousel.find('img:eq('+$(this).data('index')+')').trigger('openLightbox');
+    });
+};
+
+hypebeast.initAccountIndexPage = function($) {
+    if(hypebeast.body.hasClass('sylius_account_address_index') === false) {
+        return;
+    }
+
+    $('input[name="default-shipping"][data-href], input[name="default-billing"][data-href]').click(function() {
+        window.location.href = $(this).data('href');
+        $('#container').fadeTo(null, .5);
+    });
+};
+
+
 hypebeast.initSidebarFilter = function($) {
-    var $filter = $('#sidebar-filter');
+    var $sidebar = $('#sidebar-filter');
     var uri = new Uri(document.location);
     var params = {};
 
@@ -71,7 +124,7 @@ hypebeast.initSidebarFilter = function($) {
 
     }
 
-    $filter.find('li').each(function() {
+    $sidebar.find('li').each(function() {
         var $li = $(this);
         var field = $li.closest('.section').data('field');
         var query = $li.data('query') || $li.text();
@@ -100,6 +153,10 @@ hypebeast.initSidebarFilter = function($) {
             $('#container').fadeTo(null,.5);
             document.location = uri.replaceQueryParam('filter', JSON.stringify(params)).toString();
         })
+    });
+
+    $sidebar.find('.section.collapsable > h5').click(function(event) {
+        $(this).closest('.section').toggleClass('collapsed').find('ul').slideToggle();
     });
 };
 

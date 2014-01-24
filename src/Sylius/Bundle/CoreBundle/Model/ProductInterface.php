@@ -98,6 +98,8 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      */
     public function setPrice($price);
 
+    public function isOnSale();
+    public function getPercentOff();
     public function getSalePrice();
     public function setSalePrice($salePrice);
     public function getWholesalePrice();
@@ -177,8 +179,8 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
     public function getImage();
 
     public function getBackInStockAt();
-    public function setBackInStockAt(DateTime $backInStockAt);
+    public function setBackInStockAt($backInStockAt);
     public function getPublishedAt();
-    public function setPublishedAt(DateTime $publishedAt);
+    public function setPublishedAt($publishedAt);
     public function isNewArrival();
 }

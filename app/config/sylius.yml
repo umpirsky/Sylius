@@ -1,3 +1,6 @@
+parameters:
+    sylius.checkout_scenario.class: Hypebeast\Bundle\CoreBundle\Checkout\CheckoutProcessScenario
+
 sylius_core:
     driver: doctrine/orm
     order_confirmation:
@@ -16,7 +19,7 @@ sylius_cart:
     resolver: sylius.cart_item_resolver.default
     classes:
         item:
-            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+            form: Hypebeast\Bundle\CoreBundle\Form\Type\CartItemType
         cart:
             form: Sylius\Bundle\CoreBundle\Form\Type\CartType
 

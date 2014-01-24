@@ -1,0 +1,42 @@
+{% extends 'SyliusWebBundle:Frontend:Product/index.html.twig' %}
+
+{% block title 'sylius.meta.front_end_title.brand_page'|trans|trans %}
+
+{% block main %}
+    <div class="row">
+    {% for letter in 'A'..'Z' %}
+        {% if loop.index0 % 7 == 0 or loop.first %}
+        <div class="col-xs-3">
+        {% endif %}
+
+            <h4>{{ letter }}</h4>
+            <ul class="list-unstyled">
+            {% for taxon in taxonomy.taxons if taxon.name[0:1] == letter %}
+                <li>
+                    <a href="{{ path('store_brand', {'permalink' : taxon.permalink}) }}" title="{{ taxon.name }}">
+                        {{ taxon.name }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+
+        {% if loop.index0 % 7 == 6 and not loop.first and not loop.last %}
+        </div>
+        {% endif %}
+
+    {% endfor %}
+
+            <h4>#</h4>
+            <ul class="list-unstyled">
+            {% for taxon in taxonomy.taxons if taxon.name[0:1] not in range('A','Z') %}
+                <li>
+                    <a href="{{ path('store_brand', {'permalink' : taxon.permalink}) }}" title="{{ taxon.name }}">
+                        {{ taxon.name }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+{% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import update %}
+
+{% block title 'sylius.account.address.update'|trans|title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ 'sylius.account.address.update'|trans|title }}</h1>
+    </div>
+
+    <form action="{{ path('sylius_account_address_update', {'id': address.id}) }}"
+          method="post"
+          novalidate>
+
+        {{ bootstrap_set_style('') }}
+        {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' %}
+
+        <button type="submit" class="btn btn-primary">{{ 'sylius.save_changes'|trans|title }}</button>
+    </form>
+{% endblock %}

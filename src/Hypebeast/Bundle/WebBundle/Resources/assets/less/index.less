@@ -23,6 +23,13 @@
             font-weight: bold;
         }
     }
+
+    @media (max-width: @screen-xs-max) {
+        .items-per-page {
+            text-align: left;
+            margin-top: 7px;
+        }
+    }
 }
 
 .product {
@@ -106,18 +113,16 @@
         width: 100%;
         border-bottom: solid 1px #e5e5e5;
 
-        .from {
-            display: none;
-        }
+        .price {
+            &.on-sale .regular-price {
+                font-weight: normal;
+                color: @gray-light;
+                text-decoration:line-through;
+            }
 
-        del {
-            font-weight: normal;
-            color: @gray-light;
-        }
-
-        ins {
-            text-decoration: none;
-            color: @red;
+            .sale-price {
+                color: @red;
+            }
         }
 
         .out-of-stock {

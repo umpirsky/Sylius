@@ -1,0 +1,119 @@
+@import "../../public/bower_components/bootstrap/less/variables.less";
+@import "variables.less";
+@import "../../public/bower_components/bootstrap/less/mixins.less";
+
+#sidebar {
+    border-right: solid 1px @page-header-border-color;
+    padding-right: 20px;
+
+    .header {
+        color: #999;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1em;
+    }
+
+    ul > li > a {
+        color: #555;
+        margin: 3px 0;
+        display: block;
+    }
+}
+
+body.sylius_account_order_index {
+    .orders .order {
+        border: solid 1px @page-header-border-color;
+        padding: 10px 0;
+        margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .date {
+            line-height: 1em;
+
+            small {
+                text-transform: uppercase;
+                font-size: 10px;
+                color: @gray-light;
+            }
+
+            h4 {
+                font-weight: normal;
+                margin: 0;
+            }
+        }
+
+        .links {
+            font-size: @font-size-small;
+            line-height: 1em;
+            margin: 3px 0 15px 0;
+            color: @gray-lighter;
+        }
+
+        .number,
+        .total {
+            line-height: 1.2em;
+            margin-bottom: 2px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            small {
+                text-transform: uppercase;
+                font-size: 10px;
+                color: @gray-light;
+            }
+        }
+
+        .items .item {
+            .media {
+                display: table;
+
+                .media-object {
+                    width: 80px;
+                    height: auto;
+                }
+
+                .media-body {
+                    display: table-cell;
+                    vertical-align: middle;
+
+                    .image {
+                        width: 100px;
+                        height: auto;
+                    }
+
+                    .brand {
+                        font-family: @font-family-serif;
+                        font-size: 11px;
+                        font-weight: normal;
+                        white-space: nowrap;
+                        line-height: 1em;
+                        color: #555;
+                        margin: 0;
+                        text-transform: uppercase;
+                    }
+
+                    .name {
+                        font-weight: 500;
+                        font-size: 12px;
+                        color: @gray;
+                        margin: 5px 0 0 0;
+                        text-transform: uppercase;
+                        line-height: 1.2em;
+                    }
+
+                    .options {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

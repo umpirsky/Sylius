@@ -38,7 +38,7 @@
         <source>sylius.product.picture.alt</source>
         <target>%brand% %name% Picutre</target>
       </trans-unit>
-      <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.product.picture.model.alt">
+      <trans-unit id="69aaa56be5e347a8af25f4c92a7ada53" resname="sylius.product.picture.model.alt">
         <source>sylius.product.picture.model.alt</source>
         <target>%brand% %name% Model Picutre</target>
       </trans-unit>
@@ -50,7 +50,7 @@
         <source>sylius.product.tabs.related.up</source>
         <target>Cross sells</target>
       </trans-unit>
-      <trans-unit id="c2928b60e4bb3e0a42ed78727273473h" resname="sylius.inventory.manage">
+      <trans-unit id="40aaad38b1db49c88bdbf616a5b0d49c" resname="sylius.inventory.manage">
         <source>sylius.inventory.manage</source>
         <target>Manage inventory levels</target>
       </trans-unit>
@@ -58,7 +58,7 @@
         <source>sylius.breadcrumb.inventory.update</source>
         <target>Inventory update</target>
       </trans-unit>
-      <trans-unit id="c2928b60e4bb3e0a42ed78727273473j" resname="sylius.adjustment_change.update_header">
+      <trans-unit id="b0cf649ba3064bdbbefc20f2e978888a" resname="sylius.adjustment_change.update_header">
         <source>sylius.adjustment_change.update_header</source>
         <target>Stock adjustment</target>
       </trans-unit>
@@ -158,7 +158,7 @@
         <source>sylius.adjustment.on_hand</source>
         <target>On hand</target>
       </trans-unit>
-      <trans-unit id="c2928b60e4bb3e0a42ed78727273475f" resname="sylius.variant.movement_history">
+      <trans-unit id="1d2b1634c75147688fca3d363b4d65df" resname="sylius.variant.movement_history">
         <source>sylius.variant.movement_history</source>
         <target>Stock movement history</target>
       </trans-unit>
@@ -166,14 +166,80 @@
         <source>sylius.inventory.back_to_product</source>
         <target>Back to product</target>
       </trans-unit>
+      <trans-unit id="eee97b1c28e249fe86a6f15cbc6a5372" resname="sylius.cart.summary.save">
+        <source>sylius.cart.summary.save</source>
+        <target>Update Cart</target>
+      </trans-unit>
+      <trans-unit id="c36c04dadf7b440999f09dabcac7a2f9" resname="sylius.cart.summary.checkout">
+        <source>sylius.cart.summary.checkout</source>
+        <target>Proceed to Checkout</target>
+      </trans-unit>
+      <trans-unit id="252e96ff3f684e0bb5a99f9bf85831ef" resname="sylius.cart.summary.add_coupon">
+        <source>sylius.cart.summary.add_coupon</source>
+        <target>Apply Coupon</target>
+      </trans-unit>
+      <trans-unit id="82daea2556394f528b970cfbef67c682" resname="sylius.account.address.list">
+        <source>sylius.account.address.list</source>
+        <target>Manage addresses</target>
+      </trans-unit>
+      <trans-unit id="6094d0b1813c4c358f6b0dec42bd8bdc" resname="sylius.account.order.list">
+          <source>sylius.account.order.list</source>
+          <target>View Order History</target>
+      </trans-unit>
+      <trans-unit id="8cc3cf7bc5694d36813650d216603108" resname="sylius.order.number">
+        <source>sylius.order.number</source>
+        <target>Order #</target>
+      </trans-unit>
+      <trans-unit id="dd42b294b7ce468aa4a7eb748827dea3" resname="sylius.account.order.state">
+          <source>sylius.account.order.state</source>
+          <target>State:</target>
+      </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273475h" resname="sylius.form.shipping_method.estimation_from">
         <source>sylius.form.shipping_method.estimation_from</source>
         <target>Delivery estimation</target>
       </trans-unit>
-      <trans-unit id="c2928b60e4bb3e0a42ed78727273475i" resname="sylius.form.shipping_method.estimation_to">
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475i" resname="sylius.product.color">
+        <source>sylius.product.color</source>
+        <target>Color</target>
+      </trans-unit>
+      <trans-unit id="a079ae0e7cb74d148a38710339ed3da0" resname="sylius.product.new">
+        <source>sylius.product.new</source>
+        <target>New</target>
+      </trans-unit>
+      <trans-unit id="c2928b60e4bb3e0a42ed78727273475j" resname="sylius.form.shipping_method.estimation_to">
         <source>sylius.form.shipping_method.estimation_to</source>
         <target>to</target>
       </trans-unit>
+
+      <trans-unit id="34fb0030815744d7936fdb418f4d3977" resname="sylius.meta.frontend_title">
+          <source>sylius.meta.frontend_title</source>
+          <target>HYPEBEAST Store</target>
+      </trans-unit>
+      <trans-unit id="bdf7f44226d343769c4dd7290bc1f410" resname="sylius.meta.frontend_title.front_page">
+          <source>sylius.meta.frontend_title.front_page</source>
+          <target>What's New</target>
+      </trans-unit>
+      <trans-unit id="707ee20bc8b343b2b137b1eaf2caa075" resname="sylius.product.new_arrivals">
+          <source>sylius.product.new_arrivals</source>
+          <target>New Arrivals</target>
+      </trans-unit>
+      <trans-unit id="a63b6d83042542dda15bdb6ff628884c" resname="sylius.product.back_in_stock">
+          <source>sylius.product.back_in_stock</source>
+          <target>Back In Stock</target>
+      </trans-unit>
+      <trans-unit id="e943498e53914fe6b93931508f819e08" resname="sylius.meta.front_end_title.brand_page">
+          <source>sylius.meta.front_end_title.brand_page</source>
+          <target>Brands</target>
+      </trans-unit>
+      <trans-unit id="e21ed43898d645fa8d2cf023ec186fac" resname="sylius.meta.front_end_title.cart">
+          <source>sylius.meta.front_end_title.cart</source>
+          <target>Cart</target>
+      </trans-unit>
+      <trans-unit id="040923d1b2df4a5eb3711eb50f7db63b" resname="sylius.meta.front_end_title.checkout">
+          <source>sylius.meta.front_end_title.checkout</source>
+          <target>Checkout</target>
+      </trans-unit>
+
       <trans-unit id="c2928b60e4bb3e0a42ed78727273475j" resname="email.gift_card.subject">
         <source>email.gift_card.subject</source>
         <target>Gift card</target>
@@ -206,6 +272,7 @@
         <source>sylius.gift_card.email</source>
         <target>Email</target>
       </trans-unit>
+
       <trans-unit id="c2928b60e4bb3e0a42ed787272734704" resname="sylius.gift_card.value">
         <source>sylius.gift_card.value</source>
         <target>Value</target>
@@ -277,6 +344,10 @@
       <trans-unit id="c2928b60e4bb3e0a42ed787272734718" resname="sylius.gift_card.create_header">
         <source>sylius.gift_card.create_header</source>
         <target>Creating gift card</target>
+      </trans-unit>
+      <trans-unit id="03e918f7b6e845b48c0d3407119418ce" resname="sylius.form.product.restricted_zone.not_restricted">
+        <source>sylius.form.product.restricted_zone.not_restricted</source>
+        <target>Not Restricted</target>
       </trans-unit>
     </body>
   </file>

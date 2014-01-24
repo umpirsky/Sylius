@@ -1,2 +1,42 @@
-{% extends 'SyliusWebBundle:Frontend:Product/index.html.twig' %}
+{% extends 'HypebeastWebBundle:Frontend/Product:index.html.twig' %}
 
+{% block main %}
+    {% if products.currentPage == 1 and app.request.query.get('filter') is null %}
+        {% set homepagebanners = sylius_settings_all('homepagebanners') %}
+        {% set sections = ['left', 'right'] %}
+
+        {% if homepagebanners is defined %}
+            <div class="row">
+                {% for section in sections %}
+                    <div class="col-xs-6 visible-lg visible-md homepage-top-banner">
+                        <div class="banner-container">
+                            <a href="{{ attribute(homepagebanners, 'banner_link_'~section) }}">
+                                <div class="text-row">
+                                    <div class="text">
+                                        <div class="main-title">{{ attribute(homepagebanners, 'banner_large_title_'~section) }}</div>
+                                        {% if attribute(homepagebanners, 'banner_subtitle_'~section) is not empty %}
+                                            <div class="{{ ['subtitle', attribute(homepagebanners, 'banner_subtitle_font_size_'~section)]|join(' ') }}">
+                                                {{ attribute(homepagebanners, 'banner_subtitle_'~section) }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="overlay col-xs-6"></div>
+                                {% if attribute(homepagebanners, 'banner_add_shop_now_btn_'~section) is not empty %}
+                                    {% set hover_effect = attribute(homepagebanners, 'banner_hover_effect_'~section) is not empty ? "hover-effect" : "" %}
+                                    {% set classes = ["shop-now-btn", attribute(homepagebanners, 'banner_shop_now_color_'~section), hover_effect] %}
+                                    <div class="{{ classes|join(" ") }}">
+                                        <div class="shop-now">Shop Now</div>
+                                    </div>
+                                {% endif %}
+                                <img src="{{ attribute(homepagebanners, 'banner_image_url_'~section) }}" alt=""/>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

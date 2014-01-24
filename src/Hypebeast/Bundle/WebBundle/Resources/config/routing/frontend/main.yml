@@ -1,9 +1,6 @@
 sylius_frontend_main:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/main.yml
 
-sylius_taxonomy:
-    resource: @SyliusWebBundle/Resources/config/routing/frontend/taxonomy.yml
-
 sylius_homepage:
     pattern: /
     defaults:

@@ -15,6 +15,7 @@
 
 {% block javascripts %}
     <script type="text/javascript">
+        {{ bootstrap_set_style('') }}
         var sylius_xeditable_price_tpl = '{{ form_widget(form.masterVariant) }}';
     </script>
     {{ parent() }}

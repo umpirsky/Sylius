@@ -31,6 +31,7 @@ class ProductToElasticaDocumentTransformer implements DataTransformerInterface
         $data = [
             'name' => $product->getName(),
             'price' => $product->getPrice(),
+            'regular_price' => $product->getPrice(),
         ];
 
         if ($product->getPublishedAt()) {
@@ -42,7 +43,9 @@ class ProductToElasticaDocumentTransformer implements DataTransformerInterface
         }
 
         if ($product->getSalePrice()) {
+            $data['price'] = $product->getSalePrice();
             $data['sale_price'] = $product->getSalePrice();
+            $data['discount'] = 1-($product->getSalePrice()/$product->getPrice());
         }
 
         /** @var $taxon Taxon */
@@ -61,7 +64,7 @@ class ProductToElasticaDocumentTransformer implements DataTransformerInterface
             if ($options = $variant->getOptions()) {
                 $size = $options->first();
 
-                if (strpos(strtolower($size->getName()), 'size') !== false) {
+                if ($size && strpos(strtolower($size->getName()), 'size') !== false) {
                     if (!isset($data['size'])) {
                         $data['size'] = [];
                     }

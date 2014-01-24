@@ -45,7 +45,7 @@ class ProductProvider implements ProviderInterface
         $count = $this->countAllProducts();
         $stepStartTime = 0;
 
-        for ($offset = 0; $offset < $count; $offset += self::BATCH_SIZE) {
+        for ($offset = $options['offset']; $offset < $count; $offset += self::BATCH_SIZE) {
             if ($loggerClosure) {
                 $stepStartTime = microtime(true);
             }

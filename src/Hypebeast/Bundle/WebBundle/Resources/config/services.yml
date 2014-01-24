@@ -3,6 +3,7 @@ parameters:
     sylius.movement_history_twig.class: Hypebeast\Bundle\WebBundle\Twig\HypebeastMovementHistoryExtension
     sylius.form.type.property.class: Hypebeast\Bundle\WebBundle\Form\Type\PropertyType
     sylius.checkout_step.shipping.class: Hypebeast\Bundle\WebBundle\Checkout\Step\ShippingStep
+    sylius.menu_builder.backend.class: Hypebeast\Bundle\WebBundle\Menu\BackendMenuBuilder
     sylius.form.type.order_filter.class: Hypebeast\Bundle\WebBundle\Form\Type\Filter\OrderFilterType
     sylius.form.type.shipment.class: Hypebeast\Bundle\CoreBundle\Form\Type\ShipmentType
     sylius.form.type.product_property.class: Hypebeast\Bundle\WebBundle\Form\Type\ProductPropertyType
@@ -26,6 +27,11 @@ services:
         arguments:
             - @router
             - @translator
+        tags:
+            - { name: twig.extension }
+
+    hypebeast.twig.bootstrap_form_extension:
+        class: Hypebeast\Bundle\WebBundle\Twig\BootstrapFormExtension
         tags:
             - { name: twig.extension }
 
@@ -69,6 +75,8 @@ services:
             - @knp_menu.factory
             - @security.context
             - @translator
+            - @request
+        scope: request
 
     store.menu.user:
         class: Knp\Menu\MenuItem
@@ -76,16 +84,24 @@ services:
         factory_method: createUserMenu
         arguments:
             - @sylius.cart_provider
-            - @sylius.twig.money
         tags:
             - { name: knp_menu.menu, alias: store.user }
 
-    store.menu.sub_navbar:
+    store.menu.mobile:
         class: Knp\Menu\MenuItem
         factory_service: store.menu_builder
-        factory_method: createSubNavbarMenu
+        factory_method: createMobileMenu
+        arguments:
+            - @sylius.cart_provider
         tags:
-            - { name: knp_menu.menu, alias: store.sub_navbar }
+            - { name: knp_menu.menu, alias: store.mobile }
+
+    store.menu.store:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder
+        factory_method: createStoreMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.menu }
 
     store.menu.brands:
         class: Knp\Menu\MenuItem
@@ -114,3 +130,17 @@ services:
         factory_method: createSaleMenu
         tags:
             - { name: knp_menu.menu, alias: store.sale }
+
+    store.menu_builder.frontend:
+        class: Hypebeast\Bundle\WebBundle\Menu\FrontendMenuBuilder
+        arguments:
+            - @knp_menu.factory
+            - @security.context
+            - @translator
+
+    store.menu.frontend.account:
+        class: Knp\Menu\MenuItem
+        factory_service: store.menu_builder.frontend
+        factory_method: createAccountMenu
+        tags:
+            - { name: knp_menu.menu, alias: store.frontend.account }

@@ -1,0 +1,18 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets output='styles/account.css'
+    '@HypebeastWebBundle/Resources/assets/less/account.less' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        {{ knp_menu_render('store.frontend.account', {
+            'allow_safe_labels': true
+        }) }}
+    </div>
+{% endblock sidebar %}

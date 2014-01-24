@@ -1,0 +1,48 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block title 'sylius.account.order.list'|trans|title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ 'sylius.account.order.list'|trans|title }}</h1>
+    </div>
+
+    <div class="orders">
+    {% if orders is not empty %}
+        {% for order in orders %}
+            <div class="order clearfix">
+                <div class="col-sm-4 col-md-3">
+                    <div class="date">
+                        <small>{{ 'sylius.account.order.created_at'|trans }}</small>
+                        <h4>{{ order.createdAt|date('F j, Y') }}</h4>
+                    </div>
+                    <div class="links">
+                        <a href="{{ path('sylius_account_order_show', {'number': order.number}) }}">Order Details</a>
+                        {% if order.isInvoiceAvailable %}
+                            | <a href="{{ path('sylius_account_order_invoice', {'number': order.number}) }}">{{ 'sylius.account.order.invoice'|trans }}</a>
+                        {% endif %}
+                    </div>
+                    <div class="number">
+                        <small>{{ 'sylius.order.number'|trans }}</small> {{ order.number }}
+                    </div>
+                    <div class="total">
+                        <small>{{ 'sylius.order.total'|trans }}</small> {{ order.total|sylius_money }}
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="row items">
+                    {% for item in order.items %}
+                        <div class="col-md-6 item">
+                            {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': item.variant}) }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>{{ 'sylius.account.order.empty'|trans }}</p>
+    {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'HypebeastWebBundle:Frontend:Checkout/layout.html.twig' %}
+
+{% block title 'sylius.checkout.finalize.header'|trans|title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ 'sylius.checkout.finalize.header'|trans|title }}</h1>
+    </div>
+
+    {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
+
+    {% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
+
+    <hr/>
+
+    <a href="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="btn btn-success">{{ 'sylius.checkout.finalize.place_order'|trans|title }}</a>
+{% endblock %}

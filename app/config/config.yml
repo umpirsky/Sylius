@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: sylius.yml }
     - { resource: payum.yml }
+    - { resource: elasticsearch.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -210,6 +211,7 @@ cmf_routing:
         generic_controller: cmf_content.controller:indexAction
         persistence:
             phpcr: ~
+
 fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }

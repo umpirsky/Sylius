@@ -14,7 +14,7 @@ class CatalogController extends Controller
     public function homepageAction(Request $request)
     {
         if (!$this->isElasticsearchRunning()) {
-            return $this->render('SyliusWebBundle:Frontend/Product:index.html.twig', [
+            return $this->render('HypebeastWebBundle:Frontend/Homepage:main.html.twig', [
                 'products' => $this->getFallbackPaginator($request, 'createHomepagePaginator'),
             ]);
         }
@@ -24,7 +24,7 @@ class CatalogController extends Controller
             $this->getPriceSortOrder($request)
         ];
 
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByElasticsearch.html.twig', [
+        return $this->render('HypebeastWebBundle:Frontend/Homepage:main.html.twig', [
             'products' => $this->getPaginator($request, 'getHomepageQuery', $arguments),
         ]);
     }
@@ -37,7 +37,7 @@ class CatalogController extends Controller
             $this->getPriceSortOrder($request)
         ];
 
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByElasticsearch.html.twig', [
+        return $this->render('SyliusWebBundle:Frontend/Product:index.html.twig', [
             'products' => $this->getPaginator($request, 'getQueryByTextSearch', $arguments),
         ]);
     }
@@ -45,54 +45,67 @@ class CatalogController extends Controller
     public function newArrivalAction(Request $request)
     {
         if (!$this->isElasticsearchRunning()) {
-            return $this->render('SyliusWebBundle:Frontend/Product:index.html.twig', [
-                'products' => $this->getFallbackPaginator($request, 'createNewArrivalsPaginator'),
+            $products = $this->getFallbackPaginator($request, 'createNewArrivalsPaginator');
+        } else {
+            $products = $this->getPaginator($request, 'getNewArrivalsQuery', [
+                json_decode($request->query->get('filter')),
+                $this->getPriceSortOrder($request)
             ]);
         }
 
-        $arguments = [
-            json_decode($request->query->get('filter')),
-            $this->getPriceSortOrder($request)
-        ];
-
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByElasticsearch.html.twig', [
-            'products' => $this->getPaginator($request, 'getNewArrivalsQuery', $arguments),
+        return $this->render('SyliusWebBundle:Frontend/Product:newArrivals.html.twig', [
+            'products' => $products,
         ]);
     }
 
     public function backInStockAction(Request $request)
     {
         if (!$this->isElasticsearchRunning()) {
-            return $this->render('SyliusWebBundle:Frontend/Product:index.html.twig', [
-                'products' => $this->getFallbackPaginator($request, 'createBackInStockPaginator'),
+            $products = $this->getFallbackPaginator($request, 'createBackInStockPaginator');
+        } else {
+            $products = $this->getPaginator($request, 'getBackInStockQuery', [
+                json_decode($request->query->get('filter')),
+                $this->getPriceSortOrder($request)
             ]);
         }
 
-        $arguments = [
-            json_decode($request->query->get('filter')),
-            $this->getPriceSortOrder($request)
-        ];
-
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByElasticsearch.html.twig', [
-            'products' => $this->getPaginator($request, 'getBackInStockQuery', $arguments),
+        return $this->render('SyliusWebBundle:Frontend/Product:backInStock.html.twig', [
+            'products' => $products,
         ]);
     }
 
-    public function onSaleAction(Request $request)
+    public function saleAction(Request $request)
     {
         if (!$this->isElasticsearchRunning()) {
-            return $this->render('SyliusWebBundle:Frontend/Product:index.html.twig', [
-                'products' => $this->getFallbackPaginator($request, 'createSalePaginator'),
+            $products = $this->getFallbackPaginator($request, 'createSalePaginator');
+        } else {
+            $products = $this->getPaginator($request, 'getSaleQuery', [
+                null,
+                json_decode($request->query->get('filter')),
+                $this->getPriceSortOrder($request)
             ]);
         }
 
-        $arguments = [
-            json_decode($request->query->get('filter')),
-            $this->getPriceSortOrder($request)
-        ];
+        return $this->render('SyliusWebBundle:Frontend/Product:sale.html.twig', [
+            'products' => $products,
+        ]);
+    }
 
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByElasticsearch.html.twig', [
-            'products' => $this->getPaginator($request, 'getOnSaleQuery', $arguments),
+    public function saleNPercentOffAction(Request $request, $percentage)
+    {
+        if (!$this->isElasticsearchRunning()) {
+            $products = $this->getFallbackPaginator($request, 'createSalePaginator');
+        } else {
+            $products = $this->getPaginator($request, 'getSaleQuery', [
+                $percentage,
+                json_decode($request->query->get('filter')),
+                $this->getPriceSortOrder($request)
+            ]);
+        }
+
+        return $this->render('SyliusWebBundle:Frontend/Product:sale.html.twig', [
+            'products' => $products,
+            'percentage' => $percentage,
         ]);
     }
 
@@ -106,19 +119,17 @@ class CatalogController extends Controller
         }
 
         if (!$this->isElasticsearchRunning()) {
-            return $this->render('SyliusWebBundle:Frontend/Product:index.html.twig', [
-                'products' => $this->getFallbackPaginator($request, 'createByTaxonPaginator', [$taxon]),
+            $products = $this->getFallbackPaginator($request, 'createByTaxonPaginator', [$taxon]);
+        } else {
+            $products = $this->getPaginator($request, 'getQueryByTaxon', [
+                $taxon,
+                json_decode($request->query->get('filter')),
+                $this->getPriceSortOrder($request)
             ]);
         }
 
-        $arguments = [
-            $taxon,
-            json_decode($request->query->get('filter')),
-            $this->getPriceSortOrder($request)
-        ];
-
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByElasticsearch.html.twig', [
-            'products' => $this->getPaginator($request, 'getQueryByTaxon', $arguments),
+        return $this->render('SyliusWebBundle:Frontend/Product:taxon.html.twig', [
+            'products' => $products, 'taxon' => $taxon
         ]);
     }
 

@@ -1,0 +1,16 @@
+{% set product = item.variant.product %}
+<tr>
+    <td class="product">
+        {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': item.variant}) }}
+    </td>
+    <td class="unit-price">
+        {{ item.unitPrice|sylius_price }}
+    </td>
+    <td class="quantity">
+        {{ form_widget(form.items[loop.index0].quantity) }}
+        <a class="remove" href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}">Remove</a>
+    </td>
+    <td class="total">
+        {{ (item.unitPrice * item.quantity)|sylius_price }}
+    </td>
+</tr>

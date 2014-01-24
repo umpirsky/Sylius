@@ -1,0 +1,9 @@
+sylius_backend_settings_parent:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
+
+hypebeast_homepage_banner_settings:
+      pattern: /banners/homepage
+      defaults:
+          _controller: sylius.controller.settings:updateAction
+          namespace: homepagebanners
+          template: HypebeastWebBundle:Backend/Settings:homepagebanners.html.twig

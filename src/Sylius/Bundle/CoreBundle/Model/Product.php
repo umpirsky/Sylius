@@ -124,7 +124,7 @@ class Product extends BaseProduct implements ProductInterface
 
     protected $crossSellOf;
 
-    protected $defaultUpSells;
+    protected $guessedRelatedProducts;
 
     /**
      * Constructor.
@@ -139,6 +139,15 @@ class Product extends BaseProduct implements ProductInterface
         $this->upSells = new ArrayCollection();
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
         $this->giftCard = false;
+    }
+
+    public function isAvailable()
+    {
+        if ($this->isPublished() && !$this->isDeleted()) {
+            return parent::isAvailable();
+        }
+
+        return false;
     }
 
     /**
@@ -233,6 +242,24 @@ class Product extends BaseProduct implements ProductInterface
         $this->getMasterVariant()->setPrice($price);
 
         return $this;
+    }
+
+    public function isOnSale()
+    {
+        if ($this->getSalePrice() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getPercentOff()
+    {
+        if ($this->isOnSale()) {
+            return round((1-($this->getSalePrice() / $this->getPrice())) * 100, -1, PHP_ROUND_HALF_DOWN);
+        }
+
+        return null;
     }
 
     /**
@@ -454,7 +481,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setBackInStockAt(DateTime $backInStockAt)
+    public function setBackInStockAt($backInStockAt)
     {
         $this->backInStockAt = $backInStockAt;
 
@@ -472,9 +499,93 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setPublishedAt(DateTime $publishedAt)
+    public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get all possible related product.
+     *
+     * @param int $amount
+     * @return ArrayCollection
+     */
+    public function getRelatedProducts($amount = 3)
+    {
+        $picked = $this->getPickedRelatedProducts();
+        $guessed = $this->getGuessedRelatedProducts();
+
+        if ($picked->count() >= $amount || empty($guessed)) {
+            return $picked->slice(0, $amount);
+        }
+
+        $result = new ArrayCollection(array_merge(
+            $picked->toArray(),
+            $guessed->toArray()
+        ));
+
+        return $result->slice(0, $amount);
+    }
+
+    /**
+     * Related products picked by store operator.
+     *
+     * @return ArrayCollection
+     */
+    public function getPickedRelatedProducts()
+    {
+        // Filter out sold out product
+        $filter = function(Product $product) {
+            return
+                $product->isAvailable() &&
+                $product->getMasterVariant()->getOnHand() > 0
+            ;
+        };
+
+        return new ArrayCollection(
+            array_merge(
+                $this->getUpSells()->filter($filter)->toArray(),
+                $this->getCrossSells()->filter($filter)->toArray()
+            )
+        );
+    }
+
+    /**
+     * Related products guessed by system.
+     *
+     * @return ArrayCollection
+     */
+    public function getGuessedRelatedProducts()
+    {
+        return $this->guessedRelatedProducts;
+    }
+
+    public function setGuessedRelatedProducts($defaultUpSells)
+    {
+        if (is_array($defaultUpSells)) {
+            $this->guessedRelatedProducts = new ArrayCollection($defaultUpSells);
+        } else {
+            $this->guessedRelatedProducts = $defaultUpSells;
+        }
+    }
+
+    public function addGuessedRelatedProduct($defaultUpSell)
+    {
+        $this->guessedRelatedProducts->add($defaultUpSell);
+
+        return $this;
+    }
+
+    public function hasGuessedRelatedProduct($defaultUpSell)
+    {
+        return $this->guessedRelatedProducts->contains($defaultUpSell);
+    }
+
+    public function removeGuessedRelatedProduct($defaultUpSell)
+    {
+        $this->guessedRelatedProducts->remove($defaultUpSell);
 
         return $this;
     }
@@ -506,37 +617,6 @@ class Product extends BaseProduct implements ProductInterface
     public function removeUpSell($upSell)
     {
         $this->upSells->remove($upSell);
-
-        return $this;
-    }
-
-    public function getDefaultUpSells()
-    {
-        return $this->defaultUpSells;
-    }
-
-    public function setDefaultUpSells($defaultUpSells)
-    {
-        $this->defaultUpSells = $defaultUpSells;
-
-        return $this;
-    }
-
-    public function addDefaultUpSell($defaultUpSell)
-    {
-        $this->defaultUpSells->add($defaultUpSell);
-
-        return $this;
-    }
-
-    public function hasDefaultUpSell($defaultUpSell)
-    {
-        return $this->defaultUpSells->contains($defaultUpSell);
-    }
-
-    public function removeDefaultUpSell($defaultUpSell)
-    {
-        $this->defaultUpSells->remove($defaultUpSell);
 
         return $this;
     }

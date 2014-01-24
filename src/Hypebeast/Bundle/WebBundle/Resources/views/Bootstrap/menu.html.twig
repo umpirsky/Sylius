@@ -37,6 +37,10 @@
                 {% set listClass = (listClass|default('') ~ 'pull-left')|trim %}
             {% endif %}
 
+            {% if options.class is defined %}
+                {% set listClass = (listClass|default('') ~ ' ' ~ options.class)|trim %}
+            {% endif %}
+
             {% set listAttributes = listAttributes|merge({'class': (listAttributes.class|default('') ~ ' ' ~ listClass)|trim}) %}
         {% endif %}
 
@@ -49,6 +53,27 @@
     {% endif %}
 {% endblock %}
 
+{% block item %}
+    {% if item.labelAttribute('media_object') %}
+        <li>
+            <a class="media" href="{{ item.uri }}">
+                <div class="{{ item.getExtra('pull', 'pull-left') }}">
+                    <img class="media-object" src="{{ item.getExtra('media_object', false)|imagine_filter('store_thumbnail') }}">
+                </div>
+                <div class="media-body">
+                    {% if item.getExtra('media_heading', false) %}
+                        <h5 class="media-heading">{{ item.getExtra('media_heading', false)|raw }}</h5>
+                    {% endif %}
+
+                    {{ item.getExtra('media_body', false)|raw }}
+                </div>
+            </a>
+        </li>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block label %}
     {% if item.labelAttribute('icon') %}
         <span class="{{ item.labelAttribute('icon') }}"></span>
@@ -56,9 +81,9 @@
 
     {% if not item.labelAttribute('iconOnly') %}
         {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}
-            {{ item.label|raw }}
+            {{ item.label|trans|raw }}
         {% else %}
-            {{ item.label }}
+            {{ item.label|trans }}
         {% endif %}
     {% endif %}
 {% endblock %}

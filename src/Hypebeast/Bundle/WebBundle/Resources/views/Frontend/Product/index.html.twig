@@ -27,8 +27,92 @@
 
     <hr/>
 
-    {{ grid(products) }}
+    <div class="row">
+        {% for product in products %}
+            <div class="col-xs-6 col-sm-4">
+                {% include 'SyliusWebBundle:Frontend/Product:_singleBox.html.twig' %}
+            </div>
+        {% else %}
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    {{ 'sylius.product.no_results'|trans }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
     {{ pagination(products) }}
+{% endblock %}
+
+{% block sidebar %}
+    {% if products.adapter.facets is defined %}
+        {# Elasticsearch product filter #}
+        <div id="sidebar-filter">
+            {% set facets = products.adapter.facets %}
+
+            <div class="section">
+                <a href="{{ url('store_new_arrivals') }}"><h5>New Arrivals</h5></a>
+            </div>
+
+            <div class="section">
+                <a href="{{ url('store_back_in_stock') }}"><h5>Back In Stock</h5></a>
+            </div>
+
+            <div class="section">
+                <a href="{{ url('store_sale') }}"><h5>Sale</h5></a>
+            </div>
+
+            <div class="section collapsable" data-field="category">
+                <h5>Categories</h5>
+                <ul>
+                    {% for term in sort_facet_terms(facets.category.terms, 'category') %}
+                        <li>{{ term.term }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section collapsable" data-field="brand">
+                <h5>Brands</h5>
+                <ul>
+                    {% for term in sort_facet_terms(facets.brand.terms, 'brand') %}
+                        <li>{{ term.term }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section collapsable" data-field="size">
+                <h5>Size</h5>
+                <ul>
+                    {% for term in sort_facet_terms(facets.size.terms, 'size') %}
+                        <li>{{ term.term }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section collapsable" data-field="price">
+                <h5>Price</h5>
+                <ul>
+                    {% for range in facets.price.ranges if range.count > 0 %}
+                        {% if range.from is not defined %}
+                            <li data-query='{"from": null, "to": {{ range.to }}}'>
+                                {{ range.to|sylius_price }} and under
+                            </li>
+                        {% elseif range.to is not defined %}
+                            <li data-query='{"from": {{ range.from }}, "to": null}'>
+                                {{ range.from|sylius_price }} or above
+                            </li>
+                        {% else %}
+                            <li data-query='{"from": {{ range.from }}, "to": {{ range.to }}}'>
+                                {{ range.from|sylius_price }} - {{ range.to|sylius_price }}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
 {% endblock %}
 
 {% macro path_with_params(params) %}

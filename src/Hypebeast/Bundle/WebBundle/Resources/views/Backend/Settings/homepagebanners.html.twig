@@ -1,0 +1,43 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block topbar %}
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+        <li>Homepage Banner Settings</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-info-sign"></i> Homepage Banner Settings</h1>
+    </div>
+
+    {{ form_errors(form) }}
+
+    <form action="{{ path('hypebeast_homepage_banner_settings') }}" method="post" class="form-horizontal" novalidate>
+        <h3>Left Banner</h3>
+        {{ form_row(form.banner_image_url_left) }}
+        {{ form_row(form.banner_link_left) }}
+        {{ form_row(form.banner_large_title_left) }}
+        {{ form_row(form.banner_subtitle_left) }}
+        {{ form_row(form.banner_subtitle_font_size_left) }}
+        {{ form_row(form.banner_add_shop_now_btn_left) }}
+        {{ form_row(form.banner_hover_effect_left) }}
+        {{ form_row(form.banner_shop_now_color_left) }}
+
+        <h3>Right Banner</h3>
+        {{ form_row(form.banner_image_url_right) }}
+        {{ form_row(form.banner_link_right) }}
+        {{ form_row(form.banner_large_title_right) }}
+        {{ form_row(form.banner_subtitle_right) }}
+        {{ form_row(form.banner_subtitle_font_size_right) }}
+        {{ form_row(form.banner_add_shop_now_btn_right) }}
+        {{ form_row(form.banner_hover_effect_right) }}
+        {{ form_row(form.banner_shop_now_color_right) }}
+
+        {{ form_rest(form) }}
+        {{ update() }}
+    </form>
+{% endblock %}

@@ -1,0 +1,148 @@
+<div class="order-detail">
+    <div class="header">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2 class="number">ORDER #{{ order.number }}</h2>
+                <div class="date">{{ order.createdAt|date('F j, Y') }}</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="vertical-align">
+                    <div>
+                        {{ 'sylius.account.order.state'|trans }}
+                        {#{% include "SyliusWebBundle:Frontend/Account:Order/_state.html.twig" %}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info">
+        <div class="row">
+            <div class="billing-address col-sm-4">
+                <h5>{{ 'sylius.order.billing_address'|trans|title }}</h5>
+                <address>
+                    <strong>{{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}</strong><br/>
+                    {% if order.billingAddress.company %}
+                        {{ order.billingAddress.company }}<br/>
+                    {% endif %}
+                    {{ order.billingAddress.street }}<br/>
+                    {{ order.billingAddress.city }}<br/>
+                    {% if order.billingAddress.province %}
+                        {{ order.billingAddress.province }}<br/>
+                    {% endif %}
+                    {{ order.billingAddress.country }} {{ order.billingAddress.postcode }}
+                </address>
+            </div>
+            <div class="shipping-address col-sm-4">
+                <h5>{{ 'sylius.order.shipping_address'|trans|title }}</h5>
+                <address>
+                    <strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong><br/>
+                    {% if order.shippingAddress.company %}
+                        {{ order.shippingAddress.company }}<br/>
+                    {% endif %}
+                    {{ order.shippingAddress.street }}<br/>
+                    {{ order.shippingAddress.city }}<br/>
+                    {% if order.shippingAddress.province %}
+                        {{ order.shippingAddress.province }}<br/>
+                    {% endif %}
+                    {{ order.shippingAddress.country }} {{ order.shippingAddress.postcode }}
+                </address>
+            </div>
+            <div class="col-sm-4">
+                <h5>Delivery</h5>
+                <dl>
+                    <dt>Shipping Method</dt>
+                    <dd>{{ order.shipments.first.method }}</dd>
+                    <dt>Tracking Number</dt>
+                    {% if order.shipments.first.tracking %}
+                    <dd>{{ order.shipments.first.tracking }}</dd>
+                    {% else %}
+                    <dd><em>Not available yet.</em></dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="order-items">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.order_item.sellable'|trans }}</th>
+                <th class="text-center">{{ 'sylius.order_item.quantity'|trans }}</th>
+                <th class="text-center">{{ 'sylius.order_item.unit_price'|trans }}</th>
+                <th>{{ 'sylius.order_item.total'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order.items %}
+                {% set product = item.product %}
+                <tr>
+                    <td class="variant">
+                        {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': item.variant}) }}
+                    </td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-center">{{ item.unitPrice|sylius_price }}</td>
+                    <td>{{ item.total|sylius_price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3" class="text-right">
+                        {{ 'sylius.order.items_total'|trans }}
+                    </th>
+                    <th>{{ order.itemsTotal|sylius_price }}</th>
+                </tr>
+
+                {# Tax #}
+                {% if order.taxTotal %}
+                <tr>
+                    <td>
+                        {% for taxAdjustment in order.taxAdjustments %}
+                            <small class="text-muted">{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price }}</small>
+                        {% endfor %}
+                    </td>
+                    <td colspan="2" class="text-right">
+                        {{ 'sylius.order.tax_total'|trans }}
+                    </td>
+                    <td>{{ order.taxTotal|sylius_price }}</td>
+                </tr>
+                {% endif %}
+
+                {# Shipping #}
+                <tr>
+                    <td>
+                        {% for adjustment in order.shippingAdjustments %}
+                            <small class="text-muted">{{ adjustment.description }} {{ adjustment.amount|sylius_price }}</small>
+                        {% endfor %}
+                    </td>
+                    <td colspan="2" class="text-right">
+                        {{ 'sylius.order.shipping_total'|trans }}
+                    </td>
+                    <td>{{ order.shippingTotal|sylius_price }}</td>
+                </tr>
+
+                {# Promotion #}
+                {% if order.promotionTotal %}
+                <tr>
+                    <td>
+                        {% for adjustment in order.promotionAdjustments %}
+                        <div class="text-muted"><small>{{ adjustment.description }} {{ adjustment.amount|sylius_price }}</small></div>
+                        {% endfor %}
+                    </td>
+                    <td colspan="2" class="text-right">
+                        {{ 'sylius.order.promotion_total'|trans }}
+                    </td>
+                    <td>{{ order.promotionTotal|sylius_price }}</td>
+                </tr>
+                {% endif %}
+
+                <tr class="total">
+                    <th colspan="3" class="text-right">
+                        {{ 'sylius.order.total'|trans }}
+                    </th>
+                    <th>{{ order.total|sylius_price }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

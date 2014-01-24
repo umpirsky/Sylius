@@ -57,7 +57,7 @@
     });
 
     Price.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
-        tpl: sylius_xeditable_price_tpl,
+        tpl: sylius_xeditable_price_tpl.trim(),
         inputclass: ''
     });
 

@@ -49,6 +49,8 @@
 @import "../../public/bower_components/bootstrap/less/utilities.less";
 @import "../../public/bower_components/bootstrap/less/responsive-utilities.less";
 
+
+
 body {
     padding: 0;
     line-height: 20px;
@@ -82,19 +84,6 @@ body {
     figure {
         margin: 0;
         padding: 0;
-    }
-
-    .page-header {
-        border-top: solid 3px #EAEAEA;
-        padding: 11px 0 12px 0;
-        margin: 0 0 20px 0;
-
-        h1, h2, h3, h4, h5 {
-            margin: 0;
-            line-height: 1em;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
     }
 
     // modal
@@ -216,5 +205,90 @@ body {
     .typeahead {
         border-radius: 1px;
         min-width: 140px - 2;
+    }
+}
+
+.page-header {
+    > h1, > h2, > h3, > h4 {
+        font-weight: 200;
+    }
+
+    &:first-child {
+        margin-top: 0;
+
+        > h1, > h2, > h3, > h4 {
+            margin-top: 0;
+        }
+    }
+}
+
+.form-control {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.03);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.03);
+
+    &:focus {
+        .box-shadow(none);
+        border-color: darken(@input-border, 15%);
+    }
+}
+
+.btn {
+
+    &:not(.btn-link) {
+        .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 1px rgba(0,0,0,.05)");
+    }
+
+    &.btn-default {
+        .btn-default;
+        border-bottom-color: darken(@btn-default-border, 8%);
+        #gradient > .vertical(#FFF, #EEE);
+
+        &:hover {
+            border-color: darken(@btn-default-border, 5%);
+            border-bottom-color: darken(@btn-default-border, 15%);
+            #gradient > .vertical(#FFF, #F5F5F5);
+        }
+    }
+
+    &.btn-primary {
+        .btn-primary;
+        border-bottom-color: darken(@btn-primary-border, 5%);
+        #gradient > .vertical(lighten(@btn-primary-bg, 5%), @btn-primary-bg);
+        text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+
+        &:hover {
+            #gradient > .vertical(@btn-primary-bg, darken(@btn-primary-bg, 5%));
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.pagination {
+    border-radius: 0;
+    .box-shadow(none);
+    margin-left: -8px;
+    margin-right: -8px;
+
+    > li {
+        > a,
+        > span {
+            border: none;
+            font-weight: bold;
+            padding: 0px 8px;
+            color: @gray-light;
+            font-size: 12px;
+        }
+
+        > a {
+            color: @gray-light;
+
+            &:hover {
+                color: #000;
+                background: transparent;
+            }
+        }
     }
 }

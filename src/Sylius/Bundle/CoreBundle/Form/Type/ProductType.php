@@ -62,18 +62,21 @@ class ProductType extends BaseProductType
                 'choices' => Product::getVariantSelectionMethodLabels()
             ))
             ->add('restrictedZone', 'sylius_zone_choice', array(
-                'empty_value' => '---',
+                'empty_value' => 'sylius.form.product.restricted_zone.not_restricted',
                 'label'       => 'sylius.form.product.restricted_zone',
+                'required'    => false,
             ))
             ->add('status', 'choice', array(
                 'label'   => 'sylius.form.product.status',
-                'choices' => Product::getStatusLabels()
+                'choices' => Product::getStatusLabels(),
+                'expanded' => true,
             ))
             ->add('backInStockAt', 'datetime', [
                 'label'       => 'sylius.form.product.back_in_stock_at',
                 'date_format' => 'y-M-d',
                 'date_widget' => 'choice',
                 'time_widget' => 'text',
+                'required'    => false,
             ])
             ->add('uploadId', 'hidden', array(
                 'data'    => uniqid(),
@@ -84,15 +87,17 @@ class ProductType extends BaseProductType
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function(FormEvent $event) {
+                /** @var $data Product */
                 $data = $event->getData();
                 $form = $event->getForm();
 
-                if (null !== $data->getPublishedAt()) {
+                if ($data->getStatus() !== Product::STATUS_DRAFT) {
                     $form->add('publishedAt', 'datetime', [
                         'label'       => 'sylius.form.product.published_at',
                         'date_format' => 'y-M-d',
                         'date_widget' => 'choice',
                         'time_widget' => 'text',
+                        'required'    => false,
                     ]);
                 }
             }

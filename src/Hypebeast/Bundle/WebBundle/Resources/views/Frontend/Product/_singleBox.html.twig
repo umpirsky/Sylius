@@ -1,5 +1,4 @@
-{% set brands = sylius_product_taxons(product, 'Brand') %}
-{% set brand = brands ? brands[0] : {'permalink': 'na', 'name': ''} %}
+{% set brand = sylius_product_brand(product) %}
 
 <div class="product">
     {% spaceless %}
@@ -16,16 +15,30 @@
         {% endif %}
     </a>
     {% endspaceless %}
-    <a href="{{ path('sylius_product_index_by_brand', {'permalink': brand.permalink}) }}">
+    <a href="{{ path('store_brand', {'permalink': brand.permalink}) }}">
         <h4 class="brand">{{ brand.name }}</h4>
     </a>
     <a href="{{ path('sylius_product_show', {'slug': product.slug, 'brand': brand.permalink}) }}">
         <h3 class="name">{{ product.name }}</h3>
     </a>
     <div class="info">
-        <span class="price">{{ product.masterVariant.price|sylius_price }}</span>
+        <span class="price {{ product.onSale ? 'on-sale' }}">
+            {% if not product.onSale %}
+                <span class="regular-price">{{ product.masterVariant.price|sylius_price }}</span>
+            {% else %}
+                <span class="regular-price">{{ product.masterVariant.price|sylius_price }}</span>
+                <span class="sale-price">{{ product.masterVariant.salePrice|sylius_price }}</span>
+            {% endif %}
+        </span>
+
         {% if product.newArrival %}
             <span class="new">{{ 'sylius.product.new'|trans }}</span>
+        {% endif %}
+
+        {% if product.percentOff %}
+            <div class="pull-right">
+                {{ product.percentOff }}% off
+            </div>
         {% endif %}
     </div>
 </div>
