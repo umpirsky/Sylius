@@ -13,6 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Channel\Model\ChannelAwareInterface;
+use Sylius\Component\Inventory\Model\InventorySubjectInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
@@ -23,8 +25,22 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
+interface OrderInterface extends
+    CartInterface,
+    PaymentsSubjectInterface,
+    PromotionCountableSubjectInterface,
+    PromotionCouponsAwareSubjectInterface,
+    UserAwareInterface,
+    ChannelAwareInterface,
+    InventorySubjectInterface
 {
+    const CHECKOUT_STATE_CART       = 'cart';
+    const CHECKOUT_STATE_ADDRESSING = 'addressing';
+    const CHECKOUT_STATE_SHIPPING   = 'shipping';
+    const CHECKOUT_STATE_PAYMENT    = 'payment';
+    const CHECKOUT_STATE_FINALIZE   = 'finalize';
+    const CHECKOUT_STATE_COMPLETED  = 'completed';
+
     /**
      * Get shipping address.
      *
@@ -54,6 +70,20 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     public function setBillingAddress(AddressInterface $address);
 
     /**
+     * Get the checkout state.
+     *
+     * @return string
+     */
+    public function getCheckoutState();
+
+    /**
+     * Set the checkout state.
+     *
+     * @param string $
+     */
+    public function setCheckoutState($checkoutState);
+
+    /**
      * Get the payment state.
      *
      * @return string
@@ -66,13 +96,6 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @param string $paymentState
      */
     public function setPaymentState($paymentState);
-
-    /**
-     * Get all inventory units.
-     *
-     * @return Collection|InventoryUnitInterface[]
-     */
-    public function getInventoryUnits();
 
     /**
      * Get all inventory units by the product variant.
@@ -135,6 +158,20 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @return OrderInterface
      */
     public function setCurrency($currency);
+
+    /**
+     * Return the exchange rate for this order.
+     *
+     * @return float
+     */
+    public function getExchangeRate();
+
+    /**
+     * Set the exchange rate.
+     *
+     * @param float $exchangeRate
+     */
+    public function setExchangeRate($exchangeRate);
 
     /**
      * Adds promotion coupon.

@@ -8,6 +8,7 @@ sylius:
                 countries: Countries
                 customer: Customers
                 content: Content
+                channels: Channels
                 dashboard: Dashboard
                 currencies: Currencies
                 general_settings: General settings
@@ -36,12 +37,15 @@ sylius:
                 taxonomies: Categorization
                 users: Users
                 zones: Zones
+                stock_locations: Stock locations
             sidebar:
                 assortment: Assortment
                 blocks: Blocks
                 configuration: Configuration
                 content: Content
                 countries: Countries
+                channels: Channels
+                stock_locations: Stock locations
                 customer: Customers
                 dashboard: Dashboard
                 currencies: Currencies

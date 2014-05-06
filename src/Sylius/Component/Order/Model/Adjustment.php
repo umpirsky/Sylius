@@ -188,6 +188,9 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAmount($amount)
     {
+        if (!is_int($amount)) {
+            throw new \InvalidArgumentException('Amount must be an integer.');
+        }
         $this->amount = $amount;
 
         return $this;

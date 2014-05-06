@@ -32,6 +32,13 @@ class LoadProductsData extends DataFixture
      */
     private $totalVariants = 0;
 
+    private  $channels = array(
+        'WEB-UK',
+        'WEB-DE',
+        'WEB-US',
+        'MOBILE'
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -92,6 +99,7 @@ class LoadProductsData extends DataFixture
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
 
@@ -135,6 +143,7 @@ class LoadProductsData extends DataFixture
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Stickers', 'Stickypicky'));
 
@@ -172,6 +181,7 @@ class LoadProductsData extends DataFixture
         $product->setShortDescription($this->faker->sentence);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Mugs', 'Mugland'));
 
@@ -207,6 +217,7 @@ class LoadProductsData extends DataFixture
         $product->setShortDescription($this->faker->sentence);
 
         $this->addMasterVariant($product, $isbn);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
 
@@ -235,7 +246,6 @@ class LoadProductsData extends DataFixture
             $variant->setAvailableOn($this->faker->dateTimeThisYear);
             $variant->setPrice($this->faker->randomNumber(4));
             $variant->setSku($this->getUniqueSku());
-            $variant->setOnHand($this->faker->randomNumber(1));
 
             $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
 
@@ -256,7 +266,6 @@ class LoadProductsData extends DataFixture
         $variant->setPrice($this->faker->randomNumber(4));
         $variant->setSku(null === $sku ? $this->getUniqueSku() : $sku);
         $variant->setAvailableOn($this->faker->dateTimeThisYear);
-        $variant->setOnHand($this->faker->randomNumber(1));
 
         $productName = explode(' ', $product->getName());
         $image = clone $this->getReference(
@@ -304,6 +313,19 @@ class LoadProductsData extends DataFixture
         }
 
         $product->setTaxons($taxons);
+    }
+
+    /**
+     * Set channels.
+     *
+     * @param ProductInterface $product
+     * @param array            $channelCodes
+     */
+    protected function setChannels(ProductInterface $product, array $channelCodes)
+    {
+        foreach ($channelCodes as $code) {
+            $product->addChannel($this->getReference('Sylius.Channel.'.$code));
+        }
     }
 
     /**

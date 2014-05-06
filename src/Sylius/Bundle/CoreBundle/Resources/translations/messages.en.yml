@@ -24,6 +24,12 @@ sylius:
         group:
             name: Name
             roles: Roles
+        channel:
+            taxonomies: Taxonomies
+            locales: Locales
+            currencies: Currencies
+            shipping_methods: Shipping Methods
+            payment_methods: Payment Methods
         image:
             file: Image
         locale:
@@ -63,6 +69,11 @@ sylius:
             created_at_to: To
             number: Order number
             shipping_address: Ship to name
+        payment_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Order number
+            billing_address: Bill to name
         shipping_method:
             zone: Zone
         taxon:

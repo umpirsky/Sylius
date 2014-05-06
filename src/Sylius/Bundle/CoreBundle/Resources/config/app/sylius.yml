@@ -39,6 +39,12 @@ sylius_api:
         api_user:
             model: %sylius.model.user.class%
 
+sylius_channel:
+    classes:
+        channel:
+            model: Sylius\Component\Core\Model\Channel
+            form: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
+
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
     classes:
@@ -114,6 +120,9 @@ sylius_inventory:
     classes:
         inventory_unit:
             model: Sylius\Component\Core\Model\InventoryUnit
+        stock_location:
+            model: Sylius\Component\Core\Model\StockLocation
+            form: Sylius\Bundle\CoreBundle\Form\Type\StockLocationType
         stockable:
             model: %sylius.model.product_variant.class%
 
@@ -122,6 +131,7 @@ sylius_payment:
         payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
     gateways:
         dummy: Test
         stripe: Stripe
@@ -154,23 +164,6 @@ sylius_order:
 sylius_sequence:
     generators:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
-
-sylius_resource:
-    resources:
-        sylius.user:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\User
-                controller: Sylius\Bundle\CoreBundle\Controller\UserController
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
-        sylius.user_oauth:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\UserOAuth
-        sylius.group:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\Group
 
 sylius_pricing:
     forms:

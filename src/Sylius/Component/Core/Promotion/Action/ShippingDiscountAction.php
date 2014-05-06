@@ -52,9 +52,9 @@ class ShippingDiscountAction implements PromotionActionInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
-        $adjustment = $this->repository->createNew();
-        $adjustment->setAmount(- $subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
+        $adjustment = $this->createAdjustment($promotion);
+        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
+        $adjustment->setAmount(- $adjustmentAmount);
         $adjustment->setDescription($promotion->getDescription());
 
         $subject->addAdjustment($adjustment);

@@ -146,7 +146,7 @@ class OrderItem implements OrderItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
-        $this->unitPrice = (int) $unitPrice;
+        $this->unitPrice = intval(round($unitPrice));
 
         return $this;
     }
@@ -270,6 +270,9 @@ class OrderItem implements OrderItemInterface
      */
     public function setTotal($total)
     {
+        if (!is_int($total)) {
+            throw new \InvalidArgumentException('Total must be an integer.');
+        }
         $this->total = $total;
 
         return $this;

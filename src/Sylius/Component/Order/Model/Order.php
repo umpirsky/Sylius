@@ -326,6 +326,9 @@ class Order implements OrderInterface
      */
     public function setItemsTotal($itemsTotal)
     {
+        if (!is_int($itemsTotal)) {
+            throw new \InvalidArgumentException('Items total must be an integer.');
+        }
         $this->itemsTotal = $itemsTotal;
 
         return $this;
@@ -502,6 +505,9 @@ class Order implements OrderInterface
      */
     public function setTotal($total)
     {
+        if (!is_int($total)) {
+            throw new \InvalidArgumentException('Total must be an integer.');
+        }
         $this->total = $total;
 
         return $this;

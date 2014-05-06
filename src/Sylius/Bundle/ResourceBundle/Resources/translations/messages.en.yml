@@ -1,0 +1,4 @@
+form:
+  collection:
+    add: Add
+    delete: Delete

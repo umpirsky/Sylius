@@ -52,6 +52,7 @@
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
+        <parameter key="sylius.listener.product_inventory.class">Sylius\Bundle\CoreBundle\EventListener\ProductInventoryListener</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
@@ -66,8 +67,11 @@
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.context.channel.class">Sylius\Bundle\CoreBundle\Context\ChannelContext</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
+        <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
+        <parameter key="sylius.price_calculator.stock_location_based.class">Sylius\Component\Core\Pricing\StockLocationBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
@@ -161,6 +165,7 @@
         <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
             <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.inventory_coordinator" />
         </service>
         <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
             <argument type="service" id="sylius.repository.payment" />
@@ -306,6 +311,12 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
+        <service id="sylius.listener.product_inventory" class="%sylius.listener.product_inventory.class%">
+            <argument type="service" id="sylius.factory.stock_item" />
+            <argument type="service" id="sylius.manager.product" />
+            <tag name="kernel.event_listener" event="sylius.product.post_create" method="createProductStockItems" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.post_create" method="createProductVariantStockItems" />
+        </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
@@ -352,6 +363,14 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="sylius.price_calculator.channel_based" class="%sylius.price_calculator.channel_based.class%">
+            <tag name="sylius.price_calculator" type="channel_based" label="Channel based" />
+        </service>
+
+        <service id="sylius.price_calculator.stock_location_based" class="%sylius.price_calculator.stock_location_based.class%">
+            <tag name="sylius.price_calculator" type="stock_location_based" label="Stock location based" />
+        </service>
+
         <service id="sylius.price_calculator.group_based" class="%sylius.price_calculator.group_based.class%">
             <tag name="sylius.price_calculator" type="group_based" label="Customer group based" />
         </service>
@@ -366,6 +385,16 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service id="sylius.context.channel" class="%sylius.context.channel.class%">
+            <argument type="service" id="sylius.channel_resolver" />
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="50" />
+        </service>
+
+        <service id="sylius.channel_resolver" class="Sylius\Component\Core\Channel\ChannelResolver">
+            <argument type="service" id="sylius.repository.channel" />
         </service>
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">

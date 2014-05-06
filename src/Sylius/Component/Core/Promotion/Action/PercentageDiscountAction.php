@@ -56,10 +56,9 @@ class PercentageDiscountAction implements PromotionActionInterface
             );
         }
 
-        $adjustment = $this->repository->createNew();
-
-        $adjustment->setAmount(- $subject->getPromotionSubjectTotal() * ($configuration['percentage']));
-        $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
+        $adjustment = $this->createAdjustment($promotion);
+        $adjustmentAmount = (int) round($subject->getPromotionSubjectTotal() * $configuration['percentage']);
+        $adjustment->setAmount(- $adjustmentAmount);
         $adjustment->setDescription($promotion->getDescription());
 
         $subject->addAdjustment($adjustment);

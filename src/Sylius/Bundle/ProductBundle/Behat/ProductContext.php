@@ -31,7 +31,7 @@ class ProductContext extends DefaultContext
             $product = $repository->createNew();
             $product->setName(trim($data['name']));
             $product->setDescription('...');
-            $product->getMasterVariant()->setPrice($data['price'] * 100);
+            $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {

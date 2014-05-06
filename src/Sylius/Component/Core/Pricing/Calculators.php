@@ -20,6 +20,12 @@ use Sylius\Component\Pricing\Calculator\Calculators as BaseCalculators;
  */
 class Calculators extends BaseCalculators
 {
+    // Channel based pricing.
+    const CHANNEL_BASED = 'channel_based';
+
+    // StockLocation based pricing.
+    const STOCK_LOCATION_BASED = 'stock_location_based';
+
     // Group based pricing.
     const GROUP_BASED = 'group_based';
 

@@ -186,7 +186,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+            return $this->handleView($this->view($form, 400));
         }
 
         $view = $this
@@ -222,7 +222,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+            return $this->handleView($this->view($form, 400));
         }
 
         $view = $this
@@ -322,7 +322,7 @@ class ResourceController extends FOSRestController
     public function getForm($resource = null)
     {
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
+            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource, array('csrf_protection' => false));
         }
 
         return $this->createForm($this->config->getFormType(), $resource);
@@ -393,7 +393,7 @@ class ResourceController extends FOSRestController
      */
     protected function getPagerfantaFactory()
     {
-        return new PagerfantaFactory('page', 'paginate');
+        return new PagerfantaFactory('page', 'limit');
     }
 
     protected function handleView(View $view)
