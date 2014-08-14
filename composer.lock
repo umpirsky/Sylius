@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f673d23e5c3c43bfb16ac5eef2641526",
+    "hash": "f5f99cd7aeb97c92b736536511d17210",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -2244,16 +2244,16 @@
         },
         {
             "name": "klarna/checkout",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/klarna/kco_php.git",
-                "reference": "bbfcee7f368f302159791a56dba0419ecb975146"
+                "reference": "e15e8843566c18e4bdaeaf0e708093da0fcdced5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/klarna/kco_php/zipball/bbfcee7f368f302159791a56dba0419ecb975146",
-                "reference": "bbfcee7f368f302159791a56dba0419ecb975146",
+                "url": "https://api.github.com/repos/klarna/kco_php/zipball/e15e8843566c18e4bdaeaf0e708093da0fcdced5",
+                "reference": "e15e8843566c18e4bdaeaf0e708093da0fcdced5",
                 "shasum": ""
             },
             "require": {
@@ -2262,6 +2262,7 @@
             "require-dev": {
                 "phpmd/phpmd": "~1.5",
                 "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "~0.6",
                 "squizlabs/php_codesniffer": "~1.5"
             },
             "type": "library",
@@ -2276,7 +2277,7 @@
             ],
             "description": "Wrapper for the Klarna Checkout API",
             "homepage": "http://developers.klarna.com",
-            "time": "2014-03-27 13:35:56"
+            "time": "2014-09-05 13:24:09"
         },
         {
             "name": "knplabs/gaufrette",
@@ -3973,24 +3974,24 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "2.2.6",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "9c2fc7ed49077024a258419e22d911d255274f4d"
+                "reference": "60bfa806faa332642a63215e3b6e3607c1e1b13e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/9c2fc7ed49077024a258419e22d911d255274f4d",
-                "reference": "9c2fc7ed49077024a258419e22d911d255274f4d",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/60bfa806faa332642a63215e3b6e3607c1e1b13e",
+                "reference": "60bfa806faa332642a63215e3b6e3607c1e1b13e",
                 "shasum": ""
             },
             "require": {
-                "symfony/config": "~2.0",
-                "symfony/form": "~2.2",
-                "symfony/http-foundation": "~2.2",
-                "symfony/translation": "~2.2",
-                "twig/twig": "~1.12"
+                "symfony/config": "~2.3",
+                "symfony/form": "~2.3",
+                "symfony/http-foundation": "~2.3",
+                "symfony/translation": "~2.3",
+                "twig/twig": "~1.16"
             },
             "require-dev": {
                 "doctrine/orm": "~2.4",
@@ -3998,13 +3999,13 @@
                 "friendsofsymfony/rest-bundle": "~1.1",
                 "jackalope/jackalope-doctrine-dbal": "~1.0",
                 "jms/serializer-bundle": "~0.11",
-                "sensio/framework-extra-bundle": "~2.2",
+                "sensio/framework-extra-bundle": "~2.3",
                 "sonata-project/exporter": "~1.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -4018,13 +4019,12 @@
             ],
             "authors": [
                 {
-                    "name": "Thomas Rabaix",
-                    "email": "thomas.rabaix@sonata-project.org",
-                    "homepage": "http://sonata-project.org"
-                },
-                {
                     "name": "Sonata Community",
                     "homepage": "https://github.com/sonata-project/SonataCoreBundle/contributors"
+                },
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org"
                 }
             ],
             "description": "Symfony SonataCoreBundle",
@@ -4032,7 +4032,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2014-06-10 10:25:31"
+            "time": "2014-09-09 23:58:27"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5137,17 +5137,17 @@
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "0.3.0",
+            "version": "dev-master",
             "target-dir": "Bazinga/Bundle/HateoasBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "2776be35729b27e31b15a49c05dae8fe3c03692f"
+                "reference": "ee7ce16ca2e7459577b5f85b035f5c9975a085e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/2776be35729b27e31b15a49c05dae8fe3c03692f",
-                "reference": "2776be35729b27e31b15a49c05dae8fe3c03692f",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/ee7ce16ca2e7459577b5f85b035f5c9975a085e4",
+                "reference": "ee7ce16ca2e7459577b5f85b035f5c9975a085e4",
                 "shasum": ""
             },
             "require": {
@@ -5156,7 +5156,8 @@
                 "willdurand/hateoas": "~2.0"
             },
             "require-dev": {
-                "symfony/expression-language": "~2.4"
+                "symfony/expression-language": "~2.4",
+                "twig/twig": "~1.12"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -5185,7 +5186,7 @@
                 "HATEOAS",
                 "rest"
             ],
-            "time": "2014-06-03 07:39:08"
+            "time": "2014-07-17 09:43:35"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -5842,6 +5843,120 @@
                 "transliterator"
             ],
             "time": "2014-05-15 22:08:22"
+        },
+        {
+            "name": "coduo/php-matcher",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-matcher.git",
+                "reference": "741c7b25fb799df5cfbd1aa043c4f58101811d36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/741c7b25fb799df5cfbd1aa043c4f58101811d36",
+                "reference": "741c7b25fb799df5cfbd1aa043c4f58101811d36",
+                "shasum": ""
+            },
+            "require": {
+                "coduo/php-to-string": "0.1.*",
+                "php": ">=5.3.0",
+                "symfony/expression-language": "~2.4",
+                "symfony/property-access": "~2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Coduo\\PHPMatcher": "src/",
+                    "Coduo\\PHPMatcher\\Tests": "tests/"
+                },
+                "files": [
+                    "match.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                },
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl"
+                }
+            ],
+            "keywords": [
+                "json",
+                "matcher",
+                "tests"
+            ],
+            "time": "2014-07-27 22:11:52"
+        },
+        {
+            "name": "coduo/php-to-string",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-to-string.git",
+                "reference": "42092807d4efab4c0c6c7782ab085978de4f4ce9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/42092807d4efab4c0c6c7782ab085978de4f4ce9",
+                "reference": "42092807d4efab4c0c6c7782ab085978de4f4ce9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "coduo/phpspec-data-provider-extension": "dev-master",
+                "phpspec/phpspec": "2.0.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl",
+                    "homepage": "http://brillante.pl"
+                },
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "keywords": [
+                "php",
+                "string",
+                "to",
+                "to string"
+            ],
+            "time": "2014-05-08 08:59:42"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -6660,7 +6775,7 @@
         "mathiasverraes/money": 20,
         "pagerfanta/pagerfanta": 20,
         "white-october/pagerfanta-bundle": 20,
-        "willdurand/hateoas-bundle": 0,
+        "willdurand/hateoas-bundle": 20,
         "friendsofsymfony/oauth-server-bundle": 20,
         "behat/symfony2-extension": 20,
         "behat/mink-extension": 20,
