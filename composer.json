@@ -26,7 +26,7 @@
         "doctrine/orm":                         "~2.3",
         "doctrine/migrations":                  "dev-master",
         "doctrine/doctrine-migrations-bundle":  "dev-master",
-        "friendsofsymfony/rest-bundle":         "~1.0",
+        "friendsofsymfony/rest-bundle":         "~1.0@dev",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "hwi/oauth-bundle":                     "0.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
@@ -71,7 +71,7 @@
         "coduo/php-matcher":                 "~1.0",
         "fzaninotto/faker":                  "~1.2",
         "phpspec/phpspec":                   "~2.0",
-        "phpunit/phpunit":                   "~3.7"
+        "phpunit/phpunit":                   "~4.1"
     },
     "replace": {
         "sylius/addressing": "self.version",
