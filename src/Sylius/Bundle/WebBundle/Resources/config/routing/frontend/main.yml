@@ -5,6 +5,16 @@ sylius_homepage:
     path: /
     defaults: { _controller: sylius.controller.frontend.homepage:mainAction }
 
+sylius_session_race1:
+    pattern: /session/race1
+    defaults:
+        _controller: sylius.controller.frontend.homepage:sessionRace1Action
+
+sylius_session_race2:
+    pattern: /session/race2
+    defaults:
+        _controller: sylius.controller.frontend.homepage:sessionRace2Action
+
 sylius_currency:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/currency.yml
     prefix: /currency
