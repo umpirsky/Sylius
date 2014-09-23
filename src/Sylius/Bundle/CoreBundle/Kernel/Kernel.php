@@ -56,10 +56,6 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
             new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
 
-            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new \FOS\RestBundle\FOSRestBundle(),
-
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
@@ -82,6 +78,10 @@ abstract class Kernel extends BaseKernel
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
+
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
 
             new \FOS\UserBundle\FOSUserBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
