@@ -81,7 +81,12 @@ sylius_product:
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
 
-sylius_attribute: ~
+sylius_attribute:
+    classes:
+        product:
+            subject: %sylius.model.product.class%
+            attribute:
+                model: Sylius\Bundle\UmpirskyBundle\Entity\Attribute
 
 sylius_variation:
     classes:
