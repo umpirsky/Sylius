@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Mailer;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Emails 
+class Emails
 {
     const ORDER_CONFIRMATION    = 'order_confirmation';
     const ORDER_COMMENT         = 'order_comment';

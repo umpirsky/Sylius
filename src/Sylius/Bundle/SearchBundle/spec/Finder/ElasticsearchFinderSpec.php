@@ -12,26 +12,23 @@
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class ElasticsearchFinderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SearchIndexRepository $searchRepository,
         $config,
         $productRepository,
         $container,
         QueryLoggerInterface $queryLogger,
         ChannelContextInterface $channelContext
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $searchRepository,
             $config,
@@ -42,12 +39,12 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Finder\ElasticsearchFinder');
     }
 
-    function it_compiles_a_fulltext_elasticsearch_query()
+    public function it_compiles_a_fulltext_elasticsearch_query()
     {
         $config = array(
             'filters' => array(
@@ -80,15 +77,15 @@ class ElasticsearchFinderSpec extends ObjectBehavior
                         'value'        => null,
                         'values'       => array(),
                     ),
-                )
-            )
+                ),
+            ),
 
         );
 
         $this->compileElasticSearchStringQuery('modi', null, $config, 'all', null)->shouldHaveType('\Elastica\Query');
     }
 
-    function it_compiles_a_taxon_elasticsearch_query()
+    public function it_compiles_a_taxon_elasticsearch_query()
     {
         $config = array(
             'filters' => array(
@@ -121,12 +118,11 @@ class ElasticsearchFinderSpec extends ObjectBehavior
                         'value'        => null,
                         'values'       => array(),
                     ),
-                )
-            )
+                ),
+            ),
 
         );
 
         $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType('\Elastica\Query');
     }
-
 }

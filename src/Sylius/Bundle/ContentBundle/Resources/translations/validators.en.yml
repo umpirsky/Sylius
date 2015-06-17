@@ -82,4 +82,3 @@ sylius:
             invalid_date: Publish start date is invalid.
         end_date:
             invalid_date: Publish end date is invalid.
-            

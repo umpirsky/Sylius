@@ -31,33 +31,33 @@ class PaymentFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.number',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.number'
-                )
+                    'placeholder' => 'sylius.form.payment_filter.number',
+                ),
             ))
             ->add('billingAddress', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.billing_address',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.billing_address'
-                )
+                    'placeholder' => 'sylius.form.payment_filter.billing_address',
+                ),
             ))
             ->add('createdAtFrom', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.created_at_from',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.created_at_from'
-                )
+                    'placeholder' => 'sylius.form.payment_filter.created_at_from',
+                ),
             ))
             ->add('createdAtTo', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.payment_filter.created_at_to',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.payment_filter.created_at_to'
-                )
+                    'placeholder' => 'sylius.form.payment_filter.created_at_to',
+                ),
             ))
             ->add('channel', 'sylius_channel_choice', array(
                 'required'    => false,
-                'empty_value' => 'sylius.form.payment_filter.channel'
+                'empty_value' => 'sylius.form.payment_filter.channel',
             ))
         ;
     }

@@ -30,7 +30,7 @@
             <constraint name="Length">
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.product_translation.short_description.max</option>
-                <option name="groups">sylius</option>                
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -81,7 +81,7 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-    </class>    
+    </class>
     <class name="Sylius\Component\Cart\Model\CartItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>

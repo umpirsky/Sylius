@@ -76,8 +76,8 @@ class RedirectHandler
     }
 
     /**
-     * @param string  $url
-     * @param integer $status
+     * @param string $url
+     * @param int    $status
      *
      * @return RedirectResponse
      */

@@ -51,7 +51,7 @@ interface InventoryUnitInterface extends TimestampableInterface
     public function getSku();
 
     /**
-     * Get displayed inventory name
+     * Get displayed inventory name.
      *
      * @return string
      */

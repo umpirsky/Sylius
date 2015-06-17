@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\AddressInterface;
 
 /**
 
@@ -20,12 +19,12 @@ use Sylius\Component\Core\Model\AddressInterface;
  */
 class UserSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\User');
     }
 
-    function it_implements_user_component_interface()
+    public function it_implements_user_component_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\Model\UserInterface');
     }

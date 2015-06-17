@@ -80,7 +80,7 @@ class BackordersHandler implements BackordersHandlerInterface
 
         $units = $this->repository->findBy(array(
             'stockable'      => $stockable,
-            'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
+            'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
         ), array('createdAt' => 'ASC'));
 
         foreach ($units as $unit) {

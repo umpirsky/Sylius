@@ -18,4 +18,3 @@ Sylius\Component\Product\Model\Attribute:
         updatedAt:
             expose: true
             type: DateTime
-

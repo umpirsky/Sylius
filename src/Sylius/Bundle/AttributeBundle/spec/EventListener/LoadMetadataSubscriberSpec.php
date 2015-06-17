@@ -23,7 +23,7 @@ use Prophecy\Argument;
  */
 class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array(
             'product' => array(
@@ -38,22 +38,22 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AttributeBundle\EventListener\LoadMetadataSubscriber');
     }
 
-    function it_is_a_Doctrine_event_subscriber()
+    public function it_is_a_Doctrine_event_subscriber()
     {
         $this->shouldImplement('Doctrine\Common\EventSubscriber');
     }
 
-    function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
+    public function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
     {
         $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
     }
 
-    function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
+    public function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
@@ -70,7 +70,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
+    public function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
@@ -81,8 +81,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
         $classMetadataInfo->fieldMappings = array(
             'id' => array(
-                'columnName' => 'id'
-            )
+                'columnName' => 'id',
+            ),
         );
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
@@ -99,8 +99,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name'                 => 'product_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
+                'onDelete'             => 'CASCADE',
+            )),
         );
 
         $attributeMapping = array(
@@ -110,8 +110,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name'                 => 'attribute_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
+                'onDelete'             => 'CASCADE',
+            )),
         );
 
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();

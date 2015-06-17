@@ -56,4 +56,3 @@ sylius:
       help: 'Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).'
     version: Версия PHP
     version_recommanded: Рекомендуемая версия PHP
-

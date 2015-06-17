@@ -62,7 +62,7 @@ class ZoneBasedConfigurationType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'scope'      => null
+                'scope'      => null,
             ))
         ;
     }

@@ -60,7 +60,7 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
     }
 
     /**
-     * Returns whether the subject satisfies the category requirement configured in the method
+     * Returns whether the subject satisfies the category requirement configured in the method.
      *
      * @param ShippingSubjectInterface $subject
      * @param ShippingMethodInterface  $method

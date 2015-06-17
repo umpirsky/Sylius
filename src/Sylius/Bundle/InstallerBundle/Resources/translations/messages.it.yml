@@ -57,4 +57,3 @@ sylius:
         content: '<p>Benvenuti su Sylius installer.</p>'
         header: 'Benvenuti su <small>Sylius installer</small>'
 €: €
-

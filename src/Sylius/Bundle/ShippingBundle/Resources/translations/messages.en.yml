@@ -58,4 +58,3 @@ sylius:
             configuration: Configuration
             enabled: Enabled
             name: Name
-

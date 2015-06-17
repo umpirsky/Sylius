@@ -34,7 +34,6 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
         $methodsResolver = $this->resolver;
         $repository = $this->repository;
 
-
         $choiceList = function (Options $options) use ($methodsResolver, $repository) {
             if (isset($options['subject'])) {
                 $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
@@ -44,7 +43,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
 
             if ($options['channel']) {
                 $filteredMethods = array();
-                foreach($methods as $method) {
+                foreach ($methods as $method) {
                     if ($options['channel']->hasShippingMethod($method)) {
                         $filteredMethods[] = $method;
                     }
@@ -60,7 +59,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
             ->setDefaults(array(
                 'choice_list' => $choiceList,
                 'criteria'    => array(),
-                'channel'     => null
+                'channel'     => null,
             ))
             ->setAllowedTypes(array(
                 'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),

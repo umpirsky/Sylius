@@ -125,6 +125,7 @@ class SettingsController extends FOSRestController
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     private function isApiRequest(Request $request)

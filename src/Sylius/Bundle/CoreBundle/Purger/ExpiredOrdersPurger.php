@@ -20,7 +20,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
- * Purge expired pending orders
+ * Purge expired pending orders.
  *
  * @author Ka-Yue Yeung <kayuey@gmail.com>
  */

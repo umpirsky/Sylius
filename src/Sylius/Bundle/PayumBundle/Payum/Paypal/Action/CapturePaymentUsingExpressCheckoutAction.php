@@ -38,7 +38,7 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
 
         $m = 0;
         foreach ($order->getItems() as $item) {
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal()/$item->getQuantity()/100, 2);
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal() / $item->getQuantity() / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
             $m++;

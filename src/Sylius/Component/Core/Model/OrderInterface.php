@@ -229,14 +229,14 @@ interface OrderInterface extends
     public function isBackorder();
 
     /**
-     * Gets the last updated shipment of the order
+     * Gets the last updated shipment of the order.
      *
      * @return ShipmentInterface
      */
     public function getLastShipment();
 
     /**
-     * Gets the last new payment of the order
+     * Gets the last new payment of the order.
      *
      * @param $state
      *

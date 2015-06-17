@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 class SecurityController extends Controller
 {
     /**
-     * Target action for _switch_user=_exit, redirects admin back to impersonated user
+     * Target action for _switch_user=_exit, redirects admin back to impersonated user.
      *
      * @param string $username
      *

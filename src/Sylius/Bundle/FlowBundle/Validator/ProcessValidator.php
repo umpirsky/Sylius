@@ -69,7 +69,7 @@ class ProcessValidator implements ProcessValidatorInterface
     }
 
     /**
-     * Set validation
+     * Set validation.
      *
      * @param callable $validation
      *
@@ -83,7 +83,7 @@ class ProcessValidator implements ProcessValidatorInterface
     }
 
     /**
-     * Get validation
+     * Get validation.
      *
      * @return callable
      */

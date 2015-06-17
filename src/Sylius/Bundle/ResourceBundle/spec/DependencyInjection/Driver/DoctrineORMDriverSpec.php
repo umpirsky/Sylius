@@ -20,24 +20,24 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class DoctrineORMDriverSpec extends ObjectBehavior
 {
-    function let(ContainerBuilder $container)
+    public function let(ContainerBuilder $container)
     {
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineORMDriver');
     }
 
-    function it_should_implement_database_interface()
+    public function it_should_implement_database_interface()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverInterface');
     }
 
-    function it_should_create_definition(ContainerBuilder $container)
+    public function it_should_create_definition(ContainerBuilder $container)
     {
-        $container->hasParameter("prefix.repository.resource.class")->shouldBeCalled();
+        $container->hasParameter('prefix.repository.resource.class')->shouldBeCalled();
 
         $container->setDefinition(
             'prefix.controller.resource',
@@ -63,12 +63,12 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_create_definition_and_get_repository_in_container(ContainerBuilder $container)
+    public function it_should_create_definition_and_get_repository_in_container(ContainerBuilder $container)
     {
-        $container->hasParameter("prefix.repository.resource.class")
+        $container->hasParameter('prefix.repository.resource.class')
             ->willReturn(true);
 
-        $container->getParameter("prefix.repository.resource.class")
+        $container->getParameter('prefix.repository.resource.class')
             ->shouldBeCalled();
 
         $container->setDefinition(

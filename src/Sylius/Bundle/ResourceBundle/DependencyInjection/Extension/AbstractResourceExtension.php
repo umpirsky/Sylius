@@ -54,7 +54,7 @@ abstract class AbstractResourceExtension extends AbstractExtension
      * @param array                  $config
      * @param ConfigurationInterface $configuration
      * @param ContainerBuilder       $container
-     * @param integer                $configure
+     * @param int                    $configure
      *
      * @return array
      */

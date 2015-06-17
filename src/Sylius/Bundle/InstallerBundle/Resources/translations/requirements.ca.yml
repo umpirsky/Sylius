@@ -57,4 +57,3 @@ sylius:
       help: 'El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).'
     version: Versió PHP
     version_recommanded: Versió de PHP recomanada
-

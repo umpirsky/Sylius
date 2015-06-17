@@ -56,7 +56,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process->setSteps(array(
             'foo' => new TestStep(),
             'bar' => new TestStep(),
-            'foobar' => new TestStep()
+            'foobar' => new TestStep(),
         ));
 
         $correctOrder = array('foo', 'bar', 'foobar');
@@ -80,7 +80,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process->setSteps(array(
             'foo' => new TestStep(),
             'bar' => new TestStep(),
-            'foobar' => new TestStep()
+            'foobar' => new TestStep(),
         ));
 
         $process->removeStep('bar');
@@ -332,19 +332,19 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         return array(
             array(
                 array(new TestStep(), new TestStep()),
-                2
+                2,
             ),
             array(
                 array('abc' => new TestStep(), 'abc' => new TestStep()),
-                1
+                1,
             ),
             array(
                 array('abc' => new TestStep()),
-                1
+                1,
             ),
             array(
                 array('abc' => new TestStep(), 'zzz' => new TestStep(), 'yyy' => new TestStep()),
-                3
+                3,
             ),
         );
     }

@@ -24,40 +24,40 @@ class OrderFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.number',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.number'
-                )
+                    'placeholder' => 'sylius.form.order_filter.number',
+                ),
             ))
             ->add('totalFrom', 'sylius_money', array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.total_from',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.total_from'
-                )
+                    'placeholder' => 'sylius.form.order_filter.total_from',
+                ),
             ))
             ->add('totalTo', 'sylius_money', array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.total_to',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.total_to'
-                )
+                    'placeholder' => 'sylius.form.order_filter.total_to',
+                ),
             ))
             ->add('createdAtFrom', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.created_at_from',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.created_at_from'
-                )
+                    'placeholder' => 'sylius.form.order_filter.created_at_from',
+                ),
             ))
             ->add('createdAtTo', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.order_filter.created_at_to',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.created_at_to'
-                )
+                    'placeholder' => 'sylius.form.order_filter.created_at_to',
+                ),
             ))
             ->add('channel', 'sylius_channel_choice', array(
                 'required'    => false,
-                'empty_value' => 'sylius.form.order_filter.channel'
+                'empty_value' => 'sylius.form.order_filter.channel',
             ))
             ->add('paymentState', 'choice', array(
                 'required'    => false,

@@ -32,7 +32,7 @@ class CommentType extends AbstractResourceType
                 'required' => false,
             ))
             ->add('notifyCustomer', 'checkbox', array(
-                'label'    => 'sylius.form.comment.notify_customer'
+                'label'    => 'sylius.form.comment.notify_customer',
             ))
         ;
     }

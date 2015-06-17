@@ -110,7 +110,7 @@ class AddProductAction implements PromotionActionInterface
     }
 
     /**
-     * Create promotion item
+     * Create promotion item.
      *
      * @param array $configuration
      *

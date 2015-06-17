@@ -121,7 +121,7 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
     public function shouldNotAddObjectWhichAreNotSteps()
     {
         $this->builder->build($this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
-        $this->builder->add('some', new \stdClass);
+        $this->builder->add('some', new \stdClass());
     }
 
     /**
@@ -361,7 +361,7 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
 class TestProcessBuilder extends ProcessBuilder
 {
     /**
-     * Method getProcess exists only in TestProcessBuilder to allow testing
+     * Method getProcess exists only in TestProcessBuilder to allow testing.
      */
     public function getProcess()
     {

@@ -48,7 +48,7 @@ class TaxationSettingsSchema implements SchemaInterface
     {
         $builder
             ->setOptional(array(
-                'default_tax_zone'
+                'default_tax_zone',
             ))
             ->setAllowedTypes(array(
                 'default_tax_zone' => array('null', 'Sylius\Component\Addressing\Model\ZoneInterface'),

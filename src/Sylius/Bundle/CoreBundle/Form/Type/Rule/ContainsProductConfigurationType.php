@@ -55,7 +55,7 @@ class ContainsProductConfigurationType extends AbstractType
                 'constraints'   => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
             ->add('exclude', 'checkbox', array(
                 'label' => 'sylius.form.rule.contains_product_configuration.exclude',

@@ -33,7 +33,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             'sylius_flow_display',
              array(
                 'scenarioAlias' => 'scenarioOne',
-                'stepName' => 'firstStepName'
+                'stepName' => 'firstStepName',
             ),
             'http://someurl.dev/step/scenarioOne/firstStepName'
         );
@@ -75,7 +75,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $router = $this->getRouter(
             'my_route',
              array(
-                'stepName' => 'firstStepName'
+                'stepName' => 'firstStepName',
             ),
             'http://someurl.dev/my-super-route/firstStepName'
         );
@@ -296,7 +296,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             'sylius_flow_display',
              array(
                 'scenarioAlias' => 'scenarioOne',
-                'stepName' => 'nextStepName'
+                'stepName' => 'nextStepName',
             ),
             'http://someurl.dev/step/scenarioOne/nextStepName'
         );
@@ -335,7 +335,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             'sylius_flow_display',
             array(
                 'scenarioAlias' => 'scenarioOne',
-                'stepName' => 'nextStepName'
+                'stepName' => 'nextStepName',
             ),
             'http://someurl.dev/step/scenarioOne/nextStepName'
         );
@@ -370,7 +370,6 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoProcessRedirectWhenLastStepIsCompleted()
     {
-
         $router = $this->getRouter(
             'http://localhost/processRedirect',
             array(),
@@ -498,7 +497,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             case 'unexpectedTypeStep':
                 $step->expects($this->any())
                     ->method('forwardAction')
-                    ->will($this->returnValue("dummy"));
+                    ->will($this->returnValue('dummy'));
                 break;
             case 'goToNextStep':
                 $step->expects($this->any())

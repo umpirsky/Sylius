@@ -12,14 +12,14 @@
 namespace Sylius\Component\Contact\Model;
 
 /**
- * Default contact topic representation
+ * Default contact topic representation.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Topic implements TopicInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -29,7 +29,7 @@ class Topic implements TopicInterface
     protected $title;
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {

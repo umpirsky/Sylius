@@ -54,7 +54,7 @@ class ProductController extends BaseProductController
             }
         }
 
-        /**
+        /*
          * when using elastic search if you want to setup multiple indexes and control
          * them separately you can do so by adding the index service with a setter
          *
@@ -69,7 +69,7 @@ class ProductController extends BaseProductController
             ->setFacetGroup('categories_set')
             ->find(new TaxonQuery($taxon, $request->query->get('filters', array())));
 
-        $config = $this->container->getParameter("sylius_search.config");
+        $config = $this->container->getParameter('sylius_search.config');
 
         $paginator = $finder->getPaginator();
 
@@ -91,7 +91,7 @@ class ProductController extends BaseProductController
      * List products categorized under given taxon (fetch by its ID).
      *
      * @param Request $request
-     * @param integer $id
+     * @param int     $id
      *
      * @return Response
      *
@@ -112,7 +112,6 @@ class ProductController extends BaseProductController
 
         return $this->renderResults($taxon, $paginator, 'productIndex.html', $request->get('page', 1));
     }
-
 
     /**
      * Show product details in frontend.
@@ -206,7 +205,7 @@ class ProductController extends BaseProductController
     public function filterFormAction(Request $request)
     {
         return $this->render('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
-            'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
+            'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView(),
         ));
     }
 
@@ -217,7 +216,7 @@ class ProductController extends BaseProductController
             throw new NotFoundHttpException();
         }
 
-        /** @var $products ProductInterface[] */
+        /* @var $products ProductInterface[] */
         $results  = array();
         $products = $this->get('sylius.repository.product')->createFilterPaginator($request->query->get('criteria'));
         $helper   = $this->get('sylius.templating.helper.currency');
@@ -237,7 +236,7 @@ class ProductController extends BaseProductController
 
     /**
      * @param Request $request
-     * @param array $criteria
+     * @param array   $criteria
      *
      * @return null|ProductInterface
      */
@@ -260,8 +259,7 @@ class ProductController extends BaseProductController
         $searchTerm = null,
         $searchParam = null,
         $requestMethod = null
-    )
-    {
+    ) {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
@@ -276,7 +274,7 @@ class ProductController extends BaseProductController
                 'filters' => $filters,
                 'searchTerm' => $searchTerm,
                 'searchParam' => $searchParam,
-                'requestMethod' => $requestMethod
+                'requestMethod' => $requestMethod,
             ))
         ;
 

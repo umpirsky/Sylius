@@ -54,8 +54,8 @@ class PaymentStepType extends AbstractResourceType
                 'property_path' => 'lastPayment.method',
                 'channel'       => $this->channelContext->getChannel(),
                 'constraints'   => array(
-                    $notBlank
-                )
+                    $notBlank,
+                ),
             ))
         ;
     }

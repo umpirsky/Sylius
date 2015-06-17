@@ -42,7 +42,7 @@ class CustomerLoyaltyConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
             ->add('unit', 'choice', array(
                 'label'       => 'sylius.form.rule.customer_loyalty_configuration.unit.header',
@@ -54,7 +54,7 @@ class CustomerLoyaltyConfigurationType extends AbstractType
                 ),
                 'constraints' => array(
                     new NotBlank(),
-                )
+                ),
             ))
             ->add('after', 'checkbox', array(
                 'label' => 'sylius.form.rule.customer_loyalty_configuration.after',

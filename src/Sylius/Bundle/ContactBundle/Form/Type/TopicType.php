@@ -28,7 +28,7 @@ class TopicType extends AbstractResourceType
     {
         $builder
             ->add('title', 'text', array(
-                'label' => 'sylius.form.contact_topic.title'
+                'label' => 'sylius.form.contact_topic.title',
             ))
         ;
     }

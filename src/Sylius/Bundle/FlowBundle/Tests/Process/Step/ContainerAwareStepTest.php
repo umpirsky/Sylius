@@ -38,7 +38,7 @@ class ContainerAwareStepTest extends \PHPUnit_Framework_TestCase
 class TestContainerAwareStep extends ContainerAwareStep
 {
     /**
-     * Just for check if container setter works
+     * Just for check if container setter works.
      */
     public function getContainer()
     {

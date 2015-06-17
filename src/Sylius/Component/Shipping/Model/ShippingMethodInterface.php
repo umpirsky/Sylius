@@ -49,14 +49,14 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
      *
-     * @return integer
+     * @return int
      */
     public function getCategoryRequirement();
 
     /**
      * Set the requirement.
      *
-     * @param integer $categoryRequirement
+     * @param int $categoryRequirement
      */
     public function setCategoryRequirement($categoryRequirement);
 

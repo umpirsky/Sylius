@@ -30,7 +30,7 @@ class UserType extends BaseUserType
                 'label'    => 'sylius.form.user.roles',
                 'multiple' => true,
                 'expanded' => true,
-                'required' => false
+                'required' => false,
             ))
         ;
     }

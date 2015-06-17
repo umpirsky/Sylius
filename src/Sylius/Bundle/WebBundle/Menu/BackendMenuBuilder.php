@@ -30,18 +30,18 @@ class BackendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav navbar-nav navbar-right'
-            )
+                'class' => 'nav navbar-nav navbar-right',
+            ),
         ));
 
         $childOptions = array(
             'attributes'         => array('class' => 'dropdown'),
             'childrenAttributes' => array('class' => 'dropdown-menu'),
-            'labelAttributes'    => array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#')
+            'labelAttributes'    => array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#'),
         );
 
         $menu->addChild('dashboard', array(
-            'route' => 'sylius_backend_dashboard'
+            'route' => 'sylius_backend_dashboard',
         ))->setLabel($this->translate('sylius.backend.menu.main.dashboard'));
 
         $this->addAssortmentMenu($menu, $childOptions, 'main');
@@ -53,11 +53,11 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addConfigurationMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
-            'route' => 'sylius_homepage'
+            'route' => 'sylius_homepage',
         ))->setLabel($this->translate('sylius.backend.menu.main.homepage'));
 
         $menu->addChild('logout', array(
-            'route' => 'sylius_user_security_logout'
+            'route' => 'sylius_user_security_logout',
         ))->setLabel($this->translate('sylius.backend.logout'));
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_MAIN, new MenuBuilderEvent($this->factory, $menu));
@@ -74,15 +74,15 @@ class BackendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav'
-            )
+                'class' => 'nav',
+            ),
         ));
 
         $menu->setCurrentUri($this->request->getRequestUri());
 
         $childOptions = array(
             'childrenAttributes' => array('class' => 'nav'),
-            'labelAttributes'    => array('class' => 'nav-header')
+            'labelAttributes'    => array('class' => 'nav-header'),
         );
 
         $this->addAssortmentMenu($menu, $childOptions, 'sidebar');

@@ -275,7 +275,7 @@ class CheckoutController extends FOSRestController
                     return $zone->getId();
                 }, $zones) : null,
                 'enabled' => true,
-            )
+            ),
         ));
     }
 

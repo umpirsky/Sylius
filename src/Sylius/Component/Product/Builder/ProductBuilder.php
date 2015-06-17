@@ -75,8 +75,7 @@ class ProductBuilder implements ProductBuilderInterface
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $attributeValueRepository
-    )
-    {
+    ) {
         $this->productManager            = $productManager;
         $this->productRepository         = $productRepository;
         $this->attributeRepository        = $attributeRepository;

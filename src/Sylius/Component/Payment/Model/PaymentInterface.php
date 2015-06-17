@@ -99,14 +99,14 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Get amount.
      *
-     * @return integer
+     * @return int
      */
     public function getAmount();
 
     /**
      * Set amount.
      *
-     * @param integer $amount
+     * @param int $amount
      *
      * @return PaymentInterface
      */

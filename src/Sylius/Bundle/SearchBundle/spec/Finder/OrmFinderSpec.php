@@ -11,8 +11,6 @@
 
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\PDOStatement;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,24 +21,22 @@ use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 
-
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class OrmFinderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SearchIndexRepository $searchRepository,
         $config,
         $productRepository,
         EntityManager $entityManager,
         QueryLoggerInterface $queryLogger,
         ChannelContextInterface $channelContext
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $searchRepository,
-            (array)$config,
+            (array) $config,
             $productRepository,
             $entityManager,
             $queryLogger,
@@ -48,12 +44,12 @@ class OrmFinderSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Finder\OrmFinder');
     }
 
-    function it_calculates_the_new_facets()
+    public function it_calculates_the_new_facets()
     {
         $idsFromOtherFacets = array(
             0 => 89,
@@ -113,15 +109,13 @@ class OrmFinderSpec extends ObjectBehavior
         );
 
         $this->buildFacet($idsFromOtherFacets, $ormFacets, $givenFacetName, $result)->shouldHaveCount(6);
-
     }
 
     public function it_performs_a_fulltext_query(
         EntityManagerInterface $entityManager,
         AbstractQuery $query,
         $result = array()
-    )
-    {
+    ) {
         $entityManager->createQuery(Argument::any())->shouldBeCalled()->willReturn($query);
         $query->setParameter(Argument::any(), Argument::any())->shouldBeCalled()->willReturn($query);
 
@@ -129,5 +123,4 @@ class OrmFinderSpec extends ObjectBehavior
 
         $this->query('black', $entityManager)->shouldBeArray();
     }
-
 }

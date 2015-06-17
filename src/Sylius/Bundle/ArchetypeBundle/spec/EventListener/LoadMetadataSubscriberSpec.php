@@ -21,7 +21,7 @@ use Prophecy\Argument;
  */
 class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array(
             'product' => array(
@@ -35,22 +35,22 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ArchetypeBundle\EventListener\LoadMetadataSubscriber');
     }
 
-    function it_is_a_Doctrine_event_subscriber()
+    public function it_is_a_Doctrine_event_subscriber()
     {
         $this->shouldImplement('Doctrine\Common\EventSubscriber');
     }
 
-    function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
+    public function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
     {
         $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
     }
 
-    function it_does_not_add_mapping_if_the_class_is_not_configured_to_be_an_archetype(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
+    public function it_does_not_add_mapping_if_the_class_is_not_configured_to_be_an_archetype(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
     {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
@@ -62,7 +62,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_attributes_and_options_to_archetypes(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
+    public function it_maps_attributes_and_options_to_archetypes(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
     {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\Archetype');
@@ -84,7 +84,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                ))
+                )),
             ),
         );
 
@@ -105,7 +105,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                ))
+                )),
             ),
         );
 
@@ -117,7 +117,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
-                'onDelete'             => 'SET NULL'
+                'onDelete'             => 'SET NULL',
             ),
         );
 

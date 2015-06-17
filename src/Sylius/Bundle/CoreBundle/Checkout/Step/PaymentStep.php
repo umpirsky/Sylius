@@ -68,7 +68,7 @@ class PaymentStep extends CheckoutStep
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'order'   => $order,
             'form'    => $form->createView(),
-            'context' => $context
+            'context' => $context,
         ));
     }
 
