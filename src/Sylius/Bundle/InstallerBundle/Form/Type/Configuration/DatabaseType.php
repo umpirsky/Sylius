@@ -44,25 +44,25 @@ class DatabaseType extends AbstractType
             ->add('sylius_database_port', 'integer', array(
                 'required'    => false,
                 'constraints' => array(
-                    new Assert\Type(array('type' => 'integer'))
+                    new Assert\Type(array('type' => 'integer')),
                 ),
-                'label'    => 'sylius.form.configuration.database.port'
+                'label'    => 'sylius.form.configuration.database.port',
             ))
             ->add('sylius_database_name', 'text', array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
-                'label' => 'sylius.form.configuration.database.name'
+                'label' => 'sylius.form.configuration.database.name',
             ))
             ->add('sylius_database_user', 'text', array(
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
-                'label' => 'sylius.form.configuration.database.user'
+                'label' => 'sylius.form.configuration.database.user',
             ))
             ->add('sylius_database_password', 'password', array(
                 'required' => false,
-                'label'    => 'sylius.form.configuration.database.password'
+                'label'    => 'sylius.form.configuration.database.password',
             ))
         ;
     }

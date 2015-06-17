@@ -438,6 +438,7 @@ class ResourceController extends FOSRestController
                 )
             );
         }
+
         return $resource;
     }
 
@@ -451,7 +452,7 @@ class ResourceController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param integer $movement
+     * @param int     $movement
      *
      * @return RedirectResponse
      */

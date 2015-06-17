@@ -68,8 +68,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
     function it_should_delegate_calculation_to_a_correct_calculator(
         TaxRateInterface $rate,
         CalculatorInterface $calculator
-    )
-    {
+    ) {
         $this->registerCalculator('default', $calculator);
         $rate->getCalculator()->willReturn('default');
 

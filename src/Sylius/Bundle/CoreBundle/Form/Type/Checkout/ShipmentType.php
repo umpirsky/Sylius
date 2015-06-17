@@ -58,11 +58,10 @@ class ShipmentType extends AbstractType
                     'channel'     => $channel,
                     'expanded'    => true,
                     'constraints' => array(
-                        $notBlank
-                    )
+                        $notBlank,
+                    ),
                 ));
             });
-        ;
     }
 
     /**
@@ -72,15 +71,15 @@ class ShipmentType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class' => $this->dataClass,
             ))
             ->setOptional(array(
                 'criteria',
-                'channel'
+                'channel',
             ))
             ->setAllowedTypes(array(
                 'criteria'   => array('array'),
-                'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
+                'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
             ))
         ;
     }

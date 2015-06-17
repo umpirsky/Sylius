@@ -31,33 +31,33 @@ class ShipmentFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.number',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.number'
-                )
+                    'placeholder' => 'sylius.form.shipment_filter.number',
+                ),
             ))
             ->add('shippingAddress', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.shipping_address',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.shipping_address'
-                )
+                    'placeholder' => 'sylius.form.shipment_filter.shipping_address',
+                ),
             ))
             ->add('createdAtFrom', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.created_at_from',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.created_at_from'
-                )
+                    'placeholder' => 'sylius.form.shipment_filter.created_at_from',
+                ),
             ))
             ->add('createdAtTo', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.shipment_filter.created_at_to',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.created_at_to'
-                )
+                    'placeholder' => 'sylius.form.shipment_filter.created_at_to',
+                ),
             ))
             ->add('channel', 'sylius_channel_choice', array(
                 'required'    => false,
-                'empty_value' => 'sylius.form.shipment_filter.channel'
+                'empty_value' => 'sylius.form.shipment_filter.channel',
             ))
         ;
     }

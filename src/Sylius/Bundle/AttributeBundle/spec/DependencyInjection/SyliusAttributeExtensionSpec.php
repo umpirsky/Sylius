@@ -14,8 +14,6 @@ namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Prophecy\Argument;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -33,13 +31,13 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                     'translatable' => array(
                         'field'          => 'translations',
                         'currentLocale'  => 'currentLocale',
-                        'fallbackLocale' => 'fallbackLocale'
+                        'fallbackLocale' => 'fallbackLocale',
                     ),
                     'translation'  => array(
                         'field'  => 'translatable',
-                        'locale' => 'locale'
-                    )
-                ))
+                        'locale' => 'locale',
+                    ),
+                )),
             ));
 
         $subjects = array(
@@ -52,7 +50,7 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\AttributeTranslation',
                         'form'  => array(
                             'default' => 'Some\App\Product\Form\AttributeTranslationType',
-                        )
+                        ),
                     ),
                 ),
                 'attribute_value' => array(
@@ -76,7 +74,7 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                             'model' => 'Some\App\Product\Entity\AttributeTranslation',
                             'form' => array(
                                 'default' => 'Some\App\Product\Form\AttributeTranslationType',
-                            )
+                            ),
                         ),
                     ),
                     'attribute_value' => array(
@@ -96,7 +94,7 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\AttributeTranslation',
                         'form' => array(
                             'default' => 'Some\App\Product\Form\AttributeTranslationType',
-                        )
+                        ),
                     ),
                     'subject' => 'product',
                 ),

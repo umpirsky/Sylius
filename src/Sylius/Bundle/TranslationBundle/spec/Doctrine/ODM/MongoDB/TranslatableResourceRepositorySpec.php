@@ -17,7 +17,6 @@ use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\ODM\MongoDB\Query\Query;
 use Doctrine\ODM\MongoDB\UnitOfWork;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/TranslatableFoo.php';
@@ -88,7 +87,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en_US.' . $property;
+                $property = 'translations.en_US.'.$property;
             }
 
             $queryBuilder
@@ -123,7 +122,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en_US.' . $property;
+                $property = 'translations.en_US.'.$property;
             }
 
             $queryBuilder

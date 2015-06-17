@@ -17,7 +17,6 @@ use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
 use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
 
 /**
@@ -29,8 +28,7 @@ class AuthorizationCheckerSpec extends ObjectBehavior
         CurrentIdentityProviderInterface $currentIdentityProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
-    )
-    {
+    ) {
         $this->beConstructedWith($currentIdentityProvider, $permissionMap, $rolesResolver);
     }
 

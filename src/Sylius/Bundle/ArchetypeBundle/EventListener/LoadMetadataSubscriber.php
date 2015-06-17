@@ -29,7 +29,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     protected $subjects;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $subjects
      */
@@ -66,7 +66,6 @@ class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-
     /**
      * @param ClassMetadataInfo|ClassMetadata $metadata
      * @param array                           $class
@@ -91,7 +90,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                ))
+                )),
             ),
         );
 
@@ -122,7 +121,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                ))
+                )),
             ),
         );
 
@@ -143,7 +142,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
-                'onDelete'             => 'SET NULL'
+                'onDelete'             => 'SET NULL',
             ),
         );
 

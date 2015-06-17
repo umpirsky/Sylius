@@ -34,7 +34,7 @@ class OrderStateChoiceType extends AbstractType
                 OrderInterface::STATE_ABANDONED   => 'sylius.order.state.abandoned',
                 OrderInterface::STATE_CANCELLED   => 'sylius.order.state.cancelled',
                 OrderInterface::STATE_RETURNED    => 'sylius.order.state.returned',
-            )
+            ),
         ));
     }
 

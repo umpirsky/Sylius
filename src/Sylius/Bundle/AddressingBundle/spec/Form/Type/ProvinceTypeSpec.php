@@ -57,7 +57,7 @@ class ProvinceTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'Province',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

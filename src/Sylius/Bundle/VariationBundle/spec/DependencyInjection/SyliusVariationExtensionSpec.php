@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Prophecy\Argument;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -33,13 +32,13 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                     'translatable' => array(
                         'translations'    => 'translations',
                         'current_locale'  => 'currentLocale',
-                        'fallback_locale' => 'fallbackLocale'
+                        'fallback_locale' => 'fallbackLocale',
                     ),
                     'translation'  => array(
                         'translatable' => 'translatable',
-                        'locale'       => 'locale'
-                    )
-                ))
+                        'locale'       => 'locale',
+                    ),
+                )),
             )
         );
 
@@ -75,7 +74,6 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
 
         $container->setDefinition('sylius.form.type.product_option_value_collection', $optionValueCollectionFormType)->shouldBeCalled();
 
-
         $variables = array(
             'product' => array(
                 'variable' => 'Some\App\Product\Entity\Product',
@@ -88,8 +86,8 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\OptionTranslation',
                         'form'  => array(
                             'default' => 'Some\App\Product\Form\OptionTranslationType',
-                        )
-                    )
+                        ),
+                    ),
                 ),
                 'option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
@@ -122,7 +120,7 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                             'model' => 'Some\App\Product\Entity\OptionTranslation',
                             'form' => array(
                                 'default' => 'Some\App\Product\Form\OptionTranslationType',
-                            )
+                            ),
                         ),
                     ),
                     'option_value' => array(
@@ -153,7 +151,7 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\OptionTranslation',
                         'form'  => array(
                             'default' => 'Some\App\Product\Form\OptionTranslationType',
-                        )
+                        ),
                     ),
                     'variable' => 'product',
                 ),

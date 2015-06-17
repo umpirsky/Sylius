@@ -24,7 +24,7 @@ class SettingsSpec extends ObjectBehavior
             'title'      => 'Sylius, Symfony2 ecommerce',
             'percentage' => 12,
             'page'       => 1,
-            'zone'       => new \stdClass()
+            'zone'       => new \stdClass(),
         );
 
         $this->beConstructedWith($parameters);

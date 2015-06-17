@@ -98,7 +98,7 @@ class ShippingStep extends CheckoutStep
                     return $zone->getId();
                 }, $this->zones) : null,
                 'enabled' => true,
-            )
+            ),
         ));
     }
 }

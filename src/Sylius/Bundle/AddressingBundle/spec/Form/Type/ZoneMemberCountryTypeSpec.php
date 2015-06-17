@@ -65,7 +65,7 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'ZoneMember',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

@@ -81,8 +81,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
         $classMetadataInfo->fieldMappings = array(
             'id' => array(
-                'columnName' => 'id'
-            )
+                'columnName' => 'id',
+            ),
         );
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
@@ -99,8 +99,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name'                 => 'product_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
+                'onDelete'             => 'CASCADE',
+            )),
         );
 
         $attributeMapping = array(
@@ -110,8 +110,8 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name'                 => 'attribute_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
+                'onDelete'             => 'CASCADE',
+            )),
         );
 
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();

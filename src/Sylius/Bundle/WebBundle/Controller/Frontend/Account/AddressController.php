@@ -72,7 +72,7 @@ class AddressController extends FOSRestController
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/create.html.twig')
             ->setData(array(
                 'customer' => $this->getCustomer(),
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ))
         ;
 
@@ -104,7 +104,7 @@ class AddressController extends FOSRestController
             ->setData(array(
                 'customer'    => $this->getCustomer(),
                 'address' => $address,
-                'form'    => $form->createView()
+                'form'    => $form->createView(),
             ))
         ;
 
@@ -203,9 +203,9 @@ class AddressController extends FOSRestController
     }
 
     /**
-     * Accesses address or throws 403/404
+     * Accesses address or throws 403/404.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return AddressInterface
      *

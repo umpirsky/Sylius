@@ -50,7 +50,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             ->setAllowedTypes(array(
                 'first_item_cost'       => array('numeric'),
                 'additional_item_cost'  => array('numeric'),
-                'additional_item_limit' => array('integer')
+                'additional_item_limit' => array('integer'),
             ))
             ->shouldBeCalled()->willReturn($resolver)
         ;
@@ -68,7 +68,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $configuration = array(
             'first_item_cost'       => 1000,
             'additional_item_cost'  => 200,
-            'additional_item_limit' => 0
+            'additional_item_limit' => 0,
         );
 
         $shipment->getShippingItemCount()->willReturn(1);
@@ -82,7 +82,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $configuration = array(
             'first_item_cost'       => 1500,
             'additional_item_cost'  => 300,
-            'additional_item_limit' => 0
+            'additional_item_limit' => 0,
         );
 
         $shipment->getShippingItemCount()->willReturn(5);
@@ -95,7 +95,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $configuration = array(
             'first_item_cost'       => 1500,
             'additional_item_cost'  => 300,
-            'additional_item_limit' => 3
+            'additional_item_limit' => 3,
         );
 
         $shipment->getShippingItemCount()->willReturn(8);
@@ -108,7 +108,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $configuration = array(
             'first_item_cost'       => 1000,
             'additional_item_cost'  => 200,
-            'additional_item_limit' => 3
+            'additional_item_limit' => 3,
         );
 
         $shipment->getShippingItemCount()->willReturn(4);
@@ -121,7 +121,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $configuration = array(
             'first_item_cost'       => 1090,
             'additional_item_cost'  => 200,
-            'additional_item_limit' => 3
+            'additional_item_limit' => 3,
         );
 
         $shipment->getShippingItemCount()->willReturn(6);

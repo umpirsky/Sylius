@@ -44,7 +44,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
         $builder->add('option-name', 'sylius_varibale_name_option_value_choice', array(
             'label'         => 'option_presentation',
             'option'        => $option,
-            'property_path' => '[0]'
+            'property_path' => '[0]',
         ))->shouldBeCalled();
 
         $builder->addModelTransformer(
@@ -57,13 +57,12 @@ class VariantMatchTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array(
-            'variable'
+            'variable',
         ))->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setAllowedTypes(array(
-            'variable' => 'Sylius\Component\Variation\Model\VariableInterface'
+            'variable' => 'Sylius\Component\Variation\Model\VariableInterface',
         ))->shouldBeCalled()->willReturn($resolver);
-
 
         $this->setDefaultOptions($resolver);
     }

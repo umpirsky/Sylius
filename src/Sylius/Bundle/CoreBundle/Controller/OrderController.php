@@ -22,7 +22,7 @@ class OrderController extends ResourceController
 {
     /**
      * @param Request $request
-     * @param integer $id
+     * @param int     $id
      *
      * @return Response
      *
@@ -53,7 +53,7 @@ class OrderController extends ResourceController
 
         return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
             'customer' => $customer,
-            'orders'   => $paginator
+            'orders'   => $paginator,
         ));
     }
 

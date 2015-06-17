@@ -18,8 +18,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
 /**
- * Automatic set customer's default addressing
-*
+ * Automatic set customer's default addressing.
+ *
  * @author Liverbool <nukboon@gmail.com>
  */
 class CheckoutAddressingListenerSpec extends ObjectBehavior

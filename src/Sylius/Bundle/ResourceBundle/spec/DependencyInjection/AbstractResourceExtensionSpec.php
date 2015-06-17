@@ -46,11 +46,11 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                'choice' => 'Sylius\ChoiceFormType'
-                            )
-                        )
-                    )
-                )
+                                'choice' => 'Sylius\ChoiceFormType',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             new Configuration(),
             $container,
@@ -67,7 +67,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
             ->setArguments(array(
                 'Sylius\Model',
                 SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
-                'sylius_resource_choice'
+                'sylius_resource_choice',
             ))
             ->addTag('form.type', array('alias' => 'sylius_resource_choice'));
         $container
@@ -84,11 +84,11 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                'choice' => 'Sylius\ChoiceFormType'
-                            )
-                        )
-                    )
-                )
+                                'choice' => 'Sylius\ChoiceFormType',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             new Configuration(),
             $container,
@@ -114,11 +114,11 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType'
-                            )
-                        )
+                                AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType',
+                            ),
+                        ),
                     ),
-                )
+                ),
             ),
             new Configuration(),
             $container,
@@ -151,10 +151,10 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                             'form' => array(
                                 AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType',
                                 'other'                                => 'Sylius\OtherFormType',
-                            )
-                        )
+                            ),
+                        ),
                     ),
-                )
+                ),
             ),
             new Configuration(),
             $container,

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
@@ -42,7 +41,7 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
     {
         $this::getSubscribedEvents()->shouldReturn(array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
+            FormEvents::POST_SUBMIT  => 'postSubmit',
         ));
     }
 

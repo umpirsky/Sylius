@@ -25,22 +25,22 @@ class SequentialGenerator extends AbstractGenerator implements GeneratorInterfac
     /**
      * Order number max length.
      *
-     * @var integer
+     * @var int
      */
     protected $numberLength;
 
     /**
-     * Start number
+     * Start number.
      *
-     * @var integer
+     * @var int
      */
     protected $startNumber;
 
     /**
      * Constructor.
      *
-     * @param integer $numberLength
-     * @param integer $startNumber
+     * @param int $numberLength
+     * @param int $startNumber
      */
     public function __construct($numberLength = 9, $startNumber = 1)
     {

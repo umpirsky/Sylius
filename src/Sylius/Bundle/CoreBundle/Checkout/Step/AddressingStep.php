@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 
@@ -68,13 +67,14 @@ class AddressingStep extends CheckoutStep
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'order'   => $order,
             'form'    => $form->createView(),
-            'context' => $context
+            'context' => $context,
         ));
     }
 
     /**
-     * @param  OrderInterface    $order
-     * @param  CustomerInterface $customer
+     * @param OrderInterface    $order
+     * @param CustomerInterface $customer
+     *
      * @return FormInterface
      */
     protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)

@@ -47,11 +47,11 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'identifier' => 'id'
+            'identifier' => 'id',
         ))->willReturn($resolver);
 
         $resolver->setAllowedTypes(array(
-            'identifier' => array('string')
+            'identifier' => array('string'),
         ))->willReturn($resolver);
 
         $this->setDefaultOptions($resolver);

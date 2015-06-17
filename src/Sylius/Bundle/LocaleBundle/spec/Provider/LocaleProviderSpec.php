@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class LocaleProviderSpec extends ObjectBehavior

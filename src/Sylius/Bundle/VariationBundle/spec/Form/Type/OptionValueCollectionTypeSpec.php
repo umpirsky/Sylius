@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Product\Model\OptionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -41,18 +40,18 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $builder->add('0', 'sylius_varibale_name_option_value_choice', array(
             'label'         => 'option_name',
             'option'        => $option,
-            'property_path' => '[0]'
+            'property_path' => '[0]',
         ))->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'options' => array($option)
+            'options' => array($option),
         ));
     }
 
     function it_has_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'options' => null
+            'options' => null,
         ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

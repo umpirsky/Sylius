@@ -93,7 +93,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'Symfony\Bundle\AsseticBundle\Factory\Resource\FileResource',
             'Symfony\Bundle\FrameworkBundle\Templating\TemplateReference',
             'Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator',
-            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader'
+            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader',
         ));
     }
 

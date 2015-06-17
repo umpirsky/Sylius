@@ -40,7 +40,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * The one of 3 requirement variants.
      *
-     * @var integer
+     * @var int
      */
     protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 

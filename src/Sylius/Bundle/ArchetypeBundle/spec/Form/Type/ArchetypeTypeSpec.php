@@ -71,7 +71,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
         $resolver->setDefaults(
             array(
                 'data_class' => 'Archetype',
-                'validation_groups' => array('sylius')
+                'validation_groups' => array('sylius'),
             ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

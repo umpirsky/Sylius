@@ -49,7 +49,7 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'multiple' => true
+            'multiple' => true,
         ));
     }
 
@@ -61,7 +61,7 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         ))->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes(array(
             'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-            'criteria' => array('array')
+            'criteria' => array('array'),
         ))->shouldBeCalled()->willReturn($resolver);
 
         $this->setDefaultOptions($resolver);

@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
@@ -232,7 +231,7 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * Helper method
+     * Helper method.
      *
      * @param OrderInterface      $order
      * @param AdjustmentInterface $shippingAdjustment

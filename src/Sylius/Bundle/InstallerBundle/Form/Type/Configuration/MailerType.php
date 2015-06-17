@@ -45,7 +45,7 @@ class MailerType extends AbstractType
             ))
             ->add('sylius_mailer_password', 'password', array(
                 'required' => false,
-                'label'    => 'sylius.form.configuration.mailer.password'
+                'label'    => 'sylius.form.configuration.mailer.password',
             ))
         ;
     }

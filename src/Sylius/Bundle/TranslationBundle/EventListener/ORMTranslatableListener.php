@@ -38,7 +38,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     }
 
     /**
-     * Add mapping to translatable entities
+     * Add mapping to translatable entities.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -98,9 +98,9 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         }
 
         $metadata->mapManyToOne(array(
-            'fieldName'    => 'translatable' ,
+            'fieldName'    => 'translatable',
             'targetEntity' => $this->configs[$metadata->name]['model'],
-            'inversedBy'   => 'translations' ,
+            'inversedBy'   => 'translations',
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',
                 'referencedColumnName' => 'id',
@@ -120,7 +120,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         // Map unique index.
         $columns = array(
             $metadata->getSingleAssociationJoinColumnName('translatable'),
-            'locale'
+            'locale',
         );
 
         if (!$this->hasUniqueConstraint($metadata, $columns)) {

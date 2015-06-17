@@ -55,7 +55,7 @@ class GroupBasedConfigurationType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
         ;
     }

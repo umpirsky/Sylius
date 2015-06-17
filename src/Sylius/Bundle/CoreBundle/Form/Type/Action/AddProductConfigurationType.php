@@ -55,7 +55,7 @@ class AddProductConfigurationType extends AbstractType
                 'constraints'   => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
             ->add('quantity', 'integer', array(
                 'label' => 'sylius.form.action.add_product_configuration.quantity',
@@ -63,7 +63,7 @@ class AddProductConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
             ->add('price', 'sylius_money', array(
                 'label' => 'sylius.form.action.add_product_configuration.price',
@@ -71,7 +71,7 @@ class AddProductConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
         ;
     }

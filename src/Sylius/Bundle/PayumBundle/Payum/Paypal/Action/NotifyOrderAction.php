@@ -28,8 +28,8 @@ class NotifyOrderAction extends AbstractPaymentStateAwareAction
     protected $objectManager;
 
     /**
-     * @param ObjectManager            $objectManager
-     * @param FactoryInterface         $factory
+     * @param ObjectManager    $objectManager
+     * @param FactoryInterface $factory
      */
     public function __construct(ObjectManager $objectManager, FactoryInterface $factory)
     {

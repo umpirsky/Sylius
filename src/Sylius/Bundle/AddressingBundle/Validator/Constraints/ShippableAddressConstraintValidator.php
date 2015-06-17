@@ -17,7 +17,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
 /**
- * Validator which validates if an address is shippable
+ * Validator which validates if an address is shippable.
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
@@ -49,9 +49,9 @@ class ShippableAddressConstraintValidator extends ConstraintValidator
     }
 
     /**
-     * Override this method to implement your logic
+     * Override this method to implement your logic.
      *
-     * @return boolean
+     * @return bool
      */
     protected function isShippable()
     {

@@ -73,7 +73,7 @@ class ZoneTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'Zone',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled()

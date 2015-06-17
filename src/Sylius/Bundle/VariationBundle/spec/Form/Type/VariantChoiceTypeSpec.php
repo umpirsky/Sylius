@@ -40,7 +40,7 @@ class VariantChoiceTypeSpec extends ObjectBehavior
         ))->shouldBeCalled();
 
         $this->buildForm($builder, array(
-            'multiple' => true
+            'multiple' => true,
         ));
     }
 
@@ -49,11 +49,11 @@ class VariantChoiceTypeSpec extends ObjectBehavior
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setRequired(array(
-            'variable'
+            'variable',
         ))->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setAllowedTypes(array(
-            'variable' => array('Sylius\Component\Variation\Model\VariableInterface')
+            'variable' => array('Sylius\Component\Variation\Model\VariableInterface'),
         ))->shouldBeCalled()->willReturn($resolver);
 
         $this->setDefaultOptions($resolver);

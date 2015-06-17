@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\ChannelBundle\Doctrine\ORM;
 
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

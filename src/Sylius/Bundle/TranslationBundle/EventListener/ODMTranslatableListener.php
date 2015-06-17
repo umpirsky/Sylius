@@ -16,7 +16,6 @@ use Doctrine\ODM\MongoDB\Events;
 use Doctrine\ODM\MongoDB\Event\LifecycleEventArgs;
 use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -46,7 +45,7 @@ class ODMTranslatableListener implements EventSubscriber
     private $mappings;
 
     /**
-     * @param array $mappings
+     * @param array  $mappings
      * @param string $fallbackLocale
      */
     public function __construct(array $mappings, $fallbackLocale)
@@ -77,7 +76,7 @@ class ODMTranslatableListener implements EventSubscriber
     }
 
     /**
-     * Add mapping to translatable entities
+     * Add mapping to translatable entities.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -100,7 +99,7 @@ class ODMTranslatableListener implements EventSubscriber
     }
 
     /**
-     * Add mapping data to a translatable entity
+     * Add mapping data to a translatable entity.
      *
      * @param ClassMetadata $metadata
      */
@@ -120,12 +119,12 @@ class ODMTranslatableListener implements EventSubscriber
         $metadata->mapManyEmbedded(array(
             'fieldName'      => $mapping['translatable']['translations'],
             'targetDocument' => $config['translation']['model'],
-            'strategy'       => 'set'
+            'strategy'       => 'set',
         ));
     }
 
     /**
-     * Add mapping data to a translation entity
+     * Add mapping data to a translation entity.
      *
      * @param ClassMetadata $metadata
      */
@@ -155,18 +154,18 @@ class ODMTranslatableListener implements EventSubscriber
         // Map unique index.
         $keys = array(
             $mapping['translation']['translatable'] => 1,
-            $mapping['translation']['locale'] => 1
+            $mapping['translation']['locale'] => 1,
         );
 
         if (!$this->hasUniqueIndex($metadata, $keys)) {
             $metadata->addIndex($keys, array(
-                'unique' => true
+                'unique' => true,
             ));
         }
     }
 
     /**
-     * Load translations
+     * Load translations.
      *
      * @param LifecycleEventArgs $args
      */

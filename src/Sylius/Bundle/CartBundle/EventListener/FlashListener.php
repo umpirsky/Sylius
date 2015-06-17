@@ -49,7 +49,7 @@ class FlashListener implements EventSubscriberInterface
             SyliusCartEvents::ITEM_REMOVE_COMPLETED  => 'sylius.cart.item_remove_completed',
 
             SyliusCartEvents::ITEM_ADD_ERROR         => 'sylius.cart.item_add_error',
-            SyliusCartEvents::ITEM_REMOVE_ERROR      => 'sylius.cart.item_remove_error'
+            SyliusCartEvents::ITEM_REMOVE_ERROR      => 'sylius.cart.item_remove_error',
         );
 
         return $this;

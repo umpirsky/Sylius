@@ -84,7 +84,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                ))
+                )),
             ),
         );
 
@@ -105,7 +105,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                ))
+                )),
             ),
         );
 
@@ -117,7 +117,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
-                'onDelete'             => 'SET NULL'
+                'onDelete'             => 'SET NULL',
             ),
         );
 

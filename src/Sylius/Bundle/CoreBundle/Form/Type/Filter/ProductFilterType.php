@@ -32,15 +32,15 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'sylius.form.product_filter.name',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.product_filter.name'
-                )
+                    'placeholder' => 'sylius.form.product_filter.name',
+                ),
             ))
             ->add('sku', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.product_filter.sku',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.product_filter.sku'
-                )
+                    'placeholder' => 'sylius.form.product_filter.sku',
+                ),
             ))
         ;
     }
@@ -52,7 +52,7 @@ class ProductFilterType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => null,
             ))
         ;
     }

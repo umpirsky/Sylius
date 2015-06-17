@@ -117,28 +117,28 @@ interface CreditCardInterface extends PaymentSourceInterface, TimestampableInter
     /**
      * Get expiry month.
      *
-     * @return integer
+     * @return int
      */
     public function getExpiryMonth();
 
     /**
      * Set expiry month.
      *
-     * @param integer
+     * @param int
      */
     public function setExpiryMonth($expiryMonth);
 
     /**
      * Get expiry year.
      *
-     * @return integer
+     * @return int
      */
     public function getExpiryYear();
 
     /**
      * Set expiry year.
      *
-     * @param integer $expiryYear
+     * @param int $expiryYear
      */
     public function setExpiryYear($expiryYear);
 }

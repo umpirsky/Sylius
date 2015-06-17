@@ -21,7 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ShippingMethodTranslationTypeSpec extends ObjectBehavior
 {
-    function let() {
+    function let()
+    {
         $this->beConstructedWith('ShippingMethodTranslation', array('sylius'));
     }
 

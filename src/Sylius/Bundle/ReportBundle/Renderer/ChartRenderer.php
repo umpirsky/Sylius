@@ -54,13 +54,13 @@ class ChartRenderer implements RendererInterface
 
             $rendererConfiguration = $report->getRendererConfiguration();
 
-            return $this->templating->renderResponse($rendererConfiguration["template"], array(
+            return $this->templating->renderResponse($rendererConfiguration['template'], array(
                 'data' => $rendererData,
                 'configuration' => $rendererConfiguration,
             ));
         }
 
-        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array(
+        return $this->templating->renderResponse('SyliusReportBundle::noDataTemplate.html.twig', array(
             'report' => $report,
         ));
     }

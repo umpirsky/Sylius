@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PricingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -34,7 +33,7 @@ class VolumeBasedConfigurationType extends AbstractType
                 'allow_delete'  => true,
                 'by_reference'  => false,
                 'label'         => 'sylius.form.pricing.volume_based.label',
-                'type'          => 'sylius_price_calculator_volume_based_configuration'
+                'type'          => 'sylius_price_calculator_volume_based_configuration',
             ))
         ;
     }

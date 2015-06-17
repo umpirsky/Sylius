@@ -12,11 +12,9 @@
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -30,8 +28,7 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $container,
         QueryLoggerInterface $queryLogger,
         ChannelContextInterface $channelContext
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $searchRepository,
             $config,
@@ -80,8 +77,8 @@ class ElasticsearchFinderSpec extends ObjectBehavior
                         'value'        => null,
                         'values'       => array(),
                     ),
-                )
-            )
+                ),
+            ),
 
         );
 
@@ -121,12 +118,11 @@ class ElasticsearchFinderSpec extends ObjectBehavior
                         'value'        => null,
                         'values'       => array(),
                     ),
-                )
-            )
+                ),
+            ),
 
         );
 
         $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType('\Elastica\Query');
     }
-
 }

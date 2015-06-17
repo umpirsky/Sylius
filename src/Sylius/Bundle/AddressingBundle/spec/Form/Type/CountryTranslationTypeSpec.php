@@ -57,7 +57,7 @@ class CountryTranslationTypeSpec extends ObjectBehavior
             ->setDefaults(
                 array(
                     'data_class'        => 'CountryTranslation',
-                    'validation_groups' => array('sylius')
+                    'validation_groups' => array('sylius'),
                 )
             )
             ->shouldBeCalled();

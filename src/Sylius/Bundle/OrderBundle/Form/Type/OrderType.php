@@ -32,7 +32,7 @@ class OrderType extends AbstractResourceType
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.order.items'
+                'label'        => 'sylius.form.order.items',
             ))
         ;
     }

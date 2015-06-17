@@ -47,8 +47,8 @@ class SalesTotalType extends AbstractType
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_data_fetcher_sales_total';

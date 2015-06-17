@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Mailer\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -30,8 +29,8 @@ class EmailProviderSpec extends ObjectBehavior
                 'template' => 'SyliusMailerBundle::default.html.twig',
                 'sender'   => array(
                     'name'    => 'John Doe',
-                    'address' => 'john@doe.com'
-                )
+                    'address' => 'john@doe.com',
+                ),
             ),
             'order_cancelled' => array(
                 'enabled'  => false,
@@ -39,9 +38,9 @@ class EmailProviderSpec extends ObjectBehavior
                 'template' => 'SyliusMailerBundle::default.html.twig',
                 'sender'   => array(
                     'name'    => 'Rick Doe',
-                    'address' => 'john@doe.com'
-                )
-            )
+                    'address' => 'john@doe.com',
+                ),
+            ),
         );
         $this->beConstructedWith($repository, $emails);
     }

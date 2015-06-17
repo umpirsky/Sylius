@@ -70,7 +70,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
         $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
@@ -86,7 +86,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
         $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
@@ -102,7 +102,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
         $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
@@ -118,7 +118,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
 
@@ -152,7 +152,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
 
@@ -185,7 +185,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
 
@@ -213,7 +213,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
         $process->expects($this->once())
@@ -233,7 +233,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
 
@@ -301,7 +301,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
 
@@ -318,7 +318,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     {
         $steps = array(
             $this->getStep('step1'),
-            $this->getStep('step2')
+            $this->getStep('step2'),
         );
         $process = $this->getProcess($steps);
 
@@ -364,36 +364,36 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     $this->getStep('step1'),
-                    $this->getStep('step2')
+                    $this->getStep('step2'),
                 ),
                 0,
-                50
-            ),
-            array(
-                array(
-                    $this->getStep('step1'),
-                    $this->getStep('step2')
-                ),
-                1,
-                100
+                50,
             ),
             array(
                 array(
                     $this->getStep('step1'),
                     $this->getStep('step2'),
-                    $this->getStep('step3')
                 ),
-                0,
-                33
+                1,
+                100,
             ),
             array(
                 array(
                     $this->getStep('step1'),
                     $this->getStep('step2'),
-                    $this->getStep('step3')
+                    $this->getStep('step3'),
+                ),
+                0,
+                33,
+            ),
+            array(
+                array(
+                    $this->getStep('step1'),
+                    $this->getStep('step2'),
+                    $this->getStep('step3'),
                 ),
                 1,
-                66
+                66,
             ),
         );
     }
@@ -454,7 +454,6 @@ class TestArrayStorage implements StorageInterface
 
     public function initialize($domain)
     {
-
     }
 
     public function has($key)

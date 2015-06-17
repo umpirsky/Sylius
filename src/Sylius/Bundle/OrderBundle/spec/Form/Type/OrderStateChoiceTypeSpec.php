@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -31,7 +30,7 @@ class OrderStateChoiceTypeSpec extends ObjectBehavior
                 OrderInterface::STATE_ABANDONED   => 'sylius.order.state.abandoned',
                 OrderInterface::STATE_CANCELLED   => 'sylius.order.state.cancelled',
                 OrderInterface::STATE_RETURNED    => 'sylius.order.state.returned',
-            )
+            ),
         ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

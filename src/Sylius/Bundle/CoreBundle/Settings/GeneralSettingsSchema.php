@@ -72,34 +72,34 @@ class GeneralSettingsSchema implements SchemaInterface
             ->add('title', 'text', array(
                 'label'       => 'sylius.form.settings.general.title',
                 'constraints' => array(
-                    new NotBlank()
-                )
+                    new NotBlank(),
+                ),
             ))
             ->add('meta_keywords', 'text', array(
                 'label'       => 'sylius.form.settings.general.meta_keywords',
                 'constraints' => array(
-                    new NotBlank()
-                )
+                    new NotBlank(),
+                ),
             ))
             ->add('meta_description', 'textarea', array(
                 'label'       => 'sylius.form.settings.general.meta_description',
                 'constraints' => array(
-                    new NotBlank()
-                )
+                    new NotBlank(),
+                ),
             ))
             ->add('locale', 'locale', array(
                 'label'       => 'sylius.form.settings.general.locale',
                 'constraints' => array(
                     new NotBlank(),
                     new Locale(),
-                )
+                ),
             ))
             ->add('currency', 'sylius_currency_code_choice', array(
                 'label'       => 'sylius.form.settings.general.currency',
                 'constraints' => array(
                     new NotBlank(),
                     new Currency(),
-                )
+                ),
             ))
             ->add('tracking_code', 'textarea', array(
                 'label'       => 'sylius.form.settings.general.tracking_code',

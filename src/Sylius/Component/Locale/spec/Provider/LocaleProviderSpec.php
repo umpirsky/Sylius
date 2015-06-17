@@ -63,8 +63,7 @@ class LocaleProviderSpec extends ObjectBehavior
         RepositoryInterface $repository,
         LocaleInterface $locale1,
         LocaleInterface $locale2
-    )
-    {
+    ) {
         $locales = array($locale1, $locale2);
         $repository->findBy(Argument::any())->willReturn($locales);
 

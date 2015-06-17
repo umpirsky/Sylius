@@ -31,23 +31,23 @@ class ChannelType extends BaseChannelType
         $builder
             ->add('taxonomies', 'sylius_taxonomy_choice', array(
                 'label'    => 'sylius.form.channel.taxonomies',
-                'multiple' => true
+                'multiple' => true,
             ))
             ->add('locales', 'sylius_locale_choice', array(
                 'label'    => 'sylius.form.channel.locales',
-                'multiple' => true
+                'multiple' => true,
             ))
             ->add('currencies', 'sylius_currency_choice', array(
                 'label'    => 'sylius.form.channel.currencies',
-                'multiple' => true
+                'multiple' => true,
             ))
             ->add('shippingMethods', 'sylius_shipping_method_choice', array(
                 'label'    => 'sylius.form.channel.shipping_methods',
-                'multiple' => true
+                'multiple' => true,
             ))
             ->add('paymentMethods', 'sylius_payment_method_choice', array(
                 'label'    => 'sylius.form.channel.payment_methods',
-                'multiple' => true
+                'multiple' => true,
             ))
         ;
     }

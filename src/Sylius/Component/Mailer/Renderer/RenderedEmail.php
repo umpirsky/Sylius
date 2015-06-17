@@ -72,4 +72,3 @@ class RenderedEmail
         return $this;
     }
 }
-

@@ -67,7 +67,7 @@ class CreditCardType extends AbstractResourceType
     private function getViableYears()
     {
         $yearChoices = array();
-        $currentYear = (int) date("Y");
+        $currentYear = (int) date('Y');
 
         for ($i = 0; $i <= 20; $i++) {
             $yearChoices[$currentYear + $i] = $currentYear + $i;

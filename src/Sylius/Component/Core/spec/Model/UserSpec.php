@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\AddressInterface;
 
 /**
 
