@@ -1,5 +1,7 @@
 <?php
 
+namespace Sylius\Sylius\Bundle\AddressingBundle;
+
 /*
  * This file is part of the Sylius package.
  *
